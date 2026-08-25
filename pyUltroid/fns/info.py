@@ -1,12 +1,12 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 
-# -----------------Random Stuff--------------
+# -----------------Случайные вещи--------------
 
 import math
 
@@ -38,7 +38,7 @@ async def get_uinfo(e):
     return user, data
 
 
-# Random stuffs dk who added
+# Случайные вещи, не знаю кто добавил
 
 
 async def get_chat_info(chat, event):
@@ -47,11 +47,11 @@ async def get_chat_info(chat, event):
     elif isinstance(chat, types.Chat):
         chat_info = await event.client(functions.messages.GetFullChatRequest(chat))
     else:
-        return await event.eor("`Use this for Group/Channel.`")
+        return await event.eor("`Используйте это для групп/каналов.`")
     full = chat_info.full_chat
     chat_photo = full.chat_photo
     broadcast = getattr(chat, "broadcast", False)
-    chat_type = "Channel" if broadcast else "Group"
+    chat_type = "Канал" if broadcast else "Группа"
     chat_title = chat.title
     try:
         msg_info = await event.client(
@@ -79,7 +79,7 @@ async def get_chat_info(chat, event):
     creator_firstname = (
         msg_info.users[0].first_name
         if creator_valid and msg_info.users[0].first_name is not None
-        else "Deleted Account"
+        else "Удалённый аккаунт"
     )
     creator_username = (
         msg_info.users[0].username
@@ -104,7 +104,7 @@ async def get_chat_info(chat, event):
     messages_sent = getattr(full, "read_inbox_max_id", None)
     messages_sent_alt = getattr(full, "read_outbox_max_id", None)
     exp_count = getattr(full, "pts", None)
-    supergroup = "<b>Yes</b>" if getattr(chat, "megagroup", None) else "No"
+    supergroup = "<b>Да</b>" if getattr(chat, "megagroup", None) else "Нет"
     creator_username = "@{}".format(creator_username) if creator_username else None
 
     if admins is None:
@@ -120,63 +120,63 @@ async def get_chat_info(chat, event):
             )
             admins = participants_admins.count if participants_admins else None
         except Exception as e:
-            LOGS.info(f"Exception: {e}")
-    caption = "ℹ️ <b>[<u>CHAT INFO</u>]</b>\n"
+            LOGS.info(f"Исключение: {e}")
+    caption = "ℹ️ <b>[<u>ИНФО О ЧАТЕ</u>]</b>\n"
     caption += f"🆔 <b>ID:</b> <code>{chat.id}</code>\n"
     if chat_title is not None:
-        caption += f"📛 <b>{chat_type} name:</b> <code>{chat_title}</code>\n"
+        caption += f"📛 <b>Имя {chat_type}:</b> <code>{chat_title}</code>\n"
     if chat.username:
-        caption += f"🔗 <b>Link:</b> @{chat.username}\n"
+        caption += f"🔗 <b>Ссылка:</b> @{chat.username}\n"
     else:
-        caption += f"🗳 <b>{chat_type} type:</b> Private\n"
+        caption += f"🗳 <b>Тип {chat_type}:</b> Приватный\n"
     if creator_username:
-        caption += f"🖌 <b>Creator:</b> {creator_username}\n"
+        caption += f"🖌 <b>Создатель:</b> {creator_username}\n"
     elif creator_valid:
-        caption += f'🖌 <b>Creator:</b> <a href="tg://user?id={creator_id}">{creator_firstname}</a>\n'
+        caption += f'🖌 <b>Создатель:</b> <a href="tg://user?id={creator_id}">{creator_firstname}</a>\n'
     if created:
-        caption += f"🖌 <b>Created:</b> <code>{created.date().strftime('%b %d, %Y')} - {created.time()}</code>\n"
+        caption += f"🖌 <b>Создан:</b> <code>{created.date().strftime('%b %d, %Y')} - {created.time()}</code>\n"
     else:
-        caption += f"🖌 <b>Created:</b> <code>{chat.date.date().strftime('%b %d, %Y')} - {chat.date.time()}</code> ⚠\n"
-    caption += f"🗡 <b>Data Centre ID:</b> {dc_id}\n"
+        caption += f"🖌 <b>Создан:</b> <code>{chat.date.date().strftime('%b %d, %Y')} - {chat.date.time()}</code> ⚠\n"
+    caption += f"🗡 <b>ID дата-центра:</b> {dc_id}\n"
     if exp_count is not None:
         chat_level = int((1 + math.sqrt(1 + 7 * exp_count / 14)) / 2)
-        caption += f"⭐️ <b>{chat_type} level:</b> <code>{chat_level}</code>\n"
+        caption += f"⭐️ <b>Уровень {chat_type}:</b> <code>{chat_level}</code>\n"
     if messages_viewable is not None:
-        caption += f"💬 <b>Viewable messages:</b> <code>{messages_viewable}</code>\n"
+        caption += f"💬 <b>Видимые сообщения:</b> <code>{messages_viewable}</code>\n"
     if messages_sent:
-        caption += f"💬 <b>Messages sent:</b> <code>{messages_sent}</code>\n"
+        caption += f"💬 <b>Отправлено сообщений:</b> <code>{messages_sent}</code>\n"
     elif messages_sent_alt:
-        caption += f"💬 <b>Messages sent:</b> <code>{messages_sent_alt}</code> ⚠\n"
+        caption += f"💬 <b>Отправлено сообщений:</b> <code>{messages_sent_alt}</code> ⚠\n"
     if members is not None:
-        caption += f"👥 <b>Members:</b> <code>{members}</code>\n"
+        caption += f"👥 <b>Участники:</b> <code>{members}</code>\n"
     if admins:
-        caption += f"👮 <b>Administrators:</b> <code>{admins}</code>\n"
+        caption += f"👮 <b>Администраторы:</b> <code>{admins}</code>\n"
     if full.bot_info:
-        caption += f"🤖 <b>Bots:</b> <code>{len(full.bot_info)}</code>\n"
+        caption += f"🤖 <b>Боты:</b> <code>{len(full.bot_info)}</code>\n"
     if members_online:
-        caption += f"👀 <b>Currently online:</b> <code>{members_online}</code>\n"
+        caption += f"👀 <b>Сейчас онлайн:</b> <code>{members_online}</code>\n"
     if restricted_users is not None:
-        caption += f"🔕 <b>Restricted users:</b> <code>{restricted_users}</code>\n"
+        caption += f"🔕 <b>Ограниченные пользователи:</b> <code>{restricted_users}</code>\n"
     if banned_users:
-        caption += f"📨 <b>Banned users:</b> <code>{banned_users}</code>\n"
+        caption += f"📨 <b>Забаненные пользователи:</b> <code>{banned_users}</code>\n"
     if group_stickers:
-        caption += f'📹 <b>{chat_type} stickers:</b> <a href="t.me/addstickers/{full.stickerset.short_name}">{group_stickers}</a>\n'
+        caption += f'📹 <b>Стикеры {chat_type}:</b> <a href="t.me/addstickers/{full.stickerset.short_name}">{group_stickers}</a>\n'
     if not broadcast:
         if getattr(chat, "slowmode_enabled", None):
-            caption += f"👉 <b>Slow mode:</b> <code>True</code>"
-            caption += f", 🕐 <code>{full.slowmode_seconds}s</code>\n"
+            caption += f"👉 <b>Медленный режим:</b> <code>True</code>"
+            caption += f", 🕐 <code>{full.slowmode_seconds}с</code>\n"
         else:
-            caption += f"🦸‍♂ <b>Supergroup:</b> {supergroup}\n"
+            caption += f"🦸‍♂ <b>Супергруппа:</b> {supergroup}\n"
     if getattr(chat, "restricted", None):
-        caption += f"🎌 <b>Restricted:</b> {chat.restricted}\n"
+        caption += f"🎌 <b>Ограничен:</b> {chat.restricted}\n"
         rist = chat.restriction_reason[0]
-        caption += f"> Platform: {rist.platform}\n"
-        caption += f"> Reason: {rist.reason}\n"
-        caption += f"> Text: {rist.text}\n\n"
+        caption += f"> Платформа: {rist.platform}\n"
+        caption += f"> Причина: {rist.reason}\n"
+        caption += f"> Текст: {rist.text}\n\n"
     if getattr(chat, "scam", None):
-        caption += "⚠ <b>Scam:</b> <b>Yes</b>\n"
+        caption += "⚠ <b>Скам:</b> <b>Да</b>\n"
     if getattr(chat, "verified", None):
-        caption += f"✅ <b>Verified by Telegram:</b> <code>Yes</code>\n\n"
+        caption += f"✅ <b>Проверен Telegram:</b> <code>Да</code>\n\n"
     if full.about:
-        caption += f"🗒 <b>Description:</b> \n<code>{full.about}</code>\n"
+        caption += f"🗒 <b>Описание:</b> \n<code>{full.about}</code>\n"
     return chat_photo, caption

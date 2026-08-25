@@ -2,11 +2,11 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# Please read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
-# Standalone file for facilitating local deploys.
+# Отдельный файл для локального развёртывания.
 
 import os
 
@@ -26,30 +26,30 @@ def start():
     check_for_py()
 
     print(f"{a}\n\n")
-    print("Welcome to Ultroid, lets start setting up!\n\n")
-    print("Cloning the repository...\n\n")
+    print("Добро пожаловать в Ultroid, давайте начнём настройку!\n\n")
+    print("Клонирование репозитория...\n\n")
     os.system("rm -rf Ultroid")
     os.system("git clone https://github.com/TeamUltroid/Ultroid")
-    print("\n\nDone")
+    print("\n\nГотово")
     os.chdir("Ultroid")
     clear_screen()
     print(a)
-    print("\n\nLet's start!\n")
+    print("\n\nДавайте начнём!\n")
 
-    # generate session if needed.
+    # генерировать сессию, если нужно.
     sessionisneeded = input(
-        "Do you want to generate a new session, or have an old session string? [generate/skip]",
+        "Вы хотите сгенерировать новую сессию или у вас есть старая строка сессии? [generate/skip]",
     )
     if sessionisneeded == "generate":
         gen_session()
     elif sessionisneeded != "skip":
         print(
-            'Please choose "generate" to generate a session string, or "skip" to pass on.\n\nPlease run the script again!',
+            'Пожалуйста, выберите "generate", чтобы сгенерировать строку сессии, или "skip", чтобы пропустить.\n\nПожалуйста, запустите скрипт снова!',
         )
         exit(0)
 
-    # start bleck megik
-    print("\n\nLets start entering the variables.\n\n")
+    # запускаем bleck megik
+    print("\n\nДавайте начнём вводить переменные.\n\n")
     varrs = [
         "API_ID",
         "API_HASH",
@@ -62,72 +62,72 @@ def start():
         all_done += do_input(i)
     clear_screen()
     print(a)
-    print("\n\nHere are the things you've entered.\nKindly check.")
+    print("\n\nВот то, что вы ввели.\nПожалуйста, проверьте.")
     print(all_done)
-    isitdone = input("\n\nIs it all correct? [y/n]")
+    isitdone = input("\n\nВсё правильно? [y/n]")
     if isitdone == "y" or isitdone != "n":
         # https://github.com/TeamUltroid/Ultroid/blob/31b9eb1f4f8059e0ae66adb74cb6e8174df12eac/resources/startup/locals.py#L35
         f = open(".env", "w")
         f.write(all_done)
     else:
-        print("Oh, let's redo these then.")
+        print("Ох, тогда давайте переделаем.")
         start()
     clear_screen()
-    print("\nCongrats. All done!\nTime to start the bot!")
-    print("\nInstalling requirements... This might take a while...")
+    print("\nПоздравляем. Всё готово!\nВремя запустить бота!")
+    print("\nУстановка зависимостей... Это может занять некоторое время...")
     os.system("pip3 install --no-cache-dir -r requirements.txt")
     os.system("pip3 install -r requirements.txt --break-system-packages")
     ask = input(
-        "Enter 'yes/y' to Install other requirements, required for local deployment."
+        "Введите 'yes/y', чтобы установить другие зависимости, необходимые для локального развёртывания."
     )
     if ask.lower().startswith("y"):
-        print("Started Installing...")
+        print("Начата установка...")
         os.system(
             "pip3 install --no-cache-dir -r resources/startup/optional-requirements.txt"
         )
     else:
-        print("Skipped!")
+        print("Пропущено!")
     clear_screen()
     print(a)
-    print("\nStarting Ultroid...")
+    print("\nЗапуск Ultroid...")
     os.system("sh startup")
 
 
 def do_input(var):
-    val = input(f"Enter your {var}: ")
+    val = input(f"Введите ваш {var}: ")
     return f"{var}={val}\n"
 
 
 def clear_screen():
-    # clear screen
+    # очистить экран
     _ = os.system("clear") if os.name == "posix" else os.system("cls")
 
 
 def check_for_py():
     print(
-        "Please make sure you have python installed. \nGet it from http://python.org/\n\n",
+        "Убедитесь, что у вас установлен python. \nПолучите его с http://python.org/\n\n",
     )
     try:
         ch = int(
             input(
-                "Enter Choice:\n1. Continue, python is installed.\n2. Exit and install python.\n",
+                "Введите выбор:\n1. Продолжить, python установлен.\n2. Выйти и установить python.\n",
             ),
         )
     except BaseException:
-        print("Please run the script again, and enter the choice as a number!!")
+        print("Пожалуйста, запустите скрипт снова и введите выбор как число!!")
         exit(0)
     if ch == 1:
         pass
     elif ch == 2:
-        print("Please install python and continue!")
+        print("Пожалуйста, установите python и продолжайте!")
         exit(0)
     else:
-        print("Weren't you taught how to read? Enter a choice!!")
+        print("Вас не научили читать? Введите выбор!!")
         return
 
 
 def gen_session():
-    print("\nProcessing...")
+    print("\nОбработка...")
     # https://github.com/TeamUltroid/Ultroid/main/resources/startup/locals.py#L35
     os.system("python3 resources/session/ssgen.py")
 

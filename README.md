@@ -5,7 +5,7 @@
   <b>Ultroid - UserBot</b>
 </h1>
 
-<b>A stable pluggable Telegram userbot + Voice & Video Call music bot, based on Telethon.</b>
+<b>Стабильный плагинный Telegram userbot + музыкальный бот для голосовых и видеозвонков, основанный на Telethon.</b>
 
 [![](https://img.shields.io/badge/Ultroid-v0.8-crimson)](#)
 [![Stars](https://img.shields.io/github/stars/TeamUltroid/Ultroid?style=flat-square&color=yellow)](https://github.com/TeamUltroid/Ultroid/stargazers)
@@ -21,89 +21,89 @@
 [![License](https://img.shields.io/badge/License-AGPL-blue)](https://github.com/TeamUltroid/Ultroid/blob/main/LICENSE)
 ----
 
-# Deploy
+# Развёртывание
 - [Heroku](#deploy-to-heroku)
 - [Okteto](#deploy-to-okteto)
-- [Local Machine](#deploy-locally)
+- [Локальная машина](#deploy-locally)
 
-# Documentation 
+# Документация 
 [![Documentation](https://img.shields.io/badge/Documentation-Ultroid-blue)](http://ultroid.tech/)
 
-# Tutorial 
-- Full Tutorial - [![Full Tutorial](https://img.shields.io/badge/Watch%20Now-blue)](https://www.youtube.com/watch?v=0wAV7pUzhDQ)
+# Учебник 
+- Полное руководство - [![Полное руководство](https://img.shields.io/badge/Watch%20Now-blue)](https://www.youtube.com/watch?v=0wAV7pUzhDQ)
 
-- Tutorial to get Redis URL and password - [here.](./resources/extras/redistut.md)
+- Руководство по получению URL и пароля Redis - [здесь.](./resources/extras/redistut.md)
 ---
 
-## Deploy to Heroku
-Get the [Necessary Variables](#Necessary-Variables) and then click the button below!  
+## Развёртывание на Heroku
+Получите [Необходимые переменные](#Necessary-Variables) и затем нажмите кнопку ниже!  
 
-<summary>Deploy To Heroku</summary>
+<summary>Развёртывание на Heroku</summary>
 <p>
 <br>
 <a href="https://heroku.com/deploy">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a>
 </p>
-## Deploy to Okteto
-Get the [Necessary Variables](#Necessary-Variables) and then click the button below!
+## Развёртывание на Okteto
+Получите [Необходимые переменные](#Necessary-Variables) и затем нажмите кнопку ниже!
 
 [![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://cloud.okteto.com/deploy?repository=https://github.com/TeamUltroid/Ultroid)
 
-## Deploy Locally
-- [Traditional Method](#local-deploy---traditional-method)
-- [Easy Method](#local-deploy---easy-method)
+## Локальное развёртывание
+- [Традиционный метод](#local-deploy---traditional-method)
+- [Простой метод](#local-deploy---easy-method)
 - [Ultroid CLI](#ultroid-cli)
 
-### Local Deploy - Easy Method
+### Локальное развёртывание - Простой метод
 - Linux - `wget -O locals.py https://git.io/JY9UM && python3 locals.py`
 - Windows - `cd desktop ; wget https://git.io/JY9UM -o locals.py ; python locals.py`
 - Termux - `wget -O install-termux https://tiny.ultroid.tech/termux && bash install-termux`
 
-### Local Deploy - Traditional Method
-- Get your [Necessary Variables](#Necessary-Variables)
-- Clone the repository:    
+### Локальное развёртывание - Традиционный метод
+- Получите ваши [Необходимые переменные](#Necessary-Variables)
+- Клонируйте репозиторий:    
 `git clone https://github.com/TeamUltroid/Ultroid.git`
-- Go to the cloned folder:    
+- Перейдите в клонированную папку:    
 `cd Ultroid`
-- Create a virtual env:      
+- Создайте виртуальное окружение:      
 `virtualenv -p /usr/bin/python3 venv`
 `. ./venv/bin/activate`
-- Install the requirements:      
+- Установите зависимости:      
 `pip(3) install -U -r re*/st*/optional-requirements.txt`
 `pip(3) install -U -r requirements.txt`
-- Generate your `SESSION`:
-  - For Linux users:
+- Сгенерируйте вашу `SESSION`:
+  - Для пользователей Linux:
     `bash sessiongen`
-     or
+     или
     `wget -O session.py https://git.io/JY9JI && python3 session.py`
-  - For Termux users:
+  - Для пользователей Termux:
     `wget -O session.py https://git.io/JY9JI && python session.py`
-  - For Windows Users:
+  - Для пользователей Windows:
     `cd desktop ; wget https://git.io/JY9JI -o ultroid.py ; python ultroid.py`
-- Fill your details in a `.env` file, as given in [`.env.sample`](https://github.com/TeamUltroid/Ultroid/blob/main/.env.sample).
-(You can either edit and rename the file or make a new file named `.env`.)
-- Run the bot:
-  - Linux Users:
+- Заполните ваши данные в файле `.env`, как указано в [`.env.sample`](https://github.com/TeamUltroid/Ultroid/blob/main/.env.sample).
+(Вы можете либо отредактировать и переименовать файл, либо создать новый файл с именем `.env`.)
+- Запустите бота:
+  - Пользователи Linux:
    `bash startup`
-  - Windows Users:
+  - Пользователи Windows:
     `python(3) -m pyUltroid`
 
 ---
-## Necessary Variables
-- `SESSION` - SessionString for your accounts login session. Get it from [here](#Session-String)
+## Необходимые переменные
+- `SESSION` - Строка сессии для сессии входа в ваш аккаунт. Получите её [здесь](#Session-String)
 
-One of the following database:
-- For **Redis** (tutorial [here](./resources/extras/redistut.md))
-  - `REDIS_URI` - Redis endpoint URL, from [redislabs](http://redislabs.com/).
-  - `REDIS_PASSWORD` - Redis endpoint Password, from [redislabs](http://redislabs.com/).
-- For **MONGODB**
-  - `MONGO_URI` - Get it from [mongodb](https://mongodb.com/atlas).
-- For **SQLDB**
-  - `DATABASE_URL`- Get it from [elephantsql](https://elephantsql.com).
+Одна из следующих баз данных:
+- Для **Redis** (руководство [здесь](./resources/extras/redistut.md))
+  - `REDIS_URI` - URL конечной точки Redis, с [redislabs](http://redislabs.com/).
+  - `REDIS_PASSWORD` - Пароль конечной точки Redis, с [redislabs](http://redislabs.com/).
+- Для **MONGODB**
+  - `MONGO_URI` - Получите его с [mongodb](https://mongodb.com/atlas).
+- Для **SQLDB**
+  - `DATABASE_URL`- Получите его с [elephantsql](https://elephantsql.com).
 
-## Session String
-Different ways to get your `SESSION`:
+## Строка сессии
+Различные способы получить вашу `SESSION`:
 * [![Run on Repl.it](https://replit.com/badge/github/TeamUltroid/Ultroid)](https://replit.com/@TeamUltroid/UltroidStringSession)
 * Linux : `wget -O session.py https://git.io/JY9JI && python3 session.py`
 * PowerShell : `cd desktop ; wget https://git.io/JY9JI ; python ultroid.py`
@@ -112,7 +112,7 @@ Different ways to get your `SESSION`:
 
 ---
 
-# Core Contributor Team
+# Основная команда контрибьюторов
 
 <table>
   <tr>
@@ -132,25 +132,25 @@ Different ways to get your `SESSION`:
   </tr>
 </table>
 
-## Contributors
+## Контрибьюторы
 
 <a href="https://github.com/TeamUltroid/Ultroid/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=TeamUltroid/Ultroid" />
 </a>
 
-We are highly grateful for all the contributions made by our amazing community! ❤️
+Мы очень благодарны за все вклады, сделанные нашей удивительной сообществом! ❤️
 
 ---
 
-# License
+# Лицензия
 [![License](https://www.gnu.org/graphics/agplv3-155x51.png)](LICENSE)   
-Ultroid is licensed under [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html) v3 or later.
+Ultroid распространяется под [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html) версии 3 или выше.
 
 
 ---
-# Credits
+# Благодарности
 * [![TeamUltroid-Devs](https://img.shields.io/static/v1?label=Teamultroid&message=devs&color=critical)](https://t.me/UltroidDevs)
-* [Lonami](https://github.com/LonamiWebs/) for [Telethon.](https://github.com/LonamiWebs/Telethon)
-* [MarshalX](https://github.com/MarshalX) for [PyTgCalls.](https://github.com/MarshalX/tgcalls)
+* [Lonami](https://github.com/LonamiWebs/) за [Telethon.](https://github.com/LonamiWebs/Telethon)
+* [MarshalX](https://github.com/MarshalX) за [PyTgCalls.](https://github.com/MarshalX/tgcalls)
 
-> Made with 💕 by [@TeamUltroid](https://t.me/TeamUltroid).    
+> Сделано с 💕 от [@TeamUltroid](https://t.me/TeamUltroid).    

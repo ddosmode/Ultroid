@@ -1,12 +1,12 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочитайте GNU Affero General Public License в
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 """
-Exceptions which can be raised by py-Ultroid Itself.
+Исключения, которые могут быть вызваны самим py-Ultroid.
 """
 
 

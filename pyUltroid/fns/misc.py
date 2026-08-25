@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 import base64
@@ -155,17 +155,17 @@ async def google_search(query):
 async def allcmds(event, telegraph):
     txt = ""
     for z in LIST.keys():
-        txt += f"PLUGIN NAME: {z}\n"
+        txt += f"ИМЯ ПЛАГИНА: {z}\n"
         for zz in LIST[z]:
             txt += HNDLR + zz + "\n"
         txt += "\n\n"
-    t = telegraph.create_page(title="Ultroid All Cmds", content=[txt])
-    await eor(event, f"All Ultroid Cmds : [Click Here]({t['url']})", link_preview=False)
+    t = telegraph.create_page(title="Все команды Ultroid", content=[txt])
+    await eor(event, f"Все команды Ultroid: [Нажмите здесь]({t['url']})", link_preview=False)
 
 
 async def ReTrieveFile(input_file_name):
     if not aiohttp:
-        raise DependencyMissingError("This function needs 'aiohttp' to be installed.")
+        raise DependencyMissingError("Для этой функции требуется 'aiohttp'.")
     RMBG_API = udB.get_key("RMBG_API")
     headers = {"X-API-Key": RMBG_API}
     files = {"image_file": open(input_file_name, "rb").read()}
@@ -183,7 +183,7 @@ async def ReTrieveFile(input_file_name):
             return True, name
 
 
-# ---------------- Unsplash Search ----------------
+# ---------------- Поиск Unsplash ----------------
 # @New-Dev0
 
 
@@ -198,7 +198,7 @@ async def unsplashsearch(query, limit=None, shuf=True):
     return list(map(lambda e: e['src'], all_[:limit]))
 
 
-# ---------------- Random User Gen ----------------
+# ---------------- Генератор случайных пользователей ----------------
 # @xditya
 
 
@@ -208,7 +208,7 @@ async def get_random_user_data():
         "https://random-data-api.com/api/business_credit_card/random_card", re_json=True
     )
     card = (
-        "**CARD_ID:** "
+        "**ID_КАРТЫ:** "
         + str(cc["credit_card_number"])
         + f" {cc['credit_card_expiry_date']}\n"
         + f"**C-ID :** {cc['id']}"
@@ -220,16 +220,16 @@ async def get_random_user_data():
     loc = data_["location"]
     dob = data_["dob"]
     msg = """
-{} **Name:** {}.{} {}
-**Street:** {} {}
-**City:** {}
-**State:** {}
-**Country:** {}
-**Postal Code:** {}
+{} **Имя:** {}.{} {}
+**Улица:** {} {}
+**Город:** {}
+**Штат:** {}
+**Страна:** {}
+**Почтовый индекс:** {}
 **Email:** {}
-**Phone:** {}
-**Card:** {}
-**Birthday:** {}
+**Телефон:** {}
+**Карта:** {}
+**День рождения:** {}
 """.format(
         gender,
         name["title"],
@@ -250,12 +250,12 @@ async def get_random_user_data():
     return msg, pic
 
 
-# Dictionary (Synonyms and Antonyms)
+# Словарь (Синонимы и антонимы)
 
 
 async def get_synonyms_or_antonyms(word, type_of_words):
     if type_of_words not in ["synonyms", "antonyms"]:
-        return "Dude! Please give a corrent type of words you want."
+        return "Чувак! Пожалуйста, укажи правильный тип слов, который ты хочешь."
     s = await async_searcher(
         f"https://tuna.thesaurus.com/pageData/{word}", re_json=True
     )
@@ -304,7 +304,7 @@ class Quotly:
 
         if reply and reply.raw_text:
             reply = {
-                "name": get_display_name(reply.sender) or "Deleted Account",
+                "name": get_display_name(reply.sender) or "Удалённый аккаунт",
                 "text": reply.raw_text,
                 "chatId": reply.chat_id,
             }
@@ -342,12 +342,12 @@ class Quotly:
         text = event.raw_text
         if isinstance(event, types.MessageService):
             if isinstance(event.action, types.MessageActionGameScore):
-                text = f"scored {event.action.score}"
+                text = f"набрал(а) {event.action.score}"
                 rep = await event.get_reply_message()
                 if rep and rep.game:
-                    text += f" in {rep.game.title}"
+                    text += f" в {rep.game.title}"
             elif isinstance(event.action, types.MessageActionPinMessage):
-                text = "pinned a message."
+                text = "закрепил(а) сообщение."
             # TODO: Are there any more events with sender?
         message = {
             "entities": entities,
@@ -356,12 +356,12 @@ class Quotly:
             "from": {
                 "id": id_,
                 "first_name": (name or (sender.first_name if sender else None))
-                or "Deleted Account",
+                or "Удалённый аккаунт",
                 "last_name": last_name,
                 "username": sender.username if sender else None,
                 "language_code": "en",
                 "title": name,
-                "name": name or "Deleted Account",
+                "name": name or "Удалённый аккаунт",
                 "type": type_,
             },
             "text": text,
@@ -383,7 +383,7 @@ class Quotly:
         sender=None,
         file_name="quote.webp",
     ):
-        """Create quotely's quote."""
+        """Создать цитату Quotly."""
         if not isinstance(event, list):
             event = [event]
         from .. import udB
@@ -438,14 +438,14 @@ def split_list(List, index):
 
 def rotate_image(image, angle):
     if not cv2:
-        raise DependencyMissingError("This function needs 'cv2' to be installed!")
+        raise DependencyMissingError("Для этой функции требуется 'cv2'!")
     image_center = tuple(np.array(image.shape[1::-1]) / 2)
     rot_mat = cv2.getRotationMatrix2D(image_center, angle, 1.0)
     return cv2.warpAffine(image, rot_mat, image.shape[1::-1], flags=cv2.INTER_LINEAR)
 
 
 def random_string(length=3):
-    """Generate random string of 'n' Length"""
+    """Сгенерировать случайную строку длины 'n'"""
     return "".join(random.choices(string.ascii_uppercase, k=length))
 
 

@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочитайте GNU Affero General Public License в
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 import os
@@ -31,7 +31,7 @@ if run_as_module:
 
     if not os.path.exists("./plugins"):
         LOGS.error(
-            "'plugins' folder not found!\nMake sure that, you are on correct path."
+            "Папка 'plugins' не найдена!\nУбедитесь, что вы находитесь в правильном пути."
         )
         exit()
 
@@ -42,9 +42,9 @@ if run_as_module:
     udB = UltroidDB()
     update_envs()
 
-    LOGS.info(f"Connecting to {udB.name}...")
+    LOGS.info(f"Подключение к {udB.name}...")
     if udB.ping():
-        LOGS.info(f"Connected to {udB.name} Successfully!")
+        LOGS.info(f"Успешно подключено к {udB.name}!")
 
     BOT_MODE = udB.get_key("BOTMODE")
     DUAL_MODE = udB.get_key("DUAL_MODE")
@@ -61,7 +61,7 @@ if run_as_module:
 
         if not udB.get_key("BOT_TOKEN"):
             LOGS.critical(
-                '"BOT_TOKEN" not Found! Please add it, in order to use "BOTMODE"'
+                '"BOT_TOKEN" не найден! Пожалуйста, добавьте его, чтобы использовать "BOTMODE"'
             )
 
             sys.exit()

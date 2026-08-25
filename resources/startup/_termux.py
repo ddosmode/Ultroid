@@ -2,8 +2,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# Please read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from datetime import datetime
@@ -13,7 +13,7 @@ from time import sleep
 from colorama import Back, Fore, Style
 
 
-# clear screen
+# очистить экран
 def clear():
     system("clear")
 
@@ -29,14 +29,14 @@ MANDATORY_REQS = [
 ]
 
 OPT_PACKAGES = {
-    "bs4": "Used for site-scrapping (used in commands like - .gadget and many more)",
-    "yt-dlp": "Used for Youtuble Related Downloads...",
-    "youtube-search-python": "Used for youtube video search..",
-    "pillow": "Used for Image-Conversion related task. (size - approx 50mb ) (required for kang, convert and many more.)",
-    "psutil": "Used for .usage command.",
-    "lottie": "Used for animated sticker related conversion.",
-    "apscheduler": "Used in autopic/nightmode (scheduling tasks.)",
-    # "git+https://github.com/1danish-00/google_trans_new.git": "Used for translation purposes.",
+    "bs4": "Используется для парсинга сайтов (используется в командах, таких как .gadget и многих других)",
+    "yt-dlp": "Используется для загрузок, связанных с YouTube...",
+    "youtube-search-python": "Используется для поиска видео на YouTube..",
+    "pillow": "Используется для задач, связанных с конвертацией изображений. (размер - около 50 МБ) (требуется для kang, convert и многих других.)",
+    "psutil": "Используется для команды .usage.",
+    "lottie": "Используется для конвертации анимированных стикеров.",
+    "apscheduler": "Используется в autopic/nightmode (планирование задач.)",
+    # "git+https://github.com/1danish-00/google_trans_new.git": "Используется для целей перевода.",
 }
 
 APT_PACKAGES = ["ffmpeg", "neofetch", "mediainfo"]
@@ -55,38 +55,38 @@ HEADER = f"""{Fore.MAGENTA}
 """
 
 INFO_TEXT = f"""
-{Fore.GREEN}# Important points to know.
+{Fore.GREEN}# Важные моменты, которые нужно знать.
 
-{Fore.YELLOW}1. This script will just install basic requirements because of which some command whose requirements are missing won't work. You can view all optional requirements in (./resources/startup/optional-requirements.txt)
+{Fore.YELLOW}1. Этот скрипт установит только базовые зависимости, из-за чего некоторые команды, у которых отсутствуют зависимости, не будут работать. Вы можете просмотреть все дополнительные зависимости в (./resources/startup/optional-requirements.txt)
 
-2. You can install that requirement whenever you want with 'pip install' (a very basic python+bash knowledge is required.)
+2. Вы можете установить эту зависимость в любое время с помощью 'pip install' (требуются очень базовые знания python+bash.)
 
-3. Some of the plugins are disabled for 'Termux Users' to save resources (by adding in EXCLUDE_OFFICIAL).
-   - Read More - https://t.me/UltroidUpdates/36
-   - Also, way to enable the disabled plugins is mentioned in that post.
+3. Некоторые плагины отключены для 'Пользователей Termux' для экономии ресурсов (путем добавления в EXCLUDE_OFFICIAL).
+   - Подробнее - https://t.me/UltroidUpdates/36
+   - Также способ включить отключенные плагины указан в этом посте.
 
-   # Disabled Plugins Name
-    -    autocorrect    -     compressor
-    -    Gdrive         -     instagram
-    -    nsfwfilter     -     glitch
-    -    pdftools       -     writer
-    -    youtube        -     megadl
-    -    autopic        -     nightmode
-    -    blacklist      -     forcesubscribe
+   # Имена отключенных плагинов
+     -    autocorrect    -     compressor
+     -    Gdrive         -     instagram
+     -    nsfwfilter     -     glitch
+     -    pdftools       -     writer
+     -    youtube        -     megadl
+     -    autopic        -     nightmode
+     -    blacklist      -     forcesubscribe
 
-4. You can't use 'VCBOT' on Termux.
+4. Вы не можете использовать 'VCBOT' в Termux.
 
-5. You can't use 'MongoDB' on Termux (Android).
+5. Вы не можете использовать 'MongoDB' в Termux (Android).
 {Fore.RESET}
-* Hope you are smart enought to understand.
-* Enter 'A' to Continue, 'E' to Exit..\n
+* Надеюсь, вы достаточно умны, чтобы понять.
+* Введите 'A' для продолжения, 'E' для выхода..\n
 """
 
 
 def ask_and_wait(text, header: bool = False):
     if header:
         text = with_header(text)
-    print(text + "\nPress 'ANY Key' to Continue or 'Ctrl+C' to exit...\n")
+    print(text + "\nНажмите 'ЛЮБУЮ клавишу' для продолжения или 'Ctrl+C' для выхода...\n")
     input("")
 
 
@@ -100,76 +100,76 @@ def yes_no_apt():
         return True
     elif yes_no in ["no", "n"]:
         return False
-    print("Invalid Input\nRe-Enter: ")
+    print("Неверный ввод\nПовторите ввод: ")
     return yes_no_apt()
 
 
 def ask_process_info_text():
     strm = input("").lower().strip()
     if strm == "e":
-        print("Exiting...")
+        print("Выход...")
         exit(0)
     elif strm != "a":
-        print("Invalid Input")
-        print("Enter 'A' to Continue or 'E' to exit...")
+        print("Неверный ввод")
+        print("Введите 'A' для продолжения или 'E' для выхода...")
         ask_process_info_text()
 
 
 def ask_process_apt_install():
     strm = input("").lower().strip()
     if strm == "e":
-        print("Exiting...")
+        print("Выход...")
         exit(0)
     elif strm == "a":
         for apt in APT_PACKAGES:
             print(f"* Do you want to install '{apt}'? [Y/N] ")
             if yes_no_apt():
-                print(f"Installing {apt}...")
+                print(f"Установка {apt}...")
                 system(f"apt install {apt} -y")
             else:
-                print(f"- Discarded {apt}.\n")
+                print(f"- Отменено {apt}.\n")
     elif strm == "i":
         names = " ".join(APT_PACKAGES)
-        print("Installing all apt-packages...")
+        print("Установка всех apt-пакетов...")
         system(f"apt install {names} -y")
     elif strm != "s":
-        print("Invalid Input\n* Enter Again...")
+        print("Неверный ввод\n* Введите снова...")
         ask_process_apt_install()
 
 
 def ask_and_wait_opt():
     strm = input("").strip().lower()
     if strm == "e":
-        print("Exiting...")
+        print("Выход...")
         exit(0)
     elif strm == "a":
         for opt in OPT_PACKAGES.keys():
             print(
-                f"* {Fore.YELLOW}Do you want to install '{opt}'? [Y/N]\n- {OPT_PACKAGES[opt]}"
+                f"* {Fore.YELLOW}Вы хотите установить '{opt}'? [Y/N]\n- {OPT_PACKAGES[opt]}"
             )
             if yes_no_apt():
-                print(f"Installing {opt}...")
+                print(f"Установка {opt}...")
                 system(f"pip install {opt}")
             else:
-                print(f"{Fore.YELLOW}- Discarded {opt}.\n")
+                print(f"{Fore.YELLOW}- Отменено {opt}.\n")
     elif strm == "i":
         names = " ".join(OPT_PACKAGES.keys())
-        print(f"{Fore.YELLOW}Installing all packages...")
+        print(f"{Fore.YELLOW}Установка всех пакетов...")
         system(f"pip install {names}")
     elif strm != "s":
-        print("Invalid Input\n* Enter Again...")
+        print("Неверный ввод\n* Введите снова...")
         ask_and_wait_opt()
 
 
 def ask_make_env():
     strm = input("").strip().lower()
     if strm in ["yes", "y"]:
-        print(f"{Fore.YELLOW}* Creating .env file..")
+        print(f"{Fore.YELLOW}* Создание файла .env..")
         with open(".env", "a") as file:
             for var in ["API_ID", "API_HASH", "SESSION", "REDIS_URI", "REDIS_PASSWORD"]:
-                inp = input(f"Enter {var}\n- ")
+                inp = input(f"Введите {var}\n- ")
                 file.write(f"{var}={inp}\n")
-        print("* Created '.env' file successfully! 😃")
+        print("* Файл '.env' успешно создан! 😃")
 
     else:
         print("OK!")
@@ -190,14 +190,14 @@ print(
 █       █       █ █   █ █   █  █ █       █   █       █
 █▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█ █▄▄▄█ █▄▄▄█  █▄█▄▄▄▄▄▄▄█▄▄▄█▄▄▄▄▄▄█ 
 {Style.RESET_ALL}
-{Fore.GREEN}- ULTROID Termux Installation -
-  The Main Aim of this script is to deploy Ultroid with basic requirements and save your phone resources.
+{Fore.GREEN}- Установка ULTROID в Termux -
+  Основная цель этого скрипта - развернуть Ultroid с базовыми зависимостями и сэкономить ресурсы вашего телефона.
 {Fore.RESET}
 
 {COPYRIGHT}
     """
 )
-print("Press 'Any Key' to continue...")
+print("Нажмите 'Любую клавишу' для продолжения...")
 input("")
 clear()
 
@@ -206,59 +206,59 @@ ask_process_info_text()
 
 clear()
 
-print(with_header("Installing Mandatory requirements..."))
+print(with_header("Установка обязательных зависимостей..."))
 all_ = " ".join(MANDATORY_REQS)
 system(f"pip install {all_}")
 
 clear()
 print(
     with_header(
-        f"\n{Fore.GREEN}# Moving toward Installing Apt-Packages{Fore.RESET}\n\n"
+        f"\n{Fore.GREEN}# Переход к установке Apt-пакетов{Fore.RESET}\n\n"
     )
 )
-print("---Enter---")
-print(" - A = 'Ask Y/N for each'.")
-print(" - I = 'Install all'")
-print(" - S = 'Skip Apt installation.'")
-print(" - E = Exit.\n")
+print("---Ввод---")
+print(" - A = 'Спрашивать Y/N для каждого'.")
+print(" - I = 'Установить все'")
+print(" - S = 'Пропустить установку Apt.'")
+print(" - E = Выход.\n")
 ask_process_apt_install()
 
 clear()
 print(
     with_header(
         f"""
-{Fore.YELLOW}# Installing other non mandatory requirements.
-(You can Install them, if you want command using them to work!){Fore.RESET}
+{Fore.YELLOW}# Установка других необязательных зависимостей.
+(Вы можете установить их, если хотите, чтобы команды, использующие их, работали!){Fore.RESET}
 
-{'- '.join(list(OPT_PACKAGES.keys()))}
+{' - '.join(list(OPT_PACKAGES.keys()))}
 
-Enter [ A = Ask for each, I = Install all, S = Skip, E = Exit]"""
+Введите [ A = Спросить для каждого, I = Установить все, S = Пропустить, E = Выход]"""
     )
 )
 ask_and_wait_opt()
 
-print(f"\n{Fore.RED}#EXTRA Features...\n")
-print(f"{Fore.YELLOW}* Do you want to get Ultroid Logs in Colors? [Y/N] ")
+print(f"\n{Fore.RED}#ДОПОЛНИТЕЛЬНЫЕ возможности...\n")
+print(f"{Fore.YELLOW}* Вы хотите получать логи Ultroid в цветах? [Y/N] ")
 inp = input("").strip().lower()
 if inp in ["yes", "y"]:
-    print(f"{Fore.GREEN}*Spoking the Magical Mantras*")
+    print(f"{Fore.GREEN}*Произносим волшебные мантры*")
     system("pip install coloredlogs")
 else:
-    print("Skipped!")
+    print("Пропущено!")
 
 clear()
 if not path.exists(".env"):
-    print(with_header("# Do you want to move toward creating .env file ? [y/N] "))
+    print(with_header("# Вы хотите перейти к созданию файла .env ? [y/N] "))
     ask_make_env()
 
-print(with_header(f"\n{Fore.GREEN}You are all Done! 🥳"))
+print(with_header(f"\n{Fore.GREEN}Вы всё сделали! 🥳"))
 sleep(0.2)
-print(f"Use 'bash startup' to try running Ultroid.{Fore.RESET}")
+print(f"Используйте 'bash startup', чтобы попробовать запустить Ultroid.{Fore.RESET}")
 sleep(0.5)
 print(
-    "\nYou can head over to @UltroidSupportChat, if you get stuck somewhere, and need help."
+    "\nВы можете обратиться к @UltroidSupportChat, если застряли где-то и нуждаетесь в помощи."
 )
 sleep(0.5)
-print("\nMade with ❤️ by @TeamUltroid...")
+print("\nСделано с ❤️ от @TeamUltroid...")
 
 system("pip3 uninstall -q colorama -y")

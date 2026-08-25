@@ -4,7 +4,7 @@ if not run_as_module:
     from ..exceptions import RunningAsFunctionLibError
 
     raise RunningAsFunctionLibError(
-        "You are running 'pyUltroid' as a functions lib, not as run module. You can't access this folder.."
+        "Вы запускаете 'pyUltroid' как библиотеку функций, а не как исполняемый модуль. Вы не можете получить доступ к этой папке.."
     )
 
 from .. import *

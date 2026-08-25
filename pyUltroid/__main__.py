@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочитайте GNU Affero General Public License в
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 from . import *
@@ -30,7 +30,7 @@ def main():
     except ImportError:
         AsyncIOScheduler = None
 
-    # Option to Auto Update On Restarts..
+    # Возможность автоматического обновления при перезапуске..
     if (
         udB.get_key("UPDATE_ON_RESTART")
         and os.path.exists(".git")
@@ -47,7 +47,7 @@ def main():
     if not ultroid_bot.me.bot:
         udB.set_key("OWNER_ID", ultroid_bot.uid)
 
-    LOGS.info("Initialising...")
+    LOGS.info("Инициализация...")
 
     ultroid_bot.run_in_loop(autopilot())
     ultroid_bot.loop.create_task(keep_redis_alive())
@@ -69,25 +69,25 @@ def main():
 
     suc_msg = """
             ----------------------------------------------------------------------
-                Ultroid has been deployed! Visit @TheUltroid for updates!!
+                Ultroid был развёрнут! Посетите @TheUltroid для обновлений!!
             ----------------------------------------------------------------------
     """
 
-    # for channel plugins
+    # для плагинов каналов
     plugin_channels = udB.get_key("PLUGIN_CHANNEL")
 
-    # Customize Ultroid Assistant...
+    # Настройка ассистента Ultroid...
     ultroid_bot.run_in_loop(customize())
 
-    # Load Addons from Plugin Channels.
+    # Загрузить аддоны из каналов плагинов.
     if plugin_channels:
         ultroid_bot.run_in_loop(plug(plugin_channels))
 
-    # Send/Ignore Deploy Message..
+    # Отправить/игнорировать сообщение о развёртывании..
     if not udB.get_key("LOG_OFF"):
         ultroid_bot.run_in_loop(ready())
 
-    # Edit Restarting Message (if It's restarting)
+    # Редактировать сообщение перезапуска (если это перезапуск)
     ultroid_bot.run_in_loop(WasItRestart(udB))
 
     try:
@@ -96,7 +96,7 @@ def main():
         pass
 
     LOGS.info(
-        f"Took {time_formatter((time.time() - start_time)*1000)} to start •ULTROID•"
+        f"Запуск занял {time_formatter((time.time() - start_time)*1000)} •ULTROID•"
     )
     LOGS.info(suc_msg)
 

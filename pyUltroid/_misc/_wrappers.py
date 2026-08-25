@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочитайте GNU Affero General Public License в
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 from asyncio import sleep
@@ -11,7 +11,7 @@ from telethon.errors import MessageDeleteForbiddenError, MessageNotModifiedError
 from telethon.tl.custom import Message
 from telethon.tl.types import MessageService
 
-# edit or reply
+# редактировать или ответить
 
 
 async def eor(event, text=None, time=None, link_preview=False, edit_time=None, **args):
@@ -57,7 +57,7 @@ async def _try_delete(event):
     except BaseException as er:
         from . import LOGS
 
-        LOGS.error("Error while Deleting Message..")
+        LOGS.error("Ошибка при удалении сообщения..")
         LOGS.exception(er)
 
 

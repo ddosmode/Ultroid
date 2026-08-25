@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочитайте GNU Affero General Public License в
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 import inspect
@@ -39,11 +39,11 @@ IN_BTTS = [
 ]
 
 
-# decorator for assistant
+# декоратор для ассистента
 
 
 def asst_cmd(pattern=None, load=None, owner=False, **kwargs):
-    """Decorator for assistant's command"""
+    """Декоратор для команд ассистента"""
     name = inspect.stack()[1].filename.split("/")[-1].replace(".py", "")
     kwargs["forwards"] = False
 
@@ -67,7 +67,7 @@ def asst_cmd(pattern=None, load=None, owner=False, **kwargs):
 
 
 def callback(data=None, from_users=[], admins=False, owner=False, **kwargs):
-    """Assistant's callback decorator"""
+    """Декоратор обратных вызовов ассистента"""
     if "me" in from_users:
         from_users.remove("me")
         from_users.append(ultroid_bot.uid)
@@ -77,9 +77,9 @@ def callback(data=None, from_users=[], admins=False, owner=False, **kwargs):
             if admins and not await admin_check(event):
                 return
             if from_users and event.sender_id not in from_users:
-                return await event.answer("Not for You!", alert=True)
+                return await event.answer("Не для вас!", alert=True)
             if owner and event.sender_id not in owner_and_sudos():
-                return await event.answer(f"This is {OWNER}'s bot!!")
+                return await event.answer(f"Это бот {OWNER}!!")
             try:
                 await func(event)
             except Exception as er:
@@ -91,7 +91,7 @@ def callback(data=None, from_users=[], admins=False, owner=False, **kwargs):
 
 
 def in_pattern(pattern=None, owner=False, **kwargs):
-    """Assistant's inline decorator."""
+    """Инлайн-декоратор ассистента."""
 
     def don(func):
         async def wrapper(event):
@@ -113,7 +113,7 @@ def in_pattern(pattern=None, owner=False, **kwargs):
                 ]
                 return await event.answer(
                     res,
-                    switch_pm=f"🤖: Assistant of {OWNER}",
+                    switch_pm=f"🤖: Ассистент {OWNER}",
                     switch_pm_param="start",
                 )
             try:
@@ -124,17 +124,17 @@ def in_pattern(pattern=None, owner=False, **kwargs):
                 err = format_exc()
 
                 def error_text():
-                    return f"**#ERROR #INLINE**\n\nQuery: `{asst.me.username} {pattern}`\n\n**Traceback:**\n`{format_exc()}`"
+                    return f"**#ОШИБКА #INLINE**\n\nЗапрос: `{asst.me.username} {pattern}`\n\n**Трассировка:**\n`{format_exc()}`"
 
                 LOGS.exception(er)
                 try:
                     await event.answer(
                         [
                             await event.builder.article(
-                                title="Unhandled Exception has Occured!",
+                                title="Произошло необработанное исключение!",
                                 text=error_text(),
                                 buttons=Button.url(
-                                    "Report", "https://t.me/UltroidSupportChat"
+                                    "Сообщить", "https://t.me/UltroidSupportChat"
                                 ),
                             )
                         ]

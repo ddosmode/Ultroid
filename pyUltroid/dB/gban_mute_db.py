@@ -1,8 +1,8 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочитайте GNU Affero General Public License по адресу
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 from .. import udB
@@ -14,7 +14,7 @@ def list_gbanned():
 
 def gban(user, reason):
     ok = list_gbanned()
-    ok.update({int(user): reason or "No Reason. "})
+    ok.update({int(user): reason or "Причина не указана. "})
     return udB.set_key("GBAN", ok)
 
 

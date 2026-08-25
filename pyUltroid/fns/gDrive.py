@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 import time
@@ -65,7 +65,7 @@ class GDriveManager:
             )
             self._flow["_"] = _auth_flow
         except KeyError:
-            return "Fill GDRIVE client credentials"
+            return "Заполните учётные данные GDRIVE клиента"
         return _auth_flow.step1_get_authorize_url()
 
     @property
@@ -102,7 +102,7 @@ class GDriveManager:
         media_body = MediaFileUpload(path, mimetype=mime_type, resumable=True)
         body = {
             "title": filename,
-            "description": "Uploaded using Ultroid Userbot",
+            "description": "Загружено с помощью Ultroid Userbot",
             "mimeType": mime_type,
         }
         if folder_id:
@@ -124,10 +124,10 @@ class GDriveManager:
                 speed = round(completed / diff, 2)
                 eta = round((total_size - completed) / speed, 2) * 1000
                 crnt_txt = (
-                    f"`Uploading {filename} to GDrive...\n\n"
-                    + f"Status: {humanbytes(completed)}/{humanbytes(total_size)} »» {percentage}%\n"
-                    + f"Speed: {humanbytes(speed)}/s\n"
-                    + f"ETA: {time_formatter(eta)}`"
+                    f"`Загрузка {filename} в GDrive...\n\n"
+                    + f"Статус: {humanbytes(completed)}/{humanbytes(total_size)} »» {percentage}%\n"
+                    + f"Скорость: {humanbytes(speed)}/с\n"
+                    + f"Оставшееся время: {time_formatter(eta)}`"
                 )
                 if round((diff % 10.00) == 0) or last_txt != crnt_txt:
                     await event.edit(crnt_txt)
@@ -173,10 +173,10 @@ class GDriveManager:
                     speed = round(completed / diff, 2)
                     eta = round((total_size - completed) / speed, 2) * 1000
                     crnt_txt = (
-                        f"`Downloading {filename} from GDrive...\n\n"
-                        + f"Status: {humanbytes(completed)}/{humanbytes(total_size)} »» {percentage}%\n"
-                        + f"Speed: {humanbytes(speed)}/s\n"
-                        + f"ETA: {time_formatter(eta)}`"
+                        f"`Скачивание {filename} из GDrive...\n\n"
+                        + f"Статус: {humanbytes(completed)}/{humanbytes(total_size)} »» {percentage}%\n"
+                        + f"Скорость: {humanbytes(speed)}/с\n"
+                        + f"Оставшееся время: {time_formatter(eta)}`"
                     )
                     if round((diff % 10.00) == 0) or last_txt != crnt_txt:
                         await event.edit(crnt_txt)

@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 import asyncio
@@ -75,7 +75,7 @@ def run_async(function):
     return wrapper
 
 
-# ~~~~~~~~~~~~~~~~~~~~ small funcs ~~~~~~~~~~~~~~~~~~~~ #
+# ~~~~~~~~~~~~~~~~~~~~ маленькие функции ~~~~~~~~~~~~~~~~~~~~ #
 
 
 def make_mention(user, custom=None):
@@ -85,7 +85,7 @@ def make_mention(user, custom=None):
 
 
 def inline_mention(user, custom=None, html=False):
-    mention_text = get_display_name(user) or "Deleted Account" if not custom else custom
+    mention_text = get_display_name(user) or "Удалённый аккаунт" if not custom else custom
     if isinstance(user, types.User):
         if html:
             return f"<a href=tg://user?id={user.id}>{mention_text}</a>"
@@ -97,7 +97,7 @@ def inline_mention(user, custom=None, html=False):
     return mention_text
 
 
-# ----------------- Load \\ Unloader ---------------- #
+# ----------------- Загрузчик / Выгрузчик ---------------- #
 
 
 def un_plug(shortname):
@@ -135,9 +135,9 @@ if run_as_module:
 
         if not event.reply_to:
             return await eod(
-                event, f"Please use `{HNDLR}install` as reply to a .py file."
+                event, f"Используйте `{HNDLR}install` в ответ на .py файл."
             )
-        ok = await eor(event, "`Installing...`")
+        ok = await eor(event, "`Установка...`")
         reply = await event.get_reply_message()
         if not (
             reply.media
@@ -145,10 +145,10 @@ if run_as_module:
             and reply.file.name
             and reply.file.name.endswith(".py")
         ):
-            return await eod(ok, "`Please reply to any python plugin`")
+            return await eod(ok, "`Пожалуйста, ответьте на любой python плагин`")
         plug = reply.file.name.replace(".py", "")
         if plug in list(LOADED):
-            return await eod(ok, f"Plugin `{plug}` is already installed.")
+            return await eod(ok, f"Плагин `{plug}` уже установлен.")
         sm = reply.file.name.replace("_", "-").replace("|", "-")
         dl = await reply.download_media(f"addons/{sm}")
         if event.text[9:] != "f":
@@ -157,52 +157,52 @@ if run_as_module:
                 if re.search(dan, read):
                     os.remove(dl)
                     return await ok.edit(
-                        f"**Installation Aborted.**\n**Reason:** Occurance of `{dan}` in `{reply.file.name}`.\n\nIf you trust the provider and/or know what you're doing, use `{HNDLR}install f` to force install.",
+                        f"**Установка отменена.**\n**Причина:** Обнаружено `{dan}` в `{reply.file.name}`.\n\nЕсли вы доверяете поставщику и/или знаете что делаете, используйте `{HNDLR}install f` для принудительной установки.",
                     )
         try:
             load_addons(dl)  # dl.split("/")[-1].replace(".py", ""))
         except BaseException:
             os.remove(dl)
-            return await eor(ok, f"**ERROR**\n\n`{format_exc()}`", time=30)
+            return await eor(ok, f"**ОШИБКА**\n\n`{format_exc()}`", time=30)
         plug = sm.replace(".py", "")
         if plug in HELP:
-            output = "**Plugin** - `{}`\n".format(plug)
+            output = "**Плагин** - `{}`\n".format(plug)
             for i in HELP[plug]:
                 output += i
             output += "\n© @TeamUltroid"
-            await eod(ok, f"✓ `Ultroid - Installed`: `{plug}` ✓\n\n{output}")
+            await eod(ok, f"✓ `Ultroid - Установлено`: `{plug}` ✓\n\n{output}")
         elif plug in CMD_HELP:
-            output = f"Plugin Name-{plug}\n\n✘ Commands Available-\n\n"
+            output = f"Имя плагина-{plug}\n\n✘ Доступные команды-\n\n"
             output += str(CMD_HELP[plug])
-            await eod(ok, f"✓ `Ultroid - Installed`: `{plug}` ✓\n\n{output}")
+            await eod(ok, f"✓ `Ultroid - Установлено`: `{plug}` ✓\n\n{output}")
         else:
             try:
-                x = f"Plugin Name-{plug}\n\n✘ Commands Available-\n\n"
+                x = f"Имя плагина-{plug}\n\n✘ Доступные команды-\n\n"
                 for d in LIST[plug]:
                     x += HNDLR + d + "\n"
-                await eod(ok, f"✓ `Ultroid - Installed`: `{plug}` ✓\n\n`{x}`")
+                await eod(ok, f"✓ `Ultroid - Установлено`: `{plug}` ✓\n\n`{x}`")
             except BaseException:
-                await eod(ok, f"✓ `Ultroid - Installed`: `{plug}` ✓")
+                await eod(ok, f"✓ `Ultroid - Установлено`: `{plug}` ✓")
 
     async def heroku_logs(event):
         """
-        post heroku logs
+        отправить логи heroku
         """
         from .. import LOGS
 
-        xx = await eor(event, "`Processing...`")
+        xx = await eor(event, "`Обработка...`")
         if not (Var.HEROKU_API and Var.HEROKU_APP_NAME):
             return await xx.edit(
-                "Please set `HEROKU_APP_NAME` and `HEROKU_API` in vars."
+                "Пожалуйста, установите `HEROKU_APP_NAME` и `HEROKU_API` в переменных."
             )
         try:
             app = (heroku3.from_key(Var.HEROKU_API)).app(Var.HEROKU_APP_NAME)
         except BaseException as se:
             LOGS.info(se)
             return await xx.edit(
-                "`HEROKU_API` and `HEROKU_APP_NAME` is wrong! Kindly re-check in config vars."
+                "`HEROKU_API` и `HEROKU_APP_NAME` неверны! Пожалуйста, проверьте ещё раз в переменных конфигурации."
             )
-        await xx.edit("`Downloading Logs...`")
+        await xx.edit("`Загрузка логов...`")
         ok = app.get_log()
         with open("ultroid-heroku.log", "w") as log:
             log.write(ok)
@@ -210,7 +210,7 @@ if run_as_module:
             event.chat_id,
             file="ultroid-heroku.log",
             thumb=ULTConfig.thumb,
-            caption="**Ultroid Heroku Logs.**",
+            caption="**Логи Ultroid Heroku.**",
         )
 
         os.remove("ultroid-heroku.log")
@@ -218,27 +218,27 @@ if run_as_module:
 
     async def def_logs(ult, file):
         await ult.respond(
-            "**Ultroid Logs.**",
+            "**Логи Ultroid.**",
             file=file,
             thumb=ULTConfig.thumb,
         )
 
     async def updateme_requirements():
-        """Update requirements.."""
+        """Обновить зависимости.."""
         await bash(
             f"{sys.executable} -m pip install --no-cache-dir -r requirements.txt"
         )
 
     @run_async
     def gen_chlog(repo, diff):
-        """Generate Changelogs..."""
+        """Сгенерировать список изменений..."""
         UPSTREAM_REPO_URL = (
             Repo().remotes[0].config_reader.get("url").replace(".git", "")
         )
         ac_br = repo.active_branch.name
         ch_log = tldr_log = ""
-        ch = f"<b>Ultroid {ultroid_version} updates for <a href={UPSTREAM_REPO_URL}/tree/{ac_br}>[{ac_br}]</a>:</b>"
-        ch_tl = f"Ultroid {ultroid_version} updates for {ac_br}:"
+        ch = f"<b>Обновления Ultroid {ultroid_version} для <a href={UPSTREAM_REPO_URL}/tree/{ac_br}>[{ac_br}]</a>:</b>"
+        ch_tl = f"Обновления Ultroid {ultroid_version} для {ac_br}:"
         d_form = "%d/%m/%y || %H:%M"
         for c in repo.iter_commits(diff):
             ch_log += f"\n\n💬 <b>{c.count()}</b> 🗓 <b>[{c.committed_datetime.strftime(d_form)}]</b>\n<b><a href={UPSTREAM_REPO_URL.rstrip('/')}/commit/{c}>[{c.summary}]</a></b> 👨‍💻 <code>{c.author}</code>"
@@ -253,7 +253,7 @@ if run_as_module:
 
 async def bash(cmd, run_code=0):
     """
-    run any command in subprocess and get output or error."""
+    выполнить любую команду в подпроцессе и получить вывод или ошибку."""
     process = await asyncio.create_subprocess_shell(
         cmd,
         stdout=asyncio.subprocess.PIPE,
@@ -268,8 +268,8 @@ async def bash(cmd, run_code=0):
     return out, err
 
 
-# ---------------------------UPDATER-------------------------------- #
-# Will add in class
+# ---------------------------ОБНОВИТЕЛЬ-------------------------------- #
+# Будет добавлено в класс
 
 
 async def updater():
@@ -283,11 +283,11 @@ async def updater():
     try:
         repo = Repo()
     except NoSuchPathError as error:
-        LOGS.info(f"`directory {error} is not found`")
+        LOGS.info(f"`директория {error} не найдена`")
         Repo().__del__()
         return
     except GitCommandError as error:
-        LOGS.info(f"`Early failure! {error}`")
+        LOGS.info(f"`Ранний сбой! {error}`")
         Repo().__del__()
         return
     except InvalidGitRepositoryError:
@@ -305,7 +305,7 @@ async def updater():
     return bool(changelog)
 
 
-# ----------------Fast Upload/Download----------------
+# ----------------Быстрая загрузка/скачивание----------------
 # @1danish_00 @new-dev0 @buddhhu
 
 
@@ -347,7 +347,7 @@ async def downloader(filename, file, event, taime, msg):
     return result
 
 
-# ~~~~~~~~~~~~~~~Async Searcher~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~Асинхронный поисковик~~~~~~~~~~~~~~~
 # @buddhhu
 
 
@@ -390,12 +390,12 @@ async def async_searcher(
         raise DependencyMissingError("install 'aiohttp' to use this.")
 
 
-# ~~~~~~~~~~~~~~~~~~~~DDL Downloader~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~Загрузчик DDL~~~~~~~~~~~~~~~~~~~~
 # @buddhhu @new-dev0
 
 
 async def download_file(link, name, validate=False):
-    """for files, without progress callback with aiohttp"""
+    """для файлов, без обратного вызова прогресса с aiohttp"""
 
     async def _download(content):
         if validate and "application/json" in content.headers.get("Content-Type"):
@@ -429,7 +429,7 @@ async def fast_download(download_url, filename=None, progress_callback=None):
             return filename, time.time() - start_time
 
 
-# --------------------------Media Funcs-------------------------------- #
+# --------------------------Функции медиа-------------------------------- #
 
 
 def mediainfo(media):
@@ -467,7 +467,7 @@ def mediainfo(media):
     return m
 
 
-# ------------------Some Small Funcs----------------
+# ------------------Некоторые мелкие функции----------------
 
 
 def time_formatter(milliseconds):
@@ -545,7 +545,7 @@ async def progress(current, total, event, start, type_of_ps, file_name=None):
 
         tmp = (
             progress_str
-            + "`{0} of {1}`\n\n`✦ Speed: {2}/s`\n\n`✦ ETA: {3}`\n\n".format(
+            + "`{0} из {1}`\n\n`✦ Скорость: {2}/с`\n\n`✦ Оставшееся время: {3}`\n\n".format(
                 humanbytes(current),
                 humanbytes(total),
                 humanbytes(speed),
@@ -554,13 +554,13 @@ async def progress(current, total, event, start, type_of_ps, file_name=None):
         )
         if file_name:
             await event.edit(
-                "`✦ {}`\n\n`File Name: {}`\n\n{}".format(type_of_ps, file_name, tmp)
+                "`✦ {}`\n\n`Имя файла: {}`\n\n{}".format(type_of_ps, file_name, tmp)
             )
         else:
             await event.edit("`✦ {}`\n\n{}".format(type_of_ps, tmp))
 
 
-# ------------------System\\Heroku stuff----------------
+# ------------------Системные штуки Heroku----------------
 # @xditya @sppidy @techierror
 
 
@@ -570,13 +570,13 @@ async def restart(ult=None):
             Heroku = heroku3.from_key(Var.HEROKU_API)
             app = Heroku.apps()[Var.HEROKU_APP_NAME]
             if ult:
-                await ult.edit("`Restarting your app, please wait for a minute!`")
+                await ult.edit("`Перезапуск приложения, пожалуйста, подождите минуту!`")
             app.restart()
         except BaseException as er:
             if ult:
                 return await eor(
                     ult,
-                    "`HEROKU_API` or `HEROKU_APP_NAME` is wrong! Kindly re-check in config vars.",
+                    "`HEROKU_API` или `HEROKU_APP_NAME` неверны! Пожалуйста, проверьте ещё раз в переменных конфигурации.",
                 )
             LOGS.exception(er)
     else:
@@ -600,20 +600,20 @@ async def restart(ult=None):
 async def shutdown(ult):
     from .. import HOSTED_ON, LOGS
 
-    ult = await eor(ult, "Shutting Down")
+    ult = await eor(ult, "Завершение работы")
     if HOSTED_ON == "heroku":
         if not (Var.HEROKU_APP_NAME and Var.HEROKU_API):
-            return await ult.edit("Please Fill `HEROKU_APP_NAME` and `HEROKU_API`")
+            return await ult.edit("Пожалуйста, заполните `HEROKU_APP_NAME` и `HEROKU_API`")
         dynotype = os.getenv("DYNO").split(".")[0]
         try:
             Heroku = heroku3.from_key(Var.HEROKU_API)
             app = Heroku.apps()[Var.HEROKU_APP_NAME]
-            await ult.edit("`Shutting Down your app, please wait for a minute!`")
+            await ult.edit("`Завершение работы приложения, пожалуйста, подождите минуту!`")
             app.process_formation()[dynotype].scale(0)
         except BaseException as e:
             LOGS.exception(e)
             return await ult.edit(
-                "`HEROKU_API` and `HEROKU_APP_NAME` is wrong! Kindly re-check in config vars."
+                "`HEROKU_API` и `HEROKU_APP_NAME` неверны! Пожалуйста, проверьте ещё раз в переменных конфигурации."
             )
     else:
         sys.exit()

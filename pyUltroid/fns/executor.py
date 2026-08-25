@@ -3,25 +3,25 @@ from asyncio import create_subprocess_exec, subprocess
 
 class Terminal:
     """
-    Class for running terminal commands asynchronously.
+    Класс для асинхронного выполнения терминальных команд.
 
-    Methods:
+    Методы:
 
         run(commands: str)
-            commands: Terminal Commands.
-            Returns Process id (int)
+            commands: Терминальные команды.
+            Возвращает ID процесса (int)
 
         terminate(pid: int)
-            pid: Process id returned in `run` method.
-            Returns True if terminated else False (bool)
+            pid: ID процесса, возвращённый в методе `run`.
+            Возвращает True, если завершён, иначе False (bool)
 
         output(pid: int)
-            pid: Process id returned in `run` method.
-            Returns Output of process (str)
+            pid: ID процесса, возвращённый в методе `run`.
+            Возвращает вывод процесса (str)
 
         error(pid: int)
-            pid: Process id returned in `run` method.
-            Returns Error of process (str)
+            pid: ID процесса, возвращённый в методе `run`.
+            Возвращает ошибку процесса (str)
     """
 
     def __init__(self) -> None:
@@ -69,7 +69,7 @@ class Terminal:
     def _auto_remove_processes(self) -> None:
         while self._processes:
             for proc in self._processes.keys():
-                if proc.returncode is not None:  # process is still running
+                if proc.returncode is not None:  # процесс всё ещё работает
                     try:
                         self._processes.pop(proc)
                     except KeyError:

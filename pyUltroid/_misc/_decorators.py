@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочитайте GNU Affero General Public License в
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 import asyncio
@@ -61,7 +61,7 @@ def compile_pattern(data, hndlr):
     if data.startswith("."):
         data = data[1:]
     if hndlr in [" ", "NO_HNDLR"]:
-        # No Hndlr Feature
+        # Без Hndlr
         return re.compile("^" + data)
     return re.compile("\\" + hndlr + data)
 
@@ -83,16 +83,16 @@ def ultroid_cmd(
                 chat_id = ult.chat_id
                 command_name = pattern if pattern else ult.text.split()[0].lstrip(HNDLR)
                 chat_name = get_display_name(ult.chat)
-                LOGS.info(f"Command '{command_name}' executed by user ID {user_id} in chat {chat_id} ({chat_name})")
+                LOGS.info(f"Команда '{command_name}' выполнена пользователем с ID {user_id} в чате {chat_id} ({chat_name})")
                 log_channel = udB.get_key("LOG_CHANNEL")
                 if log_channel:
                     try:
                         await asst.send_message(
                             log_channel,
-                            f"Command '{command_name}' executed by user ID {user_id} in chat {chat_id} ({chat_name})"
+                            f"Команда '{command_name}' выполнена пользователем с ID {user_id} в чате {chat_id} ({chat_name})"
                         )
                     except Exception as e:
-                        LOGS.warning(f"Failed to send command log to log channel {log_channel}: {e}")
+                        LOGS.warning(f"Не удалось отправить лог команды в канал {log_channel}: {e}")
             if not ult.out:
                 if owner_only:
                     return
@@ -128,18 +128,18 @@ def ultroid_cmd(
             except FloodWaitError as fwerr:
                 await asst.send_message(
                     udB.get_key("LOG_CHANNEL"),
-                    f"`FloodWaitError:\n{str(fwerr)}\n\nSleeping for {tf((fwerr.seconds + 10)*1000)}`",
+                    f"\`FloodWaitError:\n{str(fwerr)}\n\nСплю {tf((fwerr.seconds + 10)*1000)}\`",
                 )
                 await ultroid_bot.disconnect()
                 await asyncio.sleep(fwerr.seconds + 10)
                 await ultroid_bot.connect()
                 await asst.send_message(
                     udB.get_key("LOG_CHANNEL"),
-                    "`Bot is working again`",
+                    "\`Бот снова работает\`",
                 )
                 return
             except ChatSendInlineForbiddenError:
-                return await eod(ult, "`Inline Locked In This Chat.`")
+                return await eod(ult, "\`Инлайн заблокирован в этом чате.\`")
             except (ChatSendMediaForbiddenError, ChatSendStickersForbiddenError):
                 return await eod(ult, get_string("py_d8"))
             except (BotMethodInvalidError, UserIsBotError):
@@ -150,7 +150,7 @@ def ultroid_cmd(
                     get_string("py_d7"),
                 )
             except (BotInlineDisabledError, DependencyMissingError) as er:
-                return await eod(ult, f"`{er}`")
+                return await eod(ult, f"\`{er}\`")
             except (
                 MessageIdInvalidError,
                 MessageNotModifiedError,
@@ -161,7 +161,7 @@ def ultroid_cmd(
                 LOGS.exception(er)
                 await asst.send_message(
                     udB.get_key("LOG_CHANNEL"),
-                    "Session String expired, create new session from 👇",
+                    "Строка сессии истекла, создайте новую сессию отсюда 👇",
                     buttons=[
                         Button.url("Bot", "t.me/SessionGeneratorBot?start="),
                         Button.url(
@@ -179,29 +179,29 @@ def ultroid_cmd(
                 LOGS.exception(e)
                 date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
                 naam = get_display_name(chat)
-                ftext = "**Ultroid Client Error:** `Forward this to` @UltroidSupportChat\n\n"
-                ftext += "**Py-Ultroid Version:** `" + str(pyver)
-                ftext += "`\n**Ultroid Version:** `" + str(ult_ver)
-                ftext += "`\n**Telethon Version:** `" + str(telever)
-                ftext += f"`\n**Hosted At:** `{HOSTED_ON}`\n\n"
-                ftext += "--------START ULTROID CRASH LOG--------"
-                ftext += "\n**Date:** `" + date
-                ftext += "`\n**Group:** `" + str(ult.chat_id) + "` " + str(naam)
-                ftext += "\n**Sender ID:** `" + str(ult.sender_id)
-                ftext += "`\n**Replied:** `" + str(ult.is_reply)
-                ftext += "`\n\n**Event Trigger:**`\n"
+                ftext = f"**Ошибка клиента Ultroid:** \`Перешлите это\` @UltroidSupportChat\n\n"
+                ftext += f"**Версия Py-Ultroid:** \`" + str(pyver)
+                ftext += f"\`\n**Версия Ultroid:** \`" + str(ult_ver)
+                ftext += f"\`\n**Версия Telethon:** \`" + str(telever)
+                ftext += f"\`\n**Хостится на:** \`{HOSTED_ON}\n\n"
+                ftext += "--------НАЧАЛО ЛОГА АВАРИИ ULTROID--------"
+                ftext += "\n**Дата:** \`" + date
+                ftext += "\`\n**Группа:** \`" + str(ult.chat_id) + "\` " + str(naam)
+                ftext += "\n**ID отправителя:** \`" + str(ult.sender_id)
+                ftext += "\`\n**Ответ:** \`" + str(ult.is_reply)
+                ftext += "\`\n\n**Событие-триггер:**\`\n"
                 ftext += str(ult.text)
-                ftext += "`\n\n**Traceback info:**`\n"
+                ftext += "\`\n\n**Информация о трассировке:**\`\n"
                 ftext += str(format_exc())
-                ftext += "`\n\n**Error text:**`\n"
+                ftext += "\`\n\n**Текст ошибки:**\`\n"
                 ftext += str(sys.exc_info()[1])
-                ftext += "`\n\n--------END ULTROID CRASH LOG--------"
-                ftext += "\n\n\n**Last 5 commits:**`\n"
+                ftext += "\`\n\n--------КОНЕЦ ЛОГА АВАРИИ ULTROID--------"
+                ftext += "\n\n\n**Последние 5 коммитов:**\`\n"
 
                 stdout, stderr = await bash('git log --pretty=format:"%an: %s" -5')
                 result = stdout + (stderr or "")
 
-                ftext += f"{result}`"
+                ftext += f"{result}\`"
 
                 if len(ftext) > 4096:
                     with BytesIO(ftext.encode()) as file:
@@ -209,7 +209,7 @@ def ultroid_cmd(
                         error_log = await asst.send_file(
                             udB.get_key("LOG_CHANNEL"),
                             file,
-                            caption="**Ultroid Client Error:** `Forward this to` @UltroidSupportChat\n\n",
+                            caption="**Ошибка клиента Ultroid:** \`Перешлите это\` @UltroidSupportChat\n\n",
                         )
                 else:
                     error_log = await asst.send_message(
@@ -218,7 +218,7 @@ def ultroid_cmd(
                     )
                 if ult.out:
                     await ult.edit(
-                        f"<b><a href={error_log.message_link}>[An error occurred]</a></b>",
+                        f"<b><a href={error_log.message_link}>[Произошла ошибка]</a></b>",
                         link_preview=False,
                         parse_mode="html",
                     )
@@ -286,15 +286,15 @@ def ultroid_cmd(
                     await dec(ult)
                 except Exception as er:
                     if chat := udB.get_key("MANAGER_LOG"):
-                        text = f"**#MANAGER_LOG\n\nChat:** `{get_display_name(ult.chat)}` `{ult.chat_id}`"
-                        text += f"\n**Replied :** `{ult.is_reply}`\n**Command :** {ult.text}\n\n**Error :** `{er}`"
+                        text = f"\*\*#МЕНЕДЖЕР_ЛОГ\n\nЧат:\*\* \`{get_display_name(ult.chat)}\` \`{ult.chat_id}\`"
+                        text += f"\n\*\*Ответ :\*\* \`{ult.is_reply}\`\n\*\*Команда :\*\* {ult.text}\n\n\*\*Ошибка :\*\* \`{er}\`"
                         try:
                             return await asst.send_message(
                                 chat, text, link_preview=False
                             )
                         except Exception as er:
                             LOGS.exception(er)
-                    LOGS.info(f"• MANAGER [{ult.chat_id}]:")
+                    LOGS.info(f"• МЕНЕДЖЕР [{ult.chat_id}]:")
                     LOGS.exception(er)
 
             if pattern:

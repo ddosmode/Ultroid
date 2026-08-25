@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 import asyncio
@@ -22,7 +22,7 @@ except ImportError:
 
 
 def ban_time(time_str):
-    """Simplify ban time from text"""
+    """Упростить время бана из текста"""
     if not any(time_str.endswith(unit) for unit in ("s", "m", "h", "d")):
         time_str += "s"
     unit = time_str[-1]
@@ -41,15 +41,15 @@ def ban_time(time_str):
     return to_return
 
 
-# ------------------Admin Check--------------- #
+# ------------------Проверка администратора--------------- #
 
 
 async def _callback_check(event):
     id_ = str(uuid.uuid1()).split("-")[0]
     time.time()
     msg = await event.reply(
-        "Click Below Button to prove self as Admin!",
-        buttons=Button.inline("Click Me", f"cc_{id_}"),
+        "Нажмите кнопку ниже, чтобы подтвердить, что вы администратор!",
+        buttons=Button.inline("Нажми меня", f"cc_{id_}"),
     )
     if not _ult_cache.get("admin_callback"):
         _ult_cache.update({"admin_callback": {id_: None}})
@@ -84,7 +84,7 @@ async def admin_check(event, require=None, silent: bool = False):
         return True
     callback = None
 
-    # for Anonymous Admin Support
+    # для поддержки анонимного администратора
     if (
         isinstance(event.sender, (types.Chat, types.Channel))
         and event.sender_id == event.chat_id
@@ -99,8 +99,8 @@ async def admin_check(event, require=None, silent: bool = False):
         callback = True
     if callback:
         if silent:
-            # work silently, same check is used for antiflood
-            # and should not ask for Button Verification.
+            # работа в тихом режиме, та же проверка используется для antiflood
+            # и не должна запрашивать проверку кнопкой.
             return
         get_ = await _callback_check(event)
         if not get_:
@@ -114,26 +114,26 @@ async def admin_check(event, require=None, silent: bool = False):
             perms = await event.client.get_permissions(event.chat_id, user.id)
         except UserNotParticipantError:
             if not silent:
-                await event.reply("You need to join this chat First!")
+                await event.reply("Сначала вам нужно присоединиться к этому чату!")
             return False
     if not perms.is_admin:
         if not silent:
-            await event.eor("Only Admins can use this command!", time=8)
+            await event.eor("Только администраторы могут использовать эту команду!", time=8)
         return
     if require and not getattr(perms, require, False):
         if not silent:
-            await event.eor(f"You are missing the right of `{require}`", time=8)
+            await event.eor(f"У вас нет права `{require}`", time=8)
         return False
     return True
 
 
-# ------------------Lock Unlock----------------
+# ------------------Блокировка/Разблокировка---------------- #
 
 
 def lock_unlock(query, lock=True):
     """
-    `Used in locks plugin`
-     Is there any better way to do this?
+    `Используется в плагине блокировок`
+     Есть ли лучший способ сделать это?
     """
     rights = types.ChatBannedRights(None)
     _do = lock
@@ -163,4 +163,4 @@ def lock_unlock(query, lock=True):
     return rights
 
 
-# ---------------- END ---------------- #
+# ---------------- КОНЕЦ ---------------- #

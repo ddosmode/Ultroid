@@ -1,13 +1,13 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочитайте GNU Affero General Public License в
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 #
-#   To Install Other USERBOTs plugin Support
+#   Для установки поддержки плагинов других USERBOTs
 #
-#   ULTROID Don't Need This Stuffs
+#   ULTROID не нуждается в этих вещах
 #
 
 import inspect

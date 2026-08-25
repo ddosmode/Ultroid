@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочитайте GNU Affero General Public License в
 # <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 
 import contextlib
@@ -33,7 +33,7 @@ class Loader:
         _single = os.path.isfile(self.path)
         if include:
             if log:
-                self._logger.info("Including: {}".format("• ".join(include)))
+                self._logger.info("Включая: {}".format("• ".join(include)))
             files = glob.glob(f"{self.path}/_*.py")
             for file in include:
                 path = f"{self.path}/{file}.py"
@@ -53,7 +53,7 @@ class Loader:
                             files.remove(f"{self.path}/{path}.py")
         if log and not _single:
             self._logger.info(
-                f"• Installing {self.key} Plugins || Count : {len(files)} •"
+                f"• Установка плагинов {self.key} || Количество : {len(files)} •"
             )
         for plugin in sorted(files):
             if func == import_module:
@@ -62,11 +62,11 @@ class Loader:
                 modl = func(plugin)
             except ModuleNotFoundError as er:
                 modl = None
-                self._logger.error(f"{plugin}: '{er.name}' not installed!")
+                self._logger.error(f"{plugin}: '{er.name}' не установлен!")
                 continue
             except Exception as exc:
                 modl = None
-                self._logger.error(f"pyUltroid - {self.key} - ERROR - {plugin}")
+                self._logger.error(f"pyUltroid - {self.key} - ОШИБКА - {plugin}")
                 self._logger.exception(exc)
                 continue
             if _single and log:

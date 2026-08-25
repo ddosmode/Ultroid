@@ -1,4 +1,4 @@
-# copied from https://github.com/tulir/mautrix-telegram/blob/master/mautrix_telegram/util/parallel_file_transfer.py
+# скопировано из https://github.com/tulir/mautrix-telegram/blob/master/mautrix_telegram/util/parallel_file_transfer.py
 # Copyright (C) 2021-2026 Tulir Asokan
 
 import asyncio
@@ -190,8 +190,8 @@ class ParallelTransferrer:
                 return minimum + 1
             return minimum
 
-        # The first cross-DC sender will export+import the authorization, so we always create it
-        # before creating any other senders.
+        # Первый отправитель cross-DC экспортирует+импортирует авторизацию, поэтому мы всегда создаём его
+        # перед созданием любых других отправителей.
         self.senders = [
             await self._create_download_sender(
                 file, 0, part_size, connections * part_size, get_part_count()
@@ -380,7 +380,7 @@ async def download_file(
 ) -> BinaryIO:
     size = location.size
     dc_id, location = utils.get_input_location(location)
-    # We lock the transfers because telegram has connection count limits
+    # Мы блокируем передачи, потому что Telegram имеет ограничения на количество подключений
     downloader = ParallelTransferrer(client, dc_id)
     downloaded = downloader.download(location, size)
     async for x in downloaded:
