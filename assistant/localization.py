@@ -2,7 +2,7 @@
 # Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 import re
@@ -31,7 +31,7 @@ async def setlang(event):
     buttons = list(zip(tultd[::2], tultd[1::2]))
     if len(tultd) % 2 == 1:
         buttons.append((tultd[-1],))
-    buttons.append([Button.inline("« Back", data="mainmenu")])
+    buttons.append([Button.inline("« Назад", data="mainmenu")])
     await event.edit(get_string("ast_4"), buttons=buttons)
 
 
@@ -42,6 +42,6 @@ async def settt(event):
     ULTConfig.lang = lang
     udB.del_key("language") if lang == "en" else udB.set_key("language", lang)
     await event.edit(
-        f"Your language has been set to {languages[lang]['natively']} [{lang}].",
+        f"Ваш язык был установлен на {languages[lang]['natively']} [{lang}].",
         buttons=get_back_button("lang"),
     )

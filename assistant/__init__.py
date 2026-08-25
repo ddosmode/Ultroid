@@ -2,7 +2,7 @@
 # Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from telethon import Button, custom
@@ -27,8 +27,8 @@ async def setit(event, name, value):
         udB.set_key(name, value)
     except BaseException as er:
         LOGS.exception(er)
-        return await event.edit("`Something Went Wrong`")
+        return await event.edit("`Что-то пошло не так`")
 
 
 def get_back_button(name):
-    return [Button.inline("« Bᴀᴄᴋ", data=f"{name}")]
+    return [Button.inline("« Назад", data=f"{name}")]

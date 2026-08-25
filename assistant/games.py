@@ -2,15 +2,15 @@
 # Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 """
 • `{i}akinator` | `/akinator`
-   Start akinator game from Userbot/Assistant
+   Запустить игру акинатора из Userbot/Assistant
 
 • `/startgame`
-   Open Portal for Games
+   Открыть портал для игр
 """
 
 import asyncio
@@ -30,7 +30,7 @@ from pyUltroid.fns.helper import inline_mention
 from pyUltroid.fns.tools import async_searcher
 from telethon.errors import ChatSendStickersForbiddenError
 
-from . import *  # Ensure this import matches your project structure
+from . import *  # Убедитесь, что этот импорт соответствует структуре вашего проекта
 
 games = {}
 aki_photo = "https://graph.org/file/3cc8825c029fd0cab9edc.jpg"
@@ -41,11 +41,11 @@ akipyLOGS = getLogger("akipy")
 async def akina(e):
     sta = Akinator()
     games[e.chat_id] = {e.id: sta}
-    LOGS.info(f"Game started for chat {e.chat_id} with ID {e.id}.")
+    LOGS.info(f"Игра запущена для чата {e.chat_id} с ID {e.id}.")
     try:
         m = await e.client.inline_query(asst.me.username, f"aki_{e.chat_id}_{e.id}")
         await m[0].click(e.chat_id)
-        akipyLOGS.info(f"Clicked inline result for chat {e.chat_id}")
+        akipyLOGS.info(f"Нажат встроенный результат для чата {e.chat_id}")
     except BotMethodInvalidError as err:
         akipyLOGS.error(f"BotMethodInvalidError: {err}")
         await asst.send_file(
@@ -54,8 +54,8 @@ async def akina(e):
             buttons=Button.inline(get_string("aki_2"), data=f"aki_{e.chat_id}_{e.id}"),
         )
     except Exception as er:
-        akipyLOGS.error(f"Unexpected error: {er}")
-        return await e.eor(f"ERROR : {er}")
+        akipyLOGS.error(f"Неожиданная ошибка: {er}")
+        return await e.eor(f"ОШИБКА : {er}")
     if e.out:
         await e.delete()
 
@@ -74,10 +74,10 @@ async def doai(e):
     await e.edit(get_string("com_1"))
     try:
         await games[ch][mid].start_game(child_mode=False)
-        bts = [Button.inline(o, f"aka_{adt}_{o}") for o in ["Yes", "No", "Idk"]]
-        cts = [Button.inline(o, f"aka_{adt}_{o}") for o in ["Probably", "Probably Not"]]
+        bts = [Button.inline(o, f"aka_{adt}_{o}") for o in ["Да", "Нет", "Не знаю"]]
+        cts = [Button.inline(o, f"aka_{adt}_{o}") for o in ["Вероятно", "Вряд ли"]]
         bts = [bts, cts]
-        await e.edit(f"Q. {games[ch][mid].question}", buttons=bts)
+        await e.edit(f"Вопрос. {games[ch][mid].question}", buttons=bts)
     except KeyError:
         return await e.answer(get_string("aki_1"), alert=True)
 
@@ -86,11 +86,11 @@ async def doai(e):
 async def okah(e):
     try:
         mk = e.pattern_match.group(1).decode("utf-8").split("_")
-        #akipyLOGS.info(f"Parsed values: {mk}")
+        #akipyLOGS.info(f"Разобранные значения: {mk}")
 
         if len(mk) < 3:
-            akipyLOGS.error("Pattern match did not return enough parts.")
-            return await e.answer("Invalid data received.", alert=True)
+            akipyLOGS.error("Совпадение шаблона не вернуло достаточное количество частей.")
+            return await e.answer("Получены неверные данные.", alert=True)
 
         ch = int(mk[0])
         mid = int(mk[1])
@@ -99,23 +99,23 @@ async def okah(e):
         gm = games[ch][mid]
         await gm.answer(ans)
 
-        # Check for the final guess in the API response
+        # Проверить окончательное предположение в ответе API
         if gm.name_proposition and gm.description_proposition:
             gm.win = True
-            text = f"It's {gm.name_proposition}\n{gm.description_proposition}"
+            text = f"Это {gm.name_proposition}\n{gm.description_proposition}"
             await e.edit(text, file=gm.photo)
         else:
-            # Game is not won yet, continue asking questions
+            # Игра ещё не выиграна, продолжать задавать вопросы
             buttons = [
-                [Button.inline(o, f"aka_{ch}_{mid}_{o}") for o in ["Yes", "No", "Idk"]],
-                [Button.inline(o, f"aka_{ch}_{mid}_{o}") for o in ["Probably", "Probably Not"]],
+                [Button.inline(o, f"aka_{ch}_{mid}_{o}") for o in ["Да", "Нет", "Не знаю"]],
+                [Button.inline(o, f"aka_{ch}_{mid}_{o}") for o in ["Вероятно", "Вряд ли"]],
             ]
             await e.edit(gm.question, buttons=buttons)
 
     except KeyError:
         await e.answer(get_string("aki_3"))
     except Exception as ex:
-        akipyLOGS.error(f"An unexpected error occurred: {ex}")
+        akipyLOGS.error(f"Произошла неожиданная ошибка: {ex}")
 
 
 @in_pattern(re.compile("aki_?(.*)"), owner=True)
@@ -124,10 +124,10 @@ async def eiagx(e):
     ci = types.InputWebDocument(aki_photo, 0, "image/jpeg", [])
     ans = [
         await e.builder.article(
-            "Akinator",
+            "Акинатор",
             type="photo",
             content=ci,
-            text="Akinator",
+            text="Акинатор",
             thumb=ci,
             buttons=bts,
             include_media=True,
@@ -143,8 +143,8 @@ GIMAGE = "https://graph.org/file/1c51015bae5205a65fd69.jpg"
 @asst_cmd(pattern="startgame", owner=True)
 async def magic(event):
     buttons = [
-        [Button.inline("Trivia Quiz", "trzia")],
-        [Button.inline("Cancel ❌", "delit")],
+        [Button.inline("Викторина", "trzia")],
+        [Button.inline("Отмена ❌", "delit")],
     ]
     await event.reply(
         get_string("games_1"),
@@ -156,7 +156,7 @@ async def magic(event):
 # -------------------------- Trivia ----------------------- #
 
 TR_BTS = {}
-DIFI_KEYS = ["Easy", "Medium", "Hard"]
+DIFI_KEYS = ["Лёгкий", "Средний", "Сложный"]
 TRIVIA_CHATS = {}
 POLLS = {}
 CONGO_STICKER = [
@@ -178,7 +178,7 @@ async def delete_it(event):
 @callback(re.compile("ctdown(.*)"), owner=True)
 async def ct_spam(e):
     n = e.data_match.group(1).decode("utf-8")
-    await e.answer(f"Wait {n} seconds..", alert=True)
+    await e.answer(f"Подождите {n} секунд..", alert=True)
 
 
 @callback(re.compile("trzia(.*)"), owner=True)
@@ -202,7 +202,7 @@ async def choose_cata(event):
             buttons = list(zip(btt[::2], btt[1::2]))
             if len(btt) % 2 == 1:
                 buttons.append((btt[-1],))
-            buttons.append([Button.inline("Cancel ❌", "delit")])
+            buttons.append([Button.inline("Отмена ❌", "delit")])
             TR_BTS.update({"category": buttons})
         text = get_string("games_2")
     elif match[0] == "d":
@@ -228,7 +228,7 @@ async def choose_cata(event):
             msg = await msg.edit(buttons=Button.inline(f"{i} ⏰", f"ctdown{i}"))
             await asyncio.sleep(1)
         await msg.edit(
-            msg.text + "\n\n• Send /cancel to stop the Quiz...", buttons=None
+            msg.text + "\n\n• Отправьте /cancel для остановки викторины...", buttons=None
         )
         qsss = await async_searcher(
             f"https://opentdb.com/api.php?amount={nu}&category={cat}&difficulty={le.lower()}",
@@ -236,7 +236,7 @@ async def choose_cata(event):
         )
         qs = qsss["results"]
         if not qs:
-            await event.respond("Sorry, No Question Found for the given Criteria..")
+            await event.respond("Извините, вопросы по заданным критериям не найдены..")
             await event.delete()
             return
         TRIVIA_CHATS.update({chat: {}})
@@ -273,14 +273,14 @@ async def choose_cata(event):
             await asyncio.sleep(int(in_))
         if not TRIVIA_CHATS[chat]:
             await event.respond(
-                "No-One Got Any Score in the Quiz!\nBetter Luck Next Time!"
+                "Никто не набрал баллов в викторине!\nУдачи в следующий раз!"
             )
         else:
             try:
                 await event.respond(file=choice(CONGO_STICKER))
             except ChatSendStickersForbiddenError:
                 pass
-            LBD = "🎯 **Scoreboard of the Quiz.**\n\n"
+            LBD = "🎯 **Таблица результатов викторины.**\n\n"
             TRC = TRIVIA_CHATS[chat]
             if "cancel" in TRC.keys():
                 del TRC["cancel"]
@@ -306,7 +306,7 @@ async def pollish(eve: UpdateMessagePollVote):
     if POLLS.get(eve.poll_id)["chat"] not in TRIVIA_CHATS.keys():
         return
     if not eve.options:
-        # Consider as correct answer if no options selected
+        # Считать правильным ответом, если ничего не выбрано
         chat = POLLS.get(eve.poll_id)["chat"]
         user = eve.peer.user_id
         if not TRIVIA_CHATS.get(chat, {}).get(user):
@@ -328,4 +328,4 @@ async def pollish(eve: UpdateMessagePollVote):
 async def cancelish(event):
     chat = TRIVIA_CHATS.get(event.chat_id)
     chat.update({"cancel": True})
-    await event.respond("Cancelled!")
+    await event.respond("Отменено!")

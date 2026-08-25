@@ -2,7 +2,7 @@
 # Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 
@@ -32,7 +32,7 @@ from . import LOGS, asst, callback, in_pattern, udB
 try:
     from youtubesearchpython import VideosSearch
 except ImportError:
-    LOGS.info("'youtubesearchpython' not installed!")
+    LOGS.info("'youtubesearchpython' не установлен!")
     VideosSearch = None
 
 
@@ -47,11 +47,11 @@ async def _(event):
         string = event.text.split(" ", maxsplit=1)[1]
     except IndexError:
         fuk = event.builder.article(
-            title="Search Something",
+            title="Поискать что-то",
             thumb=wb(ytt, 0, "image/jpeg", []),
-            text="**YᴏᴜTᴜʙᴇ Sᴇᴀʀᴄʜ**\n\nYou didn't search anything",
+            text="**YᴏᴜTᴜʙᴇ Sᴇᴀʀᴄʜ**\n\nВы ничего не искали",
             buttons=Button.switch_inline(
-                "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
+                "Искать снова",
                 query="yt ",
                 same_peer=True,
             ),
@@ -77,27 +77,27 @@ async def _(event):
             else "None"
         )
         thumb = f"https://i.ytimg.com/vi/{ids}/hqdefault.jpg"
-        text = f"**Title: [{title}]({link})**\n\n"
-        text += f"`Description: {description}\n\n"
-        text += f"「 Duration: {duration} 」\n"
-        text += f"「 Views: {views} 」\n"
-        text += f"「 Publisher: {publisher} 」\n"
-        text += f"「 Published on: {published_on} 」`"
+        text = f"**Название: [{title}]({link})**\n\n"
+        text += f"`Описание: {description}\n\n"
+        text += f"「 Длительность: {duration} 」\n"
+        text += f"「 Просмотры: {views} 」\n"
+        text += f"「 Канал: {publisher} 」\n"
+        text += f"「 Опубликовано: {published_on} 」`"
         desc = f"{title}\n{duration}"
         file = wb(thumb, 0, "image/jpeg", [])
         buttons = [
             [
-                Button.inline("Audio", data=f"ytdl:audio:{ids}"),
-                Button.inline("Video", data=f"ytdl:video:{ids}"),
+                Button.inline("Аудио", data=f"ytdl:audio:{ids}"),
+                Button.inline("Видео", data=f"ytdl:video:{ids}"),
             ],
             [
                 Button.switch_inline(
-                    "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
+                    "Искать снова",
                     query="yt ",
                     same_peer=True,
                 ),
                 Button.switch_inline(
-                    "Sʜᴀʀᴇ",
+                    "Поделиться",
                     query=f"yt {string}",
                     same_peer=False,
                 ),
@@ -132,9 +132,9 @@ async def _(e):
     _data = get_formats(_lets_split[0], _lets_split[1], _ytdl_data)
     _buttons = get_buttons(_data)
     _text = (
-        "`Select Your Format.`"
+        "`Выберите ваш формат.`"
         if _buttons
-        else "`Error downloading from YouTube.\nTry Restarting your bot.`"
+        else "`Ошибка загрузки с YouTube.\nПопробуйте перезапустить бота.`"
     )
 
     await e.edit(_text, buttons=_buttons)
@@ -270,14 +270,14 @@ async def _(event):
             ),
         ]
     description = description if description != "" else "None"
-    text = f"**Title: [{title}]({_yt_base_url}{vid_id})**\n\n"
-    text += f"`📝 Description: {description}\n\n"
-    text += f"「 Duration: {time_formatter(int(duration)*1000)} 」\n"
-    text += f"「 Artist: {artist} 」\n"
-    text += f"「 Views: {views} 」\n"
-    text += f"「 Likes: {likes} 」\n"
-    text += f"「 Size: {humanbytes(size)} 」`"
-    button = Button.switch_inline("Search More", query="yt ", same_peer=True)
+    text = f"**Название: [{title}]({_yt_base_url}{vid_id})**\n\n"
+    text += f"`📝 Описание: {description}\n\n"
+    text += f"「 Длительность: {time_formatter(int(duration)*1000)} 」\n"
+    text += f"「 Исполнитель: {artist} 」\n"
+    text += f"「 Просмотры: {views} 」\n"
+    text += f"「 Лайки: {likes} 」\n"
+    text += f"「 Размер: {humanbytes(size)} 」`"
+    button = Button.switch_inline("Искать ещё", query="yt ", same_peer=True)
     try:
         await event.edit(
             text,
@@ -303,5 +303,5 @@ async def _(event):
 async def ytdl_back(event):
     id_ = event.data_match.group(1).decode("utf-8")
     if not BACK_BUTTON.get(id_):
-        return await event.answer("Query Expired! Search again 🔍")
+        return await event.answer("Срок действия запроса истёк! Поиск снова 🔍")
     await event.edit(**BACK_BUTTON[id_])

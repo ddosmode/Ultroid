@@ -2,7 +2,7 @@
 # Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 import base64
@@ -32,8 +32,8 @@ from . import _ult_cache
 
 SUP_BUTTONS = [
     [
-        Button.url("• Repo •", url="https://github.com/TeamUltroid/Ultroid"),
-        Button.url("• Support •", url="t.me/UltroidSupportChat"),
+        Button.url("• Репозиторий •", url="https://github.com/TeamUltroid/Ultroid"),
+        Button.url("• Поддержка •", url="t.me/UltroidSupportChat"),
     ],
 ]
 
@@ -54,10 +54,10 @@ async def _(e):
         match = e.text.split(" ", maxsplit=1)[1]
     except IndexError:
         kkkk = e.builder.article(
-            title="Enter Device Codename",
+            title="Введите кодовое имя устройства",
             thumb=wb(ofox, 0, "image/jpeg", []),
-            text="**OFᴏx🦊Rᴇᴄᴏᴠᴇʀʏ**\n\nYou didn't search anything",
-            buttons=Button.switch_inline("Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="ofox ", same_peer=True),
+            text="**OFᴏx🦊Rᴇᴄᴏᴠᴇʀʏ**\n\nВы ничего не искали",
+            buttons=Button.switch_inline("Поиск снова", query="ofox ", same_peer=True),
         )
         return await e.answer([kkkk])
     device, releases = await get_ofox(match)
@@ -73,14 +73,14 @@ async def _(e):
             version = data["version"]
             size = humanbytes(data["size"])
             release_date = datetime.utcfromtimestamp(data["date"]).strftime("%Y-%m-%d")
-            text = f"[­]({ofox})**OrangeFox Recovery For**\n\n"
-            text += f"`  Full Name: {fullname}`\n"
-            text += f"`  Codename: {codename}`\n"
-            text += f"`  Maintainer: {maintainer}`\n"
-            text += f"`  Build Type: {release}`\n"
-            text += f"`  Version: {version}`\n"
-            text += f"`  Size: {size}`\n"
-            text += f"`  Build Date: {release_date}`"
+            text = f"[­]({ofox})**OrangeFox Recovery для**\n\n"
+            text += f"`  Полное имя: {fullname}`\n"
+            text += f"`  Кодовое имя: {codename}`\n"
+            text += f"`  Сопровождающий: {maintainer}`\n"
+            text += f"`  Тип сборки: {release}`\n"
+            text += f"`  Версия: {version}`\n"
+            text += f"`  Размер: {size}`\n"
+            text += f"`  Дата сборки: {release_date}`"
             fox.append(
                 await e.builder.article(
                     title=f"{fullname}",
@@ -89,19 +89,19 @@ async def _(e):
                     thumb=wb(ofox, 0, "image/jpeg", []),
                     link_preview=True,
                     buttons=[
-                        Button.url("Dᴏᴡɴʟᴏᴀᴅ", url=f"{link}"),
+                        Button.url("Скачать", url=f"{link}"),
                         Button.switch_inline(
-                            "Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="ofox ", same_peer=True
+                            "Поиск снова", query="ofox ", same_peer=True
                         ),
                     ],
                 )
             )
         await e.answer(
-            fox, switch_pm="OrangeFox Recovery Search.", switch_pm_param="start"
+            fox, switch_pm="Поиск OrangeFox Recovery.", switch_pm_param="start"
         )
     else:
         await e.answer(
-            [], switch_pm="OrangeFox Recovery Search.", switch_pm_param="start"
+            [], switch_pm="Поиск OrangeFox Recovery.", switch_pm_param="start"
         )
 
 
@@ -130,8 +130,8 @@ async def _(e):
     try:
         lnk = [
             await e.builder.article(
-                title=f"Upload {filename}",
-                text=f"**File:**\n{filename}",
+                title=f"Загрузить {filename}",
+                text=f"**Файл:**\n{filename}",
                 buttons=buttons,
             )
         ]
@@ -140,10 +140,10 @@ async def _(e):
         lnk = [
             await e.builder.article(
                 title="fl2lnk",
-                text="File not found",
+                text="Файл не найден",
             )
         ]
-    await e.answer(lnk, switch_pm="File to Link.", switch_pm_param="start")
+    await e.answer(lnk, switch_pm="Файл в ссылку.", switch_pm_param="start")
 
 
 @callback(
@@ -160,9 +160,9 @@ async def _(e):
     filename = _webupload_cache[int(chat_id)][int(msg_id)]
     if "/" in filename:
         filename = filename.split("/")[-1]
-    await e.edit(f"Uploading `{filename}` on {host}")
+    await e.edit(f"Загрузка `{filename}` на {host}")
     link = (await webuploader(chat_id, msg_id, host)).strip().replace("\n", "")
-    await e.edit(f"Uploaded `{filename}` on {host}.", buttons=Button.url("View", link))
+    await e.edit(f"Загружено `{filename}` на {host}.", buttons=Button.url("Просмотр", link))
 
 
 @in_pattern("repo", owner=True)
@@ -170,13 +170,13 @@ async def repo(e):
     res = [
         await e.builder.article(
             title="Ultroid Userbot",
-            description="Userbot | Telethon",
+            description="Юзербот | Telethon",
             thumb=wb(ultpic, 0, "image/jpeg", []),
             text="• **ULTROID USERBOT** •",
             buttons=SUP_BUTTONS,
         ),
     ]
-    await e.answer(res, switch_pm="Ultroid Repo.", switch_pm_param="start")
+    await e.answer(res, switch_pm="Репозиторий Ultroid.", switch_pm_param="start")
 
 
 @in_pattern("go", owner=True)
@@ -185,7 +185,7 @@ async def gsearch(q_event):
         match = q_event.text.split(maxsplit=1)[1]
     except IndexError:
         return await q_event.answer(
-            [], switch_pm="Google Search. Enter a query!", switch_pm_param="start"
+            [], switch_pm="Поиск Google. Введите запрос!", switch_pm_param="start"
         )
     searcher = []
     gresults = await google_search(match)
@@ -199,18 +199,18 @@ async def gsearch(q_event):
                     title=title,
                     description=desc,
                     thumb=wb(gugirl, 0, "image/jpeg", []),
-                    text=f"**Google Search**\n\n**• Title •**\n`{title}`\n\n**• Description •**\n`{desc}`",
+                    text=f"**Поиск Google**\n\n**• Заголовок •**\n`{title}`\n\n**• Описание •**\n`{desc}`",
                     link_preview=False,
                     buttons=[
-                        [Button.url("Link", url=f"{link}")],
+                        [Button.url("Ссылка", url=f"{link}")],
                         [
                             Button.switch_inline(
-                                "Search Again",
+                                "Искать снова",
                                 query="go ",
                                 same_peer=True,
                             ),
                             Button.switch_inline(
-                                "Share",
+                                "Поделиться",
                                 query=f"go {match}",
                                 same_peer=False,
                             ),
@@ -220,7 +220,7 @@ async def gsearch(q_event):
             )
         except IndexError:
             break
-    await q_event.answer(searcher, switch_pm="Google Search.", switch_pm_param="start")
+    await q_event.answer(searcher, switch_pm="Поиск Google.", switch_pm_param="start")
 
 
 @in_pattern("mods", owner=True)
@@ -229,7 +229,7 @@ async def _(e):
         quer = e.text.split(" ", maxsplit=1)[1]
     except IndexError:
         return await e.answer(
-            [], switch_pm="Mod Apps Search. Enter app name!", switch_pm_param="start"
+            [], switch_pm="Поиск модов приложений. Введите имя приложения!", switch_pm_param="start"
         )
     start = 0 * 3 + 1
     da = base64.b64decode(choice(apis)).decode("ascii")
@@ -241,8 +241,8 @@ async def _(e):
         title = a.get("title")
         desc = a.get("snippet")
         link = a.get("link")
-        text = f"**••Tɪᴛʟᴇ••** `{title}`\n\n"
-        text += f"**Dᴇsᴄʀɪᴘᴛɪᴏɴ** `{desc}`"
+        text = f"**••Заголовок••** `{title}`\n\n"
+        text += f"**Описание** `{desc}`"
         modss.append(
             await e.builder.article(
                 title=title,
@@ -250,15 +250,15 @@ async def _(e):
                 text=text,
                 link_preview=True,
                 buttons=[
-                    [Button.url("Dᴏᴡɴʟᴏᴀᴅ", url=f"{link}")],
+                    [Button.url("Скачать", url=f"{link}")],
                     [
                         Button.switch_inline(
-                            "Mᴏʀᴇ Mᴏᴅs",
+                            "Больше модов",
                             query="mods ",
                             same_peer=True,
                         ),
                         Button.switch_inline(
-                            "Sʜᴀʀᴇ",
+                            "Поделиться",
                             query=f"mods {quer}",
                             same_peer=False,
                         ),
@@ -266,7 +266,7 @@ async def _(e):
                 ],
             ),
         )
-    await e.answer(modss, switch_pm="Search Mod Applications.", switch_pm_param="start")
+    await e.answer(modss, switch_pm="Поиск модов приложений.", switch_pm_param="start")
 
 
 APP_CACHE = {}
@@ -290,7 +290,7 @@ async def _(e):
         )
     try:
         return await e.answer(
-            APP_CACHE[f], switch_pm="Application Searcher.", switch_pm_param="start"
+            APP_CACHE[f], switch_pm="Поиск приложений.", switch_pm_param="start"
         )
     except KeyError:
         pass
@@ -302,9 +302,9 @@ async def _(e):
         name = z["title"]
         desc = unescape(z["summary"])[:300].replace("<br>", "\n") + "..."
         dev = z["developer"]["devId"]
-        text = f"**• App Name •** [{name}]({url})\n"
-        text += f"**• Developer •** `{dev}`\n"
-        text += f"**• Description •**\n`{desc}`"
+        text = f"**• Имя приложения •** [{name}]({url})\n"
+        text += f"**• Разработчик •** `{dev}`\n"
+        text += f"**• Описание •**\n`{desc}`"
         foles.append(
             await e.builder.article(
                 title=name,
@@ -313,15 +313,15 @@ async def _(e):
                 text=text,
                 link_preview=True,
                 buttons=[
-                    [Button.url("Link", url=url)],
+                    [Button.url("Ссылка", url=url)],
                     [
                         Button.switch_inline(
-                            "More Apps",
+                            "Больше приложений",
                             query="app ",
                             same_peer=True,
                         ),
                         Button.switch_inline(
-                            "Sʜᴀʀᴇ",
+                            "Поделиться",
                             query=f"app {f}",
                             same_peer=False,
                         ),
@@ -334,7 +334,7 @@ async def _(e):
         RECENTS[e.sender_id].append(f)
     else:
         RECENTS.update({e.sender_id: [f]})
-    await e.answer(foles, switch_pm="Application Searcher.", switch_pm_param="start")
+    await e.answer(foles, switch_pm="Поиск приложений.", switch_pm_param="start")
 
 
 PISTON_URI = "https://emkc.org/api/v2/piston/"
@@ -348,12 +348,12 @@ async def piston_run(event):
         code = event.text.split(maxsplit=2)[2]
     except IndexError:
         result = await event.builder.article(
-            title="Bad Query",
-            description="Usage: [Language] [code]",
+            title="Неверный запрос",
+            description="Использование: [Язык] [код]",
             thumb=wb(
                 "https://graph.org/file/e33c57fc5f1044547e4d8.jpg", 0, "image/jpeg", []
             ),
-            text=f'**Inline Usage**\n\n`@{asst.me.username} run python print("hello world")`\n\n[Language List](https://graph.org/Ultroid-09-01-6)',
+            text=f'**Использование встроенного режима**\n\n`@{asst.me.username} run python print("hello world")`\n\n[Список языков](https://graph.org/Ultroid-09-01-6)',
         )
         return await event.answer([result])
     if not PISTON_LANGS:
@@ -363,12 +363,12 @@ async def piston_run(event):
         version = PISTON_LANGS[lang]["version"]
     else:
         result = await event.builder.article(
-            title="Unsupported Language",
-            description="Usage: [Language] [code]",
+            title="Неподдерживаемый язык",
+            description="Использование: [Язык] [код]",
             thumb=wb(
                 "https://graph.org/file/e33c57fc5f1044547e4d8.jpg", 0, "image/jpeg", []
             ),
-            text=f'**Inline Usage**\n\n`@{asst.me.username} run python print("hello world")`\n\n[Language List](https://graph.org/Ultroid-09-01-6)',
+            text=f'**Использование встроенного режима**\n\n`@{asst.me.username} run python print("hello world")`\n\n[Список языков](https://graph.org/Ultroid-09-01-6)',
         )
         return await event.answer([result])
     output = await async_searcher(
@@ -386,13 +386,13 @@ async def piston_run(event):
     if len(output) > 3000:
         output = f"{output[:3000]}..."
     result = await event.builder.article(
-        title="Result",
+        title="Результат",
         description=output,
-        text=f"• **Language:**\n`{lang}`\n\n• **Code:**\n`{code}`\n\n• **Result:**\n`{output}`",
+        text=f"• **Язык:**\n`{lang}`\n\n• **Код:**\n`{code}`\n\n• **Результат:**\n`{output}`",
         thumb=wb(
             "https://graph.org/file/871ee4a481f58117dccc4.jpg", 0, "image/jpeg", []
         ),
-        buttons=Button.switch_inline("Fork", query=event.text, same_peer=True),
+        buttons=Button.switch_inline("Форк", query=event.text, same_peer=True),
     )
     await event.answer([result], switch_pm="• Piston •", switch_pm_param="start")
 
@@ -406,11 +406,11 @@ async def do_magic(event):
         match = event.text.split(" ", maxsplit=1)[1].lower()
     except IndexError:
         return await event.answer(
-            [], switch_pm="Enter Query to Search", switch_pm_param="start"
+            [], switch_pm="Введите запрос для поиска", switch_pm_param="start"
         )
     if FDROID_.get(match):
         return await event.answer(
-            FDROID_[match], switch_pm=f"• Results for {match}", switch_pm_param="start"
+            FDROID_[match], switch_pm=f"• Результаты для {match}", switch_pm_param="start"
         )
     link = "https://search.f-droid.org/?q=" + match.replace(" ", "+")
     content = await async_searcher(link, re_content=True)
@@ -422,9 +422,9 @@ async def do_magic(event):
             image = "https://graph.org/file/a8dd4a92c5a53a89d0eff.jpg"
         title = dat.find("h4", "package-name").text.strip()
         desc = dat.find("span", "package-summary").text.strip()
-        text = f"• **Name :** `{title}`\n\n"
-        text += f"• **Description :** `{desc}`\n"
-        text += f"• **License :** `{dat.find('span', 'package-license').text.strip()}`"
+        text = f"• **Название :** `{title}`\n\n"
+        text += f"• **Описание :** `{desc}`\n"
+        text += f"• **Лицензия :** `{dat.find('span', 'package-license').text.strip()}`"
         imga = wb(image, 0, "image/jpeg", [])
         ress.append(
             await event.builder.article(
@@ -437,13 +437,13 @@ async def do_magic(event):
                 include_media=True,
                 buttons=[
                     Button.inline(
-                        "• Download •", "fd" + dat["href"].split("packages/")[-1]
+                        "• Скачать •", "fd" + dat["href"].split("packages/")[-1]
                     ),
-                    Button.switch_inline("• Share •", query=event.text),
+                    Button.switch_inline("• Поделиться •", query=event.text),
                 ],
             )
         )
-    msg = f"Showing {len(ress)} Results!" if ress else "No Results Found"
+    msg = f"Показано {len(ress)} результатов!" if ress else "Результаты не найдены"
     FDROID_.update({match: ress})
     await event.answer(ress, switch_pm=msg, switch_pm_param="start")
 
@@ -462,12 +462,12 @@ async def twitter_search(event):
         match = event.text.split(maxsplit=1)[1].lower()
     except IndexError:
         return await event.answer(
-            [], switch_pm="Enter Query to Search", switch_pm_param="start"
+            [], switch_pm="Введите запрос для поиска", switch_pm_param="start"
         )
     try:
         return await event.answer(
             _ult_cache["twitter"][match],
-            switch_pm="• Twitter Search •",
+            switch_pm="• Поиск Twitter •",
             switch_pm_param="start",
         )
     except KeyError:
@@ -483,14 +483,14 @@ async def twitter_search(event):
         thumb = wb(user["profile_image_url_https"], 0, "image/jpeg", [])
         if user.get("profile_banner_url"):
             url = user["profile_banner_url"]
-            text = f"[\xad]({url})• **Name :** `{user['name']}`\n"
+            text = f"[\xad]({url})• **Имя :** `{user['name']}`\n"
         else:
-            text = f"• **Name :** `{user['name']}`\n"
-        text += f"• **Description :** `{user['description']}`\n"
-        text += f"• **Username :** `@{user['screen_name']}`\n"
-        text += f"• **Followers :** `{user['followers_count']}`    • **Following :** `{user['friends_count']}`\n"
+            text = f"• **Имя :** `{user['name']}`\n"
+        text += f"• **Описание :** `{user['description']}`\n"
+        text += f"• **Имя пользователя :** `@{user['screen_name']}`\n"
+        text += f"• **Подписчики :** `{user['followers_count']}`    • **Подписки :** `{user['friends_count']}`\n"
         pro_ = "https://twitter.com/" + user["screen_name"]
-        text += f"• **Link :** [Click Here]({pro_})\n_"
+        text += f"• **Ссылка :** [Нажмите здесь]({pro_})\n_"
         reso.append(
             await event.builder.article(
                 title=user["name"],
@@ -500,7 +500,7 @@ async def twitter_search(event):
                 thumb=thumb,
             )
         )
-    swi_ = f"🐦 Showing {len(reso)} Results!" if reso else "No User Found :("
+    swi_ = f"🐦 Показано {len(reso)} результатов!" if reso else "Пользователь не найден :("
     await event.answer(reso, switch_pm=swi_, switch_pm_param="start")
     if _ult_cache.get("twitter"):
         _ult_cache["twitter"].update({match: reso})
@@ -517,24 +517,24 @@ async def savn_s(event):
         query = event.text.split(maxsplit=1)[1].lower()
     except IndexError:
         return await event.answer(
-            [], switch_pm="Enter Query to search 🔍", switch_pm_param="start"
+            [], switch_pm="Введите запрос для поиска 🔍", switch_pm_param="start"
         )
     if query in _savn_cache:
         return await event.answer(
             _savn_cache[query],
-            switch_pm=f"Showing Results for {query}",
+            switch_pm=f"Показаны результаты для {query}",
             switch_pm_param="start",
         )
     results = await saavn_search(query)
-    swi = "🎵 Saavn Search" if results else "No Results Found!"
+    swi = "🎵 Поиск Saavn" if results else "Результаты не найдены!"
     res = []
     for song in results:
         thumb = wb(song["image"], 0, "image/jpeg", [])
-        text = f"• **Title :** {song['title']}"
-        text += f"\n• **Year :** {song['year']}"
-        text += f"\n• **Lang :** {song['language']}"
-        text += f"\n• **Artist :** {song['artists']}"
-        text += f"\n• **Release Date :** {song['release_date']}"
+        text = f"• **Название :** {song['title']}"
+        text += f"\n• **Год :** {song['year']}"
+        text += f"\n• **Язык :** {song['language']}"
+        text += f"\n• **Исполнитель :** {song['artists']}"
+        text += f"\n• **Дата выпуска :** {song['release_date']}"
         res.append(
             await event.builder.article(
                 title=song["title"],
@@ -543,7 +543,7 @@ async def savn_s(event):
                 text=text,
                 include_media=True,
                 buttons=Button.switch_inline(
-                    "Search Again 🔍", query="saavn", same_peer=True
+                    "Искать снова 🔍", query="saavn", same_peer=True
                 ),
                 thumb=thumb,
                 content=wb(
@@ -569,31 +569,31 @@ async def inline_tl(ult):
     try:
         match = ult.text.split(maxsplit=1)[1]
     except IndexError:
-        text = f"**Telegram TlObjects Searcher.**\n__(Don't use if you don't know what it is!)__\n\n• Example Usage\n`@{asst.me.username} tl GetFullUserRequest`"
+        text = f"**Поиск Telegram TlObjects.**\n__(Не используйте, если не знаете, что это!)__\n\n• Пример использования\n`@{asst.me.username} tl GetFullUserRequest`"
         return await ult.answer(
             [
                 await ult.builder.article(
-                    title="How to Use?",
-                    description="Tl Searcher by Ultroid",
+                    title="Как использовать?",
+                    description="Поиск Tl от Ultroid",
                     url="https://t.me/TeamUltroid",
                     text=text,
                 )
             ],
-            switch_pm="Tl Search 🔍",
+            switch_pm="Поиск Tl 🔍",
             switch_pm_param="start",
         )
     res = []
     for key in tlobjects.values():
         if match.lower() in key.__name__.lower():
             tyyp = "Function" if "tl.functions." in str(key) else "Type"
-            text = f"**Name:** `{key.__name__}`\n"
-            text += f"**Category:** `{tyyp}`\n"
+            text = f"**Имя:** `{key.__name__}`\n"
+            text += f"**Категория:** `{tyyp}`\n"
             text += f"\n`from {key.__module__} import {key.__name__}`\n\n"
             if args := str(inspect.signature(key))[1:][:-1]:
-                text += "**Parameter:**\n"
+                text += "**Параметр:**\n"
                 for para in args.split(","):
                     text += " " * 4 + "`" + para + "`\n"
-            text += f"\n**Layer:** `{LAYER}`"
+            text += f"\n**Слой:** `{LAYER}`"
             res.append(
                 await ult.builder.article(
                     title=key.__name__,
@@ -602,22 +602,22 @@ async def inline_tl(ult):
                     text=text[:4000],
                 )
             )
-    mo = f"Showing {len(res)} results!" if res else f"No Results for {match}!"
+    mo = f"Показано {len(res)} результатов!" if res else f"Результаты для {match} не найдены!"
     await ult.answer(res[:50], switch_pm=mo, switch_pm_param="start")
 
 
 InlinePlugin.update(
     {
-        "Pʟᴀʏ Sᴛᴏʀᴇ Aᴘᴘs": "app telegram",
-        "Mᴏᴅᴅᴇᴅ Aᴘᴘs": "mods minecraft",
-        "Sᴇᴀʀᴄʜ Oɴ Gᴏᴏɢʟᴇ": "go TeamUltroid",
-        "WʜɪSᴘᴇʀ": "wspr @username Hello🎉",
-        "YᴏᴜTᴜʙᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ": "yt Ed Sheeran Perfect",
-        "Piston Eval": "run javascript console.log('Hello Ultroid')",
-        "OʀᴀɴɢᴇFᴏx🦊": "ofox beryllium",
-        "Tᴡɪᴛᴛᴇʀ Usᴇʀ": "twitter theultroid",
-        "Fᴅʀᴏɪᴅ Sᴇᴀʀᴄʜ": "fdroid telegram",
-        "Sᴀᴀᴠɴ sᴇᴀʀᴄʜ": "saavn",
-        "Tʟ Sᴇᴀʀᴄʜ": "tl",
+        "Приложения Play Store": "app telegram",
+        "Модифицированные приложения": "mods minecraft",
+        "Поиск в Google": "go TeamUltroid",
+        "Шепот": "wspr @username Hello🎉",
+        "Загрузчик YouTube": "yt Ed Sheeran Perfect",
+        "Оценка Piston": "run javascript console.log('Hello Ultroid')",
+        "OrangeFox🦊": "ofox beryllium",
+        "Пользователь Twitter": "twitter theultroid",
+        "Поиск F-Droid": "fdroid telegram",
+        "Поиск Saavn": "saavn",
+        "Поиск Tl": "tl",
     }
 )

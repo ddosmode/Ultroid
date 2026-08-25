@@ -2,7 +2,7 @@
 # Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 import re
@@ -20,16 +20,16 @@ async def dowj(e):
     if replied:
         user = replied.sender_id
     else:
-        return await e.eor("Reply to a message...")
+        return await e.eor("Ответьте на сообщение...")
     try:
         await replied.delete()
         if e.pattern_match.group(1).strip() == "kick":
             await e.client.kick_participant(e.chat_id, user)
-            te = "Kicked"
+            te = "Исключён"
         else:
             await e.client.edit_permissions(e.chat_id, user, view_messages=False)
-            te = "Banned"
-        await e.eor(f"{te} Successfully!")
+            te = "Забанен"
+        await e.eor(f"{te} успешно!")
     except Exception as E:
         await e.eor(str(E))
 
@@ -42,9 +42,9 @@ async def callback_(event):
     try:
         perm = await event.client.get_permissions(event.chat_id, event.sender_id)
     except UserNotParticipantError:
-        return await event.answer("Join the Group First!", alert=True)
+        return await event.answer("Сначала войдите в группу!", alert=True)
     if not perm.is_admin:
-        return await event.answer("You are not an Admin!", alert=True)
+        return await event.answer("Вы не администратор!", alert=True)
     _ult_cache["admin_callback"].update({data: (event.sender, perm)})
-    await event.answer("Verification Done!")
+    await event.answer("Проверка пройдена!")
     await event.delete()

@@ -2,7 +2,7 @@
 # Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from telethon import events
@@ -19,5 +19,5 @@ async def dueha(e):
     if sm == "OFF":
         return
     if not sm:
-        sm = "Thanks for Adding me :)"
+        sm = "Спасибо, что добавили меня :)"
     await e.reply(sm, link_preview=False)

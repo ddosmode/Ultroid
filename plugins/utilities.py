@@ -2,51 +2,51 @@
 # Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
-• `{i}kickme` : Leaves the group.
+• `{i}kickme` : Покинуть группу.
 
-• `{i}date` : Show Calender.
+• `{i}date` : Показать календарь.
 
 • `{i}listreserved`
-    List all usernames (channels/groups) you own.
+    Показать все имена пользователей (каналы/группы), которыми вы владеете.
 
-• `{i}stats` : See your profile stats.
+• `{i}stats` : Посмотреть статистику вашего профиля.
 
-• `{i}paste` - `Include long text / Reply to text file.`
+• `{i}paste` - `Вставить длинный текст / Ответить на текстовый файл.`
 
-• `{i}info <username/userid/chatid>`
-    Reply to someone's msg.
+• `{i}info <имя пользователя/id пользователя/id чата>`
+    Ответьте на сообщение кого-либо.
 
-• `{i}invite <username/userid>`
-    Add user to the chat.
+• `{i}invite <имя пользователя/id пользователя>`
+    Добавить пользователя в чат.
 
-• `{i}rmbg <reply to pic>`
-    Remove background from that picture.
+• `{i}rmbg <ответ на фото>`
+    Убрать фон с этой картинки.
 
-• `{i}telegraph <reply to media/text>`
-    Upload media/text to telegraph.
+• `{i}telegraph <ответ на медиа/текст>`
+    Загрузить медиа/текст в Telegraph.
 
-• `{i}json <reply to msg>`
-    Get the json encoding of the message.
+• `{i}json <ответ на сообщение>`
+    Получить JSON-кодировку сообщения.
 
-• `{i}suggest <reply to message> or <poll title>`
-    Create a Yes/No poll for the replied suggestion.
+• `{i}suggest <ответ на сообщение> или <заголовок опроса>`
+    Создать опрос Да/Нет для предложения, на которое ответили.
 
-• `{i}ipinfo <ipAddress>` : Get info about that IP address.
+• `{i}ipinfo <ip-адрес>` : Получить информацию об этом IP-адресе.
 
-• `{i}cpy <reply to message>`
-   Copy the replied message, with formatting. Expires in 24hrs.
+• `{i}cpy <ответ на сообщение>`
+   Скопировать ответное сообщение с форматированием. Истекает через 24 часа.
 • `{i}pst`
-   Paste the copied message, with formatting.
+   Вставить скопированное сообщение с форматированием.
 
-• `{i}thumb <reply file>` : Download the thumbnail of the replied file.
+• `{i}thumb <ответ на файл>` : Скачать миниатюру ответного файла.
 
-• `{i}getmsg <message link>`
-  Get messages from chats with forward/copy restrictions.
+• `{i}getmsg <ссылка на сообщение>`
+  Получить сообщения из чатов с ограничениями на пересылку/копирование.
 """
 
 import asyncio
@@ -124,14 +124,14 @@ from . import (
 
 TMP_DOWNLOAD_DIRECTORY = "resources/downloads/"
 
-CAPTION_LIMIT = 1024  # Telegram's caption character limit for non-premium
+CAPTION_LIMIT = 1024  # Лимит символов подписи Telegram для не-премиум
 
 _copied_msg = {}
 
 
 @ultroid_cmd(pattern="kickme$", fullsudo=True)
 async def leave(ult):
-    await ult.eor(f"`{ult.client.me.first_name} has left this group, bye!!.`")
+    await ult.eor(f"`{ult.client.me.first_name} покинул эту группу, пока!!.`")
     await ult.client(LeaveChannelRequest(ult.chat_id))
 
 
@@ -141,7 +141,7 @@ async def leave(ult):
 async def date(event):
     m = dt.now().month
     y = dt.now().year
-    d = dt.now().strftime("Date - %B %d, %Y\nTime- %H:%M:%S")
+    d = dt.now().strftime("Дата - %B %d, %Y\nВремя- %H:%M:%S")
     k = calendar.month(y, m)
     await event.eor(f"`{k}\n\n{d}`")
 
@@ -152,7 +152,7 @@ async def date(event):
 async def _(event):
     result = await event.client(GetAdminedPublicChannelsRequest())
     if not result.chats:
-        return await event.eor("`No username Reserved`")
+        return await event.eor("`Нет зарезервированных имён пользователей`")
     output_str = "".join(
         f"- {channel_obj.title} @{channel_obj.username} \n"
         for channel_obj in result.chats
@@ -166,7 +166,7 @@ async def _(event):
 async def stats(
     event: NewMessage.Event,
 ):
-    ok = await event.eor("`Collecting stats...`")
+    ok = await event.eor("`Сбор статистики...`")
     start_time = time.time()
     private_chats = 0
     bots = 0
@@ -215,23 +215,23 @@ async def stats(
     except BaseException:
         sp_count = 0
     full_name = inline_mention(event.client.me)
-    response = f"🔸 **Stats for {full_name}** \n\n"
-    response += f"**Private Chats:** {private_chats} \n"
-    response += f"**  •• **`Users: {private_chats - bots}` \n"
-    response += f"**  •• **`Bots: {bots}` \n"
-    response += f"**Groups:** {groups} \n"
-    response += f"**Channels:** {broadcast_channels} \n"
-    response += f"**Admin in Groups:** {admin_in_groups} \n"
-    response += f"**  •• **`Creator: {creator_in_groups}` \n"
-    response += f"**  •• **`Admin Rights: {admin_in_groups - creator_in_groups}` \n"
-    response += f"**Admin in Channels:** {admin_in_broadcast_channels} \n"
-    response += f"**  •• **`Creator: {creator_in_channels}` \n"
-    response += f"**  •• **`Admin Rights: {admin_in_broadcast_channels - creator_in_channels}` \n"
-    response += f"**Unread:** {unread} \n"
-    response += f"**Unread Mentions:** {unread_mentions} \n"
-    response += f"**Blocked Users:** {ct}\n"
-    response += f"**Total Stickers Pack Installed :** `{sp_count}`\n\n"
-    response += f"**__It Took:__** {stop_time:.02f}s \n"
+    response = f"🔸 **Статистика для {full_name}** \n\n"
+    response += f"**Личные чаты:** {private_chats} \n"
+    response += f"**  •• **`Пользователи: {private_chats - bots}` \n"
+    response += f"**  •• **`Боты: {bots}` \n"
+    response += f"**Группы:** {groups} \n"
+    response += f"**Каналы:** {broadcast_channels} \n"
+    response += f"**Админ в группах:** {admin_in_groups} \n"
+    response += f"**  •• **`Создатель: {creator_in_groups}` \n"
+    response += f"**  •• **`Права админа: {admin_in_groups - creator_in_groups}` \n"
+    response += f"**Админ в каналах:** {admin_in_broadcast_channels} \n"
+    response += f"**  •• **`Создатель: {creator_in_channels}` \n"
+    response += f"**  •• **`Права админа: {admin_in_broadcast_channels - creator_in_channels}` \n"
+    response += f"**Непрочитано:** {unread} \n"
+    response += f"**Непрочитанные упоминания:** {unread_mentions} \n"
+    response += f"**Заблокированные пользователи:** {ct}\n"
+    response += f"**Всего наборов стикеров установлено :** `{sp_count}`\n\n"
+    response += f"**__Затрачено времени:__** {stop_time:.02f}s \n"
     await ok.edit(response)
 
 
@@ -241,7 +241,7 @@ async def _(event):
         input_str = event.text.split(maxsplit=1)[1]
     except IndexError:
         input_str = None
-    xx = await event.eor("` 《 Pasting... 》 `")
+    xx = await event.eor("` 《 Вставка... 》 `")
     downloaded_file_name = None
     if input_str:
         message = input_str
@@ -261,13 +261,13 @@ async def _(event):
         message = None
     if not message:
         return await xx.eor(
-            "`Reply to a Message/Document or Give me Some Text !`", time=5
+            "`Ответьте на сообщение/документ или дайте мне текст!`", time=5
         )
     done, data = await get_paste(message)
     if not done and data.get("error"):
         return await xx.eor(data["error"])
     reply_text = (
-        f"• **Pasted to SpaceBin :** [Space]({data['link']})\n• **Raw Url :** : [Raw]({data['raw']})"
+        f"• **Вставлено в SpaceBin :** [Space]({data['link']})\n• **Сырая ссылка :** : [Raw]({data['raw']})"
     )
     try:
         if event.client._bot:
@@ -299,13 +299,13 @@ async def _(event):
     try:
         _ = await event.client.get_entity(user)
     except Exception as er:
-        return await xx.edit(f"**ERROR :** {er}")
+        return await xx.edit(f"**ОШИБКА :** {er}")
     if not isinstance(_, User):
         try:
             peer = get_peer_id(_)
             photo, capt = await get_chat_info(_, event)
             if is_gbanned(peer):
-                capt += "\n•<b> Is Gbanned:</b> <code>True</code>"
+                capt += "\n•<b> Глобально забанен:</b> <code>True</code>"
             if not photo:
                 return await xx.eor(capt, parse_mode="html")
             await event.client.send_message(
@@ -313,12 +313,12 @@ async def _(event):
             )
             await xx.delete()
         except Exception as er:
-            await event.eor("**ERROR ON CHATINFO**\n" + str(er))
+            await event.eor("**ОШИБКА В ИНФО ЧАТА**\n" + str(er))
         return
     try:
         full_user = (await event.client(GetFullUserRequest(user))).full_user
     except Exception as er:
-        return await xx.edit(f"ERROR : {er}")
+        return await xx.edit(f"ОШИБКА : {er}")
     user = _
     user_photos = (
         await event.client.get_profile_photos(user.id, limit=0)
@@ -329,7 +329,7 @@ async def _(event):
         first_name = first_name.replace("\u2060", "")
     last_name = user.last_name
     last_name = (
-        last_name.replace("\u2060", "") if last_name else ("Last Name not found")
+        last_name.replace("\u2060", "") if last_name else ("Фамилия не найдена")
     )
     user_bio = full_user.about
     if user_bio is not None:
@@ -338,20 +338,20 @@ async def _(event):
     if user.photo:
         dc_id = user.photo.dc_id
     else:
-        dc_id = "Need a Profile Picture to check this"
-    caption = """<b>Extracted Data From Telegram's Database</b>
+        dc_id = "Нужно фото профиля для проверки"
+    caption = """<b>Извлеченные данные из базы Telegram</b>
 <b>• Telegram ID</b>: <code>{}</code>
-<b>• Permanent Link</b>: <a href='tg://user?id={}'>Click Here</a>
-<b>• First Name</b>: <code>{}</code>
-<b>• Last Name</b>: <code>{}</code>
-<b>• Bio</b>: <code>{}</code>
-<b>• DC ID</b>: <code>{}</code>
-<b>• Number of Profile Pictures</b>: <code>{}</code>
-<b>• Is Restricted</b>: <code>{}</code>
-<b>• Verified</b>: <code>{}</code>
-<b>• Is Premium</b>: <code>{}</code>
-<b>• Is A Bot</b>: <code>{}</code>
-<b>• Groups In Common</b>: <code>{}</code>
+<b>• Постоянная ссылка</b>: <a href='tg://user?id={}'>Нажмите здесь</a>
+<b>• Имя</b>: <code>{}</code>
+<b>• Фамилия</b>: <code>{}</code>
+<b>• Био</b>: <code>{}</code>
+<b>• ID DC</b>: <code>{}</code>
+<b>• Количество фото профиля</b>: <code>{}</code>
+<b>• Ограничен</b>: <code>{}</code>
+<b>• Верифицирован</b>: <code>{}</code>
+<b>• Премиум</b>: <code>{}</code>
+<b>• Бот</b>: <code>{}</code>
+<b>• Общие группы</b>: <code>{}</code>
 """.format(
         user_id,
         user_id,
@@ -367,8 +367,8 @@ async def _(event):
         common_chats,
     )
     if chk := is_gbanned(user_id):
-        caption += f"""<b>••Gʟᴏʙᴀʟʟʏ Bᴀɴɴᴇᴅ</b>: <code>True</code>
-<b>••Rᴇᴀsᴏɴ</b>: <code>{chk}</code>"""
+        caption += f"""<b>••ГЛОБАЛЬНО ЗАБАНЕН</b>: <code>True</code>
+<b>••Причина</b>: <code>{chk}</code>"""
     await event.client.send_message(
         event.chat_id,
         caption,
@@ -398,7 +398,7 @@ async def _(ult):
                         fwd_limit=1000000,
                     ),
                 )
-                await xx.edit(f"Successfully invited `{user_id}` to `{ult.chat_id}`")
+                await xx.edit(f"Успешно приглашён `{user_id}` в `{ult.chat_id}`")
             except Exception as e:
                 await xx.edit(str(e))
     else:
@@ -410,10 +410,10 @@ async def _(ult):
                         users=[await ult.client.parse_id(user_id)],
                     ),
                 )
-                await xx.edit(f"Successfully invited `{user_id}` to `{ult.chat_id}`")
+                await xx.edit(f"Успешно приглашён `{user_id}` в `{ult.chat_id}`")
             except UserBotError:
                 await xx.edit(
-                    f"Bots can only be added as Admins in Channel.\nBetter Use `{HNDLR}promote {user_id}`"
+                    f"Ботов можно добавлять только как администраторов в канал.\nЛучше используйте `{HNDLR}promote {user_id}`"
                 )
             except Exception as e:
                 await xx.edit(str(e))
@@ -426,7 +426,7 @@ async def abs_rmbg(event):
     RMBG_API = udB.get_key("RMBG_API")
     if not RMBG_API:
         return await event.eor(
-            "Get your API key from [here](https://www.remove.bg/) for this plugin to work.",
+            "Получите ваш API ключ [здесь](https://www.remove.bg/) для работы этого плагина.",
         )
     match = event.pattern_match.group(1).strip()
     reply = await event.get_reply_message()
@@ -439,7 +439,7 @@ async def abs_rmbg(event):
             dl = await reply.download_media()
     else:
         return await eod(
-            event, f"Use `{HNDLR}rmbg` as reply to a pic to remove its background."
+            event, f"Используйте `{HNDLR}rmbg` в ответ на фото, чтобы убрать фон."
         )
     if not (dl and dl.endswith(("webp", "jpg", "png", "jpeg"))):
         os.remove(dl)
@@ -449,14 +449,14 @@ async def abs_rmbg(event):
         Image.open(dl).save(file)
         os.remove(dl)
         dl = file
-    xx = await event.eor("`Sending to remove.bg`")
+    xx = await event.eor("`Отправка в remove.bg`")
     dn, out = await ReTrieveFile(dl)
     os.remove(dl)
     if not dn:
         dr = out["errors"][0]
         de = dr.get("detail", "")
         return await xx.edit(
-            f"**ERROR ~** `{dr['title']}`,\n`{de}`",
+            f"**ОШИБКА ~** `{dr['title']}`,\n`{de}`",
         )
     zz = Image.open(out)
     if zz.mode != "RGB":
@@ -483,7 +483,7 @@ async def telegraphcmd(event):
     match = event.pattern_match.group(1).strip() or "Ultroid"
     reply = await event.get_reply_message()
     if not reply:
-        return await xx.eor("`Reply to Message.`")
+        return await xx.eor("`Ответьте на сообщение.`")
     if not reply.media and reply.message:
         content = reply.message
     else:
@@ -502,16 +502,16 @@ async def telegraphcmd(event):
         if "document" not in dar:
             try:
                 nn = uf(getit)
-                amsg = f"Uploaded to [Telegraph]({nn}) !"
+                amsg = f"Загружено в [Telegraph]({nn}) !"
             except Exception as e:
-                amsg = f"Error : {e}"
+                amsg = f"Ошибка : {e}"
             os.remove(getit)
             return await xx.eor(amsg)
         content = pathlib.Path(getit).read_text()
         os.remove(getit)
     makeit = Telegraph.create_page(title=match, content=[content])
     await xx.eor(
-        f"Pasted to Telegraph : [Telegraph]({makeit['url']})", link_preview=False
+        f"Вставлено в Telegraph : [Telegraph]({makeit['url']})", link_preview=False
     )
 
 
@@ -572,14 +572,14 @@ async def sugg(event):
     if not (event.is_reply or text):
         return await eod(
             event,
-            "`Please reply to a message to make a suggestion poll!`",
+            "`Пожалуйста, ответьте на сообщение, чтобы создать опрос с предложением!`",
         )
     if event.is_reply and not text:
         reply = await event.get_reply_message()
         if reply.text and len(reply.text) < 35:
             text = reply.text
         else:
-            text = "Do you Agree to Replied Suggestion ?"
+            text = "Вы согласны с предложенным вариантом ?"
     reply_to = event.reply_to_msg_id if event.is_reply else event.id
     try:
         await event.client.send_file(
@@ -588,13 +588,13 @@ async def sugg(event):
                 poll=Poll(
                     id=12345,
                     question=text,
-                    answers=[PollAnswer("Yes", b"1"), PollAnswer("No", b"2")],
+                    answers=[PollAnswer("Да", b"1"), PollAnswer("Нет", b"2")],
                 ),
             ),
             reply_to=reply_to,
         )
     except Exception as e:
-        return await eod(event, f"`Oops, you can't send polls here!\n\n{e}`")
+        return await eod(event, f"`Упс, вы не можете отправлять опросы здесь!\n\n{e}`")
     await event.delete()
 
 
@@ -621,15 +621,15 @@ async def ipinfo(event):
         await eor(
             event,
             """
-**IP Details Fetched.**
+**Данные IP получены.**
 
 **IP:** `{}`
-**City:** `{}`
-**Region:** `{}`
-**Country:** `{}`
-**Co-ordinates:** `{}`
-**Postal Code:** `{}`
-**Time Zone:** `{}`
+**Город:** `{}`
+**Регион:** `{}`
+**Страна:** `{}`
+**Координаты:** `{}`
+**Почтовый индекс:** `{}`
+**Часовой пояс:** `{}`
 """.format(
                 ip,
                 city,
@@ -643,7 +643,7 @@ async def ipinfo(event):
     except BaseException:
         err = det["error"]["title"]
         msg = det["error"]["message"]
-        await event.eor(f"ERROR:\n{err}\n{msg}", time=5)
+        await event.eor(f"ОШИБКА:\n{err}\n{msg}", time=5)
 
 
 @ultroid_cmd(
@@ -652,9 +652,9 @@ async def ipinfo(event):
 async def copp(event):
     msg = await event.get_reply_message()
     if not msg:
-        return await event.eor(f"Use `{HNDLR}cpy` as reply to a message!", time=5)
+        return await event.eor(f"Используйте `{HNDLR}cpy` в ответ на сообщение!", time=5)
     _copied_msg["CLIPBOARD"] = msg
-    await event.eor(f"Copied. Use `{HNDLR}pst` to paste!", time=10)
+    await event.eor(f"Скопировано. Используйте `{HNDLR}pst` для вставки!", time=10)
 
 
 @asst_cmd(pattern="pst$")
@@ -675,7 +675,7 @@ async def toothpaste(event):
     except KeyError:
         return await eod(
             event,
-            f"Nothing was copied! Use `{HNDLR}cpy` as reply to a message first!",
+            f"Ничего не скопировано! Сначала используйте `{HNDLR}cpy` в ответ на сообщение!",
         )
     except Exception as ex:
         return await event.eor(str(ex), time=5)
@@ -715,7 +715,7 @@ async def get_video_duration(file_path):
         duration = float(stdout.decode().strip())
         return duration
     except Exception as e:
-        print("Error running ffprobe:", e)
+        print("Ошибка запуска ffprobe:", e)
         return None
 
 async def get_thumbnail(file_path, thumbnail_path):
@@ -724,26 +724,26 @@ async def get_thumbnail(file_path, thumbnail_path):
             "ffmpeg",
             "-i", file_path,
             "-ss", "00:00:04",
-            "-vframes", "1",  # Extract a single frame as the thumbnail
+            "-vframes", "1",  # Извлечь один кадр в качестве миниатюры
             thumbnail_path,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
     except Exception as e:
-        print(f"Error extracting thumbnail: {e}")
+        print(f"Ошибка извлечения миниатюры: {e}")
 
 @ultroid_cmd(pattern="getmsg( ?(.*)|$)")
 async def get_restricted_msg(event):
     match = event.pattern_match.group(1).strip()
     if not match:
-        await event.eor("`Please provide a link!`", time=5)
+        await event.eor("`Пожалуйста, укажите ссылку!`", time=5)
         return
     
-    xx = await event.eor("`Loading...`")
+    xx = await event.eor("`Загрузка...`")
     chat, msg = get_chat_and_msgid(match)
     if not (chat and msg):
         return await event.eor(
-            "Invalid link!\nExamples:\n"
+            "Неверная ссылка!\nПримеры:\n"
             "`https://t.me/TeamUltroid/3`\n"
             "`https://t.me/c/1313492028/3`\n"
             "`tg://openmessage?user_id=1234567890&message_id=1`"
@@ -753,10 +753,10 @@ async def get_restricted_msg(event):
         input_entity = await event.client.get_input_entity(chat)
         message = await event.client.get_messages(input_entity, ids=msg)
     except BaseException as er:
-        return await event.eor(f"**ERROR**\n`{er}`")
+        return await event.eor(f"**ОШИБКА**\n`{er}`")
     
     if not message:
-        return await event.eor("`Message not found or may not exist.`")
+        return await event.eor("`Сообщение не найдено или не существует.`")
     
     try:
         await event.client.send_message(event.chat_id, message)
@@ -813,7 +813,7 @@ async def get_restricted_msg(event):
                     event.chat_id,
                     media_path,
                     caption=caption,
-                    force_document=False,  # Set to True if you want to send as a document
+                    force_document=False,  # Установите True, если хотите отправить как документ
                     supports_streaming=True if message.video else False,
                     thumb=thumb_path if message.video else None,
                     attributes=attributes if message.video else None,
@@ -823,7 +823,6 @@ async def get_restricted_msg(event):
                 os.remove(thumb_path)
             await xx.try_delete()
         else:
-            await event.eor("`Cannot process this type of media.`")
+            await event.eor("`Не удалось обработать этот тип медиа.`")
     else:
-        await event.eor("`No media found in the message.`")
-
+        await event.eor("`В сообщении нет медиа.`")

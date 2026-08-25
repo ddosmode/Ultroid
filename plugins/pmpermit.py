@@ -2,40 +2,40 @@
 # Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
-• `{i}a` or `{i}approve`
-    Approve someone to PM.
+• `{i}a` или `{i}approve`
+    Одобрить пользователя для личных сообщений.
 
-• `{i}da` or `{i}disapprove`
-    Disapprove someone to PM.
+• `{i}da` или `{i}disapprove`
+    Отозвать одобрение пользователя для личных сообщений.
 
 • `{i}block`
-    Block someone.
+    Заблокировать пользователя.
 
 • `{i}unblock` | `{i}unblock all`
-    Unblock someone.
+    Разблокировать пользователя.
 
 • `{i}nologpm`
-    Stop logging messages from the user.
+    Прекратить логирование сообщений от пользователя.
 
 • `{i}logpm`
-    Start logging messages from the user.
+    Начать логирование сообщений от пользователя.
 
 • `{i}startarchive`
-    Archive new PMs.
+    Архивировать новые личные сообщения.
 
 • `{i}stoparchive`
-    Don't archive new PMs.
+    Не архивировать новые личные сообщения.
 
 • `{i}cleararchive`
-    Unarchive all chats.
+    Разархивировать все чаты.
 
 • `{i}listapproved`
-   List all approved PMs.
+   Показать всех одобренных пользователей ЛС.
 """
 
 import asyncio
@@ -79,12 +79,12 @@ UND = get_string("pmperm_1")
 UNS = get_string("pmperm_2")
 NO_REPLY = get_string("pmperm_3")
 
-UNAPPROVED_MSG = "**PMSecurity of {ON}!**\n\n{UND}\n\nYou have {warn}/{twarn} warnings!"
+UNAPPROVED_MSG = "**Безопасность ЛС от {ON}!**\n\n{UND}\n\nУ вас {warn}/{twarn} предупреждений!"
 if udB.get_key("PM_TEXT"):
     UNAPPROVED_MSG = (
-        "**PMSecurity of {ON}!**\n\n"
+        "**Безопасность ЛС от {ON}!**\n\n"
         + udB.get_key("PM_TEXT")
-        + "\n\nYou have {warn}/{twarn} warnings!"
+        + "\n\nУ вас {warn}/{twarn} предупреждений!"
     )
 # 1
 WARNS = udB.get_key("PMWARNS") or 4
@@ -131,24 +131,24 @@ if udB.get_key("PMLOG"):
     )
     async def _(e):
         if not e.is_private:
-            return await e.eor("`Use me in Private.`", time=3)
+            return await e.eor("`Используйте меня в личных сообщениях.`", time=3)
         if not Logm.contains(e.chat_id):
-            return await e.eor("`Wasn't logging msgs from here.`", time=3)
+            return await e.eor("`Здесь не велось логирование сообщений.`", time=3)
 
         Logm.remove(e.chat_id)
-        return await e.eor("`Now I Will log msgs from here.`", time=3)
+        return await e.eor("`Теперь я буду логировать сообщения отсюда.`", time=3)
 
     @ultroid_cmd(
         pattern="nologpm$",
     )
     async def _(e):
         if not e.is_private:
-            return await e.eor("`Use me in Private.`", time=3)
+            return await e.eor("`Используйте меня в личных сообщениях.`", time=3)
         if Logm.contains(e.chat_id):
-            return await e.eor("`Wasn't logging msgs from here.`", time=3)
+            return await e.eor("`Здесь не велось логирование сообщений.`", time=3)
 
         Logm.add(e.chat_id)
-        return await e.eor("`Now I Won't log msgs from here.`", time=3)
+        return await e.eor("`Теперь я не буду логировать сообщения отсюда.`", time=3)
 
     @ultroid_bot.on(
         events.NewMessage(
@@ -188,13 +188,13 @@ if udB.get_key("PMSETTING"):
                 await asst.edit_message(
                     LOG_CHANNEL,
                     _not_approved[miss.id],
-                    f"#AutoApproved : <b>OutGoing Message.\nUser : {inline_mention(miss, html=True)}</b> [<code>{miss.id}</code>]",
+                    f"#АвтоОдобрено : <b>Исходящее сообщение.\nПользователь : {inline_mention(miss, html=True)}</b> [<code>{miss.id}</code>]",
                     parse_mode="html",
                 )
             except KeyError:
                 await asst.send_message(
                     LOG_CHANNEL,
-                    f"#AutoApproved : <b>OutGoing Message.\nUser : {inline_mention(miss, html=True)}</b> [<code>{miss.id}</code>]",
+                    f"#АвтоОдобрено : <b>Исходящее сообщение.\nПользователь : {inline_mention(miss, html=True)}</b> [<code>{miss.id}</code>]",
                     parse_mode="html",
                 )
             except MessageNotModifiedError:
@@ -232,19 +232,19 @@ if udB.get_key("PMSETTING"):
                 await asst.edit_message(
                     udB.get_key("LOG_CHANNEL"),
                     _not_approved[user.id],
-                    f"Incoming PM from **{mention}** [`{user.id}`] with **{wrn}/{WARNS}** warning!",
+                    f"Входящее ЛС от **{mention}** [`{user.id}`] с **{wrn}/{WARNS}** предупреждением!",
                     buttons=[
-                        Button.inline("Approve PM", data=f"approve_{user.id}"),
-                        Button.inline("Block PM", data=f"block_{user.id}"),
+                        Button.inline("Одобрить ЛС", data=f"approve_{user.id}"),
+                        Button.inline("Заблокировать ЛС", data=f"block_{user.id}"),
                     ],
                 )
             except KeyError:
                 _not_approved[user.id] = await asst.send_message(
                     udB.get_key("LOG_CHANNEL"),
-                    f"Incoming PM from **{mention}** [`{user.id}`] with **1/{WARNS}** warning!",
+                    f"Входящее ЛС от **{mention}** [`{user.id}`] с **1/{WARNS}** предупреждением!",
                     buttons=[
-                        Button.inline("Approve PM", data=f"approve_{user.id}"),
-                        Button.inline("Block PM", data=f"block_{user.id}"),
+                        Button.inline("Одобрить ЛС", data=f"approve_{user.id}"),
+                        Button.inline("Заблокировать ЛС", data=f"block_{user.id}"),
                     ],
                 )
                 wrn = 1
@@ -372,7 +372,7 @@ if udB.get_key("PMSETTING"):
                 except KeyError:
                     await asst.send_message(
                         udB.get_key("LOG_CHANNEL"),
-                        "PMPermit is messed! Pls restart the bot!!",
+                        "PMPermit сломан! Пожалуйста, перезапустите бота!!",
                     )
                     return LOGS.info("COUNT_PM is messed.")
                 await ultroid_bot(BlockRequest(user.id))
@@ -380,7 +380,7 @@ if udB.get_key("PMSETTING"):
                 await asst.edit_message(
                     udB.get_key("LOG_CHANNEL"),
                     _not_approved[user.id],
-                    f"**{mention}** [`{user.id}`] was Blocked for spamming.",
+                    f"**{mention}** [`{user.id}`] был заблокирован за спам.",
                 )
 
     @ultroid_cmd(pattern="(start|stop|clear)archive$", fullsudo=True)
@@ -388,14 +388,14 @@ if udB.get_key("PMSETTING"):
         x = e.pattern_match.group(1).strip()
         if x == "start":
             udB.set_key("MOVE_ARCHIVE", "True")
-            await e.eor("Now I will move new Unapproved DM's to archive", time=5)
+            await e.eor("Теперь я буду перемещать новые неодобренные ЛС в архив", time=5)
         elif x == "stop":
             udB.set_key("MOVE_ARCHIVE", "False")
-            await e.eor("Now I won't move new Unapproved DM's to archive", time=5)
+            await e.eor("Теперь я не буду перемещать новые неодобренные ЛС в архив", time=5)
         elif x == "clear":
             try:
                 await e.client.edit_folder(unpack=1)
-                await e.eor("Unarchived all chats", time=5)
+                await e.eor("Все чаты разархивированы", time=5)
             except Exception as mm:
                 await e.eor(str(mm), time=5)
 
@@ -410,7 +410,7 @@ if udB.get_key("PMSETTING"):
         if user.id in DEVLIST:
             return await eor(
                 apprvpm,
-                "This is a developer account.\nAutomatically approved.",
+                "Это аккаунт разработчика.\nАвтоматически одобрен.",
             )
         if not keym.contains(user.id):
             keym.add(user.id)
@@ -421,34 +421,34 @@ if udB.get_key("PMSETTING"):
                 pass
             await eod(
                 apprvpm,
-                f"<b>{inline_mention(user, html=True)}</b> <code>approved to PM!</code>",
+                f"<b>{inline_mention(user, html=True)}</b> <code>одобрен для ЛС!</code>",
                 parse_mode="html",
             )
             try:
                 await asst.edit_message(
                     udB.get_key("LOG_CHANNEL"),
                     _not_approved[user.id],
-                    f"#APPROVED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was approved to PM you!</code>",
+                    f"#ОДОБРЕНО\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>был одобрен для ЛС с вами!</code>",
                     buttons=[
-                        Button.inline("Disapprove PM", data=f"disapprove_{user.id}"),
-                        Button.inline("Block", data=f"block_{user.id}"),
+                        Button.inline("Отозвать одобрение ЛС", data=f"disapprove_{user.id}"),
+                        Button.inline("Заблокировать", data=f"block_{user.id}"),
                     ],
                     parse_mode="html",
                 )
             except KeyError:
                 _not_approved[user.id] = await asst.send_message(
                     udB.get_key("LOG_CHANNEL"),
-                    f"#APPROVED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was approved to PM you!</code>",
+                    f"#ОДОБРЕНО\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>был одобрен для ЛС с вами!</code>",
                     buttons=[
-                        Button.inline("Disapprove PM", data=f"disapprove_{user.id}"),
-                        Button.inline("Block", data=f"block_{user.id}"),
+                        Button.inline("Отозвать одобрение ЛС", data=f"disapprove_{user.id}"),
+                        Button.inline("Заблокировать", data=f"block_{user.id}"),
                     ],
                     parse_mode="html",
                 )
             except MessageNotModifiedError:
                 pass
         else:
-            await apprvpm.eor("`User may already be approved.`", time=5)
+            await apprvpm.eor("`Пользователь, возможно, уже одобрен.`", time=5)
 
     @ultroid_cmd(pattern="(da|disapprove)(?: |$)", fullsudo=True)
     async def disapprovepm(e):
@@ -461,33 +461,33 @@ if udB.get_key("PMSETTING"):
         if user.id in DEVLIST:
             return await eor(
                 e,
-                "`This is a developer account.\nCannot be disapproved.`",
+                "`Это аккаунт разработчика.\nНельзя отозвать одобрение.`",
             )
         if keym.contains(user.id):
             keym.remove(user.id)
             await eod(
                 e,
-                f"<b>{inline_mention(user, html=True)}</b> <code>Disapproved to PM!</code>",
+                f"<b>{inline_mention(user, html=True)}</b> <code>Отозвано одобрение для ЛС!</code>",
                 parse_mode="html",
             )
             try:
                 await asst.edit_message(
                     udB.get_key("LOG_CHANNEL"),
                     _not_approved[user.id],
-                    f"#DISAPPROVED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was disapproved to PM you.</code>",
+                    f"#ОДОБРЕНИЕ_ОТОЗВАНО\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>одобрение для ЛС с вами отозвано.</code>",
                     buttons=[
-                        Button.inline("Approve PM", data=f"approve_{user.id}"),
-                        Button.inline("Block", data=f"block_{user.id}"),
+                        Button.inline("Одобрить ЛС", data=f"approve_{user.id}"),
+                        Button.inline("Заблокировать", data=f"block_{user.id}"),
                     ],
                     parse_mode="html",
                 )
             except KeyError:
                 _not_approved[user.id] = await asst.send_message(
                     udB.get_key("LOG_CHANNEL"),
-                    f"#DISAPPROVED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was disapproved to PM you.</code>",
+                    f"#ОДОБРЕНИЕ_ОТОЗВАНО\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>одобрение для ЛС с вами отозвано.</code>",
                     buttons=[
-                        Button.inline("Approve PM", data=f"approve_{user.id}"),
-                        Button.inline("Block", data=f"block_{user.id}"),
+                        Button.inline("Одобрить ЛС", data=f"approve_{user.id}"),
+                        Button.inline("Заблокировать", data=f"block_{user.id}"),
                     ],
                     parse_mode="html",
                 )
@@ -496,7 +496,7 @@ if udB.get_key("PMSETTING"):
         else:
             await eod(
                 e,
-                f"<b>{inline_mention(user, html=True)}</b> <code>was never approved!</code>",
+                f"<b>{inline_mention(user, html=True)}</b> <code>никогда не был одобрен!</code>",
                 parse_mode="html",
             )
 
@@ -518,7 +518,7 @@ async def blockpm(block):
 
     await block.client(BlockRequest(user))
     aname = await block.client.get_entity(user)
-    await block.eor(f"{inline_mention(aname)} [`{user}`] `has been blocked!`")
+    await block.eor(f"{inline_mention(aname)} [`{user}`] `заблокирован!`")
     try:
         keym.remove(user)
     except AttributeError:
@@ -527,17 +527,17 @@ async def blockpm(block):
         await asst.edit_message(
             udB.get_key("LOG_CHANNEL"),
             _not_approved[user],
-            f"#BLOCKED\n\n{inline_mention(aname)} [`{user}`] has been **blocked**.",
+            f"#ЗАБЛОКИРОВАН\n\n{inline_mention(aname)} [`{user}`] был **заблокирован**.",
             buttons=[
-                Button.inline("UnBlock", data=f"unblock_{user}"),
+                Button.inline("Разблокировать", data=f"unblock_{user}"),
             ],
         )
     except KeyError:
         _not_approved[user] = await asst.send_message(
             udB.get_key("LOG_CHANNEL"),
-            f"#BLOCKED\n\n{inline_mention(aname)} [`{user}`] has been **blocked**.",
+            f"#ЗАБЛОКИРОВАН\n\n{inline_mention(aname)} [`{user}`] был **заблокирован**.",
             buttons=[
-                Button.inline("UnBlock", data=f"unblock_{user}"),
+                Button.inline("Разблокировать", data=f"unblock_{user}"),
             ],
         )
     except MessageNotModifiedError:
@@ -556,20 +556,20 @@ async def unblockpm(event):
             u_s = await event.client(GetBlockedRequest(0, 0))
             count = len(u_s.users)
             if not count:
-                return await eor(msg, "__You have not blocked Anyone...__")
+                return await eor(msg, "__Вы никого не заблокировали...__")
             for user in u_s.users:
                 await asyncio.sleep(1)
                 await event.client(UnblockRequest(user.id))
-            # GetBlockedRequest return 20 users at most.
+            # GetBlockedRequest возвращает не более 20 пользователей за раз.
             if count < 20:
-                return await eor(msg, f"__Unblocked {count} Users!__")
+                return await eor(msg, f"__Разблокировано {count} пользователей!__")
             while u_s.users:
                 u_s = await event.client(GetBlockedRequest(0, 0))
                 for user in u_s.users:
                     await asyncio.sleep(3)
                     await event.client(UnblockRequest(user.id))
                 count += len(u_s.users)
-            return await eor(msg, f"__Unblocked {count} users.__")
+            return await eor(msg, f"__Разблокировано {count} пользователей.__")
 
         try:
             user = await event.client.parse_id(match)
@@ -582,24 +582,24 @@ async def unblockpm(event):
     try:
         await event.client(UnblockRequest(user))
         aname = await event.client.get_entity(user)
-        await event.eor(f"{inline_mention(aname)} [`{user}`] `has been UnBlocked!`")
+        await event.eor(f"{inline_mention(aname)} [`{user}`] `разблокирован!`")
     except Exception as et:
-        return await event.eor(f"ERROR - {et}")
+        return await event.eor(f"ОШИБКА - {et}")
     try:
         await asst.edit_message(
             udB.get_key("LOG_CHANNEL"),
             _not_approved[user],
-            f"#UNBLOCKED\n\n{inline_mention(aname)} [`{user}`] has been **unblocked**.",
+            f"#РАЗБЛОКИРОВАН\n\n{inline_mention(aname)} [`{user}`] был **разблокирован**.",
             buttons=[
-                Button.inline("Block", data=f"block_{user}"),
+                Button.inline("Заблокировать", data=f"block_{user}"),
             ],
         )
     except KeyError:
         _not_approved[user] = await asst.send_message(
             udB.get_key("LOG_CHANNEL"),
-            f"#UNBLOCKED\n\n{inline_mention(aname)} [`{user}`] has been **unblocked**.",
+            f"#РАЗБЛОКИРОВАН\n\n{inline_mention(aname)} [`{user}`] был **разблокирован**.",
             buttons=[
-                Button.inline("Block", data=f"block_{user}"),
+                Button.inline("Заблокировать", data=f"block_{user}"),
             ],
         )
     except MessageNotModifiedError:
@@ -611,7 +611,7 @@ async def list_approved(event):
     xx = await event.eor(get_string("com_1"))
     all = keym.get()
     if not all:
-        return await xx.eor("`You haven't approved anyone yet!`", time=5)
+        return await xx.eor("`Вы ещё никого не одобрили!`", time=5)
     users = []
     for i in all:
         try:
@@ -622,13 +622,13 @@ async def list_approved(event):
     with open("approved_pms.txt", "w") as list_appr:
         if tabulate:
             list_appr.write(
-                tabulate(users, headers=["UserName", "UserID"], showindex="always")
+                tabulate(users, headers=["Имя пользователя", "ID пользователя"], showindex="always")
             )
         else:
             text = "".join(f"[{user[-1]}] - {user[0]}" for user in users)
             list_appr.write(text)
     await event.reply(
-        f"List of users approved by [{OWNER_NAME}](tg://user?id={OWNER_ID})",
+        f"Список пользователей, одобренных [{OWNER_NAME}](tg://user?id={OWNER_ID})",
         file="approved_pms.txt",
     )
 
@@ -645,7 +645,7 @@ async def list_approved(event):
 async def apr_in(event):
     uid = int(event.data_match.group(1).decode("UTF-8"))
     if uid in DEVLIST:
-        await event.edit("It's a dev! Approved!")
+        await event.edit("Это разработчик! Одобрено!")
     if not keym.contains(uid):
         keym.add(uid)
         try:
@@ -657,24 +657,24 @@ async def apr_in(event):
         except BaseException:
             return await event.delete()
         await event.edit(
-            f"#APPROVED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was approved to PM you!</code>",
+            f"#ОДОБРЕНО\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>был одобрен для ЛС с вами!</code>",
             buttons=[
                 [
-                    Button.inline("Disapprove PM", data=f"disapprove_{uid}"),
-                    Button.inline("Block", data=f"block_{uid}"),
+                    Button.inline("Отозвать одобрение ЛС", data=f"disapprove_{uid}"),
+                    Button.inline("Заблокировать", data=f"block_{uid}"),
                 ],
             ],
             parse_mode="html",
         )
         await delete_pm_warn_msgs(uid)
-        await event.answer("Approved.", alert=True)
+        await event.answer("Одобрено.", alert=True)
     else:
         await event.edit(
-            "`User may already be approved.`",
+            "`Пользователь, возможно, уже одобрен.`",
             buttons=[
                 [
-                    Button.inline("Disapprove PM", data=f"disapprove_{uid}"),
-                    Button.inline("Block", data=f"block_{uid}"),
+                    Button.inline("Отозвать одобрение ЛС", data=f"disapprove_{uid}"),
+                    Button.inline("Заблокировать", data=f"block_{uid}"),
                 ],
             ],
         )
@@ -695,23 +695,23 @@ async def disapr_in(event):
         except BaseException:
             return await event.delete()
         await event.edit(
-            f"#DISAPPROVED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was disapproved to PM you!</code>",
+            f"#ОДОБРЕНИЕ_ОТОЗВАНО\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>одобрение для ЛС с вами отозвано!</code>",
             buttons=[
                 [
-                    Button.inline("Approve PM", data=f"approve_{uid}"),
-                    Button.inline("Block", data=f"block_{uid}"),
+                    Button.inline("Одобрить ЛС", data=f"approve_{uid}"),
+                    Button.inline("Заблокировать", data=f"block_{uid}"),
                 ],
             ],
             parse_mode="html",
         )
-        await event.answer("Disapproved.", alert=True)
+        await event.answer("Отозвано.", alert=True)
     else:
         await event.edit(
-            "`User was never approved!`",
+            "`Пользователь никогда не был одобрен!`",
             buttons=[
                 [
-                    Button.inline("Disapprove PM", data=f"disapprove_{uid}"),
-                    Button.inline("Block", data=f"block_{uid}"),
+                    Button.inline("Отозвать одобрение ЛС", data=f"disapprove_{uid}"),
+                    Button.inline("Заблокировать", data=f"block_{uid}"),
                 ],
             ],
         )
@@ -734,11 +734,11 @@ async def blck_in(event):
     except BaseException:
         return await event.delete()
     await event.edit(
-        f"BLOCKED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was blocked!</code>",
-        buttons=Button.inline("UnBlock", data=f"unblock_{uid}"),
+        f"ЗАБЛОКИРОВАН\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>был заблокирован!</code>",
+        buttons=Button.inline("Разблокировать", data=f"unblock_{uid}"),
         parse_mode="html",
     )
-    await event.answer("Blocked.", alert=True)
+    await event.answer("Заблокирован.", alert=True)
 
 
 @callback(
@@ -758,17 +758,17 @@ async def unblck_in(event):
     except BaseException:
         return await event.delete()
     await event.edit(
-        f"#UNBLOCKED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was unblocked!</code>",
-        buttons=Button.inline("Block", data=f"block_{uid}"),
+        f"#РАЗБЛОКИРОВАН\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>был разблокирован!</code>",
+        buttons=Button.inline("Заблокировать", data=f"block_{uid}"),
         parse_mode="html",
     )
-    await event.answer("Unblocked.", alert=True)
+    await event.answer("Разблокирован.", alert=True)
 
 
 @callback("deletedissht")
 async def ytfuxist(e):
     try:
-        await e.answer("Deleted.")
+        await e.answer("Удалено.")
         await e.delete()
     except BaseException:
         await ultroid_bot.delete_messages(e.chat_id, e.id)
@@ -785,11 +785,11 @@ async def in_pm_ans(event):
     try:
         msg_ = WARN_MSGS[from_user]
     except KeyError:
-        msg_ = "**PMSecurity of {OWNER_NAME}**"
+        msg_ = "**Безопасность ЛС от {OWNER_NAME}**"
     wrns = f"{warns}/{WARNS}"
     buttons = [
         [
-            Button.inline("Warns", data=f"admin_only{from_user}"),
+            Button.inline("Предупреждения", data=f"admin_only{from_user}"),
             Button.inline(wrns, data=f"don_{wrns}"),
         ]
     ]
@@ -815,7 +815,7 @@ async def in_pm_ans(event):
             res = [
                 await event.builder.document(
                     res,
-                    title="Inline PmPermit",
+                    title="Встроенный PmPermit",
                     description="~ @TeamUltroid",
                     text=msg_,
                     buttons=buttons,
@@ -830,7 +830,7 @@ async def in_pm_ans(event):
             cont = types.InputWebDocument(PMPIC, 0, mime_type, [])
         res = [
             event.builder.article(
-                title="Inline PMPermit.",
+                title="Встроенный PMPermit.",
                 type=_type,
                 text=msg_,
                 description="@TeamUltroid",
@@ -849,10 +849,10 @@ async def _admin_tools(event):
     await event.edit(
         buttons=[
             [
-                Button.inline("Approve PM", data=f"approve_{chat}"),
-                Button.inline("Block PM", data=f"block_{chat}"),
+                Button.inline("Одобрить ЛС", data=f"approve_{chat}"),
+                Button.inline("Заблокировать ЛС", data=f"block_{chat}"),
             ],
-            [Button.inline("« Back", data=f"pmbk_{chat}")],
+            [Button.inline("« Назад", data=f"pmbk_{chat}")],
         ],
     )
 
@@ -860,8 +860,8 @@ async def _admin_tools(event):
 @callback(re.compile("don_(.*)"))
 async def _mejik(e):
     data = e.pattern_match.group(1).strip().decode("utf-8").split("/")
-    text = "👮‍♂ Warn Count : " + data[0]
-    text += "\n🤖 Total Warn Count : " + data[1]
+    text = "👮‍♂ Количество предупреждений : " + data[0]
+    text += "\n🤖 Общее количество предупреждений : " + data[1]
     await e.answer(text, alert=True)
 
 
@@ -877,7 +877,7 @@ async def edt(event):
     await event.edit(
         buttons=[
             [
-                Button.inline("Warns", data=f"admin_only{from_user}"),
+                Button.inline("Предупреждения", data=f"admin_only{from_user}"),
                 Button.inline(wrns, data=f"don_{wrns}"),
             ]
         ],

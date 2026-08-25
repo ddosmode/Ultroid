@@ -2,7 +2,7 @@
 # Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 
@@ -18,7 +18,7 @@ from . import *
 
 @asst_cmd(pattern="decide")
 async def dheh(e):
-    text = ["Yes", "NoU", "Maybe", "IDK"]
+    text = ["Да", "Нет", "Возможно", "Не знаю"]
     text = random.choice(text)
     ri = e.reply_to_msg_id or e.id
     await e.client.send_message(e.chat_id, text, reply_to=ri)
@@ -35,7 +35,7 @@ async def oqha(e):
         text = (await e.get_reply_message()).text
         reply_to = e.reply_to_msg_id
     else:
-        return await e.eor("What to Echo?", time=5)
+        return await e.eor("Что эхоить?", time=5)
     try:
         await e.delete()
     except BaseException as ex:
@@ -46,12 +46,12 @@ async def oqha(e):
 @asst_cmd(pattern="kickme$")
 async def doit(e):
     if e.sender_id in DEVLIST:
-        return await eod(e, "`I will Not Kick You, my Developer..`")
+        return await eod(e, "`Я не буду исключать вас, мой разработчик..`")
     try:
         await e.client.kick_participant(e.chat_id, e.sender_id)
     except Exception as Fe:
         return await e.eor(str(Fe), time=5)
-    await e.eor("Yes, You are right, get out.", time=5)
+    await e.eor("Да, вы правы, выходите.", time=5)
 
 
 @asst_cmd(pattern="joke$")

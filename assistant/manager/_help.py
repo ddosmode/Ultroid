@@ -2,84 +2,84 @@
 # Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import *
 
 START = """
-🪅 **Help Menu** 🪅
+🪅 **Меню помощи** 🪅
 
-✘  /start : Check I am Alive or not.
-✘  /help : Get This Message.
-✘  /repo : Get Bot's Repo..
+✘  /start : Проверить, работаю ли я.
+✘  /help : Получить это сообщение.
+✘  /repo : Получить репозиторий бота..
 
-🧑‍💻 Join **@TeamUltroid**
+🧑‍💻 Присоединяйтесь к **@TeamUltroid**
 """
 
-ADMINTOOLS = """✘ **AdminTools** ✘
+ADMINTOOLS = """✘ **Инструменты администрирования** ✘
 
-• /pin : Pins the Replied Message
-• /pinned : Get Pinned message in chat.
-• /unpin : Unpin the Replied message
-• /unpin all : Unpin all Pinned Messages.
+• /pin : Закрепить ответное сообщение
+• /pinned : Получить закреплённое сообщение в чате.
+• /unpin : Открепить ответное сообщение
+• /unpin all : Открепить все закреплённые сообщения.
 
-• /ban (username/id/reply) : Ban the User
-• /unban (username/id/reply) : UnBan the User.
+• /ban (имя пользователя/id/ответ) : Забанить пользователя
+• /unban (имя пользователя/id/ответ) : Разбанить пользователя.
 
-• /mute (username/id/reply) : Mute the User.
-• /unmute (username/id/reply) : Unmute the User.
+• /mute (имя пользователя/id/ответ) : Заглушить пользователя.
+• /unmute (имя пользователя/id/ответ) : Снять заглушение с пользователя.
 
-• /tban (username/id/reply) (time) : Temporary ban a user
-• /tmute (username/id/reply) (time) : temporary Mutes a User.
+• /tban (имя пользователя/id/ответ) (время) : Временно забанить пользователя
+• /tmute (имя пользователя/id/ответ) (время) : Временно заглушить пользователя.
 
-• /purge (purge messages)
+• /purge (сообщения для очистки)
 
-• /setgpic (reply photo) : keep Chat Photo of Group.
-• /delgpic : remove current chat Photo."""
+• /setgpic (ответ фото) : установить фото группы.
+• /delgpic : удалить текущее фото чата."""
 
 UTILITIES = """
-✘ ** Utilities ** ✘
+✘ ** Утилиты ** ✘
 
-• /info (reply/username/id) : get detailed info of user.
-• /id : get chat/user id.
-• /tr : Translate Languages..
-• /q : Create Quotes.
+• /info (ответ/имя пользователя/id) : получить подробную информацию о пользователе.
+• /id : получить id чата/пользователя.
+• /tr : Перевести языки..
+• /q : Создать цитаты.
 
-• /paste (reply file/text) : paste content on Spaceb.in
-• /meaning (text) : Get Meaning of that Word.
-• /google (query) : Search Something on Google..
+• /paste (ответ файл/текст) : вставить содержимое на Spaceb.in
+• /meaning (текст) : Получить значение этого слова.
+• /google (запрос) : Поискать что-то в Google..
 
-• /suggest (query/reply) : Creates a Yes / No Poll.
+• /suggest (запрос/ответ) : Создать опрос Да / Нет.
 """
 
 LOCKS = """
-✘ ** Locks ** ✘
+✘ ** Блокировки ** ✘
 
-• /lock (query) : lock particular content in chat.
-• /unlock (query) : Unlock some content.
+• /lock (запрос) : заблокировать определённый контент в чате.
+• /unlock (запрос) : Разблокировать контент.
 
-• All Queries
-- `msgs` : for messages.
-- `inlines` : for inline queries.
-- `media` : for all medias.
-- `games` : for games.
-- `sticker` : for stickers.
-- `polls` : for polls.
-- `gif` : for gifs.
-- `pin` : for pins.
-- `changeinfo` : for change info right.
+• Все запросы
+- `msgs` : для сообщений.
+- `inlines` : для встроенных запросов.
+- `media` : для всех медиа.
+- `games` : для игр.
+- `sticker` : для стикеров.
+- `polls` : для опросов.
+- `gif` : для гифок.
+- `pin` : для закреплений.
+- `changeinfo` : для права изменения информации.
 """
 
 MISC = """
-✘  **Misc**  ✘
+✘  **Разное**  ✘
 
-• /joke : Get Random Jokes.
-• /decide : Decide Something..
+• /joke : Получить случайные шутки.
+• /decide : Решить что-то..
 
-**✘ Stickertools ✘**
-• /kang : add sticker to your pack.
-• /listpack : get all of yours pack..
+**✘ Инструменты стикеров ✘**
+• /kang : добавить стикер в ваш набор.
+• /listpack : получить все ваши наборы..
 """
 
 STRINGS = {"Admintools": ADMINTOOLS, "locks": LOCKS, "Utils": UTILITIES, "Misc": MISC}
@@ -98,7 +98,7 @@ def get_buttons():
             del keys[i]
         BTTS.append(BT)
     url = f"https://t.me/{asst.me.username}?startgroup=true"
-    BTTS.append([Button.url("Add me to Group", url)])
+    BTTS.append([Button.url("Добавить меня в группу", url)])
     return BTTS
 
 
@@ -107,7 +107,7 @@ async def helpish(event):
     if not event.is_private:
         url = f"https://t.me/{asst.me.username}?start=start"
         return await event.reply(
-            "Contact me in PM for help!", buttons=Button.url("Click me for Help", url)
+            "Напишите мне в личные сообщения для помощи!", buttons=Button.url("Нажмите для помощи", url)
         )
     if str(event.sender_id) in owner_and_sudos() and (
         udB.get_key("DUAL_MODE") and (udB.get_key("DUAL_HNDLR") == "/")
@@ -119,7 +119,7 @@ async def helpish(event):
 @callback("mngbtn", owner=True)
 async def ehwhshd(e):
     buttons = get_buttons()
-    buttons.append([Button.inline("<< Back", "open")])
+    buttons.append([Button.inline("<< Назад", "open")])
     await e.edit(buttons=buttons)
 
 
@@ -131,4 +131,4 @@ async def home_aja(e):
 @callback(re.compile("hlp_(.*)"))
 async def do_something(event):
     match = event.pattern_match.group(1).strip().decode("utf-8")
-    await event.edit(STRINGS[match], buttons=Button.inline("<< Back", "mnghome"))
+    await event.edit(STRINGS[match], buttons=Button.inline("<< Назад", "mnghome"))

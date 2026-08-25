@@ -2,7 +2,7 @@
 # Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from datetime import datetime
@@ -24,10 +24,10 @@ custom_info = True
 if Owner_info_msg is None:
     custom_info = False
     Owner_info_msg = f"""
-**Owner** - {OWNER_NAME}
-**OwnerID** - `{OWNER_ID}`
+**Владелец** - {OWNER_NAME}
+**ID владельца** - `{OWNER_ID}`
 
-**Message Forwards** - {udB.get_key("PMBOT")}
+**Пересылка сообщений** - {udB.get_key("PMBOT")}
 
 **Ultroid [v{ultroid_version}](https://github.com/TeamUltroid/Ultroid), powered by @TeamUltroid**
 """
@@ -35,30 +35,30 @@ if Owner_info_msg is None:
 
 _settings = [
     [
-        Button.inline("API Keys", data="cbs_apiset"),
-        Button.inline("PM Bot", data="cbs_chatbot"),
+        Button.inline("API ключи", data="cbs_apiset"),
+        Button.inline("Бот ЛС", data="cbs_chatbot"),
     ],
     [
         Button.inline("Alive", data="cbs_alvcstm"),
         Button.inline("PMPermit", data="cbs_ppmset"),
     ],
     [
-        Button.inline("Features", data="cbs_otvars"),
+        Button.inline("Функции", data="cbs_otvars"),
         Button.inline("VC Song Bot", data="cbs_vcb"),
     ],
-    [Button.inline("« Back", data="mainmenu")],
+    [Button.inline("« Назад", data="mainmenu")],
 ]
 
 _start = [
     [
-        Button.inline("Language 🌐", data="lang"),
-        Button.inline("Settings ⚙️", data="setter"),
+        Button.inline("Язык 🌐", data="lang"),
+        Button.inline("Настройки ⚙️", data="setter"),
     ],
     [
-        Button.inline("Sᴛᴀᴛs ✨", data="stat"),
-        Button.inline("Bʀᴏᴀᴅᴄᴀsᴛ 📻", data="bcast"),
+        Button.inline("Статистика ✨", data="stat"),
+        Button.inline("Рассылка 📻", data="bcast"),
     ],
-    [Button.inline("TɪᴍᴇZᴏɴᴇ 🌎", data="tz")],
+    [Button.inline("Часовой пояс 🌎", data="tz")],
 ]
 
 
@@ -71,7 +71,7 @@ async def own(event):
         msg += "\n\n• Powered by **@TeamUltroid**"
     await event.edit(
         msg,
-        buttons=[Button.inline("Close", data="closeit")],
+        buttons=[Button.inline("Закрыть", data="closeit")],
         link_preview=False,
     )
 
@@ -92,7 +92,7 @@ async def ultroid(event):
         keym.add(event.sender_id)
         kak_uiw = udB.get_key("OFF_START_LOG")
         if not kak_uiw or kak_uiw != True:
-            msg = f"{inline_mention(event.sender)} `[{event.sender_id}]` started your [Assistant bot](@{asst.me.username})."
+            msg = f"{inline_mention(event.sender)} `[{event.sender_id}]` запустил вашего [бота-ассистента](@{asst.me.username})."
             buttons = [[Button.inline("Info", "itkkstyo")]]
             if event.sender.username:
                 buttons[0].append(
@@ -111,9 +111,9 @@ async def ultroid(event):
             await get_stored_file(event, args)
         if not udB.get_key("STARTMSG"):
             if udB.get_key("PMBOT"):
-                ok = "You can contact my master using this bot!!\n\nSend your Message, I will Deliver it To Master."
+                ok = "Вы можете связаться с моим владельцем через этого бота!!\n\nОтправьте ваше сообщение, я передам его владельцу."
             await event.reply(
-                f"Hey there {mention}, this is Ultroid Assistant of {me}!\n\n{ok}",
+                f"Привет, {mention}, это Ultroid Assistant от {me}!\n\n{ok}",
                 file=udB.get_key("STARTMEDIA"),
                 buttons=[Button.inline("Info.", data="ownerinfo")]
                 if Owner_info_msg
@@ -131,7 +131,7 @@ async def ultroid(event):
         name = get_display_name(event.sender)
         if args == "set":
             await event.reply(
-                "Choose from the below options -",
+                "Выберите из вариантов ниже -",
                 buttons=_settings,
             )
         elif args:
@@ -145,7 +145,7 @@ async def ultroid(event):
 
 @callback("itkkstyo", owner=True)
 async def ekekdhdb(e):
-    text = f"When New Visitor will visit your Assistant Bot. You will get this log message!\n\nTo Disable : {HNDLR}setdb OFF_START_LOG True"
+    text = f"Когда новый посетитель зайдёт в вашего бота-ассистента. Вы получите это лог-сообщение!\n\nДля отключения : {HNDLR}setdb OFF_START_LOG True"
     await e.answer(text, alert=True)
 
 
@@ -160,8 +160,8 @@ async def ultroid(event):
 @callback("stat", owner=True)
 async def botstat(event):
     ok = len(udB.get_key("BOT_USERS") or [])
-    msg = """Ultroid Assistant - Stats
-Total Users - {}""".format(
+    msg = """Ultroid Assistant - Статистика
+Всего пользователей - {}""".format(
         ok,
     )
     await event.answer(msg, cache_time=0, alert=True)
@@ -171,17 +171,17 @@ Total Users - {}""".format(
 async def bdcast(event):
     keym = KeyManager("BOT_USERS", cast=list)
     total = keym.count()
-    await event.edit(f"• Broadcast to {total} users.")
+    await event.edit(f"• Рассылка для {total} пользователей.")
     async with event.client.conversation(OWNER_ID) as conv:
         await conv.send_message(
-            "Enter your broadcast message.\nUse /cancel to stop the broadcast.",
+            "Введите ваше сообщение для рассылки.\nИспользуйте /cancel для остановки рассылки.",
         )
         response = await conv.get_response()
         if response.message == "/cancel":
-            return await conv.send_message("Cancelled!!")
+            return await conv.send_message("Отменено!!")
         success = 0
         fail = 0
-        await conv.send_message(f"Starting a broadcast to {total} users...")
+        await conv.send_message(f"Начинается рассылка для {total} пользователей...")
         start = datetime.now()
         for i in keym.get():
             try:
@@ -193,17 +193,17 @@ async def bdcast(event):
         time_taken = (end - start).seconds
         await conv.send_message(
             f"""
-**Broadcast completed in {time_taken} seconds.**
-Total Users in Bot - {total}
-**Sent to** : `{success} users.`
-**Failed for** : `{fail} user(s).`""",
+**Рассылка завершена за {time_taken} секунд.**
+Всего пользователей в боте - {total}
+**Отправлено** : `{success} пользователям.`
+**Не удалось** : `{fail} пользователю(ям).`""",
         )
 
 
 @callback("setter", owner=True)
 async def setting(event):
     await event.edit(
-        "Choose from the below options -",
+        "Выберите из вариантов ниже -",
         buttons=_settings,
     )
 
@@ -213,28 +213,28 @@ async def timezone_(event):
     await event.delete()
     pru = event.sender_id
     var = "TIMEZONE"
-    name = "Timezone"
+    name = "Часовой пояс"
     async with event.client.conversation(pru) as conv:
         await conv.send_message(
-            "Send Your TimeZone From This List [Check From Here](http://www.timezoneconverter.com/cgi-bin/findzone.tzc)"
+            "Отправьте ваш часовой пояс из этого списка [Проверить здесь](http://www.timezoneconverter.com/cgi-bin/findzone.tzc)"
         )
         response = conv.wait_event(events.NewMessage(chats=pru))
         response = await response
         themssg = response.message.message
         if themssg == "/cancel":
             return await conv.send_message(
-                "Cancelled!!",
+                "Отменено!!",
                 buttons=get_back_button("mainmenu"),
             )
         try:
             tz(themssg)
             await setit(event, var, themssg)
             await conv.send_message(
-                f"{name} changed to {themssg}\n",
+                f"{name} изменён на {themssg}\n",
                 buttons=get_back_button("mainmenu"),
             )
         except BaseException:
             await conv.send_message(
-                "Wrong TimeZone, Try again",
+                "Неверный часовой пояс, попробуйте снова",
                 buttons=get_back_button("mainmenu"),
             )
