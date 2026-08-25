@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 import asyncio
@@ -38,7 +38,7 @@ async def Function(event):
 
 
 async def DummyHandler(ult):
-    # clean chat actions
+    # очистка действий в чате
     key = udB.get_key("CLEANCHAT") or []
     if ult.chat_id in key:
         try:
@@ -46,14 +46,14 @@ async def DummyHandler(ult):
         except BaseException:
             pass
 
-    # thank members
+    # благодарность участникам
     if must_thank(ult.chat_id):
         chat_count = (await ult.client.get_participants(ult.chat_id, limit=0)).total
         if chat_count % 100 == 0:
             stik_id = chat_count / 100 - 1
             sticker = stickers[stik_id]
             await ult.respond(file=sticker)
-    # force subscribe
+    # принудительная подписка
     if (
         udB.get_key("FORCESUB")
         and ((ult.user_joined or ult.user_added))
@@ -76,7 +76,7 @@ async def DummyHandler(ult):
     if ult.user_joined or ult.added_by:
         user = await ult.get_user()
         chat = await ult.get_chat()
-        # gbans and @UltroidBans checks
+        # проверка gbans и @UltroidBans
         if udB.get_key("ULTROID_BANS"):
             try:
                 is_banned = await async_searcher(
@@ -92,7 +92,7 @@ async def DummyHandler(ult):
                         view_messages=False,
                     )
                     await ult.respond(
-                        f'**@UltroidBans:** Banned user detected and banned!\n`{str(is_banned)}`.\nBan reason: {is_banned["reason"]}',
+                        f'**@UltroidBans:** Обнаружен и заблокирован забаненный пользователь!\n`{str(is_banned)}`.\nПричина бана: {is_banned["reason"]}',
                     )
 
             except BaseException:
@@ -110,11 +110,11 @@ async def DummyHandler(ult):
             except Exception as er:
                 LOGS.exception(er)
 
-        # greetings
+        # приветствия
         elif get_welcome(ult.chat_id):
             user = await ult.get_user()
             chat = await ult.get_chat()
-            title = chat.title or "this chat"
+            title = chat.title or "этот чат"
             count = (
                 chat.participants_count
                 or (await ult.client.get_participants(chat, limit=0)).total
@@ -154,7 +154,7 @@ async def DummyHandler(ult):
     elif (ult.user_left or ult.user_kicked) and get_goodbye(ult.chat_id):
         user = await ult.get_user()
         chat = await ult.get_chat()
-        title = chat.title or "this chat"
+        title = chat.title or "этот чат"
         count = (
             chat.participants_count
             or (await ult.client.get_participants(chat, limit=0)).total
@@ -230,7 +230,7 @@ async def uname_stuff(id, uname, name):
     if udB.get_key("USERNAME_LOG"):
         old_ = udB.get_key("USERNAME_DB") or {}
         old = old_.get(id)
-        # Ignore Name Logs
+        # Игнорировать логи имён
         if old and old == uname:
             return
         if old and uname:
@@ -250,4 +250,3 @@ async def uname_stuff(id, uname, name):
             )
 
         old_[id] = uname
-        udB.set_key("USERNAME_DB", old_)

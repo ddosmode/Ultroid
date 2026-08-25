@@ -32,7 +32,7 @@ async def kang_cmd(ult):
     if not isinstance(sender, User):
         return
     if not ult.is_reply:
-        return await ult.eor("`Reply to a sticker/photo..`", time=5)
+        return await ult.eor("`Ответьте на стикер/фото..`", time=5)
     reply = await ult.get_reply_message()
     if sender.username:
         pre = sender.username[:4]
@@ -61,7 +61,7 @@ async def kang_cmd(ult):
     elif reply.text:
         dl = await Quotly().create_quotly(reply)
     else:
-        return await ult.eor("`Reply to sticker or text to add it in your pack...`")
+        return await ult.eor("`Ответьте на стикер или текст, чтобы добавить его в ваш набор...`")
     if not emoji:
         emoji = "🏵"
     if dl:
@@ -109,7 +109,7 @@ async def kang_cmd(ult):
             get_[ult.sender_id].update({type_: [sn]})
         udB.set_key("STICKERS", get_)
         return await ult.reply(
-            f"**Kanged Successfully!\nEmoji :** {emoji}\n**Link :** [Click Here](https://t.me/addstickers/{sn})"
+            f"**Стикер успешно добавлен!\nЭмодзи :** {emoji}\n**Ссылка :** [Нажмите здесь](https://t.me/addstickers/{sn})"
         )
     name = get_[ult.sender_id][type_][-1]
     try:
@@ -145,13 +145,13 @@ async def kang_cmd(ult):
         get_[ult.sender_id][type_].append(pack.set.short_name)
         udB.set_key("STICKERS", get_)
         return await ult.reply(
-            f"**Created New Kang Pack!\nEmoji :** {emoji}\n**Link :** [Click Here](https://t.me/addstickers/{sn})"
+            f"**Создан новый набор стикеров!\nЭмодзи :** {emoji}\n**Ссылка :** [Нажмите здесь](https://t.me/addstickers/{sn})"
         )
     except Exception as er:
         LOGS.exception(er)
         return await ult.reply(str(er))
     await ult.reply(
-        f"Sticker Added to Pack Successfully\n**Link :** [Click Here](https://t.me/addstickers/{name})"
+        f"Стикер успешно добавлен в набор\n**Ссылка :** [Нажмите здесь](https://t.me/addstickers/{name})"
     )
 
 
@@ -159,12 +159,12 @@ async def kang_cmd(ult):
 async def do_magic(ult):
     ko = udB.get_key("STICKERS") or {}
     if not ko.get(ult.sender_id):
-        return await ult.reply("No Sticker Pack Found!")
+        return await ult.reply("Набор стикеров не найден!")
     al_ = []
     ul = ko[ult.sender_id]
     for _ in ul.keys():
         al_.extend(ul[_])
-    msg = "• **Stickers Owned by You!**\n\n"
+    msg = "• **Ваши стикеры!**\n\n"
     for _ in al_:
         try:
             pack = await ult.client(GetSticker(InputStickerSetShortName(_), hash=0))

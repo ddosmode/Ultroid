@@ -6,10 +6,10 @@
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 • `{i}webupload`
-    Upload files on another server.
+    Загрузить файлы на другой сервер.
 """
 
 import os
@@ -27,7 +27,7 @@ async def _(event):
         _webupload_cache.update({int(event.chat_id): {}})
     if match:
         if not os.path.exists(match):
-            return await xx.eor("File doesn't exist.")
+            return await xx.eor("Файл не существует.")
         _webupload_cache[event.chat_id][event.id] = match
     elif event.reply_to_msg_id:
         reply = await event.get_reply_message()
@@ -40,7 +40,7 @@ async def _(event):
             )
             _webupload_cache[int(event.chat_id)][int(event.id)] = file.name
     else:
-        return await xx.eor("Reply to file or give file path...")
+        return await xx.eor("Ответьте на файл или укажите путь к файлу...")
     if not event.client._bot:
         results = await event.client.inline_query(
             asst.me.username, f"fl2lnk {event.chat_id}:{event.id}"
@@ -64,4 +64,4 @@ async def _(event):
                 Button.inline("siasky", data=f"flsiasky//{__cache}"),
             ],
         ]
-        await xx.edit("Choose Server to Upload File...", buttons=buttons)
+        await xx.edit("Выберите сервер для загрузки файла...", buttons=buttons)

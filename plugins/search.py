@@ -1,27 +1,27 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - ЮзерБот
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License в
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
-• `{i}saavn <search query>`
-    Download songs from Saavn.
+• `{i}saavn <поисковый запрос>`
+    Скачивать песни с Saavn.
 
-• `{i}google <query>`
-    For doing google search.
+• `{i}google <запрос>`
+    Для выполнения поиска в Google.
 
-• `{i}github <username>`
-    Get full information of the users github profile.
+• `{i}github <имя пользователя>`
+    Получить полную информацию о профиле GitHub пользователя.
 
-• `{i}img <query>`
-  `{i}img <query> ; <no of results>`
-    For doing Images search.
+• `{i}img <запрос>`
+  `{i}img <запрос> ; <кол-во результатов>`
+    Для поиска изображений.
 
 • `{i}reverse`
-    Reply an Image or sticker to find its sauce.
+    Ответьте на изображение или стикер, чтобы найти его источник.
 """
 import os
 
@@ -70,16 +70,16 @@ async def gitsearch(event):
         return await event.eor(get_string("srch_2"))
     fullusr = f"""
 **[GITHUB]({ulink})**
-**Name** - {uacc}
-**UserName** - {uname}
+**Имя** - {uacc}
+**Имя пользователя** - {uname}
 **ID** - {uid}
-**Company** - {ucomp}
-**Blog** - {ublog}
-**Location** - {ulocation}
-**Bio** - {ubio}
-**Repos** - {urepos}
-**Followers** - {ufollowers}
-**Following** - {ufollowing}
+**Компания** - {ucomp}
+**Блог** - {ublog}
+**Местоположение** - {ulocation}
+**Био** - {ubio}
+**Репозитории** - {urepos}
+**Подписчики** - {ufollowers}
+**Подписки** - {ufollowing}
 """
     await event.respond(fullusr, file=upic)
     await event.delete()
@@ -103,7 +103,7 @@ async def google(event):
         url = res["link"]
         des = res["description"]
         out += f" 👉🏻  [{text}]({url})\n`{des}`\n\n"
-    omk = f"**Google Search Query:**\n`{inp}`\n\n**Results:**\n{out}"
+    omk = f"**Поисковый запрос Google:**\n`{inp}`\n\n**Результаты:**\n{out}"
     await x.eor(omk, link_preview=False)
 
 
@@ -133,7 +133,7 @@ async def goimg(event):
 async def reverse(event):
     reply = await event.get_reply_message()
     if not reply:
-        return await event.eor("`Reply to an Image`")
+        return await event.eor("`Ответьте на изображение`")
     ult = await event.eor(get_string("com_1"))
     dl = await reply.download_media()
     file = await con.convert(dl, convert_to="png")
@@ -159,14 +159,14 @@ async def reverse(event):
     alls = div.find("a")
     link = alls["href"]
     text = alls.text
-    await ult.edit(f"`Dimension ~ {x} : {y}`\nSauce ~ [{text}](google.com{link})")
+    await ult.edit(f"`Размер ~ {x} : {y}`\nИсточник ~ [{text}](google.com{link})")
     images = await get_google_images(text)
     for z in images[:2]:
         try:
             await event.client.send_file(
                 event.chat_id,
                 file=z["original"],
-                caption="Similar Images Realted to Search",
+                caption="Похожие изображения по запросу",
             )
         except Exception as er:
             LOGS.exception(er)
@@ -179,12 +179,12 @@ async def reverse(event):
 async def siesace(e):
     song = e.pattern_match.group(1).strip()
     if not song:
-        return await e.eor("`Give me Something to Search", time=5)
-    eve = await e.eor(f"`Searching for {song} on Saavn...`")
+        return await e.eor("`Дайте мне что-нибудь для поиска", time=5)
+    eve = await e.eor(f"`Поиск {song} на Saavn...`")
     try:
         data = (await saavn_search(song))[0]
     except IndexError:
-        return await eve.eor(f"`{song} not found on saavn.`")
+        return await eve.eor(f"`{song} не найдено на saavn.`")
     try:
         title = data["title"]
         url = data["url"]
@@ -192,13 +192,13 @@ async def siesace(e):
         duration = data["duration"]
         performer = data["artists"]
     except KeyError:
-        return await eve.eor("`Something went wrong.`")
+        return await eve.eor("`Что-то пошло не так.`")
     song, _ = await fast_download(url, filename=f"{title}.m4a")
     thumb, _ = await fast_download(img, filename=f"{title}.jpg")
     song, _ = await e.client.fast_uploader(song, to_delete=True)
     await eve.eor(
         file=song,
-        text=f"`{title}`\n`From Saavn`",
+        text=f"`{title}`\n`С Saavn`",
         attributes=[
             DocumentAttributeAudio(
                 duration=int(duration),

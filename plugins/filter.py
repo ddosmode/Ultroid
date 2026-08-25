@@ -1,8 +1,8 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - Пользовательский бот
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочитайте GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import get_help
@@ -73,7 +73,7 @@ async def rf(e):
 @ultroid_cmd(pattern="listfilter$")
 async def lsnote(e):
     if x := list_filter(e.chat_id):
-        sd = "Filters Found In This Chats Are\n\n"
+        sd = "Фильтры, найденные в этом чате:\n\n"
         return await e.eor(sd + x)
     await e.eor(get_string("flr_6"))
 

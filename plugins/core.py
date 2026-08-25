@@ -1,8 +1,8 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - Пользовательский бот
+# Авторское право (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 
@@ -36,14 +36,14 @@ async def unload(event):
     if zym in lsd:
         try:
             un_plug(shortname)
-            await event.eor(f"**Uɴʟᴏᴀᴅᴇᴅ** `{shortname}` **Sᴜᴄᴄᴇssғᴜʟʟʏ.**", time=3)
+            await event.eor(f"**Выгружен** `{shortname}` **успешно.**", time=3)
         except Exception as ex:
             LOGS.exception(ex)
             return await event.eor(str(ex))
     elif zym in os.listdir("plugins"):
         return await event.eor(get_string("core_11"), time=3)
     else:
-        await event.eor(f"**No Plugin Named** `{shortname}`", time=3)
+        await event.eor(f"**Нет плагина с именем** `{shortname}`", time=3)
 
 
 @ultroid_cmd(
@@ -59,14 +59,14 @@ async def uninstall(event):
     if zym in lsd:
         try:
             un_plug(shortname)
-            await event.eor(f"**Uninstalled** `{shortname}` **successfully.**", time=3)
+            await event.eor(f"**Удалён** `{shortname}` **успешно.**", time=3)
             os.remove(f"addons/{shortname}.py")
         except Exception as ex:
             return await event.eor(str(ex))
     elif zym in os.listdir("plugins"):
         return await event.eor(get_string("core_15"), time=3)
     else:
-        return await event.eor(f"**No Plugin Named** `{shortname}`", time=3)
+        return await event.eor(f"**Нет плагина с именем** `{shortname}`", time=3)
 
 
 @ultroid_cmd(
@@ -107,10 +107,10 @@ async def get_the_addons_lol(event):
     name_of_it = split_thelink[-1]
     plug = await async_searcher(thelink)
     fil = f"addons/{name_of_it}"
-    await xx.edit("Packing the codes...")
+    await xx.edit("Упаковка кода...")
     with open(fil, "w", encoding="utf-8") as uult:
         uult.write(plug)
-    await xx.edit("Packed. Now loading the plugin..")
+    await xx.edit("Упаковано. Теперь загружаю плагин..")
     shortname = name_of_it.split(".")[0]
     try:
         load_addons(fil)

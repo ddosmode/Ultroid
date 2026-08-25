@@ -27,7 +27,7 @@ async def dnd_func(event):
         try:
             await (await event.client.kick_participant(event.chat_id, user)).delete()
         except Exception as ex:
-            LOGS.error("Error in DND:")
+            LOGS.error("Ошибка в DND:")
             LOGS.exception(ex)
     await event.delete()
 
@@ -43,15 +43,15 @@ async def _(event):
     match = event.pattern_match.group(1)
     if match == "on":
         if Keym.contains(event.chat_id):
-            return await event.eor("`Chat already in do not disturb mode.`", time=3)
+            return await event.eor("`Чат уже в режиме не беспокоить.`", time=3)
         Keym.add(event.chat_id)
         event.client.add_handler(dnd_func, events.ChatAction(func=join_func))
-        await event.eor("`Do not disturb mode activated for this chat.`", time=3)
+        await event.eor("`Режим не беспокоить активирован для этого чата.`", time=3)
     elif match == "off":
         if not Keym.contains(event.chat_id):
-            return await event.eor("`Chat is not in do not disturb mode.`", time=3)
+            return await event.eor("`Чат не в режиме не беспокоить.`", time=3)
         Keym.remove(event.chat_id)
-        await event.eor("`Do not disturb mode deactivated for this chat.`", time=3)
+        await event.eor("`Режим не беспокоить деактивирован для этого чата.`", time=3)
 
 
 if Keym.get():

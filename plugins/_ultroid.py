@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from telethon.errors import (
@@ -15,22 +15,22 @@ from . import LOG_CHANNEL, LOGS, Button, asst, eor, get_string, ultroid_cmd
 
 REPOMSG = """
 • **ULTROID USERBOT** •\n
-• Repo - [Click Here](https://github.com/TeamUltroid/Ultroid)
-• Addons - [Click Here](https://github.com/TeamUltroid/UltroidAddons)
-• Support - @UltroidSupportChat
+• Репозиторий - [Нажмите здесь](https://github.com/TeamUltroid/Ultroid)
+• Дополнения - [Нажмите здесь](https://github.com/TeamUltroid/UltroidAddons)
+• Поддержка - @UltroidSupportChat
 """
 
 RP_BUTTONS = [
     [
         Button.url(get_string("bot_3"), "https://github.com/TeamUltroid/Ultroid"),
-        Button.url("Addons", "https://github.com/TeamUltroid/UltroidAddons"),
+        Button.url("Дополнения", "https://github.com/TeamUltroid/UltroidAddons"),
     ],
-    [Button.url("Support Group", "t.me/UltroidSupportChat")],
+    [Button.url("Группа поддержки", "t.me/UltroidSupportChat")],
 ]
 
-ULTSTRING = """🎇 **Thanks for Deploying Ultroid Userbot!**
+ULTSTRING = """🎇 **Спасибо за развёртывание Ultroid Userbot!**
 
-• Here, are the Some Basic stuff from, where you can Know, about its Usage."""
+• Здесь представлены некоторые основные сведения о его использовании."""
 
 
 @ultroid_cmd(
@@ -49,13 +49,13 @@ async def repify(e):
     ):
         pass
     except Exception as er:
-        LOGS.info(f"Error while repo command : {str(er)}")
+        LOGS.info(f"Ошибка при выполнении команды repo : {str(er)}")
     await e.eor(REPOMSG)
 
 
 @ultroid_cmd(pattern="ultroid$")
 async def useUltroid(rs):
-    button = Button.inline("Start >>", "initft_2")
+    button = Button.inline("Начать >>", "initft_2")
     msg = await asst.send_message(
         LOG_CHANNEL,
         ULTSTRING,
@@ -63,4 +63,4 @@ async def useUltroid(rs):
         buttons=button,
     )
     if not (rs.chat_id == LOG_CHANNEL and rs.client._bot):
-        await eor(rs, f"**[Click Here]({msg.message_link})**")
+        await eor(rs, f"**[Нажмите здесь]({msg.message_link})**")

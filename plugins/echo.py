@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import get_help
@@ -31,13 +31,13 @@ async def echo(e):
             else:
                 user = int(user)
         except BaseException:
-            return await e.eor("Reply To A user.", time=5)
+            return await e.eor("Ответь на сообщение пользователя.", time=5)
     if check_echo(e.chat_id, user):
-        return await e.eor("Echo already activated for this user.", time=5)
+        return await e.eor("Эхо уже активировано для этого пользователя.", time=5)
     add_echo(e.chat_id, user)
     ok = await e.client.get_entity(user)
     user = inline_mention(ok)
-    await e.eor(f"Activated Echo For {user}.")
+    await e.eor(f"Активировано эхо для {user}.")
 
 
 @ultroid_cmd(pattern="remecho( (.*)|$)")
@@ -54,23 +54,23 @@ async def rm(e):
             else:
                 user = int(user)
         except BaseException:
-            return await e.eor("Reply To A User.", time=5)
+            return await e.eor("Ответь на сообщение пользователя.", time=5)
     if check_echo(e.chat_id, user):
         rem_echo(e.chat_id, user)
         ok = await e.client.get_entity(user)
         user = f"[{get_display_name(ok)}](tg://user?id={ok.id})"
-        return await e.eor(f"Deactivated Echo For {user}.")
-    await e.eor("Echo not activated for this user")
+        return await e.eor(f"Деактивировано эхо для {user}.")
+    await e.eor("Эхо не активировано для этого пользователя")
 
 
 @ultroid_cmd(pattern="listecho$")
 async def lstecho(e):
     if k := list_echo(e.chat_id):
-        user = "**Activated Echo For Users:**\n\n"
+        user = "**Активированные эхо для пользователей:**\n\n"
         for x in k:
             ok = await e.client.get_entity(int(x))
             kk = f"[{get_display_name(ok)}](tg://user?id={ok.id})"
             user += f"•{kk}" + "\n"
         await e.eor(user)
     else:
-        await e.eor("`List is Empty, For echo`", time=5)
+        await e.eor("`Список пуст для эхо`", time=5)

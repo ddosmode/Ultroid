@@ -1,8 +1,8 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - ЮзерБот
+# Авторское право (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочитайте GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 
@@ -20,7 +20,7 @@ from . import Redis, eor, get_string, udB, ultroid_cmd
 async def _(ult):
     match = ult.pattern_match.group(1).strip()
     if not match:
-        return await ult.eor("Provide key and value to set!")
+        return await ult.eor("Укажите ключ и значение для установки!")
     try:
         delim = " " if re.search("[|]", match) is None else " | "
         data = match.split(delim, maxsplit=1)
@@ -29,7 +29,7 @@ async def _(ult):
             data[1] = f"{str(udB.get_key(data[0]))} {data[1]}"
         udB.set_key(data[0], data[1])
         await ult.eor(
-            f"**DB Key Value Pair Updated\nKey :** `{data[0]}`\n**Value :** `{data[1]}`"
+            f"**Пара ключ-значение БД обновлена\nКлюч :** `{data[0]}`\n**Значение :** `{data[1]}`"
         )
 
     except BaseException:
@@ -40,7 +40,7 @@ async def _(ult):
 async def _(ult):
     key = ult.pattern_match.group(1).strip()
     if not key:
-        return await ult.eor("Give me a key name to delete!", time=5)
+        return await ult.eor("Укажите имя ключа для удаления!", time=5)
     _ = key.split(maxsplit=1)
     try:
         if _[0] == "-m":
@@ -50,8 +50,8 @@ async def _(ult):
         else:
             k = udB.del_key(key)
         if k == 0:
-            return await ult.eor("`No Such Key.`")
-        await ult.eor(f"`Successfully deleted key {key}`")
+            return await ult.eor("`Такой ключ не найден.`")
+        await ult.eor(f"`Ключ {key} успешно удалён`")
     except BaseException:
         await ult.eor(get_string("com_7"))
 
@@ -60,7 +60,7 @@ async def _(ult):
 async def _(ult):
     match = ult.pattern_match.group(1).strip()
     if not match:
-        return await ult.eor("`Provide Keys name to rename..`")
+        return await ult.eor("`Укажите имя ключа для переименования..`")
     delim = " " if re.search("[|]", match) is None else " | "
     data = match.split(delim)
     if Redis(data[0]):
@@ -68,10 +68,10 @@ async def _(ult):
             udB.rename(data[0], data[1])
             await eor(
                 ult,
-                f"**DB Key Rename Successful\nOld Key :** `{data[0]}`\n**New Key :** `{data[1]}`",
+                f"**Переименование ключа БД успешно\nСтарый ключ :** `{data[0]}`\n**Новый ключ :** `{data[1]}`",
             )
 
         except BaseException:
             await ult.eor(get_string("com_7"))
     else:
-        await ult.eor("Key not found")
+        await ult.eor("Ключ не найден")

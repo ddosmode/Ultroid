@@ -7,7 +7,7 @@
 
 # https://github.com/xditya/TeleBot/blob/master/telebot/plugins/mybot/pmbot/incoming.py
 
-# --------------------------------------- Imports -------------------------------------------- #
+# --------------------------------------- Импорт -------------------------------------------- #
 
 import os
 
@@ -27,7 +27,7 @@ from . import *
 botb = KeyManager("BOTBLS", cast=list)
 FSUB = udB.get_key("PMBOT_FSUB")
 CACHE = {}
-# --------------------------------------- Incoming -------------------------------------------- #
+# --------------------------------------- Входящие сообщения -------------------------------------------- #
 
 
 @asst_cmd(
@@ -37,7 +37,7 @@ CACHE = {}
 )
 async def on_new_mssg(event):
     who = event.sender_id
-    # doesn't reply to that user anymore
+    # больше не отвечает этому пользователю
     if event.text.startswith("/") or who == OWNER_ID:
         return
     if FSUB:
@@ -68,16 +68,16 @@ async def on_new_mssg(event):
                             uri = CACHE[chat]
                     BTTS.append(Button.url(get_display_name(TAHC_), uri))
                 except Exception as er:
-                    LOGS.exception(f"Error On PmBot Force Sub!\n - {chat} \n{er}")
+                    LOGS.exception(f"Ошибка в Force Sub PmBot!\n - {chat} \n{er}")
         if MSG and BTTS:
             return await event.reply(MSG, buttons=BTTS)
     xx = await event.forward_to(OWNER_ID)
     if event.fwd_from:
-        await xx.reply(f"From {inline_mention(event.sender)} [`{event.sender_id}`]")
+        await xx.reply(f"От {inline_mention(event.sender)} [`{event.sender_id}`]")
     add_stuff(xx.id, who)
 
 
-# --------------------------------------- Outgoing -------------------------------------------- #
+# --------------------------------------- Исходящие сообщения -------------------------------------------- #
 
 
 @asst_cmd(
@@ -94,21 +94,21 @@ async def on_out_mssg(event):
             k = await asst.get_entity(to_user)
             photu = await event.client.download_profile_photo(k.id)
             await event.reply(
-                f"• **Name :** {get_display_name(k)}\n• **ID :** `{k.id}`\n• **Link :** {inline_mention(k)}",
+                f"• **Имя :** {get_display_name(k)}\n• **ID :** `{k.id}`\n• **Ссылка :** {inline_mention(k)}",
                 file=photu,
             )
             if photu:
                 os.remove(photu)
             return
         except BaseException as er:
-            return await event.reply(f"**ERROR : **{str(er)}")
+            return await event.reply(f"**ОШИБКА : **{str(er)}")
     elif event.text.startswith("/"):
         return
     if to_user:
         await asst.send_message(to_user, event.message)
 
 
-# --------------------------------------- Ban/Unban -------------------------------------------- #
+# --------------------------------------- Бан/Разбан -------------------------------------------- #
 
 
 @asst_cmd(
@@ -125,7 +125,7 @@ async def banhammer(event):
         return await event.reply(get_string("pmbot_3"))
 
     botb.add(target)
-    await event.reply(f"#BAN\nUser : {target}")
+    await event.reply(f"#BAN\nПользователь : {target}")
     await asst.send_message(target, get_string("pmbot_4"))
 
 
@@ -143,8 +143,8 @@ async def unbanhammer(event):
         return await event.reply(get_string("pmbot_6"))
 
     botb.remove(target)
-    await event.reply(f"#UNBAN\nUser : {target}")
+    await event.reply(f"#UNBAN\nПользователь : {target}")
     await asst.send_message(target, get_string("pmbot_7"))
 
 
-# --------------------------------------- END -------------------------------------------- #
+# --------------------------------------- КОНЕЦ -------------------------------------------- #

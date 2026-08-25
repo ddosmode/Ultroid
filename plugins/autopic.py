@@ -1,8 +1,8 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid — UserBot
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 
@@ -23,7 +23,7 @@ __doc__ = get_help("help_autopic")
 
 
 async def get_google_images(query: str):
-    """Extract image URLs from Google Images search results with fallbacks"""
+    """Извлечь URL изображений из результатов поиска Google Images с запасными вариантами"""
     
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -31,7 +31,7 @@ async def get_google_images(query: str):
     
     search_url = f"https://www.google.com/search?q={query}&tbm=isch"
     
-    # Domains to exclude
+    # Домены для исключения
     excluded_domains = [
         'gstatic.com',
         'google.com',
@@ -47,7 +47,7 @@ async def get_google_images(query: str):
             async with session.get(search_url, headers=headers) as response:
                 html = await response.text()
 
-        # Try to extract from search results div first
+        # Сначала попробовать извлечь из div результатов поиска
         img_urls = []
         search_pattern = r'<div id="search".*?>(.*?)</div>'
         search_match = re.search(search_pattern, html, re.DOTALL)
@@ -60,7 +60,7 @@ async def get_google_images(query: str):
                 if url not in img_urls and is_valid_url(url):
                     img_urls.append(url)
 
-        # Fallback to tdeeNb div if no results
+        # Запасной вариант - div tdeeNb, если нет результатов
         if not img_urls:
             pattern = r'<div jsname="tdeeNb"[^>]*>(.*?)</div>'
             matches = re.finditer(pattern, html, re.DOTALL)
@@ -73,7 +73,7 @@ async def get_google_images(query: str):
                     if url not in img_urls and is_valid_url(url):
                         img_urls.append(url)
 
-        # Fallback to general image search if still no results
+        # Запасной вариант - общий поиск изображений, если всё ещё нет результатов
         if not img_urls:
             pattern = r"https://[^\"]*?\.(?:jpg|jpeg|png|webp)"
             matches = re.finditer(pattern, html, re.IGNORECASE)
@@ -82,7 +82,7 @@ async def get_google_images(query: str):
                 if url not in img_urls and is_valid_url(url):
                     img_urls.append(url)
 
-        # Final fallback to data URLs if still no results
+        # Последний запасной вариант - data URL, если всё ещё нет результатов
         if not img_urls:
             pattern = r'data:image/(?:jpeg|png|webp);base64,[^\"]*'
             matches = re.finditer(pattern, html, re.IGNORECASE)
@@ -94,7 +94,7 @@ async def get_google_images(query: str):
         return img_urls
                 
     except Exception as e:
-        print(f"Error fetching Google images: {e}")
+        print(f"Ошибка при получении изображений Google: {e}")
         return []
 
 
@@ -153,4 +153,4 @@ if search := udB.get_key("AUTOPIC"):
         schedule.add_job(autopic_func, "interval", seconds=sleep)
         schedule.start()
     except ModuleNotFoundError as er:
-        LOGS.error(f"autopic: '{er.name}' not installed.")
+        LOGS.error(f"autopic: '{er.name}' не установлен.")

@@ -1,20 +1,20 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid — ЮзерБот
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available
+✘ Доступные команды
 
 • `{i}usage`
-    Get overall usage.
+    Получить общую информацию об использовании.
 
 • `{i}usage heroku`
-   Get heroku stats.
+   Получить статистику Heroku.
 
 • `{i}usage db`
-   Get database storage usage.
+   Получить информацию об использовании хранилища базы данных.
 """
 
 import math
@@ -72,7 +72,7 @@ def simple_usage():
     try:
         import psutil
     except ImportError:
-        return "Install 'psutil' to use this..."
+        return "Установите 'psutil' для использования этой команды..."
     total, used, free = shutil.disk_usage(".")
     cpuUsage = psutil.cpu_percent()
     memory = psutil.virtual_memory().percent
@@ -100,14 +100,14 @@ async def heroku_usage():
     except ImportError:
         return (
             False,
-            "'psutil' not installed!\nPlease Install it to use this.\n`pip3 install psutil`",
+            "'psutil' не установлен!\nПожалуйста, установите его для использования этой команды.\n`pip3 install psutil`",
         )
     if not (HEROKU_API and HEROKU_APP_NAME):
         if HOSTED_ON == "heroku":
-            return False, "Please fill `HEROKU_API` and `HEROKU_APP_NAME`"
+            return False, "Пожалуйста, заполните `HEROKU_API` и `HEROKU_APP_NAME`"
         return (
             False,
-            f"`This command is only for Heroku Users, You are using {HOSTED_ON}`",
+            f"`Эта команда только для пользователей Heroku, вы используете {HOSTED_ON}`",
         )
     user_id = Heroku.account().id
     headers = {
@@ -178,7 +178,7 @@ def db_usage():
     used = udB.usage
     a = f"{humanbytes(used)}/{humanbytes(total)}"
     b = f"{str(round((used / total) * 100, 2))}%"
-    return f"**{udB.name}**\n\n**Storage Used**: `{a}`\n**Usage percentage**: **{b}**"
+    return f"**{udB.name}**\n\n**Использовано хранилища**: `{a}`\n**Процент использования**: **{b}**"
 
 
 async def get_full_usage():

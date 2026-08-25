@@ -63,7 +63,7 @@ async def all_messages_catcher(e):
             TAG_EDITS.update({e.chat_id: {e.id: {"id": sent.id, "msg": e}}})
         tag_add(sent.id, e.chat_id, e.id)
     except MediaEmptyError as er:
-        LOGS.debug(f"handling {er}.")
+        LOGS.debug(f"обработка {er}.")
         try:
             msg = await asst.get_messages(e.chat_id, ids=e.id)
             sent = await asst.send_message(NEEDTOLOG, msg, buttons=buttons)
@@ -136,7 +136,7 @@ if udB.get_key("TAG_LOG"):
                     elif isinstance(ent, MessageEntityMentionName):
                         is_self = ent.user_id == event.client.me.id
                 if is_self:
-                    text = f"**#Edited & #Mentioned**\n\n{event.text}"
+                    text = f"**#Изменено_и_Упомянуто**\n\n{event.text}"
                     try:
                         sent = await asst.send_message(
                             udB.get_key("TAG_LOG"),
@@ -163,21 +163,21 @@ if udB.get_key("TAG_LOG"):
             msg = True
             d_.update({"count": 1})
         if d_["count"] > 10:
-            return  # some limit to take edits
+            return  # ограничение на количество показываемых правок
         try:
             MSG = await asst.get_messages(udB.get_key("TAG_LOG"), ids=d_["id"])
         except Exception as er:
             return LOGS.exception(er)
         TEXT = MSG.text
         if msg:
-            TEXT += "\n\n🖋 **Later Edited to !**"
+            TEXT += "\n\n🖋 **Позже изменено на!**"
         strf = event.edit_date.strftime("%H:%M:%S")
         if "\n" not in event.text:
             TEXT += f"\n• `{strf}` : {event.text}"
         else:
             TEXT += f"\n• `{strf}` :\n-> {event.text}"
         if d_["count"] == 10:
-            TEXT += "\n\n• __Only the first 10 Edits are shown.__"
+            TEXT += "\n\n• __Показаны только первые 10 правок.__"
         try:
             msg = await MSG.edit(TEXT, buttons=await parse_buttons(event))
             d_["msg"] = msg
@@ -203,7 +203,7 @@ if udB.get_key("TAG_LOG"):
                 LOGS.exception(er)
 
 
-# log for assistant/user joins/add
+# лог для присоединения/добавления ассистента/пользователя
 
 
 async def when_added_or_joined(event):
@@ -221,11 +221,11 @@ async def when_added_or_joined(event):
     )
     if event.user_added:
         tmp = event.added_by
-        text = f"#ADD_LOG\n\n{inline_mention(tmp)} just added {inline_mention(user)} to {chat}."
+        text = f"#ДОБАВЛЕНИЕ_ЛОГ\n\n{inline_mention(tmp)} только что добавил {inline_mention(user)} в {chat}."
     elif event.from_request:
-        text = f"#APPROVAL_LOG\n\n{inline_mention(user)} just got Chat Join Approval to {chat}."
+        text = f"#ОДОБРЕНИЕ_ЗАЯВКИ\n\n{inline_mention(user)} только что получил одобрение на вход в {chat}."
     else:
-        text = f"#JOIN_LOG\n\n{inline_mention(user)} just joined {chat}."
+        text = f"#ПРИСОЕДИНЕНИЕ_ЛОГ\n\n{inline_mention(user)} только что присоединился к {chat}."
     await asst.send_message(udB.get_key("LOG_CHANNEL"), text, buttons=buttons)
 
 
@@ -259,7 +259,7 @@ async def leave_ch_at(event):
         pass
     except ChannelPrivateError:
         return await event.edit(
-            "`[CANT_ACCESS_CHAT]` `Maybe already left or got banned.`"
+            "`[НЕ_УДАЛОСЬ_ПОЛУЧИТЬ_ДОСТУП_К_ЧАТУ]` `Возможно, уже вышли или получили бан.`"
         )
     except Exception as er:
         LOGS.exception(er)
@@ -291,7 +291,7 @@ async def parse_buttons(event):
         buttons.append([Button.url(who_n, where_l)])
     replied = await event.get_reply_message()
     if replied and replied.out:
-        button = Button.url("Replied to", replied.message_link)
+        button = Button.url("Ответ на", replied.message_link)
         if len(who_n) > 7:
             buttons.append([button])
         else:

@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 import asyncio
@@ -62,9 +62,9 @@ N = 0
 cmd = ultroid_cmd
 STUFF = {}
 
-# Chats, which needs to be ignore for some cases
-# Considerably, there can be many
-# Feel Free to Add Any other...
+# Чаты, которые нужно игнорировать в некоторых случаях
+# Их может быть много
+# Не стесняйтесь добавить любой другой...
 
 NOSPAM_CHAT = [
     -1001361294038,  # UltroidSupportChat
@@ -76,16 +76,16 @@ NOSPAM_CHAT = [
 ]
 
 KANGING_STR = [
-    "Using Witchery to kang this sticker...",
-    "Plagiarising hehe...",
-    "Inviting this sticker over to my pack...",
-    "Kanging this sticker...",
-    "Hey that's a nice sticker!\nMind if I kang?!..",
-    "Hehe me stel ur stiker...",
-    "Ay look over there (☉｡☉)!→\nWhile I kang this...",
-    "Roses are red violets are blue, kanging this sticker so my pack looks cool",
-    "Imprisoning this sticker...",
-    "Mr.Steal-Your-Sticker is stealing this sticker... ",
+    "Использую магию, чтобы присвоить этот стикер...",
+    "Плагиаторствую, хехе...",
+    "Приглашаю этот стикер в мой пак...",
+    "Присваиваю этот стикер...",
+    "Эй, какой классный стикер!\nНе против, если я его присвою?..",
+    "Хехе, я краду твой стикер...",
+    "Эй, посмотри туда (☉｡☉)!→\nПока я присваиваю этот...",
+    "Розы красные, фиалки синие, присваиваю стикер, чтобы мой пак выглядел круто",
+    "Заключаю этот стикер в тюрьму...",
+    "Мистер-Укради-Стикер крадёт этот стикер... ",
 ]
 
 

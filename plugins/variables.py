@@ -1,23 +1,23 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License:
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 • `{i}get var <variable name>`
-   Get value of the given variable name.
+   Получить значение переменной с указанным именем.
 
 • `{i}get type <variable name>`
-   Get variable type.
+   Получить тип переменной.
 
 • `{i}get db <key>`
-   Get db value of the given key.
+   Получить значение из базы данных по указанному ключу.
 
 • `{i}get keys`
-   Get all redis keys.
+   Получить все ключи redis.
 """
 
 import os
@@ -30,55 +30,55 @@ async def get_var(event):
     try:
         opt = event.text.split(maxsplit=2)[1]
     except IndexError:
-        return await event.eor(f"what to get?\nRead `{HNDLR}help variables`")
+        return await event.eor(f"Что получить?\nИспользуйте `{HNDLR}help variables`")
     x = await event.eor(get_string("com_1"))
     if opt != "keys":
         try:
             varname = event.text.split(maxsplit=2)[2]
         except IndexError:
-            return await eor(x, "Such a var doesn't exist!", time=5)
+            return await eor(x, "Такой переменной не существует!", time=5)
     if opt == "var":
         c = 0
-        # try redis
+        # пробуем redis
         val = udB.get_key(varname)
         if val is not None:
             c += 1
             await x.edit(
-                f"**Variable** - `{varname}`\n**Value**: `{val}`\n**Type**: Redis Key."
+                f"**Переменная** - `{varname}`\n**Значение**: `{val}`\n**Тип**: Ключ Redis."
             )
-        # try env vars
+        # пробуем переменные окружения
         val = os.getenv(varname)
         if val is not None:
             c += 1
             await x.edit(
-                f"**Variable** - `{varname}`\n**Value**: `{val}`\n**Type**: Env Var."
+                f"**Переменная** - `{varname}`\n**Значение**: `{val}`\n**Тип**: Переменная окружения."
             )
 
         if c == 0:
-            await eor(x, "Such a var doesn't exist!", time=5)
+            await eor(x, "Такой переменной не существует!", time=5)
 
     elif opt == "type":
         c = 0
-        # try redis
+        # пробуем redis
         val = udB.get_key(varname)
         if val is not None:
             c += 1
-            await x.edit(f"**Variable** - `{varname}`\n**Type**: Redis Key.")
-        # try env vars
+            await x.edit(f"**Переменная** - `{varname}`\n**Тип**: Ключ Redis.")
+        # пробуем переменные окружения
         val = os.getenv(varname)
         if val is not None:
             c += 1
-            await x.edit(f"**Variable** - `{varname}`\n**Type**: Env Var.")
+            await x.edit(f"**Переменная** - `{varname}`\n**Тип**: Переменная окружения.")
 
         if c == 0:
-            await eor(x, "Such a var doesn't exist!", time=5)
+            await eor(x, "Такой переменной не существует!", time=5)
 
     elif opt == "db":
         val = udB.get(varname)
         if val is not None:
-            await x.edit(f"**Key** - `{varname}`\n**Value**: `{val}`")
+            await x.edit(f"**Ключ** - `{varname}`\n**Значение**: `{val}`")
         else:
-            await eor(x, "No such key!", time=5)
+            await eor(x, "Такой ключ не найден!", time=5)
 
     elif opt == "keys":
         keys = sorted(udB.keys())
@@ -91,4 +91,4 @@ async def get_var(event):
             and not i.startswith("GBAN_REASON_")
         )
 
-        await x.edit(f"**List of DB Keys :**\n{msg}")
+        await x.edit(f"**Список ключей БД :**\n{msg}")

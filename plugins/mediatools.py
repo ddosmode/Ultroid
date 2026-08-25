@@ -1,18 +1,18 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочитайте GNU Affero General Public License в
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
-• `{i}mediainfo <reply to media>/<file path>/<url>`
-   To get info about it.
+• `{i}mediainfo <ответ на медиа>/<путь к файлу>/<url>`
+   Получить информацию об этом.
 
-• `{i}rotate <degree/angle> <reply to media>`
-   Rotate any video/photo/media..
-   Note : for video it should be angle of 90's
+• `{i}rotate <градус/угол> <ответ на медиа>`
+   Повернуть любое видео/фото/медиа..
+   Примечание : для видео должен быть угол 90-х
 """
 import os
 import time
@@ -36,7 +36,7 @@ from . import (
 try:
     import cv2
 except ImportError:
-    LOGS.info("WARNING: 'cv2' not found!")
+    LOGS.info("WARNING: 'cv2' не найден!")
     cv2 = None
 
 
@@ -51,7 +51,7 @@ async def mi(e):
         murl = r.media.stringify()
         url = await make_html_telegraph("Mediainfo", f"<pre>{murl}</pre>")
         extra = f"**[{xx}]({url})**\n\n"
-        e = await e.eor(f"{extra}`Loading More...`", link_preview=False)
+        e = await e.eor(f"{extra}`Загрузка...`", link_preview=False)
 
         if hasattr(r.media, "document"):
             file = r.media.document
@@ -67,7 +67,7 @@ async def mi(e):
                 file,
                 e,
                 taime,
-                f"{extra}`Loading More...`",
+                f"{extra}`Загрузка...`",
             )
 
             naam = dl.name
@@ -114,14 +114,14 @@ async def mi(e):
 async def rotate_(ult):
     match = ult.pattern_match.group(1).strip()
     if not ult.is_reply:
-        return await ult.eor("`Reply to a media...`")
+        return await ult.eor("`Ответьте на медиа...`")
     if match:
         try:
             match = int(match)
         except ValueError:
             match = None
     if not match:
-        return await ult.eor("`Please provide a valid angle to rotate media..`")
+        return await ult.eor("`Пожалуйста, укажите допустимый угол для вращения медиа..`")
     reply = await ult.get_reply_message()
     msg = await ult.eor(get_string("com_1"))
     photo = reply.game.photo if reply.game else None
@@ -138,7 +138,7 @@ async def rotate_(ult):
         file = "ult.png"
         cv2.imwrite(file, new_)
     else:
-        return await msg.edit("`Unsupported Media..\nReply to Photo/Video`")
+        return await msg.edit("`Неподдерживаемое медиа..\nОтветьте на Фото/Видео`")
     if os.path.exists(file):
         await ult.client.send_file(
             ult.chat_id, file=file, video_note=bool(reply.video_note), reply_to=reply.id

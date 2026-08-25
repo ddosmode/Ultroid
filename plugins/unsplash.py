@@ -1,14 +1,14 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - ЮзерБот
+# Авторское право (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
-• {i}unsplash <search query> ; <no of pics>
-    Unsplash Image Search.
+• {i}unsplash <поисковый запрос> ; <кол-во изображений>
+    Поиск изображений через Unsplash.
 """
 
 from pyUltroid.fns.misc import unsplashsearch
@@ -20,7 +20,7 @@ from . import asyncio, download_file, get_string, os, ultroid_cmd
 async def searchunsl(ult):
     match = ult.pattern_match.group(1).strip()
     if not match:
-        return await ult.eor("Give me Something to Search")
+        return await ult.eor("Дай мне что-нибудь для поиска")
     num = 5
     if ";" in match:
         num = int(match.split(";")[1])
@@ -31,6 +31,6 @@ async def searchunsl(ult):
         return await ult.eor(get_string("unspl_1"), time=5)
     CL = [download_file(rp, f"{match}-{e}.png") for e, rp in enumerate(res)]
     imgs = [z[0] for z in (await asyncio.gather(*CL)) if z]
-    await ult.respond(f"Uploaded {len(imgs)} Images!", file=imgs)
+    await ult.respond(f"Загружено {len(imgs)} изображений!", file=imgs)
     await tep.delete()
     [os.remove(img) for img in imgs]

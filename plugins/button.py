@@ -1,8 +1,8 @@
-# Ultroid - UserBot
+# Ultroid - Пользовательский бот
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import get_help
@@ -45,7 +45,7 @@ async def butt(event):
     except IndexError:
         if not text:
             return await event.eor(
-                f"**Please give some text in correct format.**\n\n`{HNDLR}help button`",
+                f"**Пожалуйста, укажите текст в правильном формате.**\n\n`{HNDLR}help button`",
             )
     text, buttons = get_msg_button(text)
     if buttons:

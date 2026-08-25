@@ -5,22 +5,22 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available
+✘ Доступные команды
 
-•`{i}warn <reply to user> <reason>`
-    Gives Warn.
+•`{i}warn <ответить пользователю> <причина>`
+    Выдаёт предупреждение.
 
-•`{i}resetwarn <reply to user>`
-    To reset All Warns.
+•`{i}resetwarn <ответить пользователю>`
+    Сбросить все предупреждения.
 
-•`{i}warns <reply to user>`
-   To Get List of Warnings of a user.
+•`{i}warns <ответить пользователю>`
+   Получить список предупреждений пользователя.
 
-•`{i}setwarn <warn count> | <ban/mute/kick>`
-   Set Number in warn count for warnings
-   After putting " | " mark put action like ban/mute/kick
-   Its Default 3 kick
-   Example : `setwarn 5 | mute`
+•`{i}setwarn <количество предупреждений> | <ban/mute/kick>`
+   Установить число предупреждений
+   После знака " | " укажите действие, например ban/mute/kick
+   По умолчанию 3 kick
+   Пример : `setwarn 5 | mute`
 
 """
 
@@ -42,7 +42,7 @@ async def warn(e):
         return
     if reply:
         user = reply.sender_id
-        reason = e.text[5:] if e.pattern_match.group(1).strip() else "unknown"
+        reason = e.text[5:] if e.pattern_match.group(1).strip() else "неизвестно"
     else:
         try:
             user = e.text.split()[1]
@@ -52,11 +52,11 @@ async def warn(e):
             else:
                 user = int(user)
         except BaseException:
-            return await e.eor("Reply To A User", time=5)
+            return await e.eor("Ответьте пользователю", time=5)
         try:
             reason = e.text.split(maxsplit=2)[-1]
         except BaseException:
-            reason = "unknown"
+            reason = "неизвестно"
     count, r = warns(e.chat_id, user)
     r = f"{r}|$|{reason}" if r else reason
     try:
@@ -71,25 +71,25 @@ async def warn(e):
             try:
                 await ultroid_bot.edit_permissions(e.chat_id, user, view_messages=False)
             except BaseException:
-                return await e.eor("`Something Went Wrong.`", time=5)
+                return await e.eor("`Что-то пошло не так.`", time=5)
         elif "kick" in action:
             try:
                 await ultroid_bot.kick_participant(e.chat_id, user)
             except BaseException:
-                return await e.eor("`Something Went Wrong.`", time=5)
+                return await e.eor("`Что-то пошло не так.`", time=5)
         elif "mute" in action:
             try:
                 await ultroid_bot.edit_permissions(
                     e.chat_id, user, until_date=None, send_messages=False
                 )
             except BaseException:
-                return await e.eor("`Something Went Wrong.`", time=5)
+                return await e.eor("`Что-то пошло не так.`", time=5)
         add_warn(e.chat_id, user, count + 1, r)
         c, r = warns(e.chat_id, user)
         ok = await ultroid_bot.get_entity(user)
         user = inline_mention(ok)
         r = r.split("|$|")
-        text = f"User {user} Got {action} Due to {count+1} Warns.\n\n"
+        text = f"Пользователь {user} получил {action} за {count+1} предупреждений.\n\n"
         for x in range(c):
             text += f"•**{x+1}.** {r[x]}\n"
         await e.eor(text)
@@ -99,7 +99,7 @@ async def warn(e):
     user = inline_mention(ok)
     await eor(
         e,
-        f"**WARNING :** {count+1}/{number}\n**To :**{user}\n**Be Careful !!!**\n\n**Reason** : {reason}",
+        f"**ПРЕДУПРЕЖДЕНИЕ :** {count+1}/{number}\n**Кому :**{user}\n**Будьте осторожны !!!**\n\n**Причина** : {reason}",
     )
 
 
@@ -122,11 +122,11 @@ async def rwarn(e):
             else:
                 user = int(user)
         except BaseException:
-            return await e.eor("Reply To user")
+            return await e.eor("Ответьте пользователю")
     reset_warn(e.chat_id, user)
     ok = await e.client.get_entity(user)
     user = inline_mention(ok)
-    await e.eor(f"Cleared All Warns of {user}.")
+    await e.eor(f"Очищены все предупреждения пользователя {user}.")
 
 
 @ultroid_cmd(
@@ -148,25 +148,25 @@ async def twarns(e):
             else:
                 user = int(user)
         except BaseException:
-            return await e.eor("Reply To A User", time=5)
+            return await e.eor("Ответьте пользователю", time=5)
     c, r = warns(e.chat_id, user)
     if c and r:
         ok = await e.client.get_entity(user)
         user = inline_mention(ok)
         r = r.split("|$|")
-        text = f"User {user} Got {c} Warns.\n\n"
+        text = f"Пользователь {user} получил {c} предупреждений.\n\n"
         for x in range(c):
             text += f"•**{x+1}.** {r[x]}\n"
         await e.eor(text)
     else:
-        await e.eor("`No Warnings`")
+        await e.eor("`Нет предупреждений`")
 
 
 @ultroid_cmd(pattern="setwarn( (.*)|$)", manager=True)
 async def warnset(e):
     ok = e.pattern_match.group(1).strip()
     if not ok:
-        return await e.eor("Invalid format. Correct usage: .setwarns <number>|<action>")
+        return await e.eor("Неверный формат. Правильное использование: .setwarns <число>|<действие>")
     if "|" in ok:
         try:
             number, action = ok.split("|")
@@ -174,13 +174,13 @@ async def warnset(e):
             action = action.strip()
         except ValueError:
             return await e.eor(
-                "Invalid format. Correct usage: .setwarns <number>|<action>", time=5
+                "Неверный формат. Правильное использование: .setwarns <число>|<действие>", time=5
             )
         if action not in ["ban", "mute", "kick"]:
-            return await e.eor("Only mute / ban / kick options are supported", time=5)
+            return await e.eor("Поддерживаются только опции mute / ban / kick", time=5)
         udB.set_key("SETWARN", f"{number} {action}")
-        await e.eor(f"Done. Your Warn Count is now {number} and Action is {action}")
+        await e.eor(f"Готово. Ваше количество предупреждений: {number}, действие: {action}")
     else:
         await e.eor(
-            "Invalid format. Correct usage: .setwarns <number>|<action>", time=5
+            "Неверный формат. Правильное использование: .setwarns <число>|<действие>", time=5
         )

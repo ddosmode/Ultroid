@@ -1,56 +1,56 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
-• `{i}border <reply to photo/sticker>`
-    To create border around that media..
-    Ex - `{i}border 12,22,23`
-       - `{i}border 12,22,23 ; width (in number)`
+• `{i}border <ответ на фото/стикер>`
+    Создать рамку вокруг этого медиа..
+    Пример - `{i}border 12,22,23`
+       - `{i}border 12,22,23 ; ширина (числом)`
 
-• `{i}grey <reply to any media>`
-    To make it black nd white.
+• `{i}grey <ответ на любое медиа>`
+    Сделать его чёрно-белым.
 
-• `{i}color <reply to any Black nd White media>`
-    To make it Colorfull.
+• `{i}color <ответ на любое чёрно-белое медиа>`
+    Сделать цветным.
 
-• `{i}toon <reply to any media>`
-    To make it toon.
+• `{i}toon <ответ на любое медиа>`
+    Сделать мультяшным.
 
-• `{i}danger <reply to any media>`
-    To make it look Danger.
+• `{i}danger <ответ на любое медиа>`
+    Сделать опасным.
 
-• `{i}negative <reply to any media>`
-    To make negative image.
+• `{i}negative <ответ на любое медиа>`
+    Сделать негативным изображением.
 
-• `{i}blur <reply to any media>`
-    To make it blurry.
+• `{i}blur <ответ на любое медиа>`
+    Сделать размытым.
 
-• `{i}quad <reply to any media>`
-    create a Vortex.
+• `{i}quad <ответ на любое медиа>`
+    Создать вихрь.
 
-• `{i}mirror <reply to any media>`
-    To create mirror pic.
+• `{i}mirror <ответ на любое медиа>`
+    Создать зеркальное фото.
 
-• `{i}flip <reply to any media>`
-    To make it flip.
+• `{i}flip <ответ на любое медиа>`
+    Перевернуть.
 
-• `{i}sketch <reply to any media>`
-    To draw its sketch.
+• `{i}sketch <ответ на любое медиа>`
+    Нарисовать эскиз.
 
-• `{i}blue <reply to any media>`
-    just cool.
+• `{i}blue <ответ на любое медиа>`
+    Просто круто.
 
-• `{i}csample <color name /color code>`
-   example : `{i}csample red`
+• `{i}csample <имя цвета / hex-код>`
+   пример : `{i}csample red`
              `{i}csample #ffffff`
 
-• `{i}pixelator <reply image>`
-    Create a Pixelated Image..
+• `{i}pixelator <ответ на изображение>`
+    Создать пиксельное изображение..
 """
 import os
 
@@ -59,7 +59,7 @@ from . import LOGS, con
 try:
     import cv2
 except ImportError:
-    LOGS.error(f"{__file__}: OpenCv not Installed.")
+    LOGS.error(f"{__file__}: OpenCV не установлен.")
 
 import numpy as np
 
@@ -67,7 +67,7 @@ try:
     from PIL import Image
 except ImportError:
     Image = None
-    LOGS.info(f"{__file__}: PIL  not Installed.")
+    LOGS.info(f"{__file__}: PIL не установлен.")
 
 from . import upload_file as upf
 from telethon.errors.rpcerrorlist import (
@@ -90,8 +90,8 @@ from . import (
 async def _(event):
     reply = await event.get_reply_message()
     if not (reply and reply.media):
-        return await event.eor("`Reply To a Black and White Image`")
-    xx = await event.eor("`Coloring image 🎨🖌️...`")
+        return await event.eor("`Ответьте на чёрно-белое изображение`")
+    xx = await event.eor("`Раскрашивание изображения 🎨🖌️...`")
     image = await reply.download_media()
     img = cv2.VideoCapture(image)
     ret, frame = img.read()
@@ -109,7 +109,7 @@ async def _(event):
     os.remove(image)
     if "status" in r.json():
         return await event.edit(
-            r.json()["status"] + "\nGet api nd set `{i}setdb DEEP_API key`"
+            r.json()["status"] + "\nПолучите API и установите `{i}setdb DEEP_API key`"
         )
     r_json = r.json()["output_url"]
     await event.client.send_file(event.chat_id, r_json, reply_to=reply)
@@ -195,14 +195,14 @@ async def sampl(ult):
         try:
             try:
                 await ult.delete()
-                await ult.respond(f"Colour Sample for `{color}` !", file="csample.png")
+                await ult.respond(f"Образец цвета для `{color}` !", file="csample.png")
             except MessageDeleteForbiddenError:
-                await ult.reply(f"Colour Sample for `{color}` !", file="csample.png")
+                await ult.reply(f"Образец цвета для `{color}` !", file="csample.png")
         except ChatSendMediaForbiddenError:
-            await ult.eor("Umm! Sending Media is disabled here!")
+            await ult.eor("Хм! Отправка медиа отключена здесь!")
 
     else:
-        await ult.eor("Wrong Color Name/Hex Code specified!")
+        await ult.eor("Указано неправильное имя цвета или HEX-код!")
 
 
 @ultroid_cmd(
@@ -244,7 +244,7 @@ async def ultd(event):
 async def ok(event):
     hm = await event.get_reply_message()
     if not (hm and (hm.photo or hm.sticker)):
-        return await event.eor("`Reply to Sticker or Photo..`")
+        return await event.eor("`Ответьте на стикер или фото..`")
     col = event.pattern_match.group(1).strip()
     wh = 20
     if not col:
@@ -257,7 +257,7 @@ async def ok(event):
                 col = col_[0]
             col = [int(col) for col in col.split(",")[:2]]
         except ValueError:
-            return await event.eor("`Not a Valid Input...`")
+            return await event.eor("`Некорректный ввод...`")
     okla = await hm.download_media()
     img1 = cv2.imread(okla)
     constant = cv2.copyMakeBorder(img1, wh, wh, wh, wh, cv2.BORDER_CONSTANT, value=col)
@@ -272,7 +272,7 @@ async def ok(event):
 async def pixelator(event):
     reply_message = await event.get_reply_message()
     if not (reply_message and (reply_message.photo or reply_message.sticker)):
-        return await event.eor("`Reply to a photo`")
+        return await event.eor("`Ответьте на фото`")
     hw = 50
     try:
         hw = int(event.pattern_match.group(1).strip())
@@ -286,7 +286,7 @@ async def pixelator(event):
     temp = cv2.resize(input_, (w, h), interpolation=cv2.INTER_LINEAR)
     output = cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
     cv2.imwrite("output.jpg", output)
-    await msg.respond("• Pixelated by Ultroid", file="output.jpg")
+    await msg.respond("• Пикселировано Ultroid", file="output.jpg")
     await msg.delete()
     os.remove("output.jpg")
     os.remove(image)

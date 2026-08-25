@@ -1,23 +1,23 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с лицензией GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
-• `{i}yta <(youtube/any) link>`
-   Download audio from the link.
+• `{i}yta <(youtube/любая) ссылка>`
+   Скачать аудио по ссылке.
 
-• `{i}ytv <(youtube/any) link>`
-   Download video  from the link.
+• `{i}ytv <(youtube/любая) ссылка>`
+   Скачать видео по ссылке.
 
-• `{i}ytsa <(youtube) search query>`
-   Search and download audio from youtube.
+• `{i}ytsa <поисковый запрос (youtube)>`
+   Найти и скачать аудио с youtube.
 
-• `{i}ytsv <(youtube) search query>`
-   Search and download video from youtube.
+• `{i}ytsv <поисковый запрос (youtube)>`
+   Найти и скачать видео с youtube.
 """
 from pyUltroid.fns.ytdl import download_yt, get_yt_link
 

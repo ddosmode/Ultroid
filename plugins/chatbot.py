@@ -1,8 +1,8 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - ЮзерБот
+# Авторское право (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import get_help
@@ -44,7 +44,7 @@ async def lister(event):
     users = key.get(event.chat_id, [])
     if not users:
         return await event.eor(get_string("chab_2"), time=5)
-    msg = "**Total List Of AI Enabled Users In This Chat :**\n\n"
+    msg = "**Полный список пользователей с включённым AI в этом чате:**\n\n"
     for i in users:
         try:
             user = await event.client.get_entity(int(i))
@@ -86,4 +86,4 @@ async def chat_bot_fn(event, type_):
             if chat in key and not key[chat]:
                 del key[chat]
     udB.set_key("CHATBOT_USERS", key)
-    await event.eor(f"**ChatBot:**\n{type_}ed {inline_mention(user_)}")
+    await event.eor(f"**ЧатБот:**\n{('добавлен' if type_ == 'add' else 'удалён')} {inline_mention(user_)}")

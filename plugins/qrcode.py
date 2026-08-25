@@ -1,20 +1,20 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
-• `{i}qrcode <text/reply to text>`
-   `Makes qrcode of text`
+• `{i}qrcode <текст/ответ на текст>`
+   `Создаёт QR-код из текста`
 
-• `{i}addqr <reply image> <text>`
-   `Makes qr of text and add it to image.`
+• `{i}addqr <ответ изображением> <текст>`
+   `Создаёт QR-код из текста и добавляет его на изображение.`
 
-• `{i}qrdecode <reply to qrcode>`
-   `It decodes the qrcode.`
+• `{i}qrdecode <ответ на QR-код>`
+   `Декодирует QR-код.`
 """
 import os
 
@@ -39,7 +39,7 @@ async def cd(e):
     if reply and reply.text:
         msg = reply.text
     elif not msg:
-        return await e.eor("`Give Some Text or Reply", time=5)
+        return await e.eor("`Введите текст или ответьте", time=5)
     default, cimg = ULTConfig.thumb, None
     if reply and (reply.sticker or reply.photo):
         cimg = await reply.download_media()
@@ -73,7 +73,7 @@ async def qrwater(e):
         r, thumb=-1 if isinstance(r.media, doc) else None
     )
     if not dl:
-        return await e.eor("`Reply Any Media and Give Text`", time=5)
+        return await e.eor("`Ответьте на медиа и укажите текст`", time=5)
     kk = await e.eor(get_string("com_1"))
     img_bg = Image.open(dl)
     qr = qrcode.QRCode(box_size=5)
@@ -92,7 +92,7 @@ async def qrwater(e):
 async def decod(e):
     r = await e.get_reply_message()
     if not (r and r.media):
-        return await e.eor("`Reply to Qrcode Media`", time=5)
+        return await e.eor("`Ответьте на QR-код`", time=5)
     kk = await e.eor(get_string("com_1"))
     dl = await e.client.download_media(
         r, thumb=-1 if isinstance(r.media, doc) else None
@@ -103,7 +103,7 @@ async def decod(e):
     try:
         det = cv2.QRCodeDetector()
         tx, y, z = det.detectAndDecode(im)
-        await kk.edit("**Decoded Text:\n\n**" + tx)
+        await kk.edit("**Декодированный текст:\n\n**" + tx)
     except BaseException:
-        await kk.edit("`Reply To Media in Which Qr image present.`")
+        await kk.edit("`Ответьте на медиа, содержащее QR-изображение.`")
     os.remove(dl)

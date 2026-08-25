@@ -1,20 +1,20 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License:
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 •`{i}sample <duration in seconds>`
-   Creates Short sample of video..
+   Создаёт короткий фрагмент видео..
 
 • `{i}vshots <number of shots>`
-   Creates screenshot of video..
+   Создаёт скриншот видео..
 
 • `{i}vtrim <start time> - <end time> in seconds`
-    Crop a Lengthy video..
+    Обрезать длинное видео..
 """
 
 import glob
@@ -47,7 +47,7 @@ async def gen_sample(e):
         )
         file_name = (file.name).split("/")[-1]
         out = file_name.replace(file_name.split(".")[-1], "_sample.mkv")
-        xxx = await msg.edit(f"Generating Sample of `{stime}` seconds...")
+        xxx = await msg.edit(f"Создание образца длительностью `{stime}` секунд...")
         ss, dd = await duration_s(file.name, stime)
         cmd = f'ffmpeg -i "{file.name}" -preset ultrafast -ss {ss} -to {dd} -codec copy -map 0 "{out}" -y'
         await bash(cmd)
@@ -56,7 +56,7 @@ async def gen_sample(e):
         mmmm, _ = await e.client.fast_uploader(
             out, show_progress=True, event=xxx, to_delete=True
         )
-        caption = f"A Sample Video Of `{stime}` seconds"
+        caption = f"Образец видео длительностью `{stime}` секунд"
         await e.client.send_file(
             e.chat_id,
             mmmm,
@@ -81,15 +81,15 @@ async def gen_shots(e):
         file, _ = await e.client.fast_downloader(
             vido.document, show_progress=True, event=msg
         )
-        xxx = await msg.edit(f"Generating `{shot}` screenshots...")
+        xxx = await msg.edit(f"Создание `{shot}` скриншотов...")
         await bash("rm -rf ss && mkdir ss")
         cmd = f'ffmpeg -i "{file.name}" -vf fps=0.009 -vframes {shot} "ss/pic%01d.png"'
         await bash(cmd)
         os.remove(file.name)
         pic = glob.glob("ss/*")
-        text = f"Uploaded {len(pic)}/{shot} screenshots"
+        text = f"Загружено {len(pic)}/{shot} скриншотов"
         if not pic:
-            text = "`Failed to Take Screenshots..`"
+            text = "`Не удалось сделать скриншоты..`"
             pic = None
         await e.respond(text, file=pic)
         await bash("rm -rf ss")
@@ -116,7 +116,7 @@ async def gen_sample(e):
             os.remove(file.name)
             return await eod(msg, get_string("audiotools_6"))
         ss, dd = stdr(int(a)), stdr(int(b))
-        xxx = await msg.edit(f"Trimming Video from `{ss}` to `{dd}`...")
+        xxx = await msg.edit(f"Обрезка видео с `{ss}` до `{dd}`...")
         cmd = f'ffmpeg -i "{file.name}" -preset ultrafast -ss {ss} -to {dd} -codec copy -map 0 "{out}" -y'
         await bash(cmd)
         os.remove(file.name)
@@ -124,7 +124,7 @@ async def gen_sample(e):
         mmmm, _ = await e.client.fast_uploader(
             out, show_progress=True, event=msg, to_delete=True
         )
-        caption = f"Trimmed Video From `{ss}` To `{dd}`"
+        caption = f"Обрезано видео с `{ss}` до `{dd}`"
         await e.client.send_file(
             e.chat_id,
             mmmm,

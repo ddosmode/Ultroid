@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License в
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import get_help
@@ -28,7 +28,7 @@ from . import HOSTED_ON, LOGS
 try:
     from git import Repo
 except ImportError:
-    LOGS.error("bot: 'gitpython' module not found!")
+    LOGS.error("bot: модуль 'gitpython' не найден!")
     Repo = None
 
 from telethon.utils import resolve_bot_file_id
@@ -75,16 +75,16 @@ buttons = [
     ]
 ]
 
-# Will move to strings
+# Перенесётся в strings
 alive_txt = """
 The Ultroid Userbot
 
-  ◍ Version - {}
+  ◍ Версия - {}
   ◍ Py-Ultroid - {}
   ◍ Telethon - {}
 """
 
-in_alive = "{}\n\n🌀 <b>Ultroid Version -><b> <code>{}</code>\n🌀 <b>PyUltroid -></b> <code>{}</code>\n🌀 <b>Python -></b> <code>{}</code>\n🌀 <b>Uptime -></b> <code>{}</code>\n🌀 <b>Branch -></b>[ {} ]\n\n• <b>Join @TeamUltroid</b>"
+in_alive = "{}\n\n🌀 <b>Версия Ultroid -><b> <code>{}</code>\n🌀 <b>PyUltroid -></b> <code>{}</code>\n🌀 <b>Python -></b> <code>{}</code>\n🌀 <b>Аптайм -></b> <code>{}</code>\n🌀 <b>Ветка -></b>[ {} ]\n\n• <b>Присоединяйтесь к @TeamUltroid</b>"
 
 
 @callback("alive")
@@ -183,7 +183,7 @@ async def lol(ult):
 @ultroid_cmd(pattern="ping$", chats=[], type=["official", "assistant"])
 async def _(event):
     start = time.time()
-    x = await event.eor("Pong !")
+    x = await event.eor("Понг !")
     end = round((time.time() - start) * 1000)
     uptime = time_formatter((time.time() - start_time) * 1000)
     await x.edit(get_string("ping").format(end, uptime))
@@ -247,14 +247,14 @@ async def _(event):
         if isinstance(file, dict):
             await event.eor(f"`{file}`")
             return
-        await event.reply("**Ultroid Logs.**", file=file)
+        await event.reply("**Логи Ultroid.**", file=file)
     elif opt == "open":
         with open("ultroid.log", "r") as f:
             file = f.read()[-4000:]
         return await event.eor(f"`{file}`")
     elif (
         opt.isdigit() and 5 <= int(opt) <= 100
-    ):  # Check if input is a number between 10 and 100
+    ):  # Проверка, является ли ввод числом от 10 до 100
         num_lines = int(opt)
         with open("ultroid.log", "r") as f:
             lines = f.readlines()[-num_lines:]
@@ -336,19 +336,19 @@ async def _(e):
         x = await asst.send_file(
             udB.get_key("LOG_CHANNEL"),
             ULTPIC(),
-            caption="• **Update Available** •",
+            caption="• **Доступно обновление** •",
             force_document=False,
-            buttons=Button.inline("Changelogs", data="changes"),
+            buttons=Button.inline("Список изменений", data="changes"),
         )
         Link = x.message_link
         await xx.edit(
-            f'<strong><a href="{Link}">[ChangeLogs]</a></strong>',
+            f'<strong><a href="{Link}">[Список изменений]</a></strong>',
             parse_mode="html",
             link_preview=False,
         )
     else:
         await xx.edit(
-            f'<code>Your BOT is </code><strong>up-to-date</strong><code> with </code><strong><a href="https://github.com/TeamUltroid/Ultroid/tree/{branch}">[{branch}]</a></strong>',
+            f'<code>Ваш BOT </code><strong>обновлён</strong><code> до </code><strong><a href="https://github.com/TeamUltroid/Ultroid/tree/{branch}">[{branch}]</a></strong>',
             parse_mode="html",
             link_preview=False,
         )
@@ -360,7 +360,7 @@ async def updava(event):
     await asst.send_file(
         udB.get_key("LOG_CHANNEL"),
         ULTPIC(),
-        caption="• **Update Available** •",
+        caption="• **Доступно обновление** •",
         force_document=False,
-        buttons=Button.inline("Changelogs", data="changes"),
+        buttons=Button.inline("Список изменений", data="changes"),
     )

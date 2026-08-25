@@ -1,23 +1,23 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с лицензией GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 • `{i}meaning <word>`
-    Get the meaning of the word.
+    Получить значение слова.
 
 • `{i}synonym <word>`
-    Get all synonyms.
+    Получить все синонимы.
 
 • `{i}antonym <word>`
-    Get all antonyms.
+    Получить все антонимы.
 
 • `{i}ud <word>`
-    Fetch word defenition from urbandictionary.
+    Получить определение слова из urbandictionary.
 """
 import io
 
@@ -57,7 +57,7 @@ async def mean(event):
             await event.reply(
                 file=fle,
                 force_document=True,
-                caption=f"Meanings of {wrd}",
+                caption=f"Значения слова {wrd}",
             )
             await event.delete()
     else:
@@ -72,7 +72,7 @@ async def mean(event):
     try:
         wrd = event.text.split(maxsplit=1)[1]
     except IndexError:
-        return await event.eor("Give Something to search..")
+        return await event.eor("Введите что-нибудь для поиска..")
     try:
         ok = await get_synonyms_or_antonyms(wrd, task)
         x = get_string("wrd_2" if task == "synonyms" else "wrd_3").format(wrd)
@@ -86,7 +86,7 @@ async def mean(event):
                     fle,
                     force_document=True,
                     allow_cache=False,
-                    caption=f"{task} of {wrd}",
+                    caption=f"{task} слова {wrd}",
                     reply_to=event.reply_to_msg_id,
                 )
                 await event.delete()

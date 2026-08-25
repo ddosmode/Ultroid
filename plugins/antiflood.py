@@ -1,8 +1,8 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - Пользовательский бот
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочитайте GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import get_help
@@ -53,12 +53,12 @@ if Redis("ANTIFLOOD"):
                     event.chat_id, event.sender_id, send_messages=False
                 )
                 del _check_flood[event.chat_id]
-                await event.reply(f"#AntiFlood\n\n{get_string('antiflood_3')}")
+                await event.reply(f"#АнтиФлуд\n\n{get_string('antiflood_3')}")
                 await asst.send_message(
                     int(Redis("LOG_CHANNEL")),
-                    f"#Antiflood\n\n`Muted `[{name}](tg://user?id={event.sender_id})` in {chat}`",
+                    f"#АнтиФлуд\n\n`Заглушен `[{name}](tg://user?id={event.sender_id})` в {chat}`",
                     buttons=Button.inline(
-                        "Unmute", data=f"anti_{event.sender_id}_{event.chat_id}"
+                        "Размутить", data=f"anti_{event.sender_id}_{event.chat_id}"
                     ),
                 )
             except BaseException:
@@ -78,7 +78,7 @@ async def unmuting(e):
     chat_title = (await ultroid_bot.get_entity(chat)).title
     await ultroid_bot.edit_permissions(chat, user, send_messages=True)
     await e.edit(
-        f"#Antiflood\n\n`Unmuted `[{user_name}](tg://user?id={user})` in {chat_title}`"
+        f"#АнтиФлуд\n\n`Размучен `[{user_name}](tg://user?id={user})` в {chat_title}`"
     )
 
 
@@ -89,7 +89,7 @@ async def unmuting(e):
 async def setflood(e):
     input_ = e.pattern_match.group(1).strip()
     if not input_:
-        return await e.eor("`What?`", time=5)
+        return await e.eor("`Что?`", time=5)
     if not input_.isdigit():
         return await e.eor(get_string("com_3"), time=5)
     if m := set_flood(e.chat_id, input_):

@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 import re
@@ -64,37 +64,37 @@ async def _(e):
             query = int(query)
         logi = await ultroid_bot.get_entity(query)
         if not isinstance(logi, types.User):
-            raise ValueError("Invalid Username.")
+            raise ValueError("Неверное имя пользователя.")
     except IndexError:
         sur = await e.builder.article(
-            title="Give Username",
-            description="You Didn't Type Username or id.",
-            text="You Didn't Type Username or id.",
+            title="Укажите имя пользователя",
+            description="Вы не ввели имя пользователя или id.",
+            text="Вы не ввели имя пользователя или id.",
         )
         return await e.answer([sur])
     except ValueError as er:
         LOGS.exception(er)
         sur = await e.builder.article(
-            title="User Not Found",
-            description="Make sure username or id is correct.",
-            text="Make sure username or id is correct.",
+            title="Пользователь не найден",
+            description="Убедитесь, что имя пользователя или id верны.",
+            text="Убедитесь, что имя пользователя или id верны.",
         )
         return await e.answer([sur])
     try:
         desc = zzz[2]
     except IndexError:
         sur = await e.builder.article(
-            title="Type ur msg", text="You Didn't Type Your Msg"
+            title="Введите сообщение", text="Вы не ввели своё сообщение"
         )
         return await e.answer([sur])
     button = [
         [
-            Button.inline("Secret Msg", data=f"dd_{e.id}"),
-            Button.inline("Delete Msg", data=f"del_{e.id}"),
+            Button.inline("Секретное сообщение", data=f"dd_{e.id}"),
+            Button.inline("Удалить сообщение", data=f"del_{e.id}"),
         ],
         [
             Button.switch_inline(
-                "New", query=f"wspr {logi.username or logi.id}", same_peer=True
+                "Новое", query=f"wspr {logi.username or logi.id}", same_peer=True
             )
         ],
     ]
@@ -112,7 +112,7 @@ async def _(e):
 @in_pattern("msg", owner=True)
 async def _(e):
     zzz = e.text.split(maxsplit=1)
-    desc = "Touch me"
+    desc = "Нажми на меня"
     try:
         query = zzz[1]
         if query.isdigit():
@@ -122,32 +122,32 @@ async def _(e):
         mention = inline_mention(user)
         x = user.status
         if isinstance(x, types.UserStatusOnline):
-            status = "Online"
+            status = "В сети"
         elif isinstance(x, types.UserStatusOffline):
-            status = "Offline"
+            status = "Не в сети"
         elif isinstance(x, types.UserStatusRecently):
-            status = "Last Seen Recently"
+            status = "Был(а) недавно"
         elif isinstance(x, types.UserStatusLastMonth):
-            status = "Last seen months ago"
+            status = "Был(а) в прошлом месяце"
         elif isinstance(x, types.UserStatusLastWeek):
-            status = "Last seen weeks ago"
+            status = "Был(а) на прошлой неделе"
         else:
-            status = "Can't Tell"
-        text = f"**Name:**    `{user.first_name}`\n"
+            status = "Невозможно определить"
+        text = f"**Имя:**    `{user.first_name}`\n"
         text += f"**Id:**    `{user.id}`\n"
         if user.username:
-            text += f"**Username:**    `{user.username}`\n"
+            text += f"**Имя пользователя:**    `{user.username}`\n"
             url = f"https://t.me/{user.username}"
         else:
-            text += f"**Mention:**    `{mention}`\n"
+            text += f"**Упоминание:**    `{mention}`\n"
             url = f"tg://user?id={user.id}"
-        text += f"**Status:**    `{status}`\n"
-        text += f"**About:**    `{logi.full_user.about}`"
+        text += f"**Статус:**    `{status}`\n"
+        text += f"**О себе:**    `{logi.full_user.about}`"
         button = [
-            Button.url("Private", url=url),
+            Button.url("Личка", url=url),
             Button.switch_inline(
-                "Secret msg",
-                query=f"wspr {query} Hello 👋",
+                "Секретное сообщение",
+                query=f"wspr {query} Привет 👋",
                 same_peer=True,
             ),
         ]
@@ -159,9 +159,9 @@ async def _(e):
         )
     except IndexError:
         sur = e.builder.article(
-            title="Give Username",
-            description="You Didn't Type Username or id.",
-            text="You Didn't Type Username or id.",
+            title="Укажите имя пользователя",
+            description="Вы не ввели имя пользователя или id.",
+            text="Вы не ввели имя пользователя или id.",
         )
     except BaseException as er:
         LOGS.exception(er)
@@ -185,7 +185,7 @@ async def _(e):
         if e.sender_id in buddhhu[ids]:
             await e.answer(buddhhu[ids][-1], alert=True)
         else:
-            await e.answer("Not For You", alert=True)
+            await e.answer("Не для тебя", alert=True)
     else:
         await e.answer(get_string("wspr_2"), alert=True)
 
@@ -201,4 +201,6 @@ async def _(e):
             except MessageNotModifiedError:
                 pass
         else:
-            await e.answer(get_string("wspr_5"), alert=True)
+            await e.answer("Не для тебя", alert=True)
+    else:
+        await e.answer(get_string("wspr_2"), alert=True)

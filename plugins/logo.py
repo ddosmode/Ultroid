@@ -1,16 +1,16 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
-• `{i}logo <text>`
-   Generate a logo of the given Text
-   Or Reply To image , to write ur text on it.
-   Or Reply To Font File, To write with that font.
+• `{i}logo <текст>`
+   Создать логотип из указанного текста
+   Или ответьте на изображение, чтобы написать ваш текст на нём.
+   Или ответьте на файл шрифта, чтобы написать этим шрифтом.
 
 """
 import glob
@@ -34,7 +34,7 @@ async def logo_gen(event):
     xx = await event.eor(get_string("com_1"))
     name = event.pattern_match.group(1).strip()
     if not name:
-        return await xx.eor("`Give a name too!`", time=5)
+        return await xx.eor("`Укажите также название!`", time=5)
     bg_, font_ = None, None
     if event.reply_to_msg_id:
         temp = await event.get_reply_message()
@@ -88,11 +88,11 @@ async def logo_gen(event):
         stroke_width=strke,
         stroke_fill="black",
     )
-    await xx.edit("`Done!`")
+    await xx.edit("`Готово!`")
     await event.client.send_file(
         event.chat_id,
         file=name,
-        caption=f"Logo by [{OWNER_NAME}](tg://user?id={OWNER_ID})",
+        caption=f"Логотип от [{OWNER_NAME}](tg://user?id={OWNER_ID})",
         force_document=True,
     )
     os.remove(name)

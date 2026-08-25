@@ -22,7 +22,7 @@ from pyUltroid import _ignore_eval
 
 from . import *
 
-# Used for Formatting Eval Code, if installed
+# Используется для форматирования кода Eval, если установлен
 try:
     import black
 except ImportError:
@@ -47,7 +47,7 @@ async def _(e):
     xx = await e.eor(get_string("com_1"))
     x, y = await bash("neofetch|sed 's/\x1B\\[[0-9;\\?]*[a-zA-Z]//g' >> neo.txt")
     if y and y.endswith("NOT_FOUND"):
-        return await xx.edit(f"Error: `{y}`")
+        return await xx.edit(f"Ошибка: `{y}`")
     with open("neo.txt", "r", encoding="utf-8") as neo:
         p = (neo.read()).replace("\n\n", "")
     haa = await Carbon(code=p, file_name="neofetch", backgroundColor=choice(ATRA_COL))
@@ -75,10 +75,10 @@ async def _(event):
     xx = await event.eor(get_string("com_1"))
     reply_to_id = event.reply_to_msg_id or event.id
     stdout, stderr = await bash(cmd, run_code=1)
-    OUT = f"**☞ BASH\n\n• COMMAND:**\n`{cmd}` \n\n"
+    OUT = f"**☞ BASH\n\n• КОМАНДА:**\n`{cmd}` \n\n"
     err, out = "", ""
     if stderr:
-        err = f"**• ERROR:** \n`{stderr}`\n\n"
+        err = f"**• ОШИБКА:** \n`{stderr}`\n\n"
     if stdout:
         if (carb or udB.get_key("CARBON_ON_BASH")) and (
             event.is_private
@@ -94,12 +94,12 @@ async def _(event):
             )
             if isinstance(li, dict):
                 await xx.edit(
-                    f"Unknown Response from Carbon: `{li}`\n\nstdout`:{stdout}`\nstderr: `{stderr}`"
+                    f"Неизвестный ответ от Carbon: `{li}`\n\nstdout`:{stdout}`\nstderr: `{stderr}`"
                 )
                 return
             url = uf(li)
             OUT = f"[\xad]({url}){OUT}"
-            out = "**• OUTPUT:**"
+            out = "**• ВЫВОД:**"
             remove(li)
         elif (rayso or udB.get_key("RAYSO_ON_BASH")) and (
             event.is_private
@@ -116,12 +116,12 @@ async def _(event):
             )
             if isinstance(li, dict):
                 await xx.edit(
-                    f"Unknown Response from Carbon: `{li}`\n\nstdout`:{stdout}`\nstderr: `{stderr}`"
+                    f"Неизвестный ответ от Carbon: `{li}`\n\nstdout`:{stdout}`\nstderr: `{stderr}`"
                 )
                 return
             url = uf(li)
             OUT = f"[\xad]({url}){OUT}"
-            out = "**• OUTPUT:**"
+            out = "**• ВЫВОД:**"
             remove(li)
         else:
             if "pip" in cmd and all(":" in line for line in stdout.split("\n")):
@@ -139,9 +139,9 @@ async def _(event):
                     LOGS.exception(er)
             else:
                 stdout = f"`{stdout}`"
-            out = f"**• OUTPUT:**\n{stdout}"
+            out = f"**• ВЫВОД:**\n{stdout}"
     if not stderr and not stdout:
-        out = "**• OUTPUT:**\n`Success`"
+        out = "**• ВЫВОД:**\n`Успешно`"
     OUT += err + out
     if len(OUT) > 4096:
         ultd = err + out
@@ -208,7 +208,7 @@ async def _(event):
         try:
             cm = cmd.split(maxsplit=1)[1]
         except IndexError:
-            await event.eor("->> Wrong Format <<-")
+            await event.eor("->> Неверный формат <<-")
             cm = None
         return cm
 
@@ -232,7 +232,7 @@ async def _(event):
         try:
             cmd = black.format_str(cmd, mode=black.Mode())
         except BaseException:
-            # Consider it as Code Error, and move on to be shown ahead.
+            # Считаем это ошибкой кода, переходим к её отображению далее.
             pass
     reply_to_id = event.reply_to_msg_id or event
     if any(item in cmd for item in KEEP_SAFE().All) and (
@@ -240,11 +240,11 @@ async def _(event):
     ):
         warning = await event.forward_to(udB.get_key("LOG_CHANNEL"))
         await warning.reply(
-            f"Malicious Activities suspected by {inline_mention(await event.get_sender())}"
+            f"Подозрительная активность от {inline_mention(await event.get_sender())}"
         )
         _ignore_eval.append(event.sender_id)
         return await xx.edit(
-            "`Malicious Activities suspected⚠️!\nReported to owner. Aborted this request!`"
+            "`Подозрительная активность⚠️!\nСообщено владельцу. Запрос отклонён!`"
         )
     old_stderr = sys.stderr
     old_stdout = sys.stdout
@@ -277,8 +277,8 @@ async def _(event):
     evaluation = exc or stderr or stdout or _parse_eval(value) or get_string("instu_4")
     if mode == "silent":
         if exc:
-            msg = f"• <b>EVAL ERROR\n\n• CHAT:</b> <code>{get_display_name(event.chat)}</code> [<code>{event.chat_id}</code>]"
-            msg += f"\n\n∆ <b>CODE:</b>\n<code>{cmd}</code>\n\n∆ <b>ERROR:</b>\n<code>{exc}</code>"
+            msg = f"• <b>ОШИБКА EVAL\n\n• ЧАТ:</b> <code>{get_display_name(event.chat)}</code> [<code>{event.chat_id}</code>]"
+            msg += f"\n\n∆ <b>КОД:</b>\n<code>{cmd}</code>\n\n∆ <b>ОШИБКА:</b>\n<code>{exc}</code>"
             log_chat = udB.get_key("LOG_CHANNEL")
             if len(msg) > 4000:
                 with BytesIO(msg.encode()) as out_file:
@@ -291,7 +291,7 @@ async def _(event):
     tmt = tima * 1000
     timef = time_formatter(tmt)
     timeform = timef if not timef == "0s" else f"{tmt:.3f}ms"
-    final_output = "__►__ **EVAL** (__in {}__)\n```{}``` \n\n __►__ **OUTPUT**: \n```{}``` \n".format(
+    final_output = "__►__ **EVAL** (__за {}__)\n```{}``` \n\n __►__ **ВЫВОД**: \n```{}``` \n".format(
         timeform,
         cmd,
         evaluation,
@@ -321,7 +321,7 @@ def _stringify(text=None, *args, **kwargs):
 
 
 async def aexec(code, event):
-    # Create a dedicated namespace for execution
+    # Создаём отдельное пространство имён для выполнения
     exec_globals = {
         'print': _stringify,
         'p': _stringify,
@@ -335,21 +335,21 @@ async def aexec(code, event):
         '__name__': __name__
     }
     
-    # Format the async function definition
+    # Формируем определение асинхронной функции
     wrapped_code = (
         'async def __aexec(e, client):\n' +
         '\n'.join(f'    {line}' for line in code.split('\n'))
     )
     
     try:
-        # Execute the wrapped code in our custom namespace
+        # Выполняем обёрнутый код в нашем пространстве имён
         exec(wrapped_code, exec_globals)
-        # Get the defined async function
+        # Получаем определённую асинхронную функцию
         func = exec_globals['__aexec']
-        # Execute it with proper parameters
+        # Выполняем её с нужными параметрами
         return await func(event, event.client)
     except Exception as e:
-        raise Exception(f"Failed to execute code: {str(e)}")
+        raise Exception(f"Не удалось выполнить код: {str(e)}")
 
 
 DUMMY_CPP = """#include <iostream>
@@ -376,7 +376,7 @@ async def doie(e):
     m = await bash("g++ -o CppUltroid cpp-ultroid.cpp")
     o_cpp = f"• **Eval-Cpp**\n`{match}`"
     if m[1]:
-        o_cpp += f"\n\n**• Error :**\n`{m[1]}`"
+        o_cpp += f"\n\n**• Ошибка :**\n`{m[1]}`"
         if len(o_cpp) > 3000:
             os.remove("cpp-ultroid.cpp")
             if os.path.exists("CppUltroid"):
@@ -387,9 +387,9 @@ async def doie(e):
         return await eor(msg, o_cpp)
     m = await bash("./CppUltroid")
     if m[0] != "":
-        o_cpp += f"\n\n**• Output :**\n`{m[0]}`"
+        o_cpp += f"\n\n**• Вывод :**\n`{m[0]}`"
     if m[1]:
-        o_cpp += f"\n\n**• Error :**\n`{m[1]}`"
+        o_cpp += f"\n\n**• Ошибка :**\n`{m[1]}`"
     if len(o_cpp) > 3000:
         with BytesIO(str.encode(o_cpp)) as out_file:
             out_file.name = "eval.txt"

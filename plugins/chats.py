@@ -1,8 +1,8 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - ЮзерБот
+# Авторское право (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 from . import get_help
 
@@ -71,12 +71,12 @@ async def _(e):
     else:
         chat = await e.get_chat()
     if hasattr(chat, "username") and chat.username:
-        return await e.eor(f"Username: @{chat.username}")
+        return await e.eor(f"Имя пользователя: @{chat.username}")
     request, usage, title, link = None, None, None, None
     if match:
         split = match.split(maxsplit=1)
         request = split[0] in ["r", "request"]
-        title = "Created by Ultroid"
+        title = "Создано Ultroid"
         if len(split) > 1:
             match = split[1]
             spli = match.split(maxsplit=1)
@@ -115,8 +115,8 @@ async def _(e):
         if Inv and not Inv.revoked:
             link = Inv.link
     if link:
-        return await e.eor(f"Link:- {link}")
-    await e.eor("`Failed to getlink!\nSeems like link is inaccessible to you...`")
+        return await e.eor(f"Ссылка:- {link}")
+    await e.eor("`Не удалось получить ссылку!\nПохоже, ссылка недоступна для вас...`")
 
 
 @ultroid_cmd(
@@ -189,7 +189,7 @@ async def _(e):
 )
 async def _(ult):
     if not ult.is_reply:
-        return await ult.eor("`Reply to a Media..`", time=5)
+        return await ult.eor("`Ответьте на медиа..`", time=5)
     match = ult.pattern_match.group(1).strip()
     if not ult.client._bot and match:
         try:
@@ -204,7 +204,7 @@ async def _(ult):
     elif reply.document and reply.document.thumbs:
         replfile = await reply.download_media(thumb=-1)
     else:
-        return await ult.eor("Reply to a Photo or Video..")
+        return await ult.eor("Ответьте на фото или видео..")
     mediain = mediainfo(reply.media)
     if "animated" in mediain:
         replfile = await con.convert(replfile, convert_to="mp4")
@@ -217,9 +217,9 @@ async def _(ult):
         if "pic" not in mediain:
             file = types.InputChatUploadedPhoto(video=file)
         await ult.client(EditPhotoRequest(chat, file))
-        await ult.eor("`Group Photo has Successfully Changed !`", time=5)
+        await ult.eor("`Фото группы успешно изменено!`", time=5)
     except Exception as ex:
-        await ult.eor(f"Error occured.\n`{str(ex)}`", time=5)
+        await ult.eor(f"Произошла ошибка.\n`{str(ex)}`", time=5)
     os.remove(replfile)
 
 
@@ -233,7 +233,7 @@ async def _(ult):
         chat = match
     try:
         await ult.client(EditPhotoRequest(chat, types.InputChatPhotoEmpty()))
-        text = "`Removed Chat Photo..`"
+        text = "`Фото чата удалено..`"
     except Exception as E:
         text = str(E)
     return await ult.eor(text, time=5)
@@ -241,7 +241,7 @@ async def _(ult):
 
 @ultroid_cmd(pattern="unbanall$", manager=True, admins_only=True, require="ban_users")
 async def _(event):
-    xx = await event.eor("Searching Participant Lists.")
+    xx = await event.eor("Поиск списка участников.")
     p = 0
     title = (await event.get_chat()).title
     async for i in event.client.iter_participants(
@@ -256,7 +256,7 @@ async def _(event):
             pass
         except BaseException as er:
             LOGS.exception(er)
-    await xx.eor(f"{title}: {p} unbanned", time=5)
+    await xx.eor(f"{title}: {p} разбанено", time=5)
 
 
 @ultroid_cmd(
@@ -270,7 +270,7 @@ async def _(event):
     input_str = event.pattern_match.group(1).strip()
     p, a, b, c, d, m, n, y, w, o, q, r = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     async for i in event.client.iter_participants(event.chat_id):
-        p += 1  # Total Count
+        p += 1  # Общее количество
         if isinstance(i.status, UserStatusEmpty):
             if "empty" in input_str:
                 try:
@@ -353,9 +353,9 @@ async def _(event):
             else:
                 n += 1
     if input_str:
-        required_string = f"**>> Kicked** `{c} / {p}` **users**\n\n"
+        required_string = f"**>> Кикнуто** `{c} / {p}` **пользователей**\n\n"
     else:
-        required_string = f"**>> Total** `{p}` **users**\n\n"
+        required_string = f"**>> Всего** `{p}` **пользователей**\n\n"
     required_string += f"  `{HNDLR}rmusers deleted`  **••**  `{d}`\n"
     required_string += f"  `{HNDLR}rmusers empty`  **••**  `{y}`\n"
     required_string += f"  `{HNDLR}rmusers month`  **••**  `{m}`\n"

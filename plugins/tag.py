@@ -5,28 +5,28 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 • `{i}tagall`
-    Tag Top 100 Members of chat.
+    Отметить топ-100 участников чата.
 
 • `{i}tagadmins`
-    Tag Admins of that chat.
+    Отметить админов этого чата.
 
 • `{i}tagowner`
-    Tag Owner of that chat
+    Отметить владельца этого чата
 
 • `{i}tagbots`
-    Tag Bots of that chat.
+    Отметить ботов этого чата.
 
 • `{i}tagrec`
-    Tag recently Active Members.
+    Отметить недавно активных участников.
 
 • `{i}tagon`
-    Tag online Members(work only if privacy off).
+    Отметить участников онлайн (работает только при отключённой приватности).
 
 • `{i}tagoff`
-    Tag Offline Members(work only if privacy off).
+    Отметить участников не в сети (работает только при отключённой приватности).
 """
 
 from telethon.tl.types import ChannelParticipantAdmin as admin

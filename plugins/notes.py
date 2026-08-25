@@ -1,24 +1,24 @@
-# Ultroid - UserBot
+# Ultroid - Пользовательский бот
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License в
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 • `{i}addnote <word><reply to a message>`
-    add note in the used chat with replied message and choosen word.
+    Добавить заметку в используемый чат с ответным сообщением и выбранным словом.
 
 • `{i}remnote <word>`
-    Remove the note from used chat.
+    Удалить заметку из используемого чата.
 
 • `{i}listnote`
-    list all notes.
+    Список всех заметок.
 
-• Use :
-   set notes in group so all can use it.
-   type `#(Keyword of note)` to get it
+• Использование :
+    установите заметки в группе, чтобы все могли их использовать.
+    введите `#(Ключевое слово заметки)`, чтобы получить её
 """
 import os
 
@@ -81,13 +81,13 @@ async def rn(e):
     if wrd.startswith("#"):
         wrd = wrd.replace("#", "")
     rem_note(int(chat), wrd)
-    await e.eor(f"Done Note: `#{wrd}` Removed.")
+    await e.eor(f"Готово: заметка `#{wrd}` удалена.")
 
 
 @ultroid_cmd(pattern="listnote$", admins_only=True)
 async def lsnote(e):
     if x := list_note(e.chat_id):
-        sd = "Notes Found In This Chats Are\n\n"
+        sd = "Найденные заметки в этом чате\n\n"
         return await e.eor(sd + x)
     await e.eor(get_string("notes_5"))
 

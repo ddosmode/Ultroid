@@ -5,22 +5,22 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-❍ Commands Available -
+❍ Доступные команды -
 
-• `{i}destroy <reply to animated sticker>`
-    To destroy the sticker.
+• `{i}destroy <ответ на анимированный стикер>`
+    Уничтожить стикер.
 
-• `{i}tiny <reply to media>`
-    To create Tiny stickers.
+• `{i}tiny <ответ на медиа>`
+    Создать маленькие стикеры.
 
-• `{i}kang <reply to image/sticker>`
-    Kang the sticker (add to your pack).
+• `{i}kang <ответ на изображение/стикер>`
+    Забрать стикер (добавить в свой пак).
 
-• `{i}packkang <pack name>`
-    Kang the Complete sticker set (with custom name).
+• `{i}packkang <имя пака>`
+    Забрать весь набор стикеров (с пользовательским именем).
 
-• `{i}round <reply to any media>`
-    To extract round sticker.
+• `{i}round <ответ на любое медиа>`
+    Извлечь круглый стикер.
 """
 import glob
 import io
@@ -107,7 +107,7 @@ async def pack_kangish(_):
                 upl = await asst.upload_file(file)
                 docs.append(await asst(UploadMediaRequest(InputPeerSelf(), upl)))
                 if count % 5 == 0:
-                    await msg.edit(f"`Uploaded {count} files.`")
+                    await msg.edit(f"`Загружено {count} файлов.`")
 
     stiks = []
     for i in docs:
@@ -136,7 +136,7 @@ async def pack_kangish(_):
         )
     except PeerIdInvalidError:
         return await msg.eor(
-            f"Hey {inline_mention(_.sender)} send `/start` to @{asst.me.username} and later try this command again.."
+            f"Привет, {inline_mention(_.sender)}, отправь `/start` для @{asst.me.username} и затем попробуй эту команду снова.."
         )
     except BaseException as er:
         LOGS.exception(er)
@@ -209,7 +209,7 @@ async def hehe(args):
         if not emoji:
             emoji = "🏵"
         if len(splat) == 3:
-            pack = splat[2]  # User sent ultroid_both
+            pack = splat[2]  # Пользователь отправил ultroid_both
             emoji = splat[1]
         elif len(splat) == 2:
             if splat[1].isnumeric():
@@ -218,17 +218,17 @@ async def hehe(args):
                 emoji = splat[1]
 
         packname = f"ult_{user.id}_{pack}"
-        packnick = f"{username}'s Pack {pack}"
+        packnick = f"Пак от {username} {pack}"
         cmd = "/newpack"
         file = io.BytesIO()
 
         if is_vid:
             packname += "_vid"
-            packnick += " (Video)"
+            packnick += " (Видео)"
             cmd = "/newvideo"
         elif is_anim:
             packname += "_anim"
-            packnick += " (Animated)"
+            packnick += " (Анимированный)"
             cmd = "/newanimated"
         else:
             image = con.resize_photo_sticker(photo)
@@ -246,7 +246,7 @@ async def hehe(args):
                 try:
                     await conv.send_message("/addsticker")
                 except YouBlockedUserError:
-                    LOGS.info("Unblocking @Stickers for kang...")
+                    LOGS.info("Разблокирую @Stickers для команды kang...")
                     await ultroid_bot(functions.contacts.UnblockRequest("stickers"))
                     await conv.send_message("/addsticker")
                 await conv.get_response()
@@ -259,12 +259,12 @@ async def hehe(args):
                 while t in x.message:
                     pack += 1
                     packname = f"ult_{user.id}_{pack}"
-                    packnick = f"{username}'s Pack {pack}"
+                    packnick = f"Пак от {username} {pack}"
                     if is_anim:
                         packname += "_anim"
-                        packnick += " (Animated)"
+                        packnick += " (Анимированный)"
                     elif is_vid:
-                        packnick += " (Video)"
+                        packnick += " (Видео)"
                         packname += "_vid"
                     await xx.edit(get_string("sts_13").format(pack))
                     await conv.send_message("/addsticker")
@@ -326,7 +326,7 @@ async def hehe(args):
                 await conv.get_response()
                 await ultroid_bot.send_read_acknowledge(conv.chat_id)
         else:
-            await xx.edit("`Brewing a new Pack...`")
+            await xx.edit("`Создаю новый пак...`")
             async with ultroid_bot.conversation("Stickers") as conv:
                 await conv.send_message(cmd)
                 await conv.get_response()

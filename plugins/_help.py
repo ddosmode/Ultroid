@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from telethon.errors.rpcerrorlist import (
@@ -43,19 +43,19 @@ async def _help(ult):
     if plug:
         try:
             if plug in HELP["Official"]:
-                output = f"**Plugin** - `{plug}`\n"
+                output = f"**Плагин** - `{plug}`\n"
                 for i in HELP["Official"][plug]:
                     output += i
                 output += "\n© @TeamUltroid"
                 await ult.eor(output)
             elif HELP.get("Addons") and plug in HELP["Addons"]:
-                output = f"**Plugin** - `{plug}`\n"
+                output = f"**Плагин** - `{plug}`\n"
                 for i in HELP["Addons"][plug]:
                     output += i
                 output += "\n© @TeamUltroid"
                 await ult.eor(output)
             elif HELP.get("VCBot") and plug in HELP["VCBot"]:
-                output = f"**Plugin** - `{plug}`\n"
+                output = f"**Плагин** - `{plug}`\n"
                 for i in HELP["VCBot"][plug]:
                     output += i
                 output += "\n© @TeamUltroid"
@@ -81,17 +81,17 @@ async def _help(ult):
                                 file = file_name
                                 break
                     if not file:
-                        # the enter command/plugin name is not found
-                        text = f"`{plug}` is not a valid plugin!"
+                        # введённая команда/имя плагина не найдено
+                        text = f"`{plug}` не является допустимым плагином!"
                         best_match = None
                         for _ in compare_strings:
                             if plug in _ and not _.startswith("_"):
                                 best_match = _
                                 break
                         if best_match:
-                            text += f"\nDid you mean `{best_match}`?"
+                            text += f"\nВозможно, вы имели в виду `{best_match}`?"
                         return await ult.eor(text)
-                    output = f"**Command** `{plug}` **found in plugin** - `{file}`\n"
+                    output = f"**Команда** `{plug}` **найдена в плагине** - `{file}`\n"
                     if file in HELP["Official"]:
                         for i in HELP["Official"][file]:
                             output += i
@@ -105,7 +105,7 @@ async def _help(ult):
                     await ult.eor(output)
         except BaseException as er:
             LOGS.exception(er)
-            await ult.eor("Error 🤔 occured.")
+            await ult.eor("Произошла ошибка 🤔.")
     else:
         try:
             results = await ult.client.inline_query(asst.me.username, "ultd")
@@ -115,7 +115,7 @@ async def _help(ult):
                 z.extend(x)
             cmd = len(z) + 10
             if udB.get_key("MANAGER") and udB.get_key("DUAL_HNDLR") == "/":
-                _main_help_menu[2:3] = [[Button.inline("• Manager Help •", "mngbtn")]]
+                _main_help_menu[2:3] = [[Button.inline("• Помощь менеджера •", "mngbtn")]]
             return await ult.reply(
                 get_string("inline_4").format(
                     OWNER_NAME,

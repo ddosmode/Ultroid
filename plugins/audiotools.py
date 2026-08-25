@@ -1,8 +1,8 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - Пользовательский бот
+# Авторское право (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 
@@ -53,7 +53,7 @@ async def vnc(e):
         )
     except Exception as er:
         LOGS.exception(er)
-        return await xxx.edit("`Failed to convert in Voice...`")
+        return await xxx.edit("`Не удалось преобразовать в голосовое...`")
     await xxx.delete()
     os.remove(file.name)
     os.remove("out.opus")
@@ -84,7 +84,7 @@ async def trim_aud(e):
             vfile,
             xxx,
             c_time,
-            f"Downloading {name}...",
+            f"Загрузка {name}...",
         )
 
         o_size = os.path.getsize(file.name)
@@ -97,14 +97,14 @@ async def trim_aud(e):
             return await eod(xxx, get_string("audiotools_6"))
         ss, dd = stdr(int(a)), stdr(int(b))
         xxx = await xxx.edit(
-            f"Downloaded `{file.name}` of `{humanbytes(o_size)}` in `{diff}`.\n\nNow Trimming Audio from `{ss}` to `{dd}`..."
+            f"Загружено `{file.name}` размером `{humanbytes(o_size)}` за `{diff}`.\n\nТеперь обрезаю аудио с `{ss}` до `{dd}`..."
         )
         cmd = f'ffmpeg -i "{file.name}" -preset ultrafast -ss {ss} -to {dd} -vn -acodec copy "{out}" -y'
         await bash(cmd)
         os.remove(file.name)
         f_time = time.time()
         n_file, _ = await e.client.fast_uploader(
-            out, show_progress=True, event=e, message="Uploading...", to_delete=True
+            out, show_progress=True, event=e, message="Загрузка...", to_delete=True
         )
         attributes = await set_attributes(out)
 
@@ -137,7 +137,7 @@ async def ex_aud(e):
         vfile,
         msg,
         c_time,
-        f"Downloading {name}...",
+        f"Загрузка {name}...",
     )
 
     out_file = f"{file.name}.aac"
@@ -149,7 +149,7 @@ async def ex_aud(e):
     f_time = time.time()
     try:
         n_file, _ = await e.client.fast_uploader(
-            out_file, show_progress=True, event=e, message="Uploading...", to_delete=True
+            out_file, show_progress=True, event=e, message="Загрузка...", to_delete=True
         )
 
     except FileNotFoundError:

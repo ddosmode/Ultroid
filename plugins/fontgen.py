@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import get_help
@@ -29,7 +29,7 @@ async def _(e):
     input = e.pattern_match.group(1).strip()
     reply = await e.get_reply_message()
     if not input:
-        m = "**Available Fonts**\n\n"
+        m = "**Доступные шрифты**\n\n"
         for x in Fonts.keys():
             m += f"• `{x}`\n"
         return await e.eor(m, time=5)
@@ -41,12 +41,12 @@ async def _(e):
         except IndexError:
             return await eod(e, help)
     elif not input:
-        return await eod(e, "`Give font dude :/`")
+        return await eod(e, "`Укажи шрифт, чувак :/`")
     else:
         font = input
         text = reply.message
     if font not in Fonts.keys():
-        return await e.eor(f"`{font} not in font list`.", time=5)
+        return await e.eor(f"`{font} отсутствует в списке шрифтов`.", time=5)
     msg = gen_font(text, Fonts[font])
     await e.eor(msg)
 

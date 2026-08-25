@@ -1,8 +1,8 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - ЮзерБот
+# Авторское право (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import get_help
@@ -64,7 +64,7 @@ async def _(e):
             vfile,
             xxx,
             c_time,
-            f"Downloading {name}...",
+            f"Загрузка {name}...",
         )
 
         o_size = os.path.getsize(file.name)
@@ -73,13 +73,13 @@ async def _(e):
         file_name = (file.name).split("/")[-1]
         out = file_name.replace(file_name.split(".")[-1], "compressed.mkv")
         await xxx.edit(
-            f"`Downloaded {file.name} of {humanbytes(o_size)} in {diff}.\nNow Compressing...`"
+            f"`Загружено {file.name} размером {humanbytes(o_size)} за {diff}.\nТеперь сжимаю...`"
         )
         x, y = await bash(
             f'mediainfo --fullscan """{file.name}""" | grep "Frame count"'
         )
         if y and y.endswith("NOT_FOUND"):
-            return await xxx.edit(f"ERROR: `{y}`")
+            return await xxx.edit(f"ОШИБКА: `{y}`")
         total_frames = x.split(":")[1].split("\n")[0]
         progress = f"progress-{c_time}.txt"
         with open(progress, "w"):
@@ -105,14 +105,14 @@ async def _(e):
                     speed = round(elapse / time_diff, 2)
                 if int(speed) != 0:
                     some_eta = ((int(total_frames) - elapse) / speed) * 1000
-                    text = f"`Compressing {file_name} at {crf} CRF.\n`"
+                    text = f"`Сжимаю {file_name} при {crf} CRF.\n`"
                     progress_str = "`[{0}{1}] {2}%\n\n`".format(
                         "".join("●" for _ in range(math.floor(per / 5))),
                         "".join("" for _ in range(20 - math.floor(per / 5))),
                         round(per, 2),
                     )
 
-                    e_size = f"{humanbytes(size)} of ~{humanbytes((size / per) * 100)}"
+                    e_size = f"{humanbytes(size)} из ~{humanbytes((size / per) * 100)}"
                     eta = f"~{time_formatter(some_eta)}"
                     try:
                         await xxx.edit(
@@ -132,15 +132,15 @@ async def _(e):
         f_time = time.time()
         difff = time_formatter((f_time - d_time) * 1000)
         await xxx.edit(
-            f"`Compressed {humanbytes(o_size)} to {humanbytes(c_size)} in {difff}\nTrying to Upload...`"
+            f"`Сжато с {humanbytes(o_size)} до {humanbytes(c_size)} за {difff}\nПытаюсь загрузить...`"
         )
         differ = 100 - ((c_size / o_size) * 100)
-        caption = f"**Original Size: **`{humanbytes(o_size)}`\n"
-        caption += f"**Compressed Size: **`{humanbytes(c_size)}`\n"
-        caption += f"**Compression Ratio: **`{differ:.2f}%`\n"
-        caption += f"\n**Time Taken To Compress: **`{difff}`"
+        caption = f"**Исходный размер: **`{humanbytes(o_size)}`\n"
+        caption += f"**Размер после сжатия: **`{humanbytes(c_size)}`\n"
+        caption += f"**Степень сжатия: **`{differ:.2f}%`\n"
+        caption += f"\n**Время сжатия: **`{difff}`"
         n_file, _ = await e.client.fast_uploader(
-            out, show_progress=True, event=e, message="Uploading...", to_delete=True
+            out, show_progress=True, event=e, message="Загрузка...", to_delete=True
         )
         if to_stream:
             data = await metadata(out)

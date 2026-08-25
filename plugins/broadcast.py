@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License в
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 
@@ -87,7 +87,7 @@ async def broadcast_remover(event):
     if chat_id == "all":
         await x.edit(get_string("bd_8"))
         udB.del_key("BROADCAST")
-        await x.edit("Database cleared.")
+        await x.edit("База данных очищена.")
         return
     if KeyM.contains(chat_id):
         KeyM.remove(chat_id)
@@ -106,8 +106,8 @@ async def list_all(event):
     channels = KeyM.get()
     num = KeyM.count()
     if not channels:
-        return await eor(x, "No chats were added.", time=5)
-    msg = "Channels in database:\n"
+        return await eor(x, "Чаты не были добавлены.", time=5)
+    msg = "Каналы в базе данных:\n"
     for channel in channels:
         name = ""
         try:
@@ -115,13 +115,13 @@ async def list_all(event):
         except ValueError:
             name = ""
         msg += f"=> **{name}** [`{channel}`]\n"
-    msg += f"\nTotal {num} channels."
+    msg += f"\nВсего {num} каналов."
     if len(msg) > 4096:
         MSG = msg.replace("*", "").replace("`", "")
         with io.BytesIO(str.encode(MSG)) as out_file:
             out_file.name = "channels.txt"
             await event.reply(
-                "Channels in Database",
+                "Каналы в базе данных",
                 file=out_file,
                 force_document=True,
                 allow_cache=False,
@@ -140,9 +140,9 @@ async def forw(event):
         return await event.eor(get_string("ex_1"))
     ultroid_bot = event.client
     channels = KeyM.get()
-    x = await event.eor("Sending...")
+    x = await event.eor("Отправка...")
     if not channels:
-        return await x.edit(f"Please add channels by using `{HNDLR}add` in them.")
+        return await x.edit(f"Пожалуйста, добавьте каналы с помощью `{HNDLR}add` в них.")
     error_count = 0
     sent_count = 0
     previous_message = await event.get_reply_message()
@@ -152,24 +152,24 @@ async def forw(event):
             await ultroid_bot.forward_messages(channel, previous_message)
             sent_count += 1
             await x.edit(
-                f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
+                f"Отправлено : {sent_count}\nОшибок : {error_count}\nВсего : {len(channels)}",
             )
         except Exception:
             try:
                 await ultroid_bot.send_message(
                     udB.get_key("LOG_CHANNEL"),
-                    f"Error in sending at {channel}.",
+                    f"Ошибка при отправке на {channel}.",
                 )
             except Exception as Em:
                 LOGS.info(Em)
             error_count += 1
             await x.edit(
-                f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
+                f"Отправлено : {sent_count}\nОшибок : {error_count}\nВсего : {len(channels)}",
             )
-    await x.edit(f"{sent_count} messages sent with {error_count} errors.")
+    await x.edit(f"{sent_count} сообщений отправлено с {error_count} ошибками.")
     if error_count > 0:
         await ultroid_bot.send_message(
-            udB.get_key("LOG_CHANNEL"), f"{error_count} Errors"
+            udB.get_key("LOG_CHANNEL"), f"{error_count} ошибок"
         )
 
 
@@ -183,12 +183,12 @@ async def sending(event):
         return await x.edit(get_string("ex_1"))
     channels = KeyM.get()
     if not channels:
-        return await x.edit(f"Please add channels by using `{HNDLR}add` in them.")
-    await x.edit("Sending....")
+        return await x.edit(f"Пожалуйста, добавьте каналы с помощью `{HNDLR}add` в них.")
+    await x.edit("Отправка....")
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         if previous_message.poll:
-            return await x.edit(f"Reply `{HNDLR}forward` for polls.")
+            return await x.edit(f"Ответьте `{HNDLR}forward` для опросов.")
         if previous_message:
             error_count = 0
             sent_count = 0
@@ -197,20 +197,20 @@ async def sending(event):
                     await ultroid_bot.send_message(channel, previous_message)
                     sent_count += 1
                     await x.edit(
-                        f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
+                        f"Отправлено : {sent_count}\nОшибок : {error_count}\nВсего : {len(channels)}",
                     )
                 except Exception as error:
                     await ultroid_bot.send_message(
                         udB.get_key("LOG_CHANNEL"),
-                        f"Error in sending at {channel}.\n\n{error}",
+                        f"Ошибка при отправке на {channel}.\n\n{error}",
                     )
                     error_count += 1
                     await x.edit(
-                        f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
+                        f"Отправлено : {sent_count}\nОшибок : {error_count}\nВсего : {len(channels)}",
                     )
-            await x.edit(f"{sent_count} messages sent with {error_count} errors.")
+            await x.edit(f"{sent_count} сообщений отправлено с {error_count} ошибками.")
             if error_count > 0:
                 await ultroid_bot.send_message(
                     udB.get_key("LOG_CHANNEL"),
-                    f"{error_count} Errors",
+                    f"{error_count} ошибок",
                 )

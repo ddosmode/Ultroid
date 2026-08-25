@@ -1,25 +1,25 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочитайте GNU Affero General Public License в
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available
+✘ Доступные команды
 
-• `{i}zip <reply to file>`
-    zip the replied file
-    To set password on zip: `{i}zip <password>` reply to file
+• `{i}zip <ответ на файл>`
+    заархивировать файл, на который ответили
+    Чтобы установить пароль на архив: `{i}zip <пароль>` ответ на файл
 
-• `{i}unzip <reply to zip file>`
-    unzip the replied file.
+• `{i}unzip <ответ на zip-файл>`
+    разархивировать файл, на который ответили.
 
-• `{i}azip <reply to file>`
-   add file to batch for batch upload zip
+• `{i}azip <ответ на файл>`
+    добавить файл в пакет для пакетной загрузки в архив
 
 • `{i}dozip`
-   upload batch zip the files u added from `{i}azip`
-   To set Password: `{i}dozip <password>`
+    загрузить пакетный архив с файлами, добавленными через `{i}azip`
+    Чтобы установить пароль: `{i}dozip <пароль>`
 
 """
 import os
@@ -64,7 +64,7 @@ async def zipp(event):
         await bash(f"zip -r {inp} {file}")
     k = time.time()
     n_file, _ = await event.client.fast_uploader(
-        inp, show_progress=True, event=event, message="Uploading...", to_delete=True
+        inp, show_progress=True, event=event, message="Загрузка...", to_delete=True
     )
     await event.client.send_file(
         event.chat_id,
@@ -107,7 +107,7 @@ async def unzipp(event):
     for x in ok:
         k = time.time()
         n_file, _ = await event.client.fast_uploader(
-            x, show_progress=True, event=event, message="Uploading...", to_delete=True
+            x, show_progress=True, event=event, message="Загрузка...", to_delete=True
         )
         await event.client.send_file(
             event.chat_id,
@@ -144,7 +144,7 @@ async def azipp(event):
         else:
             file = await event.download_media(reply.media, "zip/")
     await xx.edit(
-        f"Downloaded `{file}` succesfully\nNow Reply To Other Files To Add And Zip all at once"
+        f"Файл `{file}` успешно загружен\nТеперь ответьте на другие файлы, чтобы добавить и заархивировать всё сразу"
     )
 
 

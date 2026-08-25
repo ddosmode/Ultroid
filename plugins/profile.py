@@ -1,29 +1,29 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 • `{i}setname <first name // last name>`
-    Change your profile name.
+    Изменить имя профиля.
 
 • `{i}setbio <bio>`
-    Change your profile bio.
+    Изменить био профиля.
 
 • `{i}setpic <reply to pic>`
-    Change your profile pic.
+    Изменить фото профиля.
 
 • `{i}delpfp <n>(optional)`
-    Delete one profile pic, if no value given, else delete n number of pics.
+    Удалить одно фото профиля, если значение не указано, иначе удалить n фото.
 
 • `{i}poto <username>/reply`
   `{i}poto <reply/upload-limit>/all`
 
-  Ex: `{i}poto 10` - uploads starting 10 pfps of user.
-    Upload the photo of Chat/User if Available.
+  Например: `{i}poto 10` - загрузить первые 10 аватарок пользователя.
+    Загрузить фото чата/пользователя, если доступно.
 """
 import os
 
@@ -34,7 +34,7 @@ from . import eod, eor, get_string, mediainfo, ultroid_cmd
 
 TMP_DOWNLOAD_DIRECTORY = "resources/downloads/"
 
-# bio changer
+# Изменение био
 
 
 @ultroid_cmd(pattern="setbio( (.*)|$)", fullsudo=True)
@@ -43,12 +43,12 @@ async def _(ult):
     set = ult.pattern_match.group(1).strip()
     try:
         await ult.client(UpdateProfileRequest(about=set))
-        await eod(ok, f"Profile bio changed to\n`{set}`")
+        await eod(ok, f"Био профиля изменено на\n`{set}`")
     except Exception as ex:
-        await eod(ok, f"Error occured.\n`{str(ex)}`")
+        await eod(ok, f"Произошла ошибка.\n`{str(ex)}`")
 
 
-# name changer
+# Изменение имени
 
 
 @ultroid_cmd(pattern="setname ?((.|//)*)", fullsudo=True)
@@ -65,18 +65,18 @@ async def _(ult):
                 last_name=last_name,
             ),
         )
-        await eod(ok, f"Name changed to `{names}`")
+        await eod(ok, f"Имя изменено на `{names}`")
     except Exception as ex:
-        await eod(ok, f"Error occured.\n`{str(ex)}`")
+        await eod(ok, f"Произошла ошибка.\n`{str(ex)}`")
 
 
-# profile pic
+# Фото профиля
 
 
 @ultroid_cmd(pattern="setpic$", fullsudo=True)
 async def _(ult):
     if not ult.is_reply:
-        return await ult.eor("`Reply to a Media..`", time=5)
+        return await ult.eor("`Ответьте на медиа..`", time=5)
     reply_message = await ult.get_reply_message()
     ok = await ult.eor(get_string("com_1"))
     replfile = await reply_message.download_media()
@@ -86,13 +86,13 @@ async def _(ult):
             await ult.client(UploadProfilePhotoRequest(file=file))
         else:
             await ult.client(UploadProfilePhotoRequest(video=file))
-        await eod(ok, "`My Profile Photo has Successfully Changed !`")
+        await eod(ok, "`Мое фото профиля успешно изменено!`")
     except Exception as ex:
-        await eod(ok, f"Error occured.\n`{str(ex)}`")
+        await eod(ok, f"Произошла ошибка.\n`{str(ex)}`")
     os.remove(replfile)
 
 
-# delete profile pic(s)
+# Удаление фото профиля
 
 
 @ultroid_cmd(pattern="delpfp( (.*)|$)", fullsudo=True)
@@ -107,7 +107,7 @@ async def remove_profilepic(delpfp):
         lim = 1
     pfplist = await delpfp.client.get_profile_photos("me", limit=lim)
     await delpfp.client(DeletePhotosRequest(pfplist))
-    await eod(ok, f"`Successfully deleted {len(pfplist)} profile picture(s).`")
+    await eod(ok, f"`Успешно удалено {len(pfplist)} изображений профиля.`")
 
 
 @ultroid_cmd(pattern="poto( (.*)|$)")
@@ -154,7 +154,7 @@ async def gpoto(e):
             else:
                 okla.append(photo_path)
     if not okla:
-        return await eor(a, "`Pfp Not Found...`")
+        return await eor(a, "`Аватарка не найдена...`")
     if not just_dl:
         await a.delete()
         await e.reply(file=okla)
@@ -165,4 +165,4 @@ async def gpoto(e):
         return
     if isinstance(okla, list):
         okla = "\n".join(okla)
-    await a.edit(f"Downloaded pfp to [ `{okla}` ].")
+    await a.edit(f"Аватарка сохранена в [ `{okla}` ].")

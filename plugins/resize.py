@@ -1,18 +1,18 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
-•`{i}size <reply to media>`
-   To get size of it.
+•`{i}size <ответ на медиа>`
+   Чтобы получить его размер.
 
-•`{i}resize <number> <number>`
-   To resize image on x, y axis.
-   eg. `{i}resize 690 960`
+•`{i}resize <число> <число>`
+   Чтобы изменить размер изображения по осям x, y.
+   напр. `{i}resize 690 960`
 """
 from PIL import Image
 
@@ -31,7 +31,7 @@ async def size(e):
         img = await r.download_media()
     im = Image.open(img)
     x, y = im.size
-    await k.edit(f"Dimension Of This Image Is\n`{x} x {y}`")
+    await k.edit(f"Размеры этого изображения\n`{x} x {y}`")
     os.remove(img)
 
 
@@ -43,7 +43,7 @@ async def resize(e):
     sz = e.pattern_match.group(1).strip()
     if not sz:
         return await eor(
-            f"Give Some Size To Resize, Like `{HNDLR}resize 720 1080` ", time=5
+            f"Укажите размер для изменения, например `{HNDLR}resize 720 1080` ", time=5
         )
     k = await e.eor(get_string("com_1"))
     if hasattr(r.media, "document"):
@@ -53,7 +53,7 @@ async def resize(e):
     sz = sz.split()
     if len(sz) != 2:
         return await eor(
-            k, f"Give Some Size To Resize, Like `{HNDLR}resize 720 1080` ", time=5
+            k, f"Укажите размер для изменения, например `{HNDLR}resize 720 1080` ", time=5
         )
     x, y = int(sz[0]), int(sz[1])
     im = Image.open(img)

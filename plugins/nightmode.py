@@ -1,32 +1,32 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
-At Night it will turn off everyone permission to send message in  an all groups which you added via `{i}addnight`
-And Turn On auto at morning
+Ночью он отключает всем разрешение на отправку сообщений во всех группах, которые вы добавили через `{i}addnight`
+И автоматически включает утром
 
 • `{i}addnm`
-   Add NightMode
-   To Add Group To Auto Night Mode.
+   Добавить Ночной режим
+   Чтобы добавить группу в Авто Ночной режим.
 
 • `{i}remnm`
-   Remove NightMode
-   To remove Group From Auto Night Mode
+   Удалить Ночной режим
+   Чтобы удалить группу из Авто Ночного режима
 
 • `{i}listnm`
-   List NightMode
-   To Get All List of Groups where NightMode Active.
+   Список Ночного режима
+   Чтобы получить полный список групп, где активен Ночной режим.
 
-• `{i}nmtime <close hour> <close min> <open hour> <open min>`
-   NightMode Time
-   By Default Its close 00:00 , open 07:00
-   Use 24hr format
-   Ex- `nmtime 01 00 06 30`
+• `{i}nmtime <час закрытия> <минута закрытия> <час открытия> <минута открытия>`
+   Время Ночного режима
+   По умолчанию закрытие в 00:00 , открытие в 07:00
+   Используйте 24-часовой формат
+   Например- `nmtime 01 00 06 30`
 """
 
 from . import LOGS
@@ -34,7 +34,7 @@ from . import LOGS
 try:
     from apscheduler.schedulers.asyncio import AsyncIOScheduler
 except ImportError:
-    LOGS.error("nightmode: 'apscheduler' not Installed!")
+    LOGS.error("nightmode: 'apscheduler' не установлен!")
     AsyncIOScheduler = None
 
 from telethon.tl.functions.messages import EditChatDefaultBannedRightsRequest
@@ -67,7 +67,7 @@ async def add_grp(e):
     if pat := e.pattern_match.group(1).strip():
         try:
             keym.add((await ultroid_bot.get_entity(pat)).id)
-            return await e.eor(f"Done, Added {pat} To Night Mode.")
+            return await e.eor(f"Готово, добавлено {pat} в Ночной режим.")
         except BaseException:
             return await e.eor(get_string("nightm_5"), time=5)
     keym.add(e.chat_id)
@@ -79,7 +79,7 @@ async def r_em_grp(e):
     if pat := e.pattern_match.group(1).strip():
         try:
             keym.remove((await ultroid_bot.get_entity(pat)).id)
-            return await e.eor(f"Done, Removed {pat} To Night Mode.")
+            return await e.eor(f"Готово, удалено {pat} из Ночного режима.")
         except BaseException:
             return await e.eor(get_string("nightm_5"), time=5)
     keym.remove(e.chat_id)
@@ -89,7 +89,7 @@ async def r_em_grp(e):
 @ultroid_cmd(pattern="listnm$")
 async def rem_grp(e):
     chats = keym.get()
-    name = "NightMode Groups Are-:\n\n"
+    name = "Группы с Ночным режимом:-:\n\n"
     for x in chats:
         try:
             ok = await ultroid_bot.get_entity(x)
@@ -117,7 +117,7 @@ async def open_grp():
                     ),
                 )
             )
-            await ultroid_bot.send_message(chat, "**NightMode Off**\n\nGroup Opened 🥳.")
+            await ultroid_bot.send_message(chat, "**Ночной режим выключен**\n\nГруппа открыта 🥳.")
         except Exception as er:
             LOGS.info(er)
 
@@ -138,7 +138,7 @@ async def close_grp():
                 )
             )
             await ultroid_bot.send_message(
-                chat, f"**NightMode : Group Closed**\n\nGroup Will Open At `{h2}:{m2}`"
+                chat, f"**Ночной режим : Группа закрыта**\n\nГруппа откроется в `{h2}:{m2}`"
             )
         except Exception as er:
             LOGS.info(er)

@@ -1,17 +1,17 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - ЮзерБот
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License в
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 •`{i}addnsfw <ban/mute/kick>`
-   If someone sends 18+ content it will be deleted and action will be taken.
+   Если кто-то отправляет контент 18+, он будет удалён, и будет принято соответствующее действие.
 
 •`{i}remnsfw`
-   Remove Chat from nsfw filtering.
+    Удалить чат из NSFW-фильтрации.
 """
 
 import os
@@ -22,7 +22,7 @@ try:
     from ProfanityDetector import detector
 except ImportError:
     detector = None
-    LOGS.error("nsfwfilter: 'Profanitydetector' not installed!")
+    LOGS.error("nsfwfilter: 'Profanitydetector' не установлен!")
 from pyUltroid.dB.nsfw_db import is_nsfw, nsfw_chat, rem_nsfw
 
 from . import HNDLR, async_searcher, eor, events, udB, ultroid_bot, ultroid_cmd
@@ -32,20 +32,20 @@ from . import HNDLR, async_searcher, eor, events, udB, ultroid_bot, ultroid_cmd
 async def addnsfw(e):
     if not udB.get_key("DEEP_API"):
         return await eor(
-            e, f"Get Api from deepai.org and Add It `{HNDLR}setdb DEEP_API your-api`"
+            e, f"Получите API с deepai.org и добавьте его `{HNDLR}setdb DEEP_API your-api`"
         )
     action = e.pattern_match.group(1).strip()
     if not action or ("ban" or "kick" or "mute") not in action:
         action = "mute"
     nsfw_chat(e.chat_id, action)
     ultroid_bot.add_handler(nsfw_check, events.NewMessage(incoming=True))
-    await e.eor("Added This Chat To Nsfw Filter")
+    await e.eor("Чат добавлен в NSFW-фильтр")
 
 
 @ultroid_cmd(pattern="remnsfw", admins_only=True)
 async def remnsfw(e):
     rem_nsfw(e.chat_id)
-    await e.eor("Removed This Chat from Nsfw Filter.")
+    await e.eor("Чат удалён из NSFW-фильтра.")
 
 
 NWARN = {}
@@ -94,7 +94,7 @@ async def nsfw_check(e):
                     NWARN.update({e.sender_id: count})
                     return await ultroid_bot.send_message(
                         chat,
-                        f"**NSFW Warn {count}/3** To [{e.sender.first_name}](tg://user?id={e.sender_id})\nNSFW prohibited! Repeated violation would lead to {action}",
+                        f"**NSFW предупреждение {count}/3** Для [{e.sender.first_name}](tg://user?id={e.sender_id})\nNSFW запрещён! Повторное нарушение приведёт к {action}",
                     )
                 if "mute" in action:
                     try:
@@ -103,12 +103,12 @@ async def nsfw_check(e):
                         )
                         await ultroid_bot.send_message(
                             chat,
-                            f"NSFW Warn 3/3 to [{e.sender.first_name}](tg://user?id={e.sender_id})\n\n**Action Taken** : {action}",
+                            f"NSFW предупреждение 3/3 для [{e.sender.first_name}](tg://user?id={e.sender_id})\n\n**Действие выполнено** : {action}",
                         )
                     except BaseException:
                         await ultroid_bot.send_message(
                             chat,
-                            f"NSFW Warn 3/3 to [{e.sender.first_name}](tg://user?id={e.sender_id})\n\nUnable to {action}.",
+                            f"NSFW предупреждение 3/3 для [{e.sender.first_name}](tg://user?id={e.sender_id})\n\nНевозможно {action}.",
                         )
                 elif "ban" in action:
                     try:
@@ -117,31 +117,31 @@ async def nsfw_check(e):
                         )
                         await ultroid_bot.send_message(
                             chat,
-                            f"NSFW Warn 3/3 to [{e.sender.first_name}](tg://user?id={e.sender_id})\n\n**Action Taken** : {action}",
+                            f"NSFW предупреждение 3/3 для [{e.sender.first_name}](tg://user?id={e.sender_id})\n\n**Действие выполнено** : {action}",
                         )
                     except BaseException:
                         await ultroid_bot.send_message(
                             chat,
-                            f"NSFW Warn 3/3 to [{e.sender.first_name}](tg://user?id={e.sender_id})\n\nUnable to {action}.",
+                            f"NSFW предупреждение 3/3 для [{e.sender.first_name}](tg://user?id={e.sender_id})\n\nНевозможно {action}.",
                         )
                 elif "kick" in action:
                     try:
                         await ultroid_bot.kick_participant(chat, e.sender_id)
                         await ultroid_bot.send_message(
                             chat,
-                            f"NSFW Warn 3/3 to [{e.sender.first_name}](tg://user?id={e.sender_id})\n\n**Action Taken** : {action}",
+                            f"NSFW предупреждение 3/3 для [{e.sender.first_name}](tg://user?id={e.sender_id})\n\n**Действие выполнено** : {action}",
                         )
                     except BaseException:
                         await ultroid_bot.send_message(
                             chat,
-                            f"NSFW Warn 3/3 to [{e.sender.first_name}](tg://user?id={e.sender_id})\n\nUnable to {action}.",
+                            f"NSFW предупреждение 3/3 для [{e.sender.first_name}](tg://user?id={e.sender_id})\n\nНевозможно {action}.",
                         )
                 NWARN.pop(e.sender_id)
             else:
                 NWARN.update({e.sender_id: 1})
                 return await ultroid_bot.send_message(
                     chat,
-                    f"**NSFW Warn 1/3** To [{e.sender.first_name}](tg://user?id={e.sender_id})\nNSFW prohibited! Repeated violation would lead to {action}",
+                    f"**NSFW предупреждение 1/3** Для [{e.sender.first_name}](tg://user?id={e.sender_id})\nNSFW запрещён! Повторное нарушение приведёт к {action}",
                 )
 
 

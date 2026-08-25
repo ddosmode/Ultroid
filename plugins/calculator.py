@@ -1,8 +1,8 @@
-# Ultroid - UserBot
+# Ultroid - Пользовательский бот
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 
@@ -55,7 +55,7 @@ async def icalc(e):
 
 @in_pattern("calc", owner=True)
 async def _(e):
-    calc = e.builder.article("Calc", text=get_string("calc_1"), buttons=lst)
+    calc = e.builder.article("Калькулятор", text=get_string("calc_1"), buttons=lst)
     await e.answer([calc])
 
 
@@ -74,7 +74,7 @@ async def _(e):
     elif x == "C":
         if CALC.get(user):
             CALC.pop(user)
-        await e.answer("cleared")
+        await e.answer("очищено")
     elif x == "⌫":
         if CALC.get(user):
             get = CALC[user]
@@ -108,11 +108,11 @@ async def _(e):
             out = eval(get)
             try:
                 num = float(out)
-                await e.answer(f"Answer : {num}", cache_time=0, alert=True)
+                await e.answer(f"Ответ : {num}", cache_time=0, alert=True)
             except BaseException:
                 CALC.pop(user)
                 await e.answer(get_string("sf_8"), cache_time=0, alert=True)
-        await e.answer("None")
+        await e.answer("Нет")
     else:
         if CALC.get(user):
             get = CALC[user]

@@ -1,17 +1,17 @@
 # Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 • `{i}lock <msgs/media/sticker/gif/games/inline/polls/invites/pin/changeinfo>`
-    Lock the Used Setting in Used Group.
+    Заблокировать используемую настройку в группе.
 
 • `{i}unlock <msgs/media/sticker/gif/games/inline/polls/invites/pin/changeinfo>`
-    UNLOCK the Used Setting in Used Group.
+    РАЗБЛОКИРОВАТЬ используемую настройку в группе.
 """
 from telethon.tl.functions.messages import EditChatDefaultBannedRightsRequest
 
@@ -26,12 +26,12 @@ from . import ultroid_cmd
 async def un_lock(e):
     mat = e.pattern_match.group(2).strip()
     if not mat:
-        return await e.eor("`Give some Proper Input..`", time=5)
+        return await e.eor("`Укажите корректный параметр..`", time=5)
     lock = e.pattern_match.group(1) == ""
     ml = lock_unlock(mat, lock)
     if not ml:
-        return await e.eor("`Incorrect Input`", time=5)
-    msg = "Locked" if lock else "Unlocked"
+        return await e.eor("`Некорректный ввод`", time=5)
+    msg = "Заблокировано" if lock else "Разблокировано"
     try:
         await e.client(EditChatDefaultBannedRightsRequest(e.chat_id, ml))
     except Exception as er:

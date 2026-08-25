@@ -5,31 +5,31 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 • `{i}wspr <username>`
-    Send secret message..
+    Отправить секретное сообщение..
 
 • `{i}q <color-optional>`
 • `{i}q @username`
 • `{i}q r <color-optional>`
-• `{i}q count` : `multiple quotes`
-    Create quotes..
+• `{i}q count` : `несколько цитат`
+    Создать цитаты..
 
 • `{i}sticker <query>`
-    Search Stickers as Per ur Wish..
+    Искать стикеры по вашему запросу..
 
 • `{i}getaudio <reply to an audio>`
-    Download Audio To put in ur Desired Video/Gif.
+    Скачать аудио, чтобы вставить в нужное видео/гиф.
 
 • `{i}addaudio <reply to Video/gif>`
-    It will put the above audio to the replied video/gif.
+    Добавит аудио из ответа к прикреплённому видео/гиф.
 
 • `{i}dob <date of birth>`
-    Put in dd/mm/yy Format only(eg .dob 01/01/1999).
+    Введите в формате дд/мм/гг (напр. .dob 01/01/1999).
 
 • `{i}wall <query>`
-    Search Hd Wallpaper as Per ur Wish..
+    Искать HD обои по вашему запросу..
 """
 import os
 import time
@@ -79,7 +79,7 @@ async def daudtoid(e):
         r.media.document,
         xxx,
         c_time,
-        f"Downloading {dl}...",
+        f"Загружаю {dl}...",
     )
 
     File.append(file.name)
@@ -96,7 +96,7 @@ async def adaudroid(e):
     if not mediainfo(r.media).startswith("video"):
         return await eod(e, get_string("spcltool_3"))
     if not (File and os.path.exists(File[0])):
-        return await e.edit(f"`First reply an audio with {HNDLR}addaudio`")
+        return await e.edit(f"`Сначала ответьте на аудио с помощью {HNDLR}addaudio`")
     xxx = await e.eor(get_string("com_1"))
     dl = r.file.name or "input.mp4"
     c_time = time.time()
@@ -105,7 +105,7 @@ async def adaudroid(e):
         r.media.document,
         xxx,
         c_time,
-        f"Downloading {dl}...",
+        f"Загружаю {dl}...",
     )
 
     await xxx.edit(get_string("spcltool_5"))
@@ -113,7 +113,7 @@ async def adaudroid(e):
         f'ffmpeg -i "{file.name}" -i "{File[0]}" -shortest -c:v copy -c:a aac -map 0:v:0 -map 1:a:0 output.mp4'
     )
     out = "output.mp4"
-    mmmm = await uploader(out, out, time.time(), xxx, f"Uploading {out}...")
+    mmmm = await uploader(out, out, time.time(), xxx, f"Выгружаю {out}...")
     data = await metadata(out)
     width = data["width"]
     height = data["height"]
@@ -184,36 +184,36 @@ async def hbd(event):
     ish = (cm - abhi.today()).days + 1
     dan = ish
     if dan == 0:
-        hp = "`Happy BirthDay To U🎉🎊`"
+        hp = "`С днём рождения🎉🎊`"
     elif dan < 0:
         okk = 365 + ish
-        hp = f"{okk} Days Left 🥳"
+        hp = f"Осталось {okk} дней 🥳"
     elif dan > 0:
-        hp = f"{ish} Days Left 🥳"
+        hp = f"Осталось {ish} дней 🥳"
     if month == "01":
-        sign = "Capricorn" if (day < 20) else "Aquarius"
+        sign = "Козерог" if (day < 20) else "Водолей"
     elif month == "02":
-        sign = "Aquarius" if (day < 19) else "Pisces"
+        sign = "Водолей" if (day < 19) else "Рыбы"
     elif month == "03":
-        sign = "Pisces" if (day < 21) else "Aries"
+        sign = "Рыбы" if (day < 21) else "Овен"
     elif month == "04":
-        sign = "Aries" if (day < 20) else "Taurus"
+        sign = "Овен" if (day < 20) else "Телец"
     elif month == "05":
-        sign = "Taurus" if (day < 21) else "Gemini"
+        sign = "Телец" if (day < 21) else "Близнецы"
     elif month == "06":
-        sign = "Gemini" if (day < 21) else "Cancer"
+        sign = "Близнецы" if (day < 21) else "Рак"
     elif month == "07":
-        sign = "Cancer" if (day < 23) else "Leo"
+        sign = "Рак" if (day < 23) else "Лев"
     elif month == "08":
-        sign = "Leo" if (day < 23) else "Virgo"
+        sign = "Лев" if (day < 23) else "Дева"
     elif month == "09":
-        sign = "Virgo" if (day < 23) else "Libra"
+        sign = "Дева" if (day < 23) else "Весы"
     elif month == "10":
-        sign = "Libra" if (day < 23) else "Scorpio"
+        sign = "Весы" if (day < 23) else "Скорпион"
     elif month == "11":
-        sign = "Scorpio" if (day < 22) else "Sagittarius"
+        sign = "Скорпион" if (day < 22) else "Стрелец"
     elif month == "12":
-        sign = "Sagittarius" if (day < 22) else "Capricorn"
+        sign = "Стрелец" if (day < 22) else "Козерог"
     json = await async_searcher(
         f"https://aztro.sameerkumar.website/?sign={sign}&day=today",
         post=True,
@@ -229,24 +229,24 @@ async def hbd(event):
     await event.client.send_message(
         event.chat_id,
         f"""
-    Name -: {name}
+    Имя -: {name}
 
-D.O.B -:  {match}
+Дата рождения -:  {match}
 
-Lived -:  {saal}yr, {mahina}m, {din}d, {ghanta}hr, {mi}min, {slive}sec
+Прожито -:  {saal}г, {mahina}мес, {din}дн, {ghanta}ч, {mi}мин, {slive}сек
 
-Birthday -: {hp}
+День рождения -: {hp}
 
-Zodiac -: {sign}
+Знак зодиака -: {sign}
 
-**Horoscope On {dd} -**
+**Гороскоп на {dd} -**
 
 `{ds}`
 
-    Lucky Time :-        {lt}
-    Lucky Number :-   {ln}
-    Lucky Color :-        {cl}
-    Mood :-                   {md}
+    Удачное время :-        {lt}
+    Удачное число :-   {ln}
+    Удачный цвет :-        {cl}
+    Настроение :-                   {md}
     """,
         reply_to=event.reply_to_msg_id,
     )
@@ -257,7 +257,7 @@ session = Session()
 async def _(event):
     x = event.pattern_match.group(1).strip()
     if not x:
-        return await event.eor("`Give something to search`")
+        return await event.eor("`Введите запрос для поиска`")
     uu = await event.eor(get_string("com_1"))
     
     headers = {
@@ -274,10 +274,10 @@ async def _(event):
                 headers=headers
             ).content
             
-            # Check if response contains Cloudflare challenge
+            # Проверяем, не содержит ли ответ защиту Cloudflare
             if "Just a moment..." in response.decode():
                 retry_count += 1
-                await asyncio.sleep(2) # Wait before retry
+                await asyncio.sleep(2) # Ждём перед повторной попыткой
                 continue
                 
             z = bs(response, "html.parser")
@@ -286,7 +286,7 @@ async def _(event):
             if not packs:
                 return await uu.edit(get_string("spcltool_9"))
                 
-            break # Success - exit loop
+            break # Успех - выходим из цикла
             
         except Exception as er:
             retry_count += 1
@@ -294,7 +294,7 @@ async def _(event):
             continue
     
     if retry_count >= max_retries:
-        return await uu.edit("`Failed to fetch stickers after multiple retries`")
+        return await uu.edit("`Не удалось загрузить стикеры после нескольких попыток`")
     try:
         sticks = {}
         for pack in packs:
@@ -307,19 +307,19 @@ async def _(event):
         if not sticks:
             return await uu.edit(get_string("spcltool_9"))
 
-        a = "SᴛɪᴄᴋEʀs Aᴠᴀɪʟᴀʙʟᴇ ~\n\n"
+        a = "Дᴏсᴛуᴘныᴇ сᴛиᴋᴇʀы ~\n\n"
         for href, title in sticks.items():
             a += f"<a href={href}>{title}</a>\n"
         await uu.edit(a, parse_mode="html")
         
     except Exception as e:
-        await uu.edit(f"`Error: {str(e)}`\nTry again later.")
+        await uu.edit(f"`Ошибка: {str(e)}`\nПопробуйте позже.")
 
 @ultroid_cmd(pattern="wall( (.*)|$)")
 async def wall(event):
     inp = event.pattern_match.group(1).strip()
     if not inp:
-        return await event.eor("`Give me something to search..`")
+        return await event.eor("`Введите запрос для поиска..`")
     nn = await event.eor(get_string("com_1"))
     query = f"hd {inp}"
     images = await get_google_images(query)
@@ -332,7 +332,7 @@ async def wall(event):
 async def quott_(event):
     match = event.pattern_match.group(1).strip()
     if not event.is_reply:
-        return await event.eor("`Reply to Message..`")
+        return await event.eor("`Ответьте на сообщение..`")
     msg = await event.eor(get_string("com_1"))
     reply = await event.get_reply_message()
     replied_to, reply_ = None, None
@@ -385,7 +385,7 @@ async def quott_(event):
         )
     except Exception as er:
         return await msg.edit(str(er))
-    message = await reply.reply("Quotly by Ultroid", file=file)
+    message = await reply.reply("Цитата от Ultroid", file=file)
     os.remove(file)
     await msg.delete()
     return message

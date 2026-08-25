@@ -6,14 +6,14 @@
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 """
-**Get Weather Data using OpenWeatherMap API**
-❍  Commands Available -
+**Получение данных о погоде через OpenWeatherMap API**
+❍  Доступные команды -
 
-• `{i}weather` <city name>
-    Shows the Weather of Cities
+• `{i}weather` <название города>
+    Показывает погоду в городах
 
-• `{i}air` <city name>
-    Shows the Air Condition of Cities
+• `{i}air` <название города>
+    Показывает состояние воздуха в городах
 """
 
 import datetime
@@ -49,7 +49,7 @@ async def get_timezone(offset_seconds, use_utc=False):
             now = datetime.datetime.now(tz)
             if now.utcoffset() == offset:
                 return f"{m} ({timezone}{sign}{hours:02d})"
-        return "Timezone not found"
+        return "Часовой пояс не найден"
 
 async def getWindinfo(speed: str, degree: str) -> str:
     dirs = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
@@ -77,16 +77,16 @@ async def weather(event):
     x = udB.get_key("OPENWEATHER_API")
     if x is None:
         await event.eor(
-            "No API found. Get One from [Here](https://api.openweathermap.org)\nAnd Add it in OPENWEATHER_API Redis Key",
+            "API не найден. Получите его [здесь](https://api.openweathermap.org)\nИ добавьте в ключ Redis OPENWEATHER_API",
             time=8,
         )
         return
     input_str = event.pattern_match.group(1)
     if not input_str:
-        await event.eor("No Location was Given...", time=5)
+        await event.eor("Местоположение не указано...", time=5)
         return
     elif input_str == "butler":
-        await event.eor("search butler,au for australila", time=5)
+        await event.eor("ищите butler,au для australila", time=5)
     sample_url = f"https://api.openweathermap.org/data/2.5/weather?q={input_str}&APPID={x}&units=metric"
     try:
         response_api = await async_searcher(sample_url, re_json=True)
@@ -98,25 +98,25 @@ async def weather(event):
             await msg.edit(
                 f"{response_api['name']}, {response_api['sys']['country']}\n\n"
                 f"╭────────────────•\n"
-                f"╰➢ **𝖶𝖾𝖺𝗍𝗁𝖾𝗋:** {response_api['weather'][0]['description']}\n"
-                f"╰➢ **𝖳𝗂𝗆𝖾𝗓𝗈𝗇𝖾:** {tz}\n"
-                f"╰➢ **𝖲𝗎𝗇𝗋𝗂𝗌𝖾:** {time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(sun_rise_time))}\n"
-                f"╰➢ **𝖲𝗎𝗇𝗌𝖾𝗍:** {time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(sun_set_time))}\n"
-                f"╰➢ **𝖶𝗂𝗇𝖽:** {await getWindinfo(response_api['wind']['speed'], response_api['wind']['deg'])}\n"
-                f"╰➢ **𝖳𝖾𝗆𝗉𝖾𝗋𝖺𝗍𝗎𝗋𝖾:** {response_api['main']['temp']}°C\n"
-                f"╰➢ **𝖥𝖾𝖾𝗅𝗌 𝗅𝗂𝗄𝖾:** {response_api['main']['feels_like']}°C\n"
-                f"╰➢ **𝖬𝗂𝗇𝗂𝗆𝗎𝗆:** {response_api['main']['temp_min']}°C\n"
-                f"╰➢ **𝖬𝖺𝗑𝗂𝗆𝗎𝗆:** {response_api['main']['temp_max']}°C\n"
-                f"╰➢ **𝖯𝗋𝖾𝗌𝗌𝗎𝗋𝖾:** {response_api['main']['pressure']} hPa\n"
-                f"╰➢ **𝖧𝗎𝗆𝗂𝖽𝗂𝗍𝗒:** {response_api['main']['humidity']}%\n"
-                f"╰➢ **𝖵𝗂𝗌𝗂𝖻𝗂𝗅𝗂𝗍𝗒:** {response_api['visibility']} m\n"
-                f"╰➢ **𝖢𝗅𝗈𝗎𝖽𝗌:** {response_api['clouds']['all']}%\n"
+                f"╰➢ **Погода:** {response_api['weather'][0]['description']}\n"
+                f"╰➢ **Часовой пояс:** {tz}\n"
+                f"╰➢ **Восход:** {time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(sun_rise_time))}\n"
+                f"╰➢ **Закат:** {time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(sun_set_time))}\n"
+                f"╰➢ **Ветер:** {await getWindinfo(response_api['wind']['speed'], response_api['wind']['deg'])}\n"
+                f"╰➢ **Температура:** {response_api['main']['temp']}°C\n"
+                f"╰➢ **Ощущается как:** {response_api['main']['feels_like']}°C\n"
+                f"╰➢ **Минимум:** {response_api['main']['temp_min']}°C\n"
+                f"╰➢ **Максимум:** {response_api['main']['temp_max']}°C\n"
+                f"╰➢ **Давление:** {response_api['main']['pressure']} hPa\n"
+                f"╰➢ **Влажность:** {response_api['main']['humidity']}%\n"
+                f"╰➢ **Видимость:** {response_api['visibility']} m\n"
+                f"╰➢ **Облачность:** {response_api['clouds']['all']}%\n"
                 f"╰────────────────•\n\n"
             )
         else:
             await msg.edit(response_api["message"])
     except Exception as e:
-        await event.eor(f"An unexpected error occurred: {str(e)}", time=5)
+        await event.eor(f"Произошла непредвиденная ошибка: {str(e)}", time=5)
 
 
 @ultroid_cmd(pattern="air ?(.*)")
@@ -127,13 +127,13 @@ async def air_pollution(event):
     x = udB.get_key("OPENWEATHER_API")
     if x is None:
         await event.eor(
-            "No API found. Get One from [Here](https://api.openweathermap.org)\nAnd Add it in OPENWEATHER_API Redis Key",
+            "API не найден. Получите его [здесь](https://api.openweathermap.org)\nИ добавьте в ключ Redis OPENWEATHER_API",
             time=8,
         )
         return
     input_str = event.pattern_match.group(1)
     if not input_str:
-        await event.eor("`No Location was Given...`", time=5)
+        await event.eor("`Местоположение не указано...`", time=5)
         return
     if input_str.lower() == "perth":
         geo_url = f"https://geocode.xyz/perth%20au?json=1"
@@ -145,32 +145,32 @@ async def air_pollution(event):
         latitude = geo_data["latt"]
     except KeyError as e:
         LOGS.info(e)
-        await event.eor("`Unable to find coordinates for the given location.`", time=5)
+        await event.eor("`Не удалось найти координаты для указанного местоположения.`", time=5)
         return
     try:
         city = geo_data["standard"]["city"]
         prov = geo_data["standard"]["prov"]
     except KeyError as e:
         LOGS.info(e)
-        await event.eor("`Unable to find city for the given coordinates.`", time=5)
+        await event.eor("`Не удалось найти город для указанных координат.`", time=5)
         return
     air_pollution_data = await get_air_pollution_data(latitude, longitude, x)
     if air_pollution_data is None:
         await event.eor(
-            "`Unable to fetch air pollution data for the given location.`", time=5
+            "`Не удалось получить данные о загрязнении воздуха для указанного местоположения.`", time=5
         )
         return
     await msg.edit(
         f"{city}, {prov}\n\n"
         f"╭────────────────•\n"
-        f"╰➢ **𝖠𝖰𝖨:** {air_pollution_data['main']['aqi']}\n"
-        f"╰➢ **𝖢𝖺𝗋𝖻𝗈𝗇 𝖬𝗈𝗇𝗈𝗑𝗂𝖽𝖾:** {air_pollution_data['components']['co']}µg/m³\n"
-        f"╰➢ **𝖭𝗈𝗂𝗍𝗋𝗈𝗀𝖾𝗇 𝖬𝗈𝗇𝗈𝗑𝗂𝖽𝖾:** {air_pollution_data['components']['no']}µg/m³\n"
-        f"╰➢ **𝖭𝗂𝗍𝗋𝗈𝗀𝖾𝗇 𝖣𝗂𝗈𝗑𝗂𝖽𝖾:** {air_pollution_data['components']['no2']}µg/m³\n"
-        f"╰➢ **𝖮𝗓𝗈𝗇𝖾:** {air_pollution_data['components']['o3']}µg/m³\n"
-        f"╰➢ **𝖲𝗎𝗅𝗉𝗁𝗎𝗋 𝖣𝗂𝗈𝗑𝗂𝖽𝖾:** {air_pollution_data['components']['so2']}µg/m³\n"
-        f"╰➢ **𝖠𝗆𝗆𝗈𝗇𝗂𝖺:** {air_pollution_data['components']['nh3']}µg/m³\n"
-        f"╰➢ **𝖥𝗂𝗇𝖾 𝖯𝖺𝗋𝗍𝗂𝖼𝗅𝖾𝗌 (PM₂.₅):** {air_pollution_data['components']['pm2_5']}\n"
-        f"╰➢ **𝖢𝗈𝖺𝗋𝗌𝖾 𝖯𝖺𝗋𝗍𝗂𝖼𝗅𝖾𝗌 (PM₁₀):** {air_pollution_data['components']['pm10']}\n"
+        f"╰➢ **ИКВ:** {air_pollution_data['main']['aqi']}\n"
+        f"╰➢ **Оксид углерода:** {air_pollution_data['components']['co']}µg/m³\n"
+        f"╰➢ **Оксид азота:** {air_pollution_data['components']['no']}µg/m³\n"
+        f"╰➢ **Диоксид азота:** {air_pollution_data['components']['no2']}µg/m³\n"
+        f"╰➢ **Озон:** {air_pollution_data['components']['o3']}µg/m³\n"
+        f"╰➢ **Диоксид серы:** {air_pollution_data['components']['so2']}µg/m³\n"
+        f"╰➢ **Аммиак:** {air_pollution_data['components']['nh3']}µg/m³\n"
+        f"╰➢ **Мелкие частицы (PM₂.₅):** {air_pollution_data['components']['pm2_5']}\n"
+        f"╰➢ **Крупные частицы (PM₁₀):** {air_pollution_data['components']['pm10']}\n"
         f"╰────────────────•\n\n"
     )

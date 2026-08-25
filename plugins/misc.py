@@ -1,25 +1,25 @@
-# Ultroid - UserBot
+# Ultroid - ЮзерБот
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License в
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 • `{i}eod`
-    `Get Event of the Today`
+    `Получить событие дня`
 
 • `{i}pntrst <link/id>`
-    Download and send pinterest pins
+    Скачать и отправить пины Pinterest
 
 • `{i}gadget <search query>`
-    Gadget Search from Telegram.
+    Поиск гаджетов в Telegram.
 
 • `{i}randomuser`
-   Generate details about a random user.
+   Генерация данных случайного пользователя.
 
 • `{i}ascii <reply image>`
-    Convert replied image into html.
+     Конвертировать изображение в HTML.
 """
 
 import os
@@ -43,7 +43,7 @@ from . import async_searcher, get_random_user_data, get_string, re, ultroid_cmd
 async def diela(e):
     m = await e.eor(get_string("com_1"))
     li = "https://daysoftheyear.com"
-    te = "🎊 **Events of the Day**\n\n"
+    te = "🎊 **События дня**\n\n"
     da = dt.now()
     month = da.strftime("%b")
     li += f"/days/{month}/" + da.strftime("%F").split("-")[2]
@@ -61,7 +61,7 @@ async def diela(e):
 async def pinterest(e):
     m = e.pattern_match.group(1).strip()
     if not m:
-        return await e.eor("`Give pinterest link.`", time=3)
+        return await e.eor("`Укажите ссылку Pinterest.`", time=3)
     soup = await async_searcher(
         "https://www.expertstool.com/download-pinterest-video/",
         data={"url": m},
@@ -70,26 +70,26 @@ async def pinterest(e):
     try:
         _soup = bs(soup, "html.parser").find("table").tbody.find_all("tr")
     except BaseException:
-        return await e.eor("`Wrong link or private pin.`", time=5)
+        return await e.eor("`Неверная ссылка или закрытый пин.`", time=5)
     file = _soup[1] if len(_soup) > 1 else _soup[0]
     file = file.td.a["href"]
-    await e.client.send_file(e.chat_id, file, caption=f"Pin:- {m}")
+    await e.client.send_file(e.chat_id, file, caption=f"Пин:- {m}")
 
 
 @ultroid_cmd(pattern="gadget( (.*)|$)")
 async def mobs(e):
     mat = e.pattern_match.group(1).strip()
     if not mat:
-        await e.eor("Please Give a Mobile Name to look for.")
+        await e.eor("Пожалуйста, укажите название мобильного устройства для поиска.")
     query = mat.replace(" ", "%20")
     jwala = f"https://gadgets.ndtv.com/search?searchtext={query}"
     c = await async_searcher(jwala)
     b = bs(c, "html.parser", from_encoding="utf-8")
     co = b.find_all("div", "rvw-imgbox")
     if not co:
-        return await e.eor("No Results Found!")
+        return await e.eor("Результаты не найдены!")
     bt = await e.eor(get_string("com_1"))
-    out = "**📱 Mobile / Gadgets Search**\n\n"
+    out = "**📱 Поиск мобильных / гаджетов**\n\n"
     li = co[0].find("a")
     imu, title = None, li.find("img")["title"]
     cont = await async_searcher(li["href"])
@@ -124,7 +124,7 @@ async def _gen_data(event):
 )
 async def _(e):
     if not Img2HTMLConverter:
-        return await e.eor("'img2html-converter' not installed!")
+        return await e.eor("'img2html-converter' не установлен!")
     if not e.reply_to_msg_id:
         return await e.eor(get_string("ascii_1"))
     m = await e.eor(get_string("ascii_2"))

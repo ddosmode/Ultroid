@@ -1,34 +1,34 @@
-# Ultroid - UserBot
+# Ultroid - Юзербот
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
----- Welcomes ----
+---- Приветствия ----
 • `{i}setwelcome <message/reply to message>`
-    Set welcome message in the current chat.
+    Установить приветственное сообщение в текущем чате.
 
 • `{i}clearwelcome`
-    Delete the welcome in the current chat.
+    Удалить приветствие в текущем чате.
 
 • `{i}getwelcome`
-    Get the welcome message in the current chat.
+    Получить приветственное сообщение в текущем чате.
 
----- GoodByes ----
+---- Прощания ----
 • `{i}setgoodbye <message/reply to message>`
-    Set goodbye message in the current chat.
+    Установить прощальное сообщение в текущем чате.
 
 • `{i}cleargoodbye`
-    Delete the goodbye in the current chat.
+    Удалить прощание в текущем чате.
 
 • `{i}getgoodbye`
-    Get the goodbye message in the current chat.
+    Получить прощальное сообщение в текущем чате.
 
 • `{i}thankmembers on/off`
-    Send a thank you sticker on hitting a members count of 100*x in your groups.
+    Отправить стикер с благодарностью при достижении количества участников, кратного 100, в ваших группах.
 """
 import os
 
@@ -51,7 +51,7 @@ from pyUltroid.fns.tools import create_tl_btn, format_btn, get_msg_button
 from . import HNDLR, eor, get_string, mediainfo, ultroid_cmd
 from ._inline import something
 
-Note = "\n\nNote: `{mention}`, `{group}`, `{count}`, `{name}`, `{fullname}`, `{username}`, `{userid}` can be used as formatting parameters.\n\n"
+Note = "\n\nПримечание: `{mention}`, `{group}`, `{count}`, `{name}`, `{fullname}`, `{username}`, `{userid}` можно использовать как параметры форматирования.\n\n"
 
 
 @ultroid_cmd(pattern="setwelcome", groups_only=True)
@@ -113,7 +113,7 @@ async def listwel(event):
     if wel.get("button"):
         btn = create_tl_btn(wel["button"])
         return await something(event, msgg, med, btn)
-    await event.reply(f"**Welcome Note in this chat**\n\n`{msgg}`", file=med)
+    await event.reply(f"**Приветствие в этом чате**\n\n`{msgg}`", file=med)
     await event.delete()
 
 
@@ -149,12 +149,12 @@ async def setgb(event):
             add_goodbye(event.chat_id, txt, m, btn)
         else:
             add_goodbye(event.chat_id, None, m, btn)
-        await eor(x, "`Goodbye note saved`")
+        await eor(x, "`Прощальная заметка сохранена`")
     elif text:
         if not btn:
             txt, btn = get_msg_button(text)
         add_goodbye(event.chat_id, txt, None, btn)
-        await eor(x, "`Goodbye note saved`")
+        await eor(x, "`Прощальная заметка сохранена`")
     else:
         await eor(x, get_string("grt_7"), time=5)
 
@@ -164,7 +164,7 @@ async def clearwgb(event):
     if not get_goodbye(event.chat_id):
         return await event.eor(get_string("grt_6"), time=5)
     delete_goodbye(event.chat_id)
-    await event.eor("`Goodbye Note Deleted`", time=5)
+    await event.eor("`Прощальная заметка удалена`", time=5)
 
 
 @ultroid_cmd(pattern="getgoodbye$", groups_only=True)
@@ -177,7 +177,7 @@ async def listgd(event):
     if wel.get("button"):
         btn = create_tl_btn(wel["button"])
         return await something(event, msgg, med, btn)
-    await event.reply(f"**Goodbye Note in this chat**\n\n`{msgg}`", file=med)
+    await event.reply(f"**Прощание в этом чате**\n\n`{msgg}`", file=med)
     await event.delete()
 
 
@@ -187,7 +187,7 @@ async def thank_set(event):
     if not type_ or type_ == "":
         await eor(
             event,
-            f"**Current Chat Settings:**\n**Thanking Members:** `{must_thank(event.chat_id)}`\n\nUse `{HNDLR}thankmembers on` or `{HNDLR}thankmembers off` to toggle current settings!",
+            f"**Текущие настройки чата:**\n**Благодарение участников:** `{must_thank(event.chat_id)}`\n\nИспользуйте `{HNDLR}thankmembers on` или `{HNDLR}thankmembers off` для переключения текущих настроек!",
         )
         return
     chat = event.chat_id
@@ -197,5 +197,5 @@ async def thank_set(event):
         remove_thanks(chat)
     await eor(
         event,
-        f"**Done! Thank you members has been turned** `{type_.lower()}` **for this chat**!",
+        f"**Готово! Благодарение участников было переключено на** `{type_.lower()}` **для этого чата**!",
     )

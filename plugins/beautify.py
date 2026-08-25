@@ -1,8 +1,8 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - ЮзерБот
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import get_help
@@ -54,7 +54,7 @@ async def cr_bn(event):
         return
     await xxxx.delete()
     await event.reply(
-        f"Carbonised by {inline_mention(event.sender)}",
+        f"Карбонизировано пользователем {inline_mention(event.sender)}",
         file=xx,
     )
 
@@ -86,7 +86,7 @@ async def crbn(event):
     xx = await Carbon(code=code, backgroundColor=match)
     await msg.delete()
     await event.reply(
-        f"Carbonised by {inline_mention(event.sender)}",
+        f"Карбонизировано пользователем {inline_mention(event.sender)}",
         file=xx,
     )
 
@@ -115,7 +115,7 @@ async def pass_on(ult):
         from playwright.async_api import async_playwright
     except ImportError:
         await ult.eor(
-            "`playwright` is not installed!\nPlease install it to use this command.."
+            "`playwright` не установлен!\nПожалуйста, установите его для использования этой команды.."
         )
         return
 
@@ -137,9 +137,9 @@ async def pass_on(ult):
             if not theme and spli[1] in RaySoTheme:
                 theme = spli[1]
         except Exception as sam:
-            LOGS.exception(sam)    
+            LOGS.exception(sam)
     if not text:
-        await proc.eor("No text to beautify!")
+        await proc.eor("Нет текста для украшения!")
         return
     if not theme:
         theme = random.choice(RaySoTheme)
@@ -176,12 +176,12 @@ async def pass_on(ult):
                     download = await download_info.value
                     await download.save_as(name)
             except playwright._impl._errors.TimeoutError:
-                LOGS.error("Timeout error: Selector not found within 60 seconds.")
-                await proc.eor("Failed to find the editor within 60 seconds.")
+                LOGS.error("Ошибка таймаута: Селектор не найден в течение 60 секунд.")
+                await proc.eor("Не удалось найти редактор в течение 60 секунд.")
                 return
         except Exception as e:
-            LOGS.error(f"Error occurred during playwright operation: {e}")
-            await proc.eor("An error occurred during the operation.")
+            LOGS.error(f"Произошла ошибка при работе playwright: {e}")
+            await proc.eor("Произошла ошибка во время операции.")
             return
         finally:
             if os.path.exists(name):
@@ -190,8 +190,8 @@ async def pass_on(ult):
                     await proc.try_delete()
                     os.remove(name)
                 except Exception as e:
-                    LOGS.error(f"Error occurred while replying with the file: {e}")
-                    await proc.eor("Failed to send the file.")
+                    LOGS.error(f"Произошла ошибка при ответе с файлом: {e}")
+                    await proc.eor("Не удалось отправить файл.")
             else:
-                LOGS.error(f"Error: File {name} not found or inaccessible.")
-                await proc.eor("Failed to save the file.")
+                LOGS.error(f"Ошибка: Файл {name} не найден или недоступен.")
+                await proc.eor("Не удалось сохранить файл.")

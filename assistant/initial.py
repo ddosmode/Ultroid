@@ -1,8 +1,8 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - Пользовательский бот
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 import re
@@ -10,37 +10,37 @@ import re
 from . import *
 
 STRINGS = {
-    1: """🎇 **Thanks for Deploying Ultroid Userbot!**
+    1: """🎇 **Спасибо за развертывание Ultroid Userbot!**
 
-• Here, are the Some Basic stuff from, where you can Know, about its Usage.""",
-    2: """🎉** About Ultroid**
+• Вот некоторые основные моменты, из которых вы можете узнать об использовании.""",
+    2: """🎉** Об Ultroid**
 
-🧿 Ultroid is Pluggable and powerful Telethon Userbot, made in Python from Scratch. It is Aimed to Increase Security along with Addition of Other Useful Features.
+🧿 Ultroid — это модульный и мощный Telethon Userbot, созданный на Python с нуля. Он направлен на повышение безопасности вместе с добавлением других полезных функций.
 
-❣ Made by **@TeamUltroid**""",
-    3: """**💡• FAQs •**
+❣ Сделано **@TeamUltroid**""",
+    3: """**💡• ЧаВо •**
 
--> [Username Tracker](https://t.me/UltroidUpdates/24)
--> [Keeping Custom Addons Repo](https://t.me/UltroidUpdates/28)
--> [Disabling Deploy message](https://t.me/UltroidUpdates/27)
--> [Setting up TimeZone](https://t.me/UltroidUpdates/22)
--> [About Inline PmPermit](https://t.me/UltroidUpdates/21)
--> [About Dual Mode](https://t.me/UltroidUpdates/18)
--> [Custom Thumbnail](https://t.me/UltroidUpdates/13)
--> [About FullSudo](https://t.me/UltroidUpdates/11)
--> [Setting Up PmBot](https://t.me/UltroidUpdates/2)
--> [Also Check](https://t.me/UltroidUpdates/14)
+-> [Трекер юзернеймов](https://t.me/UltroidUpdates/24)
+-> [Хранение репо с кастомными аддонами](https://t.me/UltroidUpdates/28)
+-> [Отключение сообщения о деплое](https://t.me/UltroidUpdates/27)
+-> [Настройка часового пояса](https://t.me/UltroidUpdates/22)
+-> [Об Inline PmPermit](https://t.me/UltroidUpdates/21)
+-> [О Dual Mode](https://t.me/UltroidUpdates/18)
+-> [Кастомная миниатюра](https://t.me/UltroidUpdates/13)
+-> [О FullSudo](https://t.me/UltroidUpdates/11)
+-> [Настройка PmBot](https://t.me/UltroidUpdates/2)
+-> [Также проверьте](https://t.me/UltroidUpdates/14)
 
-**• To Know About Updates**
-  - Join @TeamUltroid.""",
-    4: f"""• `To Know All Available Commands`
+**• Чтобы узнать об обновлениях**
+  - Вступите в @TeamUltroid.""",
+    4: f"""• `Чтобы узнать все доступные команды`
 
   - `{HNDLR}help`
   - `{HNDLR}cmds`""",
-    5: """• **For Any Other Query or Suggestion**
-  - Move to **@UltroidSupportChat**.
+    5: """• **По любым другим вопросам или предложениям**
+  - Перейдите в **@UltroidSupportChat**.
 
-• Thanks for Reaching till END.""",
+• Спасибо, что дошли до конца.""",
 }
 
 
@@ -50,7 +50,7 @@ async def init_depl(e):
     if CURRENT == 5:
         return await e.edit(
             STRINGS[5],
-            buttons=Button.inline("<< Back", "initbk_4"),
+            buttons=Button.inline("<< Назад", "initbk_4"),
             link_preview=False,
         )
 
@@ -70,7 +70,7 @@ async def ineiq(e):
     if CURRENT == 1:
         return await e.edit(
             STRINGS[1],
-            buttons=Button.inline("Start Back >>", "initft_2"),
+            buttons=Button.inline("В начало >>", "initft_2"),
             link_preview=False,
         )
 

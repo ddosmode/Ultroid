@@ -6,13 +6,13 @@
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 """
-✘ Commands Available -
+✘ Доступные команды -
 
-• `{i}setstory <reply media>`
-    Set replied media as your story.
+• `{i}setstory <ответ на медиа>`
+    Установить медиа в качестве истории.
 
-• `{i}storydl <username/reply user/story link>`
-    Download and upload user stories or specific story from link!
+• `{i}storydl <юзернейм/ответ на пользователя/ссылка на историю>`
+    Скачать и загрузить истории пользователя или конкретную историю по ссылке!
 """
 
 import os
@@ -32,7 +32,7 @@ from telethon.events import NewMessage
 async def setStory(event: NewMessage.Event):
     reply = await event.get_reply_message()
     if not (reply and (reply.photo or reply.video)):
-        await event.eor("Please reply to a photo or video!", time=5)
+        await event.eor("Ответьте на фото или видео!", time=5)
         return
     msg = await event.eor(get_string("com_1"))
     try:
@@ -45,9 +45,9 @@ async def setStory(event: NewMessage.Event):
             ]
         )
     )
-        await msg.eor("🔥 **Story is Live!**", time=5)
+        await msg.eor("🔥 **История опубликована!**", time=5)
     except Exception as er:
-        await msg.edit(f"__ERROR: {er}__")
+        await msg.edit(f"__ОШИБКА: {er}__")
         LOGS.exception(er)
 
 
@@ -58,22 +58,22 @@ async def downloadUserStories(event: NewMessage.Event):
     
     try:
         text_input = event.text.split(maxsplit=1)[1]
-        # Check if input is a Telegram story link
+        # Проверяем, является ли ввод ссылкой на историю Telegram
         story_link_pattern = r"https?://t\.me/([^/]+)/s/(\d+)"
         match = re.match(story_link_pattern, text_input)
         
         if match:
-            # Extract username and story ID from link
+            # Извлекаем юзернейм и ID истории из ссылки
             username = match.group(1)
             story_id = int(match.group(2))
             
             try:
-                # Get the entity for the username
+                # Получаем сущность по юзернейму
                 entity = await event.client.get_entity(username)
                 
-                # Using GetStoriesByIDRequest to fetch the specific story
+                # Используем GetStoriesByIDRequest для получения конкретной истории
                 stories_response = await event.client(
-                    GetStoriesByIDRequest(
+                    GetStickerSetByIDRequest(
                         entity.id,
                         id=[story_id]
                     )
@@ -81,9 +81,9 @@ async def downloadUserStories(event: NewMessage.Event):
                 print(stories_response)
                 
                 if not stories_response.stories:
-                    return await message.eor("ERROR: Story not found or expired!")
+                    return await message.eor("ОШИБКА: История не найдена или истекла!")
 
-                # Download and upload the story
+                # Скачиваем и загружаем историю
                 for story in stories_response.stories:
                     client: TelegramClient = event.client
                     file = await client.download_media(story.media)
@@ -94,14 +94,14 @@ async def downloadUserStories(event: NewMessage.Event):
                     )
                     os.remove(file)
                 
-                return await message.eor("**Uploaded Story!**", time=5)
+                return await message.eor("**История загружена!**", time=5)
 
             except Exception as er:
-                await message.eor(f"ERROR while fetching story: __{er}__")
+                await message.eor(f"ОШИБКА при получении истории: __{er}__")
                 LOGS.exception(er)
                 return
         
-        # If not a story link, proceed with the original functionality
+        # Если это не ссылка на историю, выполняем стандартную функциональность
         username = text_input
         
     except IndexError as er:
@@ -110,7 +110,7 @@ async def downloadUserStories(event: NewMessage.Event):
             username = replied.sender_id
         else:
             return await message.eor(
-                "Please reply to a user, provide username or story link!"
+                "Ответьте на пользователя, укажите юзернейм или ссылку на историю!"
             )
             
     with suppress(ValueError):
@@ -131,11 +131,11 @@ async def downloadUserStories(event: NewMessage.Event):
             ).full_user 
             stories = full_user.stories
     except Exception as er:
-        await message.eor(f"ERROR: __{er}__")
+        await message.eor(f"ОШИБКА: __{er}__")
         return
 
     if not (stories and stories.stories):
-        await message.eor("ERROR: Stories not found!")
+        await message.eor("ОШИБКА: Истории не найдены!")
         return
     for story in stories.stories[:5]:
         client: TelegramClient = event.client
@@ -147,4 +147,4 @@ async def downloadUserStories(event: NewMessage.Event):
         )
         os.remove(file)
 
-    await message.eor("**Uploaded Stories!**", time=5)
+    await message.eor("**Истории загружены!**", time=5)

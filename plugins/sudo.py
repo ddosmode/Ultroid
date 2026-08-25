@@ -5,16 +5,16 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 • `{i}addsudo`
-    Add Sudo Users by replying to user or using <space> separated userid(s)
+    Добавить SUDO-пользователей ответом на сообщение или через <пробел> с ID пользователя(ей)
 
 • `{i}delsudo`
-    Remove Sudo Users by replying to user or using <space> separated userid(s)
+    Удалить SUDO-пользователей ответом на сообщение или через <пробел> с ID пользователя(ей)
 
 • `{i}listsudo`
-    List all sudo users.
+    Список всех SUDO-пользователей.
 """
 
 from telethon.tl.types import User
@@ -54,13 +54,13 @@ async def _(ult):
     if id == ultroid_bot.uid:
         mmm = get_string("sudo_2")
     elif id in sudoers():
-        mmm = f"{name} `is already a SUDO User ...`"
+        mmm = f"{name} `уже является SUDO-пользователем ...`"
     else:
         udB.set_key("SUDO", "True")
         key = sudoers()
         key.append(id)
         udB.set_key("SUDOS", key)
-        mmm = f"**Added** {name} **as SUDO User**"
+        mmm = f"**Добавлен** {name} **как SUDO-пользователь**"
     await ult.eor(mmm, time=5)
 
 
@@ -90,12 +90,12 @@ async def _(ult):
         return await ult.eor(get_string("sudo_1"), time=5)
     name = inline_mention(name) if name else f"`{id}`"
     if id not in sudoers():
-        mmm = f"{name} `wasn't a SUDO User ...`"
+        mmm = f"{name} `не был SUDO-пользователем ...`"
     else:
         key = sudoers()
         key.remove(id)
         udB.set_key("SUDOS", key)
-        mmm = f"**Removed** {name} **from SUDO User(s)**"
+        mmm = f"**Удалён** {name} **из SUDO-пользователей**"
     await ult.eor(mmm, time=5)
 
 
@@ -115,10 +115,10 @@ async def _(ult):
         if name:
             msg += f"• {inline_mention(name)} ( `{i}` )\n"
         else:
-            msg += f"• `{i}` -> Invalid User\n"
+            msg += f"• `{i}` -> Недействительный пользователь\n"
     m = udB.get_key("SUDO") or True
     if not m:
         m = "[False](https://graph.org/Ultroid-04-06)"
     return await ult.eor(
-        f"**SUDO MODE : {m}\n\nList of SUDO Users :**\n{msg}", link_preview=False
+        f"**РЕЖИМ SUDO : {m}\n\nСписок SUDO-пользователей :**\n{msg}", link_preview=False
     )

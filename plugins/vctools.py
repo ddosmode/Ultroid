@@ -1,24 +1,24 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License:
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 • `{i}startvc`
-    Start Group Call in a group.
+    Запустить групповой звонок в группе.
 
 • `{i}stopvc`
-    Stop Group Call in a group.
+    Остановить групповой звонок в группе.
 
 • `{i}vctitle <title>`
-    Change the title Group call.
+    Изменить заголовок группового звонка.
 
 • `{i}vcinvite`
-    Invite all members of group in Group Call.
-    (You must be joined)
+    Пригласить всех участников группы в групповой звонок.
+    (Вы должны быть подключены)
 """
 
 from telethon.tl.functions.channels import GetFullChannelRequest as getchat

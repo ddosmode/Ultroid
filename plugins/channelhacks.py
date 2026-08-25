@@ -1,8 +1,8 @@
-# Ultroid - UserBot
+# Ultroid - Пользовательский бот
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 from . import get_help
 
@@ -40,7 +40,7 @@ async def autopost_func(e):
                 ERROR[str(ex)]
             except KeyError:
                 ERROR.update({str(ex): ex})
-                Error = f"**Error on AUTOPOST**\n\n`{ex}`"
+                Error = f"**Ошибка в AUTOPOST**\n\n`{ex}`"
                 await asst.send_message(udB.get_key("LOG_CHANNEL"), Error)
 
 
@@ -69,7 +69,7 @@ async def _(e):
             await e.client.send_message(int(d), msg)
         except BaseException as er:
             LOGS.exception(er)
-    await z.edit("Done")
+    await z.edit("Готово")
 
 
 @ultroid_cmd(pattern="asource (.*)")
@@ -111,7 +111,7 @@ async def dd(event):
         SourceM.remove(y)
         await eor(x, get_string("cha_5"), time=5)
     else:
-        await eor(x, "Source channel is already removed from database. ", time=3)
+        await eor(x, "Исходный канал уже удалён из базы данных. ", time=3)
 
 
 @ultroid_cmd(pattern="listsource")
@@ -119,7 +119,7 @@ async def list_all(event):
     x = await event.eor(get_string("com_1"))
     num = SourceM.count()
     if not num:
-        return await eor(x, "No chats were added.", time=5)
+        return await eor(x, "Чаты не были добавлены.", time=5)
     msg = get_string("cha_8")
     channels = SourceM.get()
     for channel in channels:
@@ -129,13 +129,13 @@ async def list_all(event):
         except BaseException:
             name = ""
         msg += f"\n=> **{name}** [`{channel}`]"
-    msg += f"\nTotal {num} channels."
+    msg += f"\nВсего {num} каналов."
     if len(msg) > 4096:
         MSG = msg.replace("*", "").replace("`", "")
         with io.BytesIO(str.encode(MSG)) as out_file:
             out_file.name = "channels.txt"
             await event.reply(
-                "Channels in database",
+                "Каналы в базе данных",
                 file=out_file,
                 force_document=True,
                 allow_cache=False,
@@ -157,9 +157,9 @@ async def destination(e):
         y = e.chat_id
     if not DestiM.contains(y):
         DestiM.add(y)
-        await e.eor("Destination added succesfully")
+        await e.eor("Назначение успешно добавлено")
     else:
-        await e.eor("Destination channel already added")
+        await e.eor("Канал назначения уже добавлен")
 
 
 @ultroid_cmd(pattern="ddest( (.*)|$)")
@@ -169,7 +169,7 @@ async def dd(event):
     if chat_id == "all":
         await x.edit(get_string("bd_8"))
         udB.del_key("CH_DESTINATION")
-        await x.edit("Destinations database cleared.")
+        await x.edit("База данных назначений очищена.")
         return
     if chat_id:
         try:
@@ -181,9 +181,9 @@ async def dd(event):
         y = event.chat_id
     if DestiM.contains(y):
         DestiM.remove(y)
-        await eor(x, "Destination removed from database")
+        await eor(x, "Назначение удалено из базы данных")
     else:
-        await eor(x, "Destination channel is already removed from database. ", time=5)
+        await eor(x, "Канал назначения уже удалён из базы данных. ", time=5)
 
 
 @ultroid_cmd(pattern="listdest")
@@ -193,7 +193,7 @@ async def list_all(event):
     channels = DestiM.get()
     num = len(channels)
     if not num:
-        return await eor(x, "No chats were added.", time=5)
+        return await eor(x, "Чаты не были добавлены.", time=5)
     msg = get_string("cha_7")
     for channel in channels:
         name = ""
@@ -202,7 +202,7 @@ async def list_all(event):
         except BaseException:
             name = ""
         msg += f"\n=> **{name}** [`{channel}`]"
-    msg += f"\nTotal {num} channels."
+    msg += f"\nВсего {num} каналов."
     if len(msg) > 4096:
         MSG = msg.replace("*", "").replace("`", "")
         with io.BytesIO(str.encode(MSG)) as out_file:
@@ -212,7 +212,7 @@ async def list_all(event):
                 out_file,
                 force_document=True,
                 allow_cache=False,
-                caption="Destination channels in database",
+                caption="Каналы назначения в базе данных",
                 reply_to=event,
             )
             await x.delete()

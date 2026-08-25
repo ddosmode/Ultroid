@@ -2,20 +2,20 @@
 # Copyright (C) 2021-2026 TeamUltroid
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 • `{i}poll <question> ; <option> ; <option>`
-    Get the Anonymous Poll with Given Options
+    Получить анонимный опрос с заданными вариантами
 
 • `{i}poll <question> ; <option> ; <option> | <type>`
-    Get the poll specified with desired type!
-    type should be any of  `public`,  `multiple` or `quiz`
+    Получить опрос с указанным желаемым типом!
+    тип должен быть одним из  `public`,  `multiple` или `quiz`
 
 • `{i}poll <question> ; <option> ; <option> | quiz_<answerno>`
-    Get the quiz poll where answerno is the number of option which is correct
+    Получить викторину, где answerno — это номер правильного варианта
 
 """
 from telethon.tl.types import InputMediaPoll, Poll, PollAnswer, TextWithEntities
@@ -28,12 +28,12 @@ from . import get_string, ultroid_cmd
 )
 async def uri_poll(e):
     if not e.client._bot and e.is_private:
-        return await e.eor("`Use this in Group/Channel.`", time=15)
+        return await e.eor("`Используйте это в группе/канале.`", time=15)
     match = e.pattern_match.group(1).strip()
     if not match:
-        return await e.eor("`Give Proper Input...`", time=5)
+        return await e.eor("`Введите корректные данные...`", time=5)
     if ";" not in match:
-        return await e.eor("`Unable to Determine Options.`.", time=5)
+        return await e.eor("`Не удалось определить варианты.`.", time=5)
     ques = match.split(";")[0]
     option = match.split(";")[1::]
     publ = None
@@ -47,7 +47,7 @@ async def uri_poll(e):
             karzo = [str(int(ptype.split("_")[1]) - 1).encode()]
             ptype = ptype.split("_")[0]
         if ptype not in ["public", "quiz", "multiple"]:
-            return await e.eor("`Invalid Poll Type...`", time=5)
+            return await e.eor("`Недопустимый тип опроса...`", time=5)
         if ptype == "multiple":
             mpp = True
         elif ptype == "public":
@@ -55,7 +55,7 @@ async def uri_poll(e):
         elif ptype == "quiz":
             quizo = True
     if len(option) <= 1:
-        return await e.eor("`Options Should be More than 1..`", time=5)
+        return await e.eor("`Вариантов должно быть больше одного..`", time=5)
     m = await e.eor(get_string("com_1"))
     OUT = [PollAnswer(TextWithEntities(option[on], entities=[]), str(on).encode()) for on in range(len(option))]
     await e.respond(

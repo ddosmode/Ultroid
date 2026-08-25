@@ -1,23 +1,23 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 • `{i}fsub <chat username><id>`
-    Enable ForceSub in Used Chat !
+    Включить ForceSub в используемом чате !
 
 • `{i}checkfsub`
-    Check/Get Active ForceSub Setting of Used Chat.
+    Проверить/Получить активную настройку ForceSub в используемом чате.
 
 • `{i}remfsub`
-    Remove ForceSub from Used Chat !
+    Удалить ForceSub из используемого чата !
 
-    Note - You Need to be Admin in Both Channel/Chats
-        in order to Use ForceSubscribe.
+    Примечание - Вам нужно быть администратором в обоих канале/чатах
+        чтобы использовать ForceSubscribe.
 """
 
 import re
@@ -61,7 +61,7 @@ async def addfor(e):
     except BaseException:
         return await e.eor(get_string("fsub_2"), time=5)
     add_forcesub(e.chat_id, match)
-    await e.eor("Added ForceSub in This Chat !")
+    await e.eor("ForceSub добавлен в этот чат !")
     ultroid_bot.add_handler(force_sub, events.NewMessage(incoming=True))
 
 
@@ -70,16 +70,16 @@ async def remor(e):
     res = rem_forcesub(e.chat_id)
     if not res:
         return await e.eor(get_string("fsub_3"), time=5)
-    await e.eor("Removed ForceSub...")
+    await e.eor("ForceSub удалён...")
 
 
 @ultroid_cmd(pattern="checkfsub$")
 async def getfsr(e):
     res = get_forcesetting(e.chat_id)
     if not res:
-        return await e.eor("ForceSub is Not Active In This Chat !", time=5)
+        return await e.eor("ForceSub не активен в этом чате !", time=5)
     cha = await e.client.get_entity(int(res))
-    await e.eor(f"**ForceSub Status** : `Active`\n- **{cha.title}** `({res})`")
+    await e.eor(f"**Статус ForceSub** : `Активен`\n- **{cha.title}** `({res})`")
 
 
 @in_pattern("fsub( (.*)|$)", owner=True)
@@ -88,8 +88,8 @@ async def fcall(e):
     spli = match.split("_")
     user = await ultroid_bot.get_entity(int(spli[0]))
     cl = await ultroid_bot.get_entity(int(spli[1]))
-    text = f"Hi {inline_mention(user)}, You Need to Join"
-    text += f" {cl.title} in order to Chat in this Group."
+    text = f"Привет, {inline_mention(user)}, вам нужно присоединиться"
+    text += f" к {cl.title}, чтобы общаться в этой группе."
     el = (
         f"https://t.me/{cl.username}"
         if cl.username
@@ -98,7 +98,7 @@ async def fcall(e):
 
     res = [
         await e.builder.article(
-            title="forcesub",
+            title="принудительная_подписка",
             text=text,
             buttons=[
                 [Button.url(text=get_string("fsub_4"), url=el)],
@@ -123,7 +123,7 @@ async def diesoon(e):
             raise UserNotParticipantError("")
     except UserNotParticipantError:
         return await e.answer(
-            "Please Join That Channel !\nThen Click This Button !", alert=True
+            "Пожалуйста, присоединитесь к этому каналу !\nЗатем нажмите эту кнопку !", alert=True
         )
     await ultroid_bot.edit_permissions(
         e.chat_id, int(spli[0]), send_messages=True, until_date=None

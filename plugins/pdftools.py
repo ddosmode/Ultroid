@@ -1,29 +1,29 @@
-# Ultroid - UserBot
+# Ultroid - ЮзерБот
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License в
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
-• `{i}pdf <page num> <reply to pdf file>`
-    Extract & send page as an Image.(note-: For extracting all pages, just use .pdf)
-    to upload selected range `{i}pdf 1-7`
+• `{i}pdf <номер страницы> <ответ на pdf-файл>`
+    Извлечь и отправить страницу как изображение. (примечание: для извлечения всех страниц просто используйте .pdf)
+    для отправки выбранного диапазона `{i}pdf 1-7`
 
-• `{i}pdtext <page num> <reply to pdf file>`
-    Extract Text From the Pdf.(note-: For Extraction all text just use .pdtext)
-    to extract selected pages `{i}pdf 1-7`
+• `{i}pdtext <номер страницы> <ответ на pdf-файл>`
+    Извлечь текст из PDF. (примечание: для извлечения всего текста просто используйте .pdtext)
+    для извлечения выбранных страниц `{i}pdtext 1-7`
 
-• `{i}pdscan <reply to image>`
-    It scan, crop & send image(s) as pdf.
+• `{i}pdscan <ответ на изображение>`
+    Сканирует, обрезает и отправляет изображение(я) как pdf.
 
-• `{i}pdsave <reply to image/pdf>`
-    It scan, crop & save file to merge.
-    you can merge many pages in a single pdf.
+• `{i}pdsave <ответ на изображение/pdf>`
+    Сканирует, обрезает и сохраняет файл для объединения.
+    вы можете объединить много страниц в один pdf.
 
 • `{i}pdsend `
-    Merge & send the pdf, collected from .pdsave.
+    Объединяет и отправляет pdf, собранные из .pdsave.
 """
 import glob
 import os
@@ -37,7 +37,7 @@ try:
     from PIL import Image
 except ImportError:
     Image = None
-    LOGS.info(f"{__file__}: PIL  not Installed.")
+    LOGS.info(f"{__file__}: PIL не установлен.")
 from PyPDF2 import PdfFileMerger, PdfFileReader, PdfFileWriter
 from telethon.errors.rpcerrorlist import PhotoSaveFileInvalidError
 
@@ -65,14 +65,14 @@ async def pdfseimg(event):
     ok = await event.get_reply_message()
     msg = event.pattern_match.group(1).strip()
     if not (ok and (ok.document and (ok.document.mime_type == "application/pdf"))):
-        await event.eor("`Reply The pdf u Want to Download..`")
+        await event.eor("`Ответьте на pdf, который хотите скачать..`")
         return
     xx = await event.eor(get_string("com_1"))
     file = ok.media.document
     k = time.time()
     filename = "hehe.pdf"
     result = await downloader(
-        f"pdf/{filename}", file, xx, k, f"Downloading {filename}..."
+        f"pdf/{filename}", file, xx, k, f"Загрузка {filename}..."
     )
 
     await xx.delete()
@@ -127,13 +127,13 @@ async def pdfsetxt(event):
     ok = await event.get_reply_message()
     msg = event.pattern_match.group(1).strip()
     if not ok and ok.document and ok.document.mime_type == "application/pdf":
-        await event.eor("`Reply The pdf u Want to Download..`")
+        await event.eor("`Ответьте на pdf, который хотите скачать..`")
         return
     xx = await event.eor(get_string("com_1"))
     file = ok.media.document
     k = time.time()
     filename = ok.file.name
-    result = await downloader(filename, file, xx, k, f"Downloading {filename}...")
+    result = await downloader(filename, file, xx, k, f"Загрузка {filename}...")
     await xx.delete()
     dl = result.name
     if not msg:
@@ -182,13 +182,13 @@ async def pdfsetxt(event):
 async def imgscan(event):
     ok = await event.get_reply_message()
     if not (ok and (ok.media)):
-        await event.eor("`Reply The pdf u Want to Download..`")
+        await event.eor("`Ответьте на pdf, который хотите скачать..`")
         return
     if not (
         ok.photo
         or (ok.file.name and ok.file.name.endswith(("png", "jpg", "jpeg", "webp")))
     ):
-        await event.eor("`Reply to a Image only...`")
+        await event.eor("`Ответьте только на изображение...`")
         return
     ultt = await ok.download_media()
     xx = await event.eor(get_string("com_1"))
@@ -220,8 +220,8 @@ async def imgscan(event):
         try:
             from skimage.filters import threshold_local
         except ImportError:
-            LOGS.info(f"Scikit-Image is not Installed.")
-            await xx.edit("`Installing Scikit-Image...\nThis may take some long...`")
+            LOGS.info(f"Scikit-Image не установлен.")
+            await xx.edit("`Установка Scikit-Image...\nЭто может занять некоторое время...`")
             _, __ = await bash("pip install scikit-image")
             LOGS.info(_)
             from skimage.filters import threshold_local
@@ -254,7 +254,7 @@ async def savepdf(event):
     if not (ok and (ok.media)):
         await eor(
             event,
-            "`Reply to Images/pdf which u want to merge as a single pdf..`",
+            "`Ответьте на изображения/pdf, которые хотите объединить в один pdf..`",
         )
         return
     ultt = await ok.download_media()
@@ -289,9 +289,9 @@ async def savepdf(event):
             try:
                 from skimage.filters import threshold_local
             except ImportError:
-                LOGS.info(f"Scikit-Image is not Installed.")
+                LOGS.info(f"Scikit-Image не установлен.")
                 await xx.edit(
-                    "`Installing Scikit-Image...\nThis may take some long...`"
+                    "`Установка Scikit-Image...\nЭто может занять некоторое время...`"
                 )
                 _, __ = await bash("pip install scikit-image")
                 LOGS.info(_)
@@ -311,7 +311,7 @@ async def savepdf(event):
         a = check_filename("pdf/scan.pdf")
         im1.save(a)
         await xx.edit(
-            f"Done, Now Reply Another Image/pdf if completed then use {HNDLR}pdsend to merge nd send all as pdf",
+            f"Готово, теперь ответьте на другое изображение/pdf, если завершено, используйте {HNDLR}pdsend для объединения и отправки всего как pdf",
         )
         os.remove("o.png")
     elif ultt.endswith(".pdf"):
@@ -319,10 +319,10 @@ async def savepdf(event):
         await event.client.download_media(ok, a)
         await eor(
             event,
-            f"Done, Now Reply Another Image/pdf if completed then use {HNDLR}pdsend to merge nd send all as pdf",
+            f"Готово, теперь ответьте на другое изображение/pdf, если завершено, используйте {HNDLR}pdsend для объединения и отправки всего как pdf",
         )
     else:
-        await event.eor("`Reply to a Image/pdf only...`")
+        await event.eor("`Ответьте только на изображение/pdf...`")
     os.remove(ultt)
 
 
@@ -333,7 +333,7 @@ async def sendpdf(event):
     if not os.path.exists("pdf/scan.pdf"):
         await eor(
             event,
-            "first select pages by replying .pdsave of which u want to make multi page pdf file",
+            "сначала выберите страницы, ответив .pdsave на те, которые хотите объединить в многостраничный pdf-файл",
         )
         return
     msg = event.pattern_match.group(1).strip()

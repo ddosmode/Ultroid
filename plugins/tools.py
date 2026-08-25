@@ -5,33 +5,33 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды -
 
 • `{i}circle`
-    Reply to a audio song or gif to get video note.
+    Ответьте на аудио или gif, чтобы получить видеокружок.
 
 • `{i}ls`
-    Get all the Files inside a Directory.
+    Получить все файлы внутри каталога.
 
 • `{i}bots`
-    Shows the number of bots in the current chat with their perma-link.
+    Показывает количество ботов в текущем чате с их постоянными ссылками.
 
-• `{i}hl <a link> <text-optional>`
-    Embeds the link with a whitespace as message.
+• `{i}hl <ссылка> <текст-опционально>`
+    Встраивает ссылку как сообщение с пробелом.
 
 • `{i}id`
-    Reply a Sticker to Get Its Id
-    Reply a User to Get His Id
-    Without Replying You Will Get the Chat's Id
+    Ответьте на стикер, чтобы получить его ID
+    Ответьте на пользователя, чтобы получить его ID
+    Без ответа вы получите ID чата
 
-• `{i}sg <reply to a user><username/id>`
-    Get His Name History of the replied user.
+• `{i}sg <ответ пользователю><имя пользователя/id>`
+    Получить историю имён указанного пользователя.
 
-• `{i}tr <dest lang code> <(reply to) a message>`
-    Get translated message.
+• `{i}tr <код языка назначения> <(ответ на) сообщение>`
+    Получить переведённое сообщение.
 
 • `{i}webshot <url>`
-    Get a screenshot of the webpage.
+    Получить скриншот веб-страницы.
 """
 import asyncio
 import glob
@@ -95,12 +95,12 @@ async def _(event):
         text = previous_message.message
     else:
         return await eor(
-            event, f"`{HNDLR}tr LanguageCode` as reply to a message", time=5
+            event, f"`{HNDLR}tr КодЯзыка` в ответ на сообщение", time=5
         )
     lan = input or "en"
     try:
         tt = translate(text, lang_tgt=lan)
-        output_str = f"**TRANSLATED** to {lan}\n{tt}"
+        output_str = f"**ПЕРЕВЕДЕНО** на {lan}\n{tt}"
         await event.eor(output_str)
     except Exception as exc:
         LOGS.exception(exc)
@@ -120,24 +120,24 @@ async def _(event):
         except Exception as er:
             return await event.eor(str(er))
         return await event.eor(
-            f"**Chat ID:**  `{event.chat_id}`\n**User ID:**  `{ids}`"
+            f"**ID чата:**  `{event.chat_id}`\n**ID пользователя:**  `{ids}`"
         )
-    data = f"**Current Chat ID:**  `{event.chat_id}`"
+    data = f"**ID текущего чата:**  `{event.chat_id}`"
     if event.reply_to_msg_id:
         event = await event.get_reply_message()
-        data += f"\n**From User ID:**  `{event.sender_id}`"
+        data += f"\n**ID отправителя:**  `{event.sender_id}`"
     if event.media:
         bot_api_file_id = event.file.id
         data += f"\n**Bot API File ID:**  `{bot_api_file_id}`"
-    data += f"\n**Msg ID:**  `{event.id}`"
+    data += f"\n**ID сообщения:**  `{event.id}`"
     await ult.eor(data)
 
 
 @ultroid_cmd(pattern="bots( (.*)|$)", groups_only=True, manager=True)
 async def _(ult):
-    mentions = "• **Bots in this Chat**: \n"
+    mentions = "• **Боты в этом чате**: \n"
     if input_str := ult.pattern_match.group(1).strip():
-        mentions = f"• **Bots in **{input_str}: \n"
+        mentions = f"• **Боты в **{input_str}: \n"
         try:
             chat = await ult.client.parse_id(input_str)
         except Exception as e:
@@ -164,7 +164,7 @@ async def _(ult):
 async def _(ult):
     input_ = ult.pattern_match.group(1).strip()
     if not input_:
-        return await ult.eor("`Input some link`", time=5)
+        return await ult.eor("`Введите ссылку`", time=5)
     text = None
     if len(input_.split()) > 1:
         spli_ = input_.split()
@@ -181,9 +181,9 @@ async def _(ult):
 async def _(e):
     reply = await e.get_reply_message()
     if not (reply and reply.media):
-        return await e.eor("`Reply to a gif or audio file only.`")
+        return await e.eor("`Ответьте только на gif или аудиофайл.`")
     if "audio" in mediainfo(reply.media):
-        msg = await e.eor("`Downloading...`")
+        msg = await e.eor("`Загрузка...`")
         try:
             bbbb = await reply.download_media(thumb=-1)
         except TypeError:
@@ -194,11 +194,11 @@ async def _(e):
         cv2.imwrite("img.jpg", output)
         thumb = "img.jpg"
         audio, _ = await e.client.fast_downloader(reply.document)
-        await msg.edit("`Creating video note...`")
+        await msg.edit("`Создание видеокружка...`")
         await bash(
             f'ffmpeg -i "{thumb}" -i "{audio.name}" -preset ultrafast -c:a libmp3lame -ab 64 circle.mp4 -y'
         )
-        await msg.edit("`Uploading...`")
+        await msg.edit("`Выгрузка...`")
         data = await metadata("circle.mp4")
         file, _ = await e.client.fast_uploader("circle.mp4", to_delete=True)
         await e.client.send_file(
@@ -219,7 +219,7 @@ async def _(e):
         await msg.delete()
         [os.remove(k) for k in [audio.name, thumb]]
     elif mediainfo(reply.media) == "gif" or mediainfo(reply.media).startswith("video"):
-        msg = await e.eor("**Creating video note**")
+        msg = await e.eor("**Создание видеокружка**")
         file = await reply.download_media("resources/downloads/")
         if file.endswith(".webm"):
             nfile = await con.ffmpeg_convert(file, "file.mp4")
@@ -237,7 +237,7 @@ async def _(e):
         await msg.delete()
 
     else:
-        await e.eor("`Reply to a gif or audio file only.`")
+        await e.eor("`Ответьте только на gif или аудиофайл.`")
 
 
 FilesEMOJI = {
@@ -268,7 +268,7 @@ async def _(e):
         files += "/*"
     files = glob.glob(files)
     if not files:
-        return await e.eor("`Directory Empty or Incorrect.`", time=5)
+        return await e.eor("`Каталог пуст или указан неверно.`", time=5)
     folders = []
     allfiles = []
     for file in sorted(files):
@@ -327,7 +327,7 @@ async def _(e):
         tfls = "0 B"
     if not hb(fos + fls):
         ttol = "0 B"
-    text += f"\n\n`Folders` :  `{foc}` :   `{tfos}`\n`Files` :       `{flc}` :   `{tfls}`\n`Total` :       `{flc+foc}` :   `{ttol}`"
+    text += f"\n\n`Каталоги` :  `{foc}` :   `{tfos}`\n`Файлы` :       `{flc}` :   `{tfls}`\n`Всего` :       `{flc+foc}` :   `{ttol}`"
     try:
         if (flc + foc) > 100:
             text = text.replace("`", "")
@@ -347,8 +347,8 @@ def sanga_seperator(sanga_list):
         name, username = string.split("Usernames**")
         name = name.split("Names")[1]
     except ValueError:
-        name = "No Names Found"
-        username = "No Usernames Found"
+        name = "Имена не найдены"
+        username = "Юзернеймы не найдены"
     return name, username
 
 
@@ -361,7 +361,7 @@ def mentionuser(name, userid):
     fullsudo=True,
 )
 async def sangmata(event):
-    "To get name/username history."
+    "Получить историю имени/юзернейма."
     cmd = event.pattern_match.group(1)
     user = event.pattern_match.group(2)
     reply = await event.get_reply_message()
@@ -369,7 +369,7 @@ async def sangmata(event):
         user = str(reply.sender_id)
     if not user:
         await event.edit(
-            "`Reply to  user's text message to get name/username history or give userid/username`",
+            "`Ответьте на текстовое сообщение пользователя, чтобы получить историю имени/юзернейма, либо укажите userid/юзернейм`",
         )
         await asyncio.sleep(10)
         return await event.delete()
@@ -382,16 +382,16 @@ async def sangmata(event):
     except ValueError:
         userinfo = None
     if not isinstance(userinfo, types.User):
-        await event.edit("`Can't fetch the user...`")
+        await event.edit("`Не удалось получить пользователя...`")
         await asyncio.sleep(10)
         return await event.delete()
 
-    await event.edit("`Processing...`")
+    await event.edit("`Обработка...`")
     async with event.client.conversation("@SangMata_beta_bot") as conv:
         try:
             await conv.send_message(f"{userinfo.id}")
         except YouBlockedUserError:
-            return await event.edit("`Please unblock @SangMata_beta_bot and try again`")
+            return await event.edit("`Пожалуйста, разблокируйте @SangMata_beta_bot и попробуйте снова`")
             # await conv.send_message(f"{userinfo.id}")
         responses = []
         while True:
@@ -403,11 +403,11 @@ async def sangmata(event):
         await event.client.send_read_acknowledge(conv.chat_id)
 
     if not responses:
-        await event.edit("`Bot can't fetch results`")
+        await event.edit("`Бот не смог получить результаты`")
         await asyncio.sleep(10)
         await event.delete()
     if "No records found" in responses or "No data available" in responses:
-        await event.edit("`The user doesn't have any record`")
+        await event.edit("`У пользователя нет записей`")
         await asyncio.sleep(10)
         await event.delete()
 
@@ -418,7 +418,7 @@ async def sangmata(event):
         if userinfo.last_name
         else userinfo.first_name
     )
-    output = f"**➜ User Info :**  {mentionuser(user_name, userinfo.id)}\n**➜ {check[1]} History :**\n{check[0]}"
+    output = f"**➜ Инфо о пользователе :**  {mentionuser(user_name, userinfo.id)}\n**➜ История {check[1]} :**\n{check[0]}"
     await event.edit(output)
 
 
@@ -441,7 +441,7 @@ async def webss(event):
                 pic = path
         except Exception as er:
             LOGS.exception(er)
-            await xx.respond(f"Error with playwright:\n`{er}`")
+            await xx.respond(f"Ошибка playwright:\n`{er}`")
     if WebShot and not pic:
         try:
             shot = WebShot(
@@ -468,4 +468,3 @@ async def webss(event):
         )
         os.remove(pic)
     await xx.delete()
-

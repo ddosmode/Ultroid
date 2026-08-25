@@ -1,23 +1,23 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - Юзербот
+# Авторское право (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available -
+✘ Доступные команды —
 
 • `{i}addsnip <word><reply to a message>`
-    add the used word as snip relating to replied message.
+    добавить используемое слово как снип, связанный с ответом на сообщение.
 
 • `{i}remsnip <word>`
-    Remove the snip word..
+    Удалить снип-слово..
 
 • `{i}listsnip`
-    list all snips.
+    показать все снипы.
 
-• Use :
-    type `$(ur snip word)` get setted reply.
+• Использование :
+    введите `$(ur snip word)`, чтобы получить установленный ответ.
 """
 import os
 
@@ -67,7 +67,7 @@ async def an(e):
         if not btn:
             txt, btn = get_msg_button(wt.text)
         add_snip(wrd, txt, None, btn)
-    await e.eor(f"Done : snip `${wrd}` Saved.")
+    await e.eor(f"Готово : снип `{wrd}` Сохранён.")
     ultroid_bot.add_handler(add_snips, events.NewMessage())
 
 
@@ -79,15 +79,15 @@ async def rs(e):
     if wrd.startswith("$"):
         wrd = wrd.replace("$", "")
     rem_snip(wrd)
-    await e.eor(f"Done : snip `${wrd}` Removed.")
+    await e.eor(f"Готово : снип `{wrd}` Удалён.")
 
 
 @ultroid_cmd(pattern="listsnip")
 async def lsnote(e):
     if x := list_snip():
-        sd = "SNIPS Found :\n\n"
+        sd = "Найдены снипы :\n\n"
         return await e.eor(sd + x)
-    await e.eor("No Snips Found Here")
+    await e.eor("Здесь снипы не найдены")
 
 
 async def add_snips(e):

@@ -1,27 +1,27 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
+# Ultroid - Пользовательский бот
+# Авторские права (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
-✘ Commands Available
+✘ Доступные команды
 
 •`{i}invertgif`
-  Make Gif Inverted(negative).
+  Сделать GIF инвертированным (негатив).
 
 •`{i}bwgif`
-  Make Gif black and white
+  Сделать GIF чёрно-белым
 
 •`{i}rvgif`
-  Reverse a gif
+  Перевернуть GIF
 
 •`{i}vtog`
-  Reply To Video , It will Create Gif
-  Video to Gif
+  Ответьте на видео, оно создаст GIF
+  Видео в GIF
 
-•`{i}gif <query>`
-   Send video regarding to query.
+•`{i}gif <запрос>`
+   Отправить видео по запросу.
 """
 import os
 import random
@@ -36,10 +36,10 @@ async def igif(e):
     match = e.pattern_match.group(1).strip()
     a = await e.get_reply_message()
     if not (a and a.media):
-        return await e.eor("`Reply To gif only`", time=5)
+        return await e.eor("`Ответьте только на GIF`", time=5)
     wut = mediainfo(a.media)
     if "gif" not in wut:
-        return await e.eor("`Reply To Gif Only`", time=5)
+        return await e.eor("`Ответьте только на GIF`", time=5)
     xx = await e.eor(get_string("com_1"))
     z = await a.download_media()
     if match == "bw":
@@ -60,11 +60,11 @@ async def igif(e):
 async def reverse_gif(event):
     a = await event.get_reply_message()
     if not (a and a.media) and "video" not in mediainfo(a.media):
-        return await event.eor("`Reply To Video only`", time=5)
+        return await event.eor("`Ответьте только на видео`", time=5)
     msg = await event.eor(get_string("com_1"))
     file = await a.download_media()
     await bash(f'ffmpeg -i "{file}" -vf reverse -af areverse reversed.mp4 -y')
-    await event.respond("- **Reversed Video/GIF**", file="reversed.mp4")
+    await event.respond("- **Перевернутое видео/GIF**", file="reversed.mp4")
     await msg.delete()
     os.remove(file)
     os.remove("reversed.mp4")
@@ -81,7 +81,7 @@ async def gifs(ult):
         except IndexError:
             pass
     if not get:
-        return await ult.eor(f"`{HNDLR}gif <query>`")
+        return await ult.eor(f"`{HNDLR}gif <запрос>`")
     m = await ult.eor(get_string("com_2"))
     gifs = await ult.client.inline_query("gif", get)
     if not n:
@@ -100,10 +100,10 @@ async def gifs(ult):
 async def vtogif(e):
     a = await e.get_reply_message()
     if not (a and a.media):
-        return await e.eor("`Reply To video only`", time=5)
+        return await e.eor("`Ответьте только на видео`", time=5)
     wut = mediainfo(a.media)
     if "video" not in wut:
-        return await e.eor("`Reply To Video Only`", time=5)
+        return await e.eor("`Ответьте только на видео`", time=5)
     xx = await e.eor(get_string("com_1"))
     dur = a.media.document.attributes[0].duration
     tt = time.time()

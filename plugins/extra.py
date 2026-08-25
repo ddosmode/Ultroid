@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import get_help
@@ -71,10 +71,10 @@ async def _(e):
             msg = (await e.client.get_messages(e.chat_id, limit=1, max_id=e.id))[0]
         except IndexError:
             return await e.eor(
-                "`You have previously sent no message to reply again...`", time=5
+                "`Вы ранее не отправляли сообщение, на которое можно ответить повторно...`", time=5
             )
         except BaseException as er:
-            return await e.eor(f"**ERROR:** `{er}`")
+            return await e.eor(f"**ОШИБКА:** `{er}`")
         await asyncio.wait(
             [
                 e.client.delete_messages(chat, [e.id, msg.id]),

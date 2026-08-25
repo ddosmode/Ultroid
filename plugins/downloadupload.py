@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import get_help
@@ -60,13 +60,13 @@ async def down(event):
                     t,
                     msg,
                     s_time,
-                    f"Downloading from {link}",
+                    f"Загрузка с {link}",
                 )
             ),
         )
     except InvalidURL:
-        return await msg.eor("`Invalid URL provided :(`", time=5)
-    await msg.eor(f"`{filename}` `downloaded in {time_formatter(d*1000)}.`")
+        return await msg.eor("`Предоставлен неверный URL :(`", time=5)
+    await msg.eor(f"`{filename}` `загружено за {time_formatter(d*1000)}.`")
 
 
 @ultroid_cmd(
@@ -104,7 +104,7 @@ async def download(event):
                 file,
                 xx,
                 k,
-                f"Downloading {filename}...",
+                f"Загрузка {filename}...",
             )
 
         except MessageNotModifiedError as err:
@@ -139,7 +139,7 @@ async def _(event):
     if match:
         match = match.strip()
     if not event.out and match == ".env":
-        return await event.reply("`You can't do this...`")
+        return await event.reply("`Вы не можете это сделать...`")
     stream, force_doc, delete, thumb = (
         False,
         True,
@@ -194,7 +194,7 @@ async def _(event):
                         force_document=force_doc,
                         thumb=thumb,
                         attributes=attributes,
-                        caption=f"`Uploaded` `{files}` `in {time_formatter(_*1000)}`",
+                        caption=f"`Загружено` `{files}` `за {time_formatter(_*1000)}`",
                         reply_to=event.reply_to_msg_id or event,
                     )
                     s += 1
@@ -217,6 +217,6 @@ async def _(event):
             force_document=force_doc,
             thumb=thumb,
             attributes=attributes,
-            caption=f"`Uploaded` `{result}` `in {time_formatter(_*1000)}`",
+            caption=f"`Загружено` `{result}` `за {time_formatter(_*1000)}`",
         )
     await msg.try_delete()

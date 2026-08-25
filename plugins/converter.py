@@ -1,8 +1,8 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2026 TeamUltroid
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
+# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Пожалуйста, прочтите GNU Affero General Public License по адресу
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import get_help
@@ -22,7 +22,7 @@ except ImportError:
 try:
     from PIL import Image
 except ImportError:
-    LOGS.info(f"{__file__}: PIL  not Installed.")
+    LOGS.info(f"{__file__}: PIL не установлен.")
     Image = None
 
 from . import upload_file as uf
@@ -52,7 +52,7 @@ async def _(e):
     elif r.document and r.document.thumbs:
         dl = await r.download_media(thumb=-1)
     else:
-        return await e.eor("`Reply to Photo or media with thumb...`")
+        return await e.eor("`Ответьте на фото или медиа с превью...`")
     nn = uf(dl)
     os.remove(dl)
     udB.set_key("CUSTOM_THUMBNAIL", str(nn))
@@ -93,7 +93,7 @@ async def imak(event):
         os.rename(file, inp)
     k = time.time()
     n_file, _ = await event.client.fast_uploader(
-        inp, show_progress=True, event=event, message="Uploading...", to_delete=True
+        inp, show_progress=True, event=event, message="Загрузка...", to_delete=True
     )
     await event.reply(
         f"`{n_file.name}`",
@@ -124,7 +124,7 @@ async def uconverter(event):
     xx = await event.eor(get_string("com_1"))
     a = await event.get_reply_message()
     if a is None:
-        return await event.eor("`Reply to Photo or media with thumb...`")
+        return await event.eor("`Ответьте на фото или медиа с превью...`")
     input_ = event.pattern_match.group(1).strip()
     b = await a.download_media("resources/downloads/")
     if not b and (a.document and a.document.thumbs):
@@ -144,7 +144,7 @@ async def uconverter(event):
         )
         os.remove(file)
     else:
-        await xx.edit("`Failed to convert`")
+        await xx.edit("`Не удалось конвертировать`")
         return
     await xx.delete()
 
@@ -161,7 +161,7 @@ async def _(event):
         return await xx.edit(get_string("ex_1"))
     with open(input_str, "w") as b:
         b.write(str(a.message))
-    await xx.edit(f"**Packing into** `{input_str}`")
+    await xx.edit(f"**Упаковка в** `{input_str}`")
     await event.reply(file=input_str, thumb=ULTConfig.thumb)
     await xx.delete()
     os.remove(input_str)
@@ -190,7 +190,7 @@ async def _(event):
     except BaseException:
         what, data = await get_paste(d)
         await xx.edit(
-            f"**MESSAGE EXCEEDS TELEGRAM LIMITS**\n\nSo Pasted It On [SPACEBIN]({data['link']})"
+            f"**СООБЩЕНИЕ ПРЕВЫШАЕТ ЛИМИТ TELEGRAM**\n\nПоэтому вставлено в [SPACEBIN]({data['link']})"
         )
     if rem:
         os.remove(b)
