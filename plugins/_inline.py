@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 import re
 import time
 from datetime import datetime
@@ -50,8 +43,8 @@ upage = 0
 
 SUP_BUTTONS = [
     [
-        Button.url("• Репозиторий •", url="https://github.com/TeamUltroid/Ultroid"),
-        Button.url("• Поддержка •", url="t.me/UltroidSupportChat"),
+        Button.url("• Репозиторий •", url="https://github.com/TeamTeleFriend/TeleFriend"),
+        Button.url("• Поддержка •", url="t.me/TeleFriendSupportChat"),
     ],
 ]
 
@@ -61,7 +54,7 @@ SUP_BUTTONS = [
 @in_pattern(owner=True, func=lambda x: not x.text)
 async def inline_alive(o):
     TLINK = inline_pic() or "https://graph.org/file/74d6259983e0642923fdb.jpg"
-    MSG = "• **Ultroid Userbot •**"
+    MSG = "• **TeleFriend Userbot •**"
     WEB0 = InputWebDocument(
         "https://graph.org/file/acd4f5d61369f74c5e7a7.jpg", 0, "image/jpg", []
     )
@@ -71,7 +64,7 @@ async def inline_alive(o):
             text=MSG,
             include_media=True,
             buttons=SUP_BUTTONS,
-            title="Ultroid Userbot",
+            title="TeleFriend Userbot",
             description="Юзербот | Telethon",
             url=TLINK,
             thumb=WEB0,
@@ -107,7 +100,7 @@ async def inline_handler(event):
         )
     else:
         result = await event.builder.article(
-            title="Меню помощи Ultroid", text=text, buttons=_main_help_menu
+            title="Меню помощи TeleFriend", text=text, buttons=_main_help_menu
         )
     await event.answer([result], private=True, cache_time=300, gallery=True)
 

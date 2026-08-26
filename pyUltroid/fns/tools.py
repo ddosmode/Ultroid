@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
-
 import json
 import math
 import os
@@ -616,7 +609,7 @@ def telegraph_client():
     profile_url = (
         f"https://t.me/{ultroid_bot.me.username}"
         if ultroid_bot.me.username
-        else "https://t.me/TeamUltroid"
+        else "https://t.me/TeamTeleFriend"
     )
     try:
         TelegraphClient.create_account(
@@ -658,7 +651,7 @@ async def Carbon(
         kwargs["text"] = code
         kwargs["theme"] = kwargs.get("theme", "breeze")
         kwargs["darkMode"] = kwargs.get("darkMode", True)
-        kwargs["title"] = kwargs.get("title", "Ultroid")
+        kwargs["title"] = kwargs.get("title", "TeleFriend")
     else:
         kwargs["code"] = code
     con = await async_searcher(base_url, post=True, json=kwargs, re_content=True)

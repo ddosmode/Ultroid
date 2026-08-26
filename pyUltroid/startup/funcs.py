@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
-
 import asyncio
 import os
 import random
@@ -149,7 +142,7 @@ async def startup_stuff():
             LOGS.debug(er)
         except BaseException:
             LOGS.critical(
-                "Incorrect Timezone ,\nCheck Available Timezone From Here https://graph.org/Ultroid-06-18-2\nSo Time is Default UTC"
+                "Incorrect Timezone ,\nCheck Available Timezone From Here https://graph.org/TeleFriend-06-18-2\nSo Time is Default UTC"
             )
             os.environ["TZ"] = "UTC"
             time.tzset()
@@ -278,8 +271,8 @@ async def autopilot():
         try:
             r = await ultroid_bot(
                 CreateChannelRequest(
-                    title="My Ultroid Logs",
-                    about="My Ultroid Log Group\n\n Join @TeamUltroid",
+                    title="My TeleFriend Logs",
+                    about="My TeleFriend Log Group\n\n Join @TeamTeleFriend",
                     megagroup=True,
                 ),
             )
@@ -414,7 +407,7 @@ async def customize():
         await asyncio.sleep(1)
         await ultroid_bot.send_message(
             "botfather",
-            f"✨ Powerful Ultroid Assistant Bot ✨\n✨ Master ~ {sir} ✨\n\n✨ Powered By ~ @TeamUltroid ✨",
+            f"✨ Powerful TeleFriend Assistant Bot ✨\n✨ Master ~ {sir} ✨\n\n✨ Powered By ~ @TeamTeleFriend ✨",
         )
         await asyncio.sleep(2)
         await msg.edit("Completed **Auto Customisation** at @BotFather.")
@@ -455,7 +448,7 @@ async def plug(plugin_channels):
                     try:
                         load_addons(plugin)
                     except Exception as e:
-                        LOGS.info(f"Ultroid - PLUGIN_CHANNEL - ERROR - {plugin}")
+                        LOGS.info(f"TeleFriend - PLUGIN_CHANNEL - ERROR - {plugin}")
                         LOGS.exception(e)
                         os.remove(plugin)
         except Exception as er:
@@ -469,13 +462,13 @@ async def ready():
     chat_id = udB.get_key("LOG_CHANNEL")
     spam_sent = None
     if not udB.get_key("INIT_DEPLOY"):  # Detailed Message at Initial Deploy
-        MSG = """🎇 **Thanks for Deploying Ultroid Userbot!**
+        MSG = """🎇 **Thanks for Deploying TeleFriend Userbot!**
 • Here, are the Some Basic stuff from, where you can Know, about its Usage."""
         PHOTO = "https://graph.org/file/54a917cc9dbb94733ea5f.jpg"
         BTTS = Button.inline("• Click to Start •", "initft_2")
         udB.set_key("INIT_DEPLOY", "Done")
     else:
-        MSG = f"**Ultroid has been deployed!**\n➖➖➖➖➖➖➖➖➖➖\n**UserMode**: {inline_mention(ultroid_bot.me)}\n**Assistant**: @{asst.me.username}\n➖➖➖➖➖➖➖➖➖➖\n**Support**: @TeamUltroid\n➖➖➖➖➖➖➖➖➖➖"
+        MSG = f"**TeleFriend has been deployed!**\n➖➖➖➖➖➖➖➖➖➖\n**UserMode**: {inline_mention(ultroid_bot.me)}\n**Assistant**: @{asst.me.username}\n➖➖➖➖➖➖➖➖➖➖\n**Support**: @TeamTeleFriend\n➖➖➖➖➖➖➖➖➖➖"
         BTTS, PHOTO = None, None
         prev_spam = udB.get_key("LAST_UPDATE_LOG_SPAM")
         if prev_spam:
@@ -504,7 +497,7 @@ async def ready():
         udB.set_key("LAST_UPDATE_LOG_SPAM", spam_sent.id)
 
     try:
-        await ultroid_bot(JoinChannelRequest("TheUltroid"))
+        await ultroid_bot(JoinChannelRequest("TheTeleFriend"))
     except Exception as er:
         LOGS.exception(er)
 

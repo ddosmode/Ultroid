@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 import asyncio
 import os
 import time
@@ -35,8 +28,8 @@ quotly = Quotly()
 OWNER_NAME = ultroid_bot.full_name
 OWNER_ID = ultroid_bot.uid
 
-ultroid_bot: UltroidClient
-asst: UltroidClient
+ultroid_bot: TeleFriendClient
+asst: TeleFriendClient
 
 LOG_CHANNEL = udB.get_key("LOG_CHANNEL")
 
@@ -67,7 +60,7 @@ STUFF = {}
 # Не стесняйтесь добавить любой другой...
 
 NOSPAM_CHAT = [
-    -1001361294038,  # UltroidSupportChat
+    -1001361294038,  # TeleFriendSupportChat
     -1001387666944,  # PyrogramChat
     -1001109500936,  # TelethonChat
     -1001050982793,  # Python

@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License в
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 from . import get_help
 
 __doc__ = get_help("help_bot")
@@ -70,21 +63,21 @@ def ULTPIC():
 
 buttons = [
     [
-        Button.url(get_string("bot_3"), "https://github.com/TeamUltroid/Ultroid"),
-        Button.url(get_string("bot_4"), "t.me/UltroidSupportChat"),
+        Button.url(get_string("bot_3"), "https://github.com/TeamTeleFriend/TeleFriend"),
+        Button.url(get_string("bot_4"), "t.me/TeleFriendSupportChat"),
     ]
 ]
 
 # Перенесётся в strings
 alive_txt = """
-The Ultroid Userbot
+The TeleFriend Userbot
 
   ◍ Версия - {}
-  ◍ Py-Ultroid - {}
+  ◍ Py-TeleFriend - {}
   ◍ Telethon - {}
 """
 
-in_alive = "{}\n\n🌀 <b>Версия Ultroid -><b> <code>{}</code>\n🌀 <b>PyUltroid -></b> <code>{}</code>\n🌀 <b>Python -></b> <code>{}</code>\n🌀 <b>Аптайм -></b> <code>{}</code>\n🌀 <b>Ветка -></b>[ {} ]\n\n• <b>Присоединяйтесь к @TeamUltroid</b>"
+in_alive = "{}\n\n🌀 <b>Версия TeleFriend -><b> <code>{}</code>\n🌀 <b>PyTeleFriend -></b> <code>{}</code>\n🌀 <b>Python -></b> <code>{}</code>\n🌀 <b>Аптайм -></b> <code>{}</code>\n🌀 <b>Ветка -></b>[ {} ]\n\n• <b>Присоединяйтесь к @TeamTeleFriend</b>"
 
 
 @callback("alive")
@@ -247,7 +240,7 @@ async def _(event):
         if isinstance(file, dict):
             await event.eor(f"`{file}`")
             return
-        await event.reply("**Логи Ultroid.**", file=file)
+        await event.reply("**Логи TeleFriend.**", file=file)
     elif opt == "open":
         with open("ultroid.log", "r") as f:
             file = f.read()[-4000:]
@@ -301,7 +294,7 @@ async def inline_alive(ult):
                     await builder.document(
                         pic,
                         title="Inline Alive",
-                        description="@TeamUltroid",
+                        description="@TeamTeleFriend",
                         parse_mode="html",
                         buttons=buttons,
                     )
@@ -348,7 +341,7 @@ async def _(e):
         )
     else:
         await xx.edit(
-            f'<code>Ваш BOT </code><strong>обновлён</strong><code> до </code><strong><a href="https://github.com/TeamUltroid/Ultroid/tree/{branch}">[{branch}]</a></strong>',
+            f'<code>Ваш BOT </code><strong>обновлён</strong><code> до </code><strong><a href="https://github.com/TeamTeleFriend/TeleFriend/tree/{branch}">[{branch}]</a></strong>',
             parse_mode="html",
             link_preview=False,
         )

@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
-# <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
-
 import base64
 import os
 import random
@@ -159,8 +152,8 @@ async def allcmds(event, telegraph):
         for zz in LIST[z]:
             txt += HNDLR + zz + "\n"
         txt += "\n\n"
-    t = telegraph.create_page(title="Все команды Ultroid", content=[txt])
-    await eor(event, f"Все команды Ultroid: [Нажмите здесь]({t['url']})", link_preview=False)
+    t = telegraph.create_page(title="Все команды TeleFriend", content=[txt])
+    await eor(event, f"Все команды TeleFriend: [Нажмите здесь]({t['url']})", link_preview=False)
 
 
 async def ReTrieveFile(input_file_name):

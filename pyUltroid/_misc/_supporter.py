@@ -1,9 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочитайте GNU Affero General Public License в
-# <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
 #
 #   Для установки поддержки плагинов других USERBOTs
 #
@@ -87,7 +81,7 @@ class Config((object)):
         )
         TEMP_DOWNLOAD_DIRECTORY = TMP_DOWNLOAD_DIRECTORY
         TEMP_DIR = TMP_DOWNLOAD_DIRECTORY
-        TELEGRAPH_SHORT_NAME = os.environ.get("TELEGRAPH_SHORT_NAME", "Ultroid")
+        TELEGRAPH_SHORT_NAME = os.environ.get("TELEGRAPH_SHORT_NAME", "TeleFriend")
         OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
         TG_BOT_USER_NAME_BF_HER = asst.me.username
         UB_BLACK_LIST_CHAT = [

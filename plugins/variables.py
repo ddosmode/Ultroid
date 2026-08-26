@@ -1,9 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License:
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
 ✘ Доступные команды -
 

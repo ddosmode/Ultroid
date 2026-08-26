@@ -1,9 +1,9 @@
-# Ultroid - ЮзерБот
-# Авторское право (C) 2021-2026 TeamUltroid
+# TeleFriend - ЮзерБот
+# Авторское право (C) 2021-2026 TeamTeleFriend
 #
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Этот файл является частью < https://github.com/TeamTeleFriend/TeleFriend/ >
 # Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+# <https://www.github.com/TeamTeleFriend/TeleFriend/blob/main/LICENSE/>.
 from . import get_help
 
 __doc__ = get_help("help_chats")
@@ -76,7 +76,7 @@ async def _(e):
     if match:
         split = match.split(maxsplit=1)
         request = split[0] in ["r", "request"]
-        title = "Создано Ultroid"
+        title = "Создано TeleFriend"
         if len(split) > 1:
             match = split[1]
             spli = match.split(maxsplit=1)

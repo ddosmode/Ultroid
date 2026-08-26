@@ -1,9 +1,9 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2023 TeamUltroid
+# TeleFriend - UserBot
+# Copyright (C) 2021-2023 TeamTeleFriend
 #
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
+# This file is a part of < https://github.com/TeamTeleFriend/TeleFriend/ >
 # PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+# <https://www.github.com/TeamTeleFriend/TeleFriend/blob/main/LICENSE/>.
 
 """
 ✘ Доступные команды -

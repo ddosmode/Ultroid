@@ -1,9 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
 ✘ Доступные команды -
 
@@ -385,7 +379,7 @@ async def quott_(event):
         )
     except Exception as er:
         return await msg.edit(str(er))
-    message = await reply.reply("Цитата от Ultroid", file=file)
+    message = await reply.reply("Цитата от TeleFriend", file=file)
     os.remove(file)
     await msg.delete()
     return message

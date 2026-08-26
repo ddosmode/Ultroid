@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 from . import *
 
 START = """
@@ -14,7 +7,7 @@ START = """
 ✘  /help : Получить это сообщение.
 ✘  /repo : Получить репозиторий бота..
 
-🧑‍💻 Присоединяйтесь к **@TeamUltroid**
+🧑‍💻 Присоединяйтесь к **@TeamTeleFriend**
 """
 
 ADMINTOOLS = """✘ **Инструменты администрирования** ✘

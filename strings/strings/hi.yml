@@ -116,12 +116,12 @@ autopic_4: "AUTOPIC इस्तेमाल नही हो रहा है!!
 autopic_5: "AUTOPIC को बंद किया गया!"
 
 # inline
-inline_1: "[उल्ट्रॉइड सपोर्ट](t.me/UltroidSupportChat)\n\n\n**{} का मदद मेनू.\n\n\nप्लग-इन ~ {}**"
-inline_2: "[उल्ट्रॉइड सपोर्ट](t.me/UltroidSupportChat)\n\n\n**{} का मदद मेनू.\n\n\nएडऑन ~ {}**"
-inline_3: "[उल्ट्रॉइड सपोर्ट](t.me/UltroidSupportChat)\n\n\n**{} का मदद मेनू.\n\n\nएडऑन ~ {}\n\nजाओ और जोड़ो `ADDONS` Vᴀʀ Tʀᴜᴇ मूल्य के साथ !**"
+inline_1: "[उल्ट्रॉइड सपोर्ट](t.me/TeleFriendSupportChat)\n\n\n**{} का मदद मेनू.\n\n\nप्लग-इन ~ {}**"
+inline_2: "[उल्ट्रॉइड सपोर्ट](t.me/TeleFriendSupportChat)\n\n\n**{} का मदद मेनू.\n\n\nएडऑन ~ {}**"
+inline_3: "[उल्ट्रॉइड सपोर्ट](t.me/TeleFriendSupportChat)\n\n\n**{} का मदद मेनू.\n\n\nएडऑन ~ {}\n\nजाओ और जोड़ो `ADDONS` Vᴀʀ Tʀᴜᴇ मूल्य के साथ !**"
 inline_4: "**{} का बॉट\n\nमुख्य मेन्यू\n\nप्लग-इन ~ {}\nएडऑन ~ {}\nकुल कमांड ~ {}**"
 inline_5: "**मेनू बंद कर दिया गया है !**"
-inline_6: "**वॉइस चैट हेल्प मेनू for {}**\n**उपलब्द कमांड्स** `{}`\n\n@TeamUltroid"
+inline_6: "**वॉइस चैट हेल्प मेनू for {}**\n**उपलब्द कमांड्स** `{}`\n\n@TeamTeleFriend"
 inline_7: "Do .help {} to get the list of commands."
 inline_8: "अपडेट करने के लिए नीचे बटन को क्लिक करे"
 inline_9: "आप लेटेस्ट अपडेट में है"
@@ -224,7 +224,7 @@ chats_1: "`प्रक्रिया जारी है......`"
 chats_2: "`इस चैट को हटाया नहीं जा सकता`"
 chats_3: "#Deleted\nहटाया गया {}"
 chats_4: "आपका [{}]({}) ग्रुप बन गया!"
-chats_5: "@TeamUltroid को जॉइन करें"
+chats_5: "@TeamTeleFriend को जॉइन करें"
 chats_6: "आपका {} समूह / चैनल बॉस बनाया गया है!"
 
 # clean action
@@ -341,7 +341,7 @@ gdrive_1: "`आपने पहले ही गूगल ड्राइव क
 gdrive_2: "[यहाँ जाये](https://console.developers.google.com/flows/enableapi?apiid=drive) और अपना `GDRIVE_CLIENT_ID` and `GDRIVE_CLIENT_SECRET`\n\n
 अपना GDRIVE_CLIENT_ID और GDRIVE_CLIENT_SECRET भेजो.\n`GDRIVE_CLIENT_ID GDRIVE_CLIENT_SECRET` space( ) से अलग."
 gdrive_3: "`गलत CLIENT_ID आईडी`"
-gdrive_4: "`कुछ गलत हो गया! फिर से `/auth` भेजे.\nअगर ऐसा दुबारा होता है तब `@TeamUltroid में संपर्क करे"
+gdrive_4: "`कुछ गलत हो गया! फिर से `/auth` भेजे.\nअगर ऐसा दुबारा होता है तब `@TeamTeleFriend में संपर्क करे"
 gdrive_5: "`सफलता !\nआप Google Drive को उपयोग करने के लिए पूरी तरह तैयार हैं. उल्ट्रॉइड उपयोगकर्ता बॉट के साथ.`"
 gdrive_6: "`यहाँ जाये `{}` और ``/auth.` भेज दें`"
 gdrive_7: "**G-Drive पर फ़ाइल सफलतापूर्वक अपलोड की गई:**\n\n[{}]({})"
@@ -636,7 +636,7 @@ help_cleanaction: "-\n\n• `{i}addclean`\n    सभी आगामी सर�
 help_unsplash: "-\n\n• `{i}unsplash <जिसकी तस्वीर चाहिए> ; <संख्या>`\n    उपयुक्त शब्दों की तस्वीर unsplash से निकाले।"
 help_misc: "-\n\n• `{i}eod`\n    `आज की घटनाएं और आयोजनों की जानकारी प्राप्त करें`\n\n• `{i}pntrst <link/id>`\n     pintrest id या लिंक से तस्वीर डाउनलोड करेंं।\n\n• `{i}gadget <गैजेट का नाम>`\n    टेलीग्राम से गैजेट खोजें।\n\n• `{i}randomuser`\n   एक random यूजर की जानकारी उत्पन्न करें।\n\n• `{i}ascii <किसी फोटो पर रिप्लाई>`\n    उत्तर दिया गए फोटो को HTML में परिवर्तित करें।"
 help_profile: "-\n\n• `{i}setname <पहला नाम // अंतिम नाम>`\n    अपना प्रोफ़ाइल नाम बदलें।\n\n• `{i}setbio <बायो>`\n    अपना प्रोफ़ाइल बायो बदलें।\n\n• `{i}setpic <फोटो पर रिप्लाई>`\n    अपनी प्रोफ़ाइल तस्वीर रिप्लाई तस्वीर से बदलें।\n\n• `{i}delpfp <संख्या> (वैकल्पिक)`\n    अपनी प्रोफ़ाइल से 'संख्या' फोटो को डिलीट करें।\n\n• `{i}poto <यूजरनेम>`\n    चैट/उपयोगकर्ता की प्रोफाइल तस्वीर साझा करें।"
-help_database: "-\n\n• ** डेटाबेस कमांड, इस कमांड का इस्तेमाल सोच समझ कर करें। **\n\n• `{i}setdb key | value`\n    डेटाबेस में अपनी key और value सेट करें।\n    उदाहरण:\n    `{i}setdb Hello there`\n    `{i}setdb Hello there | Ultroid here `\n    `{i}setdb --extended key value` या `{i}setdb -e key value` डेटाबेस में पहले से मौजूद key में value जोड़ने के लिए।\n\n• `{i}deldb key`\n    डेटाबेस से key हटाएं।\n\n• `{i}rendb old key | new key`\n    पुरानी key को नई key से बदलें।"
+help_database: "-\n\n• ** डेटाबेस कमांड, इस कमांड का इस्तेमाल सोच समझ कर करें। **\n\n• `{i}setdb key | value`\n    डेटाबेस में अपनी key और value सेट करें।\n    उदाहरण:\n    `{i}setdb Hello there`\n    `{i}setdb Hello there | TeleFriend here `\n    `{i}setdb --extended key value` या `{i}setdb -e key value` डेटाबेस में पहले से मौजूद key में value जोड़ने के लिए।\n\n• `{i}deldb key`\n    डेटाबेस से key हटाएं।\n\n• `{i}rendb old key | new key`\n    पुरानी key को नई key से बदलें।"
 help_admintools: "-\n\n• `{i}promote <रिप्लाई/यूजरनेम/यूज़र ID>`\n    वर्तमान चैट में उपयुक्त यूज़र को एडमिन बनाएं।\n\n• `{i}demote`\n    वर्तमान चैट में उपयुक्त यूज़र को डिमोट करें।\n\n• `{i}ban <रिप्लाई/यूजरनेम/यूज़र ID> <कारण>`\n    चैट से उपयुक्त यूज़र को प्रतिबंधित करें\n\n• `{i}unban`\n    चैट से उपयुक्त यूज़र को अनबैन करें।\n\n• `{i}kick <रिप्लाई/यूज़र ID/यूजरनेम> <कारण>`\n    चैट से यूज़र को बाहर करें।\n\n• `{i}pin <रिप्लाई>`\n    चैट में किसी संदेश को पिन करें\n• `{i}tpin <समय> <अस्थाई पिन करने के लिए संदेश>`\n• `{i}unpin (all)`\n    चैट में सभी संदेशों को अनपिन करने के लिए `all` का प्रयोग करे , अन्यथा किसी pinned मैसेज पर रिप्लाई करें।\n\n• `{i}pinned`\n   वर्तमान चैट में पिन किए गए संदेश देखें।\n• `{i}listpinned`\n   वर्तमान चैट में पिन किए गए सभी संदेश को सूचीबद्ध करें\n\n• `{i}autodelete <24h/7d/1m/off>`\n   चैट में स्वतः संदेश डिलीट, चालू अथवा बंद करें।\n\n• `{i}purge <रिप्लाई>`\n    रिप्लाई दिए गए मैसेज से सभी संदेशों को डिलीट करें।\n\n• `{i}purgeme <संख्या>`\n    चैट से केवल अपने संदेशों को डिलीट करें। जैसे - `purgeme 30`\n\n• `{i}purgeall <रिप्लाई>`\n    रिप्लाई किए गए उपयोगकर्ता के सभी मैसेज को डिलीट करें।"
 help_logo: "-\n\n• `{i}logo <शब्द>`\n    उपयुक्त शब्द का लोगो तैयार करें\n    खुद की फोटो अथवा फॉन्ट इस्तेमाल करने के लिए फोटो/फॉन्ट पर रिप्लाई करें।"
 help_specialtools: "-\n\n• `{i}wspr <यूज़र ID>`\n    गुप्त संदेश भेजें।\n\n• `{i}q <रंग>`\n• `{i}q @username`\n• `{i}q r <रंग>`\n• `{i}q <अंक> `विभिन्न संदेशों का स्टिकर बनाएँ..`\n\n• `{i}sticker <>`\n    उर इच्छा के अनुसार स्टिकर खोजें ..\n\n• `{i}getaudio <एक ऑडियो का उत्तर दें>`\n    उर वांछित वीडियो/GIF में डालने के लिए ऑडियो डाउनलोड करें।\n\n• `{i}addaudio <वीडियो का उत्तर/gif>`\n    यह उपरोक्त ऑडियो को उत्तरित वीडियो/GIF में डाल देगा।\n\n• `{i}dob <जन्म तिथि>`\n    केवल dd/mm/yy प्रारूप में डालें (जैसे .dob 01/01/1999)।\n\n• `{i}wall <क्वेरी>`\n    उर इच्छा के अनुसार एचडी वॉलपेपर खोजें .."

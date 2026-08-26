@@ -1,11 +1,4 @@
 # /usr/bin/python3
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 from datetime import datetime
 from os import path, system
 from time import sleep
@@ -43,7 +36,7 @@ APT_PACKAGES = ["ffmpeg", "neofetch", "mediainfo"]
 
 DISCLAIMER_TEXT = ""
 
-COPYRIGHT = f"©️ TeamUltroid {datetime.now().year}"
+COPYRIGHT = f"©️ TeamTeleFriend {datetime.now().year}"
 
 HEADER = f"""{Fore.MAGENTA}
 ╔╗ ╔╗╔╗  ╔╗            ╔╗
@@ -62,7 +55,7 @@ INFO_TEXT = f"""
 2. Вы можете установить эту зависимость в любое время с помощью 'pip install' (требуются очень базовые знания python+bash.)
 
 3. Некоторые плагины отключены для 'Пользователей Termux' для экономии ресурсов (путем добавления в EXCLUDE_OFFICIAL).
-   - Подробнее - https://t.me/UltroidUpdates/36
+   - Подробнее - https://t.me/TeleFriendUpdates/36
    - Также способ включить отключенные плагины указан в этом посте.
 
    # Имена отключенных плагинов
@@ -191,7 +184,7 @@ print(
 █▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█ █▄▄▄█ █▄▄▄█  █▄█▄▄▄▄▄▄▄█▄▄▄█▄▄▄▄▄▄█ 
 {Style.RESET_ALL}
 {Fore.GREEN}- Установка ULTROID в Termux -
-  Основная цель этого скрипта - развернуть Ultroid с базовыми зависимостями и сэкономить ресурсы вашего телефона.
+  Основная цель этого скрипта - развернуть TeleFriend с базовыми зависимостями и сэкономить ресурсы вашего телефона.
 {Fore.RESET}
 
 {COPYRIGHT}
@@ -238,7 +231,7 @@ print(
 ask_and_wait_opt()
 
 print(f"\n{Fore.RED}#ДОПОЛНИТЕЛЬНЫЕ возможности...\n")
-print(f"{Fore.YELLOW}* Вы хотите получать логи Ultroid в цветах? [Y/N] ")
+print(f"{Fore.YELLOW}* Вы хотите получать логи TeleFriend в цветах? [Y/N] ")
 inp = input("").strip().lower()
 if inp in ["yes", "y"]:
     print(f"{Fore.GREEN}*Произносим волшебные мантры*")
@@ -253,12 +246,12 @@ if not path.exists(".env"):
 
 print(with_header(f"\n{Fore.GREEN}Вы всё сделали! 🥳"))
 sleep(0.2)
-print(f"Используйте 'bash startup', чтобы попробовать запустить Ultroid.{Fore.RESET}")
+print(f"Используйте 'bash startup', чтобы попробовать запустить TeleFriend.{Fore.RESET}")
 sleep(0.5)
 print(
-    "\nВы можете обратиться к @UltroidSupportChat, если застряли где-то и нуждаетесь в помощи."
+    "\nВы можете обратиться к @TeleFriendSupportChat, если застряли где-то и нуждаетесь в помощи."
 )
 sleep(0.5)
-print("\nСделано с ❤️ от @TeamUltroid...")
+print("\nСделано с ❤️ от @TeamTeleFriend...")
 
 system("pip3 uninstall -q colorama -y")

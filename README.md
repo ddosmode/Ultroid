@@ -1,24 +1,24 @@
 <p align="center">
-  <img src="./resources/extras/logo_readme.jpg" alt="TeamUltroid Logo">
+  <img src="./resources/extras/logo_readme.jpg" alt="TeamTeleFriend Logo">
 </p>
 <h1 align="center">
-  <b>Ultroid - UserBot</b>
+  <b>TeleFriend - UserBot</b>
 </h1>
 
 <b>Стабильный плагинный Telegram userbot + музыкальный бот для голосовых и видеозвонков, основанный на Telethon.</b>
 
-[![](https://img.shields.io/badge/Ultroid-v0.8-crimson)](#)
-[![Stars](https://img.shields.io/github/stars/TeamUltroid/Ultroid?style=flat-square&color=yellow)](https://github.com/TeamUltroid/Ultroid/stargazers)
-[![Forks](https://img.shields.io/github/forks/TeamUltroid/Ultroid?style=flat-square&color=orange)](https://github.com/TeamUltroid/Ultroid/fork)
-[![Size](https://img.shields.io/github/repo-size/TeamUltroid/Ultroid?style=flat-square&color=green)](https://github.com/TeamUltroid/Ultroid/)   
+[![](https://img.shields.io/badge/TeleFriend-v0.8-crimson)](#)
+[![Stars](https://img.shields.io/github/stars/TeamTeleFriend/TeleFriend?style=flat-square&color=yellow)](https://github.com/TeamTeleFriend/TeleFriend/stargazers)
+[![Forks](https://img.shields.io/github/forks/TeamTeleFriend/TeleFriend?style=flat-square&color=orange)](https://github.com/TeamTeleFriend/TeleFriend/fork)
+[![Size](https://img.shields.io/github/repo-size/TeamTeleFriend/TeleFriend?style=flat-square&color=green)](https://github.com/TeamTeleFriend/TeleFriend/)   
 [![Python](https://img.shields.io/badge/Python-v3.10+-blue)](https://www.python.org/)
 [![CodeFactor](https://www.codefactor.io/repository/github/teamultroid/ultroid/badge/main)](https://www.codefactor.io/repository/github/teamultroid/ultroid/overview/main)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/TeamUltroid/Ultroid/graphs/commit-activity)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/TeamTeleFriend/TeleFriend/graphs/commit-activity)
 [![Docker Pulls](https://img.shields.io/docker/pulls/theteamultroid/ultroid?style=flat-square)](https://img.shields.io/docker/pulls/theteamultroid/ultroid?style=flat-square)   
-[![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/TeamUltroid/Ultroid)
-[![Contributors](https://img.shields.io/github/contributors/TeamUltroid/Ultroid?style=flat-square&color=green)](https://github.com/TeamUltroid/Ultroid/graphs/contributors)
+[![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/TeamTeleFriend/TeleFriend)
+[![Contributors](https://img.shields.io/github/contributors/TeamTeleFriend/TeleFriend?style=flat-square&color=green)](https://github.com/TeamTeleFriend/TeleFriend/graphs/contributors)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
-[![License](https://img.shields.io/badge/License-AGPL-blue)](https://github.com/TeamUltroid/Ultroid/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/License-AGPL-blue)](https://github.com/TeamTeleFriend/TeleFriend/blob/main/LICENSE)
 ----
 
 # Развёртывание
@@ -27,7 +27,7 @@
 - [Локальная машина](#deploy-locally)
 
 # Документация 
-[![Documentation](https://img.shields.io/badge/Documentation-Ultroid-blue)](http://ultroid.tech/)
+[![Documentation](https://img.shields.io/badge/Documentation-TeleFriend-blue)](http://ultroid.tech/)
 
 # Учебник 
 - Полное руководство - [![Полное руководство](https://img.shields.io/badge/Watch%20Now-blue)](https://www.youtube.com/watch?v=0wAV7pUzhDQ)
@@ -48,12 +48,12 @@
 ## Развёртывание на Okteto
 Получите [Необходимые переменные](#Necessary-Variables) и затем нажмите кнопку ниже!
 
-[![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://cloud.okteto.com/deploy?repository=https://github.com/TeamUltroid/Ultroid)
+[![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://cloud.okteto.com/deploy?repository=https://github.com/TeamTeleFriend/TeleFriend)
 
 ## Локальное развёртывание
 - [Традиционный метод](#local-deploy---traditional-method)
 - [Простой метод](#local-deploy---easy-method)
-- [Ultroid CLI](#ultroid-cli)
+- [TeleFriend CLI](#ultroid-cli)
 
 ### Локальное развёртывание - Простой метод
 - Linux - `wget -O locals.py https://git.io/JY9UM && python3 locals.py`
@@ -63,9 +63,9 @@
 ### Локальное развёртывание - Традиционный метод
 - Получите ваши [Необходимые переменные](#Necessary-Variables)
 - Клонируйте репозиторий:    
-`git clone https://github.com/TeamUltroid/Ultroid.git`
+`git clone https://github.com/TeamTeleFriend/TeleFriend.git`
 - Перейдите в клонированную папку:    
-`cd Ultroid`
+`cd TeleFriend`
 - Создайте виртуальное окружение:      
 `virtualenv -p /usr/bin/python3 venv`
 `. ./venv/bin/activate`
@@ -81,13 +81,13 @@
     `wget -O session.py https://git.io/JY9JI && python session.py`
   - Для пользователей Windows:
     `cd desktop ; wget https://git.io/JY9JI -o ultroid.py ; python ultroid.py`
-- Заполните ваши данные в файле `.env`, как указано в [`.env.sample`](https://github.com/TeamUltroid/Ultroid/blob/main/.env.sample).
+- Заполните ваши данные в файле `.env`, как указано в [`.env.sample`](https://github.com/TeamTeleFriend/TeleFriend/blob/main/.env.sample).
 (Вы можете либо отредактировать и переименовать файл, либо создать новый файл с именем `.env`.)
 - Запустите бота:
   - Пользователи Linux:
    `bash startup`
   - Пользователи Windows:
-    `python(3) -m pyUltroid`
+    `python(3) -m pyTeleFriend`
 
 ---
 ## Необходимые переменные
@@ -104,7 +104,7 @@
 
 ## Строка сессии
 Различные способы получить вашу `SESSION`:
-* [![Run on Repl.it](https://replit.com/badge/github/TeamUltroid/Ultroid)](https://replit.com/@TeamUltroid/UltroidStringSession)
+* [![Run on Repl.it](https://replit.com/badge/github/TeamTeleFriend/TeleFriend)](https://replit.com/@TeamTeleFriend/TeleFriendStringSession)
 * Linux : `wget -O session.py https://git.io/JY9JI && python3 session.py`
 * PowerShell : `cd desktop ; wget https://git.io/JY9JI ; python ultroid.py`
 * Termux : `wget -O session.py https://git.io/JY9JI && python session.py`
@@ -134,8 +134,8 @@
 
 ## Контрибьюторы
 
-<a href="https://github.com/TeamUltroid/Ultroid/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=TeamUltroid/Ultroid" />
+<a href="https://github.com/TeamTeleFriend/TeleFriend/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=TeamTeleFriend/TeleFriend" />
 </a>
 
 Мы очень благодарны за все вклады, сделанные нашей удивительной сообществом! ❤️
@@ -144,13 +144,13 @@
 
 # Лицензия
 [![License](https://www.gnu.org/graphics/agplv3-155x51.png)](LICENSE)   
-Ultroid распространяется под [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html) версии 3 или выше.
+TeleFriend распространяется под [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html) версии 3 или выше.
 
 
 ---
 # Благодарности
-* [![TeamUltroid-Devs](https://img.shields.io/static/v1?label=Teamultroid&message=devs&color=critical)](https://t.me/UltroidDevs)
+* [![TeamTeleFriend-Devs](https://img.shields.io/static/v1?label=Teamultroid&message=devs&color=critical)](https://t.me/TeleFriendDevs)
 * [Lonami](https://github.com/LonamiWebs/) за [Telethon.](https://github.com/LonamiWebs/Telethon)
 * [MarshalX](https://github.com/MarshalX) за [PyTgCalls.](https://github.com/MarshalX/tgcalls)
 
-> Сделано с 💕 от [@TeamUltroid](https://t.me/TeamUltroid).    
+> Сделано с 💕 от [@TeamTeleFriend](https://t.me/TeamTeleFriend).    

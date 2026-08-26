@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 import ast
 import asyncio
 import re
@@ -50,7 +43,7 @@ def text_to_url(event):
 
 _buttons = {
     "otvars": {
-        "text": "Другие переменные для настройки для @TeamUltroid:",
+        "text": "Другие переменные для настройки для @TeamTeleFriend:",
         "buttons": [
             [
                 Button.inline("Tᴀɢ Lᴏɢɢᴇʀ", data="taglog"),
@@ -138,7 +131,7 @@ _buttons = {
         ],
     },
     "chatbot": {
-        "text": "С помощью этой функции вы можете общаться с людьми через вашего бота-ассистента.\n[Подробнее](https://t.me/UltroidUpdates/2)",
+        "text": "С помощью этой функции вы можете общаться с людьми через вашего бота-ассистента.\n[Подробнее](https://t.me/TeleFriendUpdates/2)",
         "buttons": [
             [
                 Button.inline("Cʜᴀᴛ Bᴏᴛ  Oɴ", data="onchbot"),
@@ -154,14 +147,14 @@ _buttons = {
         ],
     },
     "vcb": {
-        "text": "С помощью этой функции вы можете воспроизводить песни в групповом голосовом чате\n\n[подробнее](https://t.me/UltroidUpdates/4)",
+        "text": "С помощью этой функции вы можете воспроизводить песни в групповом голосовом чате\n\n[подробнее](https://t.me/TeleFriendUpdates/4)",
         "buttons": [
             [Button.inline("VC Sᴇssɪᴏɴ", data="abs_vcs")],
             [Button.inline("« Назад", data="setter")],
         ],
     },
     "oofdm": {
-        "text": "О [Dual Mode](https://t.me/UltroidUpdates/18)",
+        "text": "О [Dual Mode](https://t.me/TeleFriendUpdates/18)",
         "buttons": [
             [
                 Button.inline("Dᴜᴀʟ Mᴏᴅᴇ Oɴ", "dmof"),
@@ -348,7 +341,7 @@ async def changes(okk):
                 language="md",
             )
             return await okk.edit(
-                f"**• Ultroid Userbot •**{cli}", file=img, buttons=button
+                f"**• TeleFriend Userbot •**{cli}", file=img, buttons=button
             )
         except Exception as er:
             LOGS.exception(er)
@@ -458,7 +451,7 @@ async def _(e):
         code = await conv.get_response()
         if GDrive._create_token_file(code=code.text):
             await conv.send_message(
-                "`Успешно!\nВы готовы использовать Google Drive с Ultroid Userbot.`",
+                "`Успешно!\nВы готовы использовать Google Drive с TeleFriend Userbot.`",
                 buttons=Button.inline("Главное меню", data="setter"),
             )
         else:
@@ -496,7 +489,7 @@ async def _(e):
     if not e.is_private:
         return
     await e.edit(
-        "Нажмите Авторизоваться и отправьте код.\n\nВы можете использовать свой собственный CLIENT ID и SECRET по [этой](https://t.me/UltroidUpdates/37) ссылке",
+        "Нажмите Авторизоваться и отправьте код.\n\nВы можете использовать свой собственный CLIENT ID и SECRET по [этой](https://t.me/TeleFriendUpdates/37) ссылке",
         buttons=[
             [
                 Button.inline("ID папки", data="folderid"),

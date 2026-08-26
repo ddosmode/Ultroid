@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочитайте GNU Affero General Public License в
-# <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
-
 from . import *
 
 
@@ -69,14 +62,14 @@ def main():
 
     suc_msg = """
             ----------------------------------------------------------------------
-                Ultroid был развёрнут! Посетите @TheUltroid для обновлений!!
+                TeleFriend был развёрнут! Посетите @TheTeleFriend для обновлений!!
             ----------------------------------------------------------------------
     """
 
     # для плагинов каналов
     plugin_channels = udB.get_key("PLUGIN_CHANNEL")
 
-    # Настройка ассистента Ultroid...
+    # Настройка ассистента TeleFriend...
     ultroid_bot.run_in_loop(customize())
 
     # Загрузить аддоны из каналов плагинов.

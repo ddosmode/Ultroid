@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 # https://github.com/xditya/TeleBot/blob/master/telebot/plugins/mybot/pmbot/incoming.py
 
 # --------------------------------------- Импорт -------------------------------------------- #

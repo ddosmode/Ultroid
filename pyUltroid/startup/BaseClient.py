@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
-
 import contextlib
 import inspect
 import sys
@@ -24,7 +17,7 @@ from ..configs import Var
 from . import *
 
 
-class UltroidClient(TelegramClient):
+class TeleFriendClient(TelegramClient):
     def __init__(
         self,
         session,
@@ -52,7 +45,7 @@ class UltroidClient(TelegramClient):
         self.dc_id = self.session.dc_id
 
     def __repr__(self):
-        return f"<Ultroid.Client :\n self: {self.full_name}\n bot: {self._bot}\n>"
+        return f"<TeleFriend.Client :\n self: {self.full_name}\n bot: {self._bot}\n>"
 
     @property
     def __dict__(self):

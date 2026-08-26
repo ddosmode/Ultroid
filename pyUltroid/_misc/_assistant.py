@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочитайте GNU Affero General Public License в
-# <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
-
 import inspect
 import re
 from traceback import format_exc
@@ -21,10 +14,10 @@ from . import append_or_update, owner_and_sudos
 OWNER = ultroid_bot.full_name
 
 MSG = f"""
-**Ultroid - UserBot**
+**TeleFriend - UserBot**
 ➖➖➖➖➖➖➖➖➖➖
 **Owner**: [{OWNER}](tg://user?id={ultroid_bot.uid})
-**Support**: @TeamUltroid
+**Support**: @TeamTeleFriend
 ➖➖➖➖➖➖➖➖➖➖
 """
 
@@ -32,9 +25,9 @@ IN_BTTS = [
     [
         Button.url(
             "Repository",
-            url="https://github.com/TeamUltroid/Ultroid",
+            url="https://github.com/TeamTeleFriend/TeleFriend",
         ),
-        Button.url("Support", url="https://t.me/UltroidSupportChat"),
+        Button.url("Support", url="https://t.me/TeleFriendSupportChat"),
     ]
 ]
 
@@ -98,9 +91,9 @@ def in_pattern(pattern=None, owner=False, **kwargs):
             if owner and event.sender_id not in owner_and_sudos():
                 res = [
                     await event.builder.article(
-                        title="Ultroid Userbot",
-                        url="https://t.me/TeamUltroid",
-                        description="(c) TeamUltroid",
+                        title="TeleFriend Userbot",
+                        url="https://t.me/TeamTeleFriend",
+                        description="(c) TeamTeleFriend",
                         text=MSG,
                         thumb=InputWebDocument(
                             "https://graph.org/file/dde85d441fa051a0d7d1d.jpg",
@@ -134,7 +127,7 @@ def in_pattern(pattern=None, owner=False, **kwargs):
                                 title="Произошло необработанное исключение!",
                                 text=error_text(),
                                 buttons=Button.url(
-                                    "Сообщить", "https://t.me/UltroidSupportChat"
+                                    "Сообщить", "https://t.me/TeleFriendSupportChat"
                                 ),
                             )
                         ]

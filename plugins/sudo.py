@@ -1,9 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
 ✘ Доступные команды -
 
@@ -118,7 +112,7 @@ async def _(ult):
             msg += f"• `{i}` -> Недействительный пользователь\n"
     m = udB.get_key("SUDO") or True
     if not m:
-        m = "[False](https://graph.org/Ultroid-04-06)"
+        m = "[False](https://graph.org/TeleFriend-04-06)"
     return await ult.eor(
         f"**РЕЖИМ SUDO : {m}\n\nСписок SUDO-пользователей :**\n{msg}", link_preview=False
     )

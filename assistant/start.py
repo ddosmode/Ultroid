@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 from datetime import datetime
 
 from pytz import timezone as tz
@@ -29,7 +22,7 @@ if Owner_info_msg is None:
 
 **Пересылка сообщений** - {udB.get_key("PMBOT")}
 
-**Ultroid [v{ultroid_version}](https://github.com/TeamUltroid/Ultroid), powered by @TeamUltroid**
+**TeleFriend [v{ultroid_version}](https://github.com/TeamTeleFriend/TeleFriend), powered by @TeamTeleFriend**
 """
 
 
@@ -68,7 +61,7 @@ async def own(event):
         mention=event.sender.mention, me=inline_mention(ultroid_bot.me)
     )
     if custom_info:
-        msg += "\n\n• Powered by **@TeamUltroid**"
+        msg += "\n\n• Powered by **@TeamTeleFriend**"
     await event.edit(
         msg,
         buttons=[Button.inline("Закрыть", data="closeit")],
@@ -113,7 +106,7 @@ async def ultroid(event):
             if udB.get_key("PMBOT"):
                 ok = "Вы можете связаться с моим владельцем через этого бота!!\n\nОтправьте ваше сообщение, я передам его владельцу."
             await event.reply(
-                f"Привет, {mention}, это Ultroid Assistant от {me}!\n\n{ok}",
+                f"Привет, {mention}, это TeleFriend Assistant от {me}!\n\n{ok}",
                 file=udB.get_key("STARTMEDIA"),
                 buttons=[Button.inline("Info.", data="ownerinfo")]
                 if Owner_info_msg
@@ -160,7 +153,7 @@ async def ultroid(event):
 @callback("stat", owner=True)
 async def botstat(event):
     ok = len(udB.get_key("BOT_USERS") or [])
-    msg = """Ultroid Assistant - Статистика
+    msg = """TeleFriend Assistant - Статистика
 Всего пользователей - {}""".format(
         ok,
     )

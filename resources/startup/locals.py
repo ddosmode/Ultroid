@@ -1,11 +1,4 @@
 # /usr/bin/python3
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 # Отдельный файл для локального развёртывания.
 
 import os
@@ -26,12 +19,12 @@ def start():
     check_for_py()
 
     print(f"{a}\n\n")
-    print("Добро пожаловать в Ultroid, давайте начнём настройку!\n\n")
+    print("Добро пожаловать в TeleFriend, давайте начнём настройку!\n\n")
     print("Клонирование репозитория...\n\n")
-    os.system("rm -rf Ultroid")
-    os.system("git clone https://github.com/TeamUltroid/Ultroid")
+    os.system("rm -rf TeleFriend")
+    os.system("git clone https://github.com/TeamTeleFriend/TeleFriend")
     print("\n\nГотово")
-    os.chdir("Ultroid")
+    os.chdir("TeleFriend")
     clear_screen()
     print(a)
     print("\n\nДавайте начнём!\n")
@@ -57,7 +50,7 @@ def start():
         "REDIS_URI",
         "REDIS_PASSWORD",
     ]
-    all_done = "# Ultroid Environment Variables.\n# Do not delete this file.\n\n"
+    all_done = "# TeleFriend Environment Variables.\n# Do not delete this file.\n\n"
     for i in varrs:
         all_done += do_input(i)
     clear_screen()
@@ -66,7 +59,7 @@ def start():
     print(all_done)
     isitdone = input("\n\nВсё правильно? [y/n]")
     if isitdone == "y" or isitdone != "n":
-        # https://github.com/TeamUltroid/Ultroid/blob/31b9eb1f4f8059e0ae66adb74cb6e8174df12eac/resources/startup/locals.py#L35
+        # https://github.com/TeamTeleFriend/TeleFriend/blob/31b9eb1f4f8059e0ae66adb74cb6e8174df12eac/resources/startup/locals.py#L35
         f = open(".env", "w")
         f.write(all_done)
     else:
@@ -89,7 +82,7 @@ def start():
         print("Пропущено!")
     clear_screen()
     print(a)
-    print("\nЗапуск Ultroid...")
+    print("\nЗапуск TeleFriend...")
     os.system("sh startup")
 
 
@@ -128,7 +121,7 @@ def check_for_py():
 
 def gen_session():
     print("\nОбработка...")
-    # https://github.com/TeamUltroid/Ultroid/main/resources/startup/locals.py#L35
+    # https://github.com/TeamTeleFriend/TeleFriend/main/resources/startup/locals.py#L35
     os.system("python3 resources/session/ssgen.py")
 
 

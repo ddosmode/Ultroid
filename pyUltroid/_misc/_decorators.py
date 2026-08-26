@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочитайте GNU Affero General Public License в
-# <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
-
 import asyncio
 import inspect
 import re
@@ -166,7 +159,7 @@ def ultroid_cmd(
                         Button.url("Bot", "t.me/SessionGeneratorBot?start="),
                         Button.url(
                             "Repl",
-                            "https://replit.com/@TheUltroid/UltroidStringSession",
+                            "https://replit.com/@TheTeleFriend/TeleFriendStringSession",
                         ),
                     ],
                 )
@@ -179,9 +172,9 @@ def ultroid_cmd(
                 LOGS.exception(e)
                 date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
                 naam = get_display_name(chat)
-                ftext = f"**Ошибка клиента Ultroid:** \`Перешлите это\` @UltroidSupportChat\n\n"
-                ftext += f"**Версия Py-Ultroid:** \`" + str(pyver)
-                ftext += f"\`\n**Версия Ultroid:** \`" + str(ult_ver)
+                ftext = f"**Ошибка клиента TeleFriend:** \`Перешлите это\` @TeleFriendSupportChat\n\n"
+                ftext += f"**Версия Py-TeleFriend:** \`" + str(pyver)
+                ftext += f"\`\n**Версия TeleFriend:** \`" + str(ult_ver)
                 ftext += f"\`\n**Версия Telethon:** \`" + str(telever)
                 ftext += f"\`\n**Хостится на:** \`{HOSTED_ON}\n\n"
                 ftext += "--------НАЧАЛО ЛОГА АВАРИИ ULTROID--------"
@@ -209,7 +202,7 @@ def ultroid_cmd(
                         error_log = await asst.send_file(
                             udB.get_key("LOG_CHANNEL"),
                             file,
-                            caption="**Ошибка клиента Ultroid:** \`Перешлите это\` @UltroidSupportChat\n\n",
+                            caption="**Ошибка клиента TeleFriend:** \`Перешлите это\` @TeleFriendSupportChat\n\n",
                         )
                 else:
                     error_log = await asst.send_message(

@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 import asyncio
 
 from telethon import events
@@ -76,7 +69,7 @@ async def DummyHandler(ult):
     if ult.user_joined or ult.added_by:
         user = await ult.get_user()
         chat = await ult.get_chat()
-        # проверка gbans и @UltroidBans
+        # проверка gbans и @TeleFriendBans
         if udB.get_key("ULTROID_BANS"):
             try:
                 is_banned = await async_searcher(
@@ -92,7 +85,7 @@ async def DummyHandler(ult):
                         view_messages=False,
                     )
                     await ult.respond(
-                        f'**@UltroidBans:** Обнаружен и заблокирован забаненный пользователь!\n`{str(is_banned)}`.\nПричина бана: {is_banned["reason"]}',
+                        f'**@TeleFriendBans:** Обнаружен и заблокирован забаненный пользователь!\n`{str(is_banned)}`.\nПричина бана: {is_banned["reason"]}',
                     )
 
             except BaseException:

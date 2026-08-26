@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, ознакомьтесь с GNU Affero General Public License по адресу
-# <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
-
 import time
 from io import FileIO
 from logging import WARNING
@@ -102,7 +95,7 @@ class GDriveManager:
         media_body = MediaFileUpload(path, mimetype=mime_type, resumable=True)
         body = {
             "title": filename,
-            "description": "Загружено с помощью Ultroid Userbot",
+            "description": "Загружено с помощью TeleFriend Userbot",
             "mimeType": mime_type,
         }
         if folder_id:

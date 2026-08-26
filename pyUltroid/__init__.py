@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочитайте GNU Affero General Public License в
-# <https://github.com/TeamUltroid/pyUltroid/blob/main/LICENSE>.
-
 import os
 import sys
 import telethonpatch
@@ -23,8 +16,8 @@ if run_as_module:
 
     from .configs import Var
     from .startup import *
-    from .startup._database import UltroidDB
-    from .startup.BaseClient import UltroidClient
+    from .startup._database import TeleFriendDB
+    from .startup.BaseClient import TeleFriendClient
     from .startup.connections import validate_session, vc_connection
     from .startup.funcs import _version_changes, autobot, enable_inline, update_envs
     from .version import ultroid_version
@@ -39,7 +32,7 @@ if run_as_module:
     _ult_cache = {}
     _ignore_eval = []
 
-    udB = UltroidDB()
+    udB = TeleFriendDB()
     update_envs()
 
     LOGS.info(f"Подключение к {udB.name}...")
@@ -66,18 +59,18 @@ if run_as_module:
 
             sys.exit()
     else:
-        ultroid_bot = UltroidClient(
+        ultroid_bot = TeleFriendClient(
             validate_session(Var.SESSION, LOGS),
             udB=udB,
             app_version=ultroid_version,
-            device_model="Ultroid",
+            device_model="TeleFriend",
         )
         ultroid_bot.run_in_loop(autobot())
 
     if USER_MODE:
         asst = ultroid_bot
     else:
-        asst = UltroidClient("asst", bot_token=udB.get_key("BOT_TOKEN"), udB=udB)
+        asst = TeleFriendClient("asst", bot_token=udB.get_key("BOT_TOKEN"), udB=udB)
 
     if BOT_MODE:
         ultroid_bot = asst
@@ -99,7 +92,7 @@ if run_as_module:
     DUAL_HNDLR = udB.get_key("DUAL_HNDLR") or "/"
     SUDO_HNDLR = udB.get_key("SUDO_HNDLR") or HNDLR
 else:
-    print("pyUltroid 2022 © TeamUltroid")
+    print("pyUltroid 2022 © TeamTeleFriend")
 
     from logging import getLogger
 

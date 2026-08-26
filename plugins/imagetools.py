@@ -1,9 +1,9 @@
-# Ultroid - UserBot
-# Авторские права (C) 2021-2026 TeamUltroid
+# TeleFriend - UserBot
+# Авторские права (C) 2021-2026 TeamTeleFriend
 #
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Этот файл является частью < https://github.com/TeamTeleFriend/TeleFriend/ >
 # Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+# <https://www.github.com/TeamTeleFriend/TeleFriend/blob/main/LICENSE/>.
 """
 ✘ Доступные команды -
 
@@ -286,7 +286,7 @@ async def pixelator(event):
     temp = cv2.resize(input_, (w, h), interpolation=cv2.INTER_LINEAR)
     output = cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
     cv2.imwrite("output.jpg", output)
-    await msg.respond("• Пикселировано Ultroid", file="output.jpg")
+    await msg.respond("• Пикселировано TeleFriend", file="output.jpg")
     await msg.delete()
     os.remove("output.jpg")
     os.remove(image)

@@ -1,11 +1,4 @@
 #!/usr/bin/python3
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 import os
 from time import sleep
 
@@ -109,7 +102,7 @@ def telethon_session():
     except Exception as er:
         print("Произошла непредвиденная ошибка при создании сессии")
         print(er)
-        print("Если вы считаете это ошибкой, сообщите в @UltroidSupportChat.\n\n")
+        print("Если вы считаете это ошибкой, сообщите в @TeleFriendSupportChat.\n\n")
 
 
 def pyro_session():
@@ -136,7 +129,7 @@ def pyro_session():
             ss = pyro.export_session_string()
             pyro.send_message(
                 "me",
-                f"`{ss}`\n\nВыше ваша строка сессии Pyrogram для @TheUltroid. **НЕ ПОКАЗЫВАЙТЕ ЕЁ.**",
+                f"`{ss}`\n\nВыше ваша строка сессии Pyrogram для @TheTeleFriend. **НЕ ПОКАЗЫВАЙТЕ ЕЁ.**",
             )
             print("Сессия была отправлена в ваши сохранённые сообщения!")
             exit(0)
@@ -151,7 +144,7 @@ def main():
     try:
         type_of_ss = int(
             input(
-                "\nUltroid поддерживает как сессии Telethon, так и Pyrogram.\n\nКакую сессию вы хотите сгенерировать?\n1. Сессия Telethon.\n2. Сессия Pyrogram.\n\nВведите выбор:  "
+                "\nTeleFriend поддерживает как сессии Telethon, так и Pyrogram.\n\nКакую сессию вы хотите сгенерировать?\n1. Сессия Telethon.\n2. Сессия Pyrogram.\n\nВведите выбор:  "
             )
         )
     except Exception as e:

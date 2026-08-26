@@ -20,13 +20,13 @@ autopic_2: "`{}` માટે કોઈ પરિણામ મળ્યાં �
 autopic_3: "તમારી શોધથી સંબંધિત સંગ્રહ મળ્યો !\n ઓટોપિક શરૂ કરી રહ્યા છીએ  !"
 
 # inline
-inline_1: "[અલ્ટ્રોઇડ સપોર્ટ](t.me/UltroidSupportChat)\n\n
+inline_1: "[અલ્ટ્રોઇડ સપોર્ટ](t.me/TeleFriendSupportChat)\n\n
 **{} ના સહાય મેનૂ .\n\n
 પ્લગઇન્સ ~ {}**"
-inline_2: "[અલ્ટ્રોઇડ સપોર્ટ](t.me/UltroidSupportChat)\n\n
+inline_2: "[અલ્ટ્રોઇડ સપોર્ટ](t.me/TeleFriendSupportChat)\n\n
 **{} ના સહાય મેનૂ.\n\n
 એડન્સ ~ {}**"
-inline_3: "[અલ્ટ્રોઇડ સપોર્ટ](t.me/UltroidSupportChat)\n\n
+inline_3: "[અલ્ટ્રોઇડ સપોર્ટ](t.me/TeleFriendSupportChat)\n\n
 **{} ના સહાય મેનૂ.\n\n
 એડન્સ ~ {}\n\n
 `ADDONS` મૂલ્યને `True` પર સેટ કરો**"
@@ -103,7 +103,7 @@ chats_2: "`આ ચેટ કાઢી શકાતી નથી`"
 chats_3: "`હું એડમિન નથી`"
 chats_4: "#Deleted\n{} કાઢી નાખ્યું."
 chats_5: "તમારું [{}]({}) ગ્રુપ તૈયાર છે!"
-chats_6: "જોડાઓ @TeamUltroid"
+chats_6: "જોડાઓ @TeamTeleFriend"
 
 # converter
 cvt_1: "મીડિયાને/ડોક્યુમેન્ટ જવાબ આપો."
@@ -159,7 +159,7 @@ gdrive_1: "`તમે પહેલાથી જ ગૂગલ ડ્રાઇવ�
 gdrive_2: "[અહીં](https://console.developers.google.com/flows/enableapi?apiid=drive) જાઓ અને મેળવો તમારો `GDRIVE_CLIENT_ID` અને `GDRIVE_CLIENT_SECRET`\n\n
 GDRIVE_CLIENT_ID અને GDRIVE_CLIENT_SECRET આવી રીતે મોકલો.\n`GDRIVE_CLIENT_ID GDRIVE_CLIENT_SECRET` જગ્યા દ્વારા અલગ."
 gdrive_3: "`Client ID ખોટું છે`"
-gdrive_4: "`કંઈક ખોટું થયું! `/auth` ફરીથી મોકલો.\nIf same happens contact `@TeamUltroid"
+gdrive_4: "`કંઈક ખોટું થયું! `/auth` ફરીથી મોકલો.\nIf same happens contact `@TeamTeleFriend"
 gdrive_5: "`સફળ! \ N તમે બધા અલ્ટ્રોઇડ યુઝરબotટથી ગૂગલ ડ્રાઇવનો ઉપયોગ કરવા માટે તૈયાર છો.`"
 gdrive_6: "`Go to `{}` and send ``/auth.`"
 gdrive_7: "**જી ડ્રાઇવ પર સફળતાપૂર્વક ફાઇલ અપલોડ કરી :**\n\n[{}]({})"

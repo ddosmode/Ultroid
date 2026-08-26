@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 from telethon.errors import (
     BotMethodInvalidError,
     ChatSendInlineForbiddenError,
@@ -15,20 +8,20 @@ from . import LOG_CHANNEL, LOGS, Button, asst, eor, get_string, ultroid_cmd
 
 REPOMSG = """
 • **ULTROID USERBOT** •\n
-• Репозиторий - [Нажмите здесь](https://github.com/TeamUltroid/Ultroid)
-• Дополнения - [Нажмите здесь](https://github.com/TeamUltroid/UltroidAddons)
-• Поддержка - @UltroidSupportChat
+• Репозиторий - [Нажмите здесь](https://github.com/TeamTeleFriend/TeleFriend)
+• Дополнения - [Нажмите здесь](https://github.com/TeamTeleFriend/TeleFriendAddons)
+• Поддержка - @TeleFriendSupportChat
 """
 
 RP_BUTTONS = [
     [
-        Button.url(get_string("bot_3"), "https://github.com/TeamUltroid/Ultroid"),
-        Button.url("Дополнения", "https://github.com/TeamUltroid/UltroidAddons"),
+        Button.url(get_string("bot_3"), "https://github.com/TeamTeleFriend/TeleFriend"),
+        Button.url("Дополнения", "https://github.com/TeamTeleFriend/TeleFriendAddons"),
     ],
-    [Button.url("Группа поддержки", "t.me/UltroidSupportChat")],
+    [Button.url("Группа поддержки", "t.me/TeleFriendSupportChat")],
 ]
 
-ULTSTRING = """🎇 **Спасибо за развёртывание Ultroid Userbot!**
+ULTSTRING = """🎇 **Спасибо за развёртывание TeleFriend Userbot!**
 
 • Здесь представлены некоторые основные сведения о его использовании."""
 
@@ -54,7 +47,7 @@ async def repify(e):
 
 
 @ultroid_cmd(pattern="ultroid$")
-async def useUltroid(rs):
+async def useTeleFriend(rs):
     button = Button.inline("Начать >>", "initft_2")
     msg = await asst.send_message(
         LOG_CHANNEL,

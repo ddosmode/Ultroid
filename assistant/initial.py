@@ -1,44 +1,44 @@
-# Ultroid - Пользовательский бот
-# Авторские права (C) 2021-2026 TeamUltroid
+# TeleFriend - Пользовательский бот
+# Авторские права (C) 2021-2026 TeamTeleFriend
 #
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
+# Этот файл является частью < https://github.com/TeamTeleFriend/TeleFriend/ >
 # Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+# <https://www.github.com/TeamTeleFriend/TeleFriend/blob/main/LICENSE/>.
 
 import re
 
 from . import *
 
 STRINGS = {
-    1: """🎇 **Спасибо за развертывание Ultroid Userbot!**
+    1: """🎇 **Спасибо за развертывание TeleFriend Userbot!**
 
 • Вот некоторые основные моменты, из которых вы можете узнать об использовании.""",
-    2: """🎉** Об Ultroid**
+    2: """🎉** Об TeleFriend**
 
-🧿 Ultroid — это модульный и мощный Telethon Userbot, созданный на Python с нуля. Он направлен на повышение безопасности вместе с добавлением других полезных функций.
+🧿 TeleFriend — это модульный и мощный Telethon Userbot, созданный на Python с нуля. Он направлен на повышение безопасности вместе с добавлением других полезных функций.
 
-❣ Сделано **@TeamUltroid**""",
+❣ Сделано **@TeamTeleFriend**""",
     3: """**💡• ЧаВо •**
 
--> [Трекер юзернеймов](https://t.me/UltroidUpdates/24)
--> [Хранение репо с кастомными аддонами](https://t.me/UltroidUpdates/28)
--> [Отключение сообщения о деплое](https://t.me/UltroidUpdates/27)
--> [Настройка часового пояса](https://t.me/UltroidUpdates/22)
--> [Об Inline PmPermit](https://t.me/UltroidUpdates/21)
--> [О Dual Mode](https://t.me/UltroidUpdates/18)
--> [Кастомная миниатюра](https://t.me/UltroidUpdates/13)
--> [О FullSudo](https://t.me/UltroidUpdates/11)
--> [Настройка PmBot](https://t.me/UltroidUpdates/2)
--> [Также проверьте](https://t.me/UltroidUpdates/14)
+-> [Трекер юзернеймов](https://t.me/TeleFriendUpdates/24)
+-> [Хранение репо с кастомными аддонами](https://t.me/TeleFriendUpdates/28)
+-> [Отключение сообщения о деплое](https://t.me/TeleFriendUpdates/27)
+-> [Настройка часового пояса](https://t.me/TeleFriendUpdates/22)
+-> [Об Inline PmPermit](https://t.me/TeleFriendUpdates/21)
+-> [О Dual Mode](https://t.me/TeleFriendUpdates/18)
+-> [Кастомная миниатюра](https://t.me/TeleFriendUpdates/13)
+-> [О FullSudo](https://t.me/TeleFriendUpdates/11)
+-> [Настройка PmBot](https://t.me/TeleFriendUpdates/2)
+-> [Также проверьте](https://t.me/TeleFriendUpdates/14)
 
 **• Чтобы узнать об обновлениях**
-  - Вступите в @TeamUltroid.""",
+  - Вступите в @TeamTeleFriend.""",
     4: f"""• `Чтобы узнать все доступные команды`
 
   - `{HNDLR}help`
   - `{HNDLR}cmds`""",
     5: """• **По любым другим вопросам или предложениям**
-  - Перейдите в **@UltroidSupportChat**.
+  - Перейдите в **@TeleFriendSupportChat**.
 
 • Спасибо, что дошли до конца.""",
 }

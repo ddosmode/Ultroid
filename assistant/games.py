@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 """
 • `{i}akinator` | `/akinator`
    Запустить игру акинатора из Userbot/Assistant
@@ -265,7 +258,7 @@ async def choose_cata(event):
                     close_period=int(in_),
                 ),
                 correct_answers=[ansi],
-                solution="Join @TeamUltroid",
+                solution="Join @TeamTeleFriend",
                 solution_entities=[],
             )
             m_ = await event.client.send_message(chat, file=poll)

@@ -1,9 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
 ✘ Доступные команды -
 
@@ -816,7 +810,7 @@ async def in_pm_ans(event):
                 await event.builder.document(
                     res,
                     title="Встроенный PmPermit",
-                    description="~ @TeamUltroid",
+                    description="~ @TeamTeleFriend",
                     text=msg_,
                     buttons=buttons,
                     link_preview=False,
@@ -833,14 +827,14 @@ async def in_pm_ans(event):
                 title="Встроенный PMPermit.",
                 type=_type,
                 text=msg_,
-                description="@TeamUltroid",
+                description="@TeamTeleFriend",
                 include_media=include_media,
                 buttons=buttons,
                 thumb=cont,
                 content=cont,
             )
         ]
-    await event.answer(res, switch_pm="• Ultroid •", switch_pm_param="start")
+    await event.answer(res, switch_pm="• TeleFriend •", switch_pm_param="start")
 
 
 @callback(re.compile("admin_only(.*)"), from_users=[ultroid_bot.uid])

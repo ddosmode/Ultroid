@@ -1,10 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# Этот файл является частью < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-
 import base64
 import inspect
 from datetime import datetime
@@ -32,8 +25,8 @@ from . import _ult_cache
 
 SUP_BUTTONS = [
     [
-        Button.url("• Репозиторий •", url="https://github.com/TeamUltroid/Ultroid"),
-        Button.url("• Поддержка •", url="t.me/UltroidSupportChat"),
+        Button.url("• Репозиторий •", url="https://github.com/TeamTeleFriend/TeleFriend"),
+        Button.url("• Поддержка •", url="t.me/TeleFriendSupportChat"),
     ],
 ]
 
@@ -169,14 +162,14 @@ async def _(e):
 async def repo(e):
     res = [
         await e.builder.article(
-            title="Ultroid Userbot",
+            title="TeleFriend Userbot",
             description="Юзербот | Telethon",
             thumb=wb(ultpic, 0, "image/jpeg", []),
             text="• **ULTROID USERBOT** •",
             buttons=SUP_BUTTONS,
         ),
     ]
-    await e.answer(res, switch_pm="Репозиторий Ultroid.", switch_pm_param="start")
+    await e.answer(res, switch_pm="Репозиторий TeleFriend.", switch_pm_param="start")
 
 
 @in_pattern("go", owner=True)
@@ -353,7 +346,7 @@ async def piston_run(event):
             thumb=wb(
                 "https://graph.org/file/e33c57fc5f1044547e4d8.jpg", 0, "image/jpeg", []
             ),
-            text=f'**Использование встроенного режима**\n\n`@{asst.me.username} run python print("hello world")`\n\n[Список языков](https://graph.org/Ultroid-09-01-6)',
+            text=f'**Использование встроенного режима**\n\n`@{asst.me.username} run python print("hello world")`\n\n[Список языков](https://graph.org/TeleFriend-09-01-6)',
         )
         return await event.answer([result])
     if not PISTON_LANGS:
@@ -368,7 +361,7 @@ async def piston_run(event):
             thumb=wb(
                 "https://graph.org/file/e33c57fc5f1044547e4d8.jpg", 0, "image/jpeg", []
             ),
-            text=f'**Использование встроенного режима**\n\n`@{asst.me.username} run python print("hello world")`\n\n[Список языков](https://graph.org/Ultroid-09-01-6)',
+            text=f'**Использование встроенного режима**\n\n`@{asst.me.username} run python print("hello world")`\n\n[Список языков](https://graph.org/TeleFriend-09-01-6)',
         )
         return await event.answer([result])
     output = await async_searcher(
@@ -574,8 +567,8 @@ async def inline_tl(ult):
             [
                 await ult.builder.article(
                     title="Как использовать?",
-                    description="Поиск Tl от Ultroid",
-                    url="https://t.me/TeamUltroid",
+                    description="Поиск Tl от TeleFriend",
+                    url="https://t.me/TeamTeleFriend",
                     text=text,
                 )
             ],
@@ -598,7 +591,7 @@ async def inline_tl(ult):
                 await ult.builder.article(
                     title=key.__name__,
                     description=tyyp,
-                    url="https://t.me/TeamUltroid",
+                    url="https://t.me/TeamTeleFriend",
                     text=text[:4000],
                 )
             )
@@ -610,10 +603,10 @@ InlinePlugin.update(
     {
         "Приложения Play Store": "app telegram",
         "Модифицированные приложения": "mods minecraft",
-        "Поиск в Google": "go TeamUltroid",
+        "Поиск в Google": "go TeamTeleFriend",
         "Шепот": "wspr @username Hello🎉",
         "Загрузчик YouTube": "yt Ed Sheeran Perfect",
-        "Оценка Piston": "run javascript console.log('Hello Ultroid')",
+        "Оценка Piston": "run javascript console.log('Hello TeleFriend')",
         "OrangeFox🦊": "ofox beryllium",
         "Пользователь Twitter": "twitter theultroid",
         "Поиск F-Droid": "fdroid telegram",

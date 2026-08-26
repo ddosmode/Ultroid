@@ -119,12 +119,12 @@ autopic_4: "Autopic ব্যবহার ছিল না!!"
 autopic_5: "Autopic বন্ধ!"
 
 # inline
-inline_1: "[Uʟᴛʀᴏɪᴅ Sᴜᴘᴘᴏʀᴛ](t.me/UltroidSupportChat)\n\n**Hᴇʟᴘ Mᴇɴᴜ Oғ {}.\n\nPʟᴜɢɪɴs ~ {}**"
-inline_2: "[Uʟᴛʀᴏɪᴅ Sᴜᴘᴘᴏʀᴛ](t.me/UltroidSupportChat)\n\n**Hᴇʟᴘ Mᴇɴᴜ Oғ {}.\n\nAᴅᴅᴏɴs ~ {}**"
-inline_3: "[Uʟᴛʀᴏɪᴅ Sᴜᴘᴘᴏʀᴛ](t.me/UltroidSupportChat)\n\n**Hᴇʟᴘ Mᴇɴᴜ Oғ {}.\n\nAᴅᴅᴏɴs ~ {}\n\nDᴏ **`.setdb ADDONS True`** ᴀɴᴅ ʀᴇsᴛᴀʀᴛ ᴛᴏ ɢᴇᴛ ᴀᴅᴅᴏɴs.**"
+inline_1: "[Uʟᴛʀᴏɪᴅ Sᴜᴘᴘᴏʀᴛ](t.me/TeleFriendSupportChat)\n\n**Hᴇʟᴘ Mᴇɴᴜ Oғ {}.\n\nPʟᴜɢɪɴs ~ {}**"
+inline_2: "[Uʟᴛʀᴏɪᴅ Sᴜᴘᴘᴏʀᴛ](t.me/TeleFriendSupportChat)\n\n**Hᴇʟᴘ Mᴇɴᴜ Oғ {}.\n\nAᴅᴅᴏɴs ~ {}**"
+inline_3: "[Uʟᴛʀᴏɪᴅ Sᴜᴘᴘᴏʀᴛ](t.me/TeleFriendSupportChat)\n\n**Hᴇʟᴘ Mᴇɴᴜ Oғ {}.\n\nAᴅᴅᴏɴs ~ {}\n\nDᴏ **`.setdb ADDONS True`** ᴀɴᴅ ʀᴇsᴛᴀʀᴛ ᴛᴏ ɢᴇᴛ ᴀᴅᴅᴏɴs.**"
 inline_4: "** Bᴏᴛ Oғ {}\n\nMᴀɪɴ Mᴇɴᴜ\n\nPʟᴜɢɪɴs ~ {}\nAᴅᴅᴏɴs ~ {}\nTᴏᴛᴀʟ Cᴏᴍᴍᴀɴᴅs ~ {}**"
 inline_5: "**Mᴇɴᴜ Hᴀs Bᴇᴇɴ Cʟᴏsᴇᴅ**"
-inline_6: "**ভয়েস চ্যাট হেল্প মেনু জন্য {}**\n**উপলব্ধ কমান্ড:** `{}`\n\n@TeamUltroid"
+inline_6: "**ভয়েস চ্যাট হেল্প মেনু জন্য {}**\n**উপলব্ধ কমান্ড:** `{}`\n\n@TeamTeleFriend"
 inline_7: "করুন .help {} কমান্ডের তালিকা পেতে।"
 inline_8: "আপডেট করতে নিচের বাটনে ক্লিক করুন!"
 inline_9: "আপনি ইতিমধ্যে সর্বশেষ সংস্করণে "
@@ -209,7 +209,7 @@ chats_1: "`এই চ্যাটটি মুছতে পারলাম ন�
 chats_2: "`আমি অ্যাডমিন নই `"
 chats_3: "#মোছা\nমোছা {}"
 chats_4: "তোমার [{}]({}) গ্রুপ তৈরি বস!!"
-chats_5: "যোগ দিন@TeamUltroid"
+chats_5: "যোগ দিন@TeamTeleFriend"
 chats_6: "তোমার [{}]({}) গ্রুপ/চ্যানেল  তৈরি  করা হয়েছে বস!"
 
 # clean action
@@ -326,7 +326,7 @@ gdrive_1: "`আপনি ইতিমধ্যে গুগল ড্রাই�
 gdrive_2: "যান [এখানে](https://console.developers.google.com/flows/enableapi?apiid=drive) এবং পান আপনার `GDRIVE_CLIENT_ID` এবং `GDRIVE_CLIENT_SECRET`\n\n
 সেন্ড করুন আপনার GDRIVE_CLIENT_ID এবং GDRIVE_CLIENT_SECRET এই হিসাবে.\n`GDRIVE_CLIENT_ID GDRIVE_CLIENT_SECRET` আলাদা করে"
 gdrive_3: "`ভুল ক্লায়েন্ট আইডি`"
-gdrive_4: "`কিছু ভুল হয়েছে!  আবার পাঠান `/auth` আবার.\nযদি একই ঘটনা ঘটে যোগাযোগ  `@TeamUltroid"
+gdrive_4: "`কিছু ভুল হয়েছে!  আবার পাঠান `/auth` আবার.\nযদি একই ঘটনা ঘটে যোগাযোগ  `@TeamTeleFriend"
 gdrive_5: "`সাফল্য!\nআপনি আলট্রয়েড ইউজারবট দিয়ে গুগল ড্রাইভ ব্যবহার করতে প্রস্তুত.`"
 gdrive_6: "`যান`{}` এবং পাঠান ``/auth.`"
 gdrive_7: "**জি-ড্রাইভে সফলভাবে ফাইল আপলোড করা হয়েছে:**\n\n[{}]({})"

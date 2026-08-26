@@ -1,9 +1,3 @@
-# Ultroid - UserBot
-# Copyright (C) 2021-2026 TeamUltroid
-#
-# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# Пожалуйста, прочтите GNU Affero General Public License по адресу
-# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 """
 ✘ Доступные команды -
 
@@ -480,7 +474,7 @@ async def abs_rmbg(event):
 )
 async def telegraphcmd(event):
     xx = await event.eor(get_string("com_1"))
-    match = event.pattern_match.group(1).strip() or "Ultroid"
+    match = event.pattern_match.group(1).strip() or "TeleFriend"
     reply = await event.get_reply_message()
     if not reply:
         return await xx.eor("`Ответьте на сообщение.`")
@@ -744,7 +738,7 @@ async def get_restricted_msg(event):
     if not (chat and msg):
         return await event.eor(
             "Неверная ссылка!\nПримеры:\n"
-            "`https://t.me/TeamUltroid/3`\n"
+            "`https://t.me/TeamTeleFriend/3`\n"
             "`https://t.me/c/1313492028/3`\n"
             "`tg://openmessage?user_id=1234567890&message_id=1`"
         )
